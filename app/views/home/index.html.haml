@@ -1,0 +1,21 @@
+.row.mb-20
+  .span8
+    =image_placeholder("620x300#")
+  .span4
+    .homepage-box
+      %h2.homepage-box-title
+        About Tourbook
+      .homepage-box-content
+        %p Tourbook is a service of PAN - an independent organisation supporting its members who promote touring arts events in the Highlands and Islands of Scotland
+      .homepage-box-links
+        =link_to("Find out more", "#")
+.row.mb-20
+  -3.times do
+    .span4
+      .homepage-box
+        %h2.homepage-box-title
+          About PAN
+        .homepage-box-content
+          %p PAN is an independent organisation supporting its members who promote touring arts events in the Highlands and Islands of Scotland.
+        .homepage-box-links
+          =link_to("Find out more", "#")
