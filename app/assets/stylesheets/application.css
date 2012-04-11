@@ -36,7 +36,13 @@
   padding: 20px;
   height: 260px;  
 }
+.homepage-box-short {
+  height: 156px;
+}
 .homepage-box-title {
   font-size: 20px;
   margin-bottom: 20px;
+}
+.homepage-box-title a {
+  color: inherit;
 }
