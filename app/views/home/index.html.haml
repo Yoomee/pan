@@ -4,11 +4,11 @@
   .span4
     .homepage-box
       %h2.homepage-box-title
-        About Tourbook
+        =link_to_slug('about-tourbook')
       .homepage-box-content
-        %p Tourbook is a service of PAN - an independent organisation supporting its members who promote touring arts events in the Highlands and Islands of Scotland
+        =simple_format(truncate(Page.find_by_slug('about-tourbook').try(:text).to_s, :length => 200))
       .homepage-box-links
-        =link_to("Find out more", "#")
+        =link_to_slug("Find out more", 'about-tourbook')
 .row.mb-2
   -3.times do
     .span4

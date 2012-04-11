@@ -8,22 +8,22 @@
               =Settings.site_name
       .row
         .span3
-          =link_to("About", "#")
-          =link_to("Contact", "#")
+          =link_to_slug('about', :class => 'header_link')
+          =link_to_slug('contact', :class => 'header_link')
     .span9
       .row
-        .span7
+        .span6
           #nav.nav
             %ul.unstyled
               %li=link_to("Home", root_path)
               %li=link_to("Companies", "#")
               %li=link_to("Community", "#")
-        .span2
+        .span3
           #header_links
             -if user_signed_in?
-              =link_to(t(:logout), sign_out_path, :method => :delete, :class=>"header_link", :id=>"login_link")
               =link_to_self(current_user, :class => "header_link")
-              =link_to("sitemap", pages_path, :class => "header_link")
+              =link_to(t(:logout), sign_out_path, :method => :delete, :class=>"header_link", :id=>"login_link")
+              =link_to("Sitemap", pages_path, :class => "header_link")
             -else
               =link_to "Register", new_user_path, :class => "header_link"
               =link_to(t(:login), sign_in_path(:next => request.path), :class=>"header_link", :id=>"login_link")
