@@ -1,3 +1,5 @@
+require 'lib/ym_gem_loader'
+
 source 'http://rubygems.org'
 
 ### Always used
@@ -15,19 +17,8 @@ gem 'formtastic-bootstrap', :git => "git://github.com/cgunther/formtastic-bootst
 # gem 'ym_permalinks', :git => "git://git.yoomee.com:4321/gems/ym_permalinks.git"
 # gem 'ym_users', :git => "git://git.yoomee.com:4321/gems/ym_users.git"
 
-def ym_gem(gem_name)
- return true unless gem_name
- if !File.directory?(gem_path = "vendor/gems/#{gem_name}")
-   system("git clone -q git://git.yoomee.com:4321/gems/#{gem_name}.git #{gem_path}")
- end
- gem gem_name, :path => "vendor/gems"
-end
+load_ym_gems!
 
-### Yoomee gems
-ym_gem 'ym_core'
-ym_gem 'ym_cms'
-ym_gem 'ym_permalinks'
-ym_gem 'ym_users'
 
 ### Groups
 # Gems used only for assets and not required
