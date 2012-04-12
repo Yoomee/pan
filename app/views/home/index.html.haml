@@ -10,15 +10,30 @@
       .homepage-box-links
         =link_to_slug("Find out more", 'about-tourbook')
 .row.mb-2
-  -3.times do
-    .span4
-      .homepage-box
-        %h2.homepage-box-title
-          About PAN
-        .homepage-box-content
-          %p PAN is an independent organisation supporting its members who promote touring arts events in the Highlands and Islands of Scotland.
-        .homepage-box-links
-          =link_to("Find out more", "#")
+  .span4
+    .homepage-box
+      %h2.homepage-box-title
+        =link_to_slug('about-pan')
+      .homepage-box-content
+        =simple_format(truncate(Page.find_by_slug('about-pan').try(:text).to_s, :length => 200))
+      .homepage-box-links
+        =link_to_slug("Find out more", 'about-pan')
+  .span4
+    .homepage-box
+      %h2.homepage-box-title
+        Promote your company in Scotland
+      .homepage-box-content
+        %p If you are performing arts company wanting to promote your events in the Highlands and Islands of Scotland then sign up here.
+      .homepage-box-links
+        =link_to("Sign up for FREE", new_user_path)
+  .span4
+    .homepage-box
+      %h2.homepage-box-title
+        =link_to('Join the promoter community', new_user_path)
+      .homepage-box-content
+        %p If you are a member of PAN then you can access the community tools here.
+      .homepage-box-links
+        =link_to("Register", new_user_path)
 .row.mb-2
   .span4
     .homepage-box.homepage-box-short
