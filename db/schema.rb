@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413105718) do
+ActiveRecord::Schema.define(:version => 20120413143946) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20120413105718) do
   end
 
   add_index "posts", ["target_id", "target_type"], :name => "index_posts_on_target_id_and_target_type"
+
+  create_table "promoters", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "snippets", :force => true do |t|
     t.string   "item_type"

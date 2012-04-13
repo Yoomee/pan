@@ -1,0 +1,12 @@
+.row
+  .span8
+    %h1=title("Promoters")
+    -if promoters.empty?
+      %p There are no promoters yet.
+    %ul
+      -promoters.each do |promoter|
+        %li=link_to_self(promoter)
+.row
+  .span8
+    =options_panel do
+      =link_if_can("New promoter", [:new, Promoter])
