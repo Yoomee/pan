@@ -1,0 +1,101 @@
+.row
+  .span3
+    =image_for(promoter, "220x") if promoter.image
+    .span3.mt-2
+      %h4 Region
+      %p Northern Isles
+    .span3.mt-2
+      %h4 Contact
+      Shetland Arts Development Agency
+      %br
+      Toll Clock Centre
+      %br
+      26 North Road
+      %br
+      Lerwick, Scotland
+      %br
+      ZE1 0DE
+      %br
+      Tel: +44 (0)1595 743843
+      %br
+      Email:
+      =link_to "info@shetlandarts.org", "mailto:info@shetlandarts.org"
+    .span3.mt-2
+      %h4 Secondary contact
+      Fred blogs
+      %br
+      fred@billions.com
+      %br
+      07895 1234567
+    .span3.mt-2
+      %h4 Links
+      %ul.unstyled
+        %li=link_to_url("www.shetlandarts.org/", :target => "_blank")
+        %li=link_to("Facebook", "#")
+        %li=link_to("Twitter", "#")
+
+    
+  .span8
+    %h1.mb-1=title(promoter)
+    =simple_format(promoter.description)
+    .row.mt-2
+      .span8
+        %h4 Venue(s)
+        %ul.unstyled
+          %li
+            Borogha Gallery
+            =link_to 'View', '#'
+          %li
+            Garrison Theatre
+            =link_to 'View', '#'
+          %li
+            Mareel
+            =link_to 'View', '#'
+          %li
+            The Hatchery
+            =link_to 'View', '#'
+            
+    .row.mt-2
+      .span8
+        %h4 Individual profiles
+    .row
+      .span2
+        =link_to '#' do
+          =image_placeholder('120x120#')
+        %h5=link_to 'Kathy Hubbard', '#'
+        %p=link_to 'Head of Development', '#'
+      .span2
+        =link_to '#' do
+          =image_placeholder('120x120#')
+        %h5=link_to 'Donald Anderson', '#'
+        %p=link_to 'Arts Development Officer, Literature', '#'
+      .span2
+        =link_to '#' do
+          =image_placeholder('120x120#')
+        %h5=link_to 'John Haswell', '#'
+        %p=link_to 'Arts Development Officer, Drama', '#'
+      .span2
+        =link_to '#' do
+          =image_placeholder('120x120#')
+        %h5=link_to 'Claire Aldington', '#'
+        %p=link_to 'Arts Development Officer, Visual Arts', '#'
+      
+    .row.mt-2
+      .span8
+        %h4 Genres/art-forms currently promoting
+    .row.mt-2
+      .span8
+        %h4 Genres/art-forms interested in
+    .row.mt-2
+      .span8
+        %h4 List of resources
+    .row.mt-2
+      .span8
+        %h4 Skills matrix
+
+.row.mt-2
+  .span8
+    =options_panel do
+      =back_link
+      =link_if_can("Edit promoter", [:edit, promoter])
+      =link_if_can("Delete promoter", [:destroy, promoter], :confirm => "Are you sure?")
