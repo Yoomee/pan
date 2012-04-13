@@ -2,4 +2,8 @@
   =form.input :name
   =form.input :description
   =form.input :retained_image, :as => :hidden
+  -if company.image && company.errors[:image].empty?
+    =image_for(company, "100x")
+    =form.input :remove_image, :as => :boolean
+  
   =form.input :image, :as => :file
