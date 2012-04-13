@@ -25,26 +25,18 @@
       .span3.mt-2
         %h4 Links
         %ul.unstyled
-          %li=link_to_url("www.mumfordandsons.com/", :target => "_blank")
-          %li=link_to("Facebook", "#")
-          %li=link_to("Twitter", "#")
-          %li=link_to("Youtube", "#")
-          %li=link_to("Vimeo", "#")
-          %li=link_to("Soundcloud", "#")
-      .span3.mt-2
-        %h4 Primary contact
-        Fred blogs
-        %br
-        fred@billions.com
-        %br
-        07895 1234567
-      .span3.mt-2
-        %h4 Secondary contact
-        Fred blogs
-        %br
-        fred@billions.com
-        %br
-        07895 1234567
+          -if company.website_url.present?
+            %li=link_to_url(company.website_url, :target => "_blank")
+          -company.social_urls.each do |site_name, url|
+            %li=link_to(site_name, url, :target => "_blank")
+      -if company.contact1_details.present?
+        .span3.mt-2
+          %h4 Primary contact
+          =auto_link(company.contact1_details.join("<br />").html_safe)
+      -if company.contact2_details.present?
+        .span3.mt-2
+          %h4 Secondary contact
+          =auto_link(company.contact2_details.join("<br />").html_safe)
       .span3.mt-2
         %h4 Upcoming shows
         %ul.unstyled

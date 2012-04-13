@@ -1,8 +1,4 @@
 =semantic_form_for(company, :html => {:multipart => true}) do |form|
-  =form.inputs do
-    =form.input :name
-    =form.input :description
-    =form.input :retained_image, :as => :hidden
-    =form.input :image, :as => :file
+  =tabs('details', 'links', 'contact_info', :form => form)
   =form.buttons do
     =form.commit_button "Save"
