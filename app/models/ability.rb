@@ -15,7 +15,6 @@ class Ability
       # user ability
       can [:read, :create], Post
       can [:update, :destroy], Post, :user_id => user.id
-      can :show, Page, :published => true
       can :manage, User, :id => user.id
     end
   end
