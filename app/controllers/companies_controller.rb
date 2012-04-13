@@ -34,7 +34,7 @@ class CompaniesController < ApplicationController
   
   def update
     if company.save
-      flash[:notice] = 'updated company'
+      flash[:notice] = 'Updated company'
       redirect_to(company)
     else
       render :action => 'edit'
