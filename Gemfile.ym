@@ -1,0 +1,7 @@
+### Yoomee gems
+ym_gem 'core'
+ym_gem 'cms'
+ym_gem 'permalinks'
+ym_gem 'users'
+ym_gem 'tags'
+ym_gem 'posts'
