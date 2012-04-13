@@ -1,5 +1,6 @@
 def ym_gem(gem_name, checkout = nil)
   return true unless gem_name
+  gem_name = "ym_#{gem_name}" if !(gem_name =~ /^ym_\w+/)
   gem_path = File.expand_path("../../vendor/gems/#{gem_name}", __FILE__)
   if !File.directory?(gem_path)
     system("git clone git://git.yoomee.com:4321/gems/#{gem_name}.git #{gem_path}")
