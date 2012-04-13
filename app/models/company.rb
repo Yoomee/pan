@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   include YmCore::Model
   
   image_accessor :image
+  acts_as_taggable_on :genres, :art_forms, :funders  
   
   has_many :posts, :as => :target
   

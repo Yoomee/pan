@@ -52,19 +52,24 @@
       .span2
         %h4 Current show:
         "The Final Tour"
-      .span2
-        %h4 Genres
-        %ul.unstyled
-          %li Music
-          %li Dance
-      .span2
-        %h4 Art forms
-        %ul.unstyled
-          %li Folk
-          %li Rock
-      .span2
-        %h4 Funders
-        Self financing
+      -if company.genre_list.present?
+        .span2
+          %h4 Genres
+          %ul.unstyled
+            -company.genre_list.each do |genre|
+              %li=genre.titleize.humanize
+      -if company.art_form_list.present?
+        .span2
+          %h4 Art forms
+          %ul.unstyled
+            -company.art_form_list.each do |art_form|
+              %li=art_form.titleize.humanize
+      -if company.funder_list.present?
+        .span2
+          %h4 Funders
+          %ul.unstyled
+            -company.funder_list.each do |funder|
+              %li=funder.titleize.humanize
     .row
       .span2
         %h4 Scale of work
