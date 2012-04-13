@@ -23,7 +23,7 @@
             =raw(page.text)
     .span8
       =options_panel do
-        -if can?(:edit, page)
+        -if can?(:mercury_update, page)
           =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
         =link_if_can("Edit page details", [:edit, page])
         =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
