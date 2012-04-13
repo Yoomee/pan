@@ -1,6 +1,58 @@
 .row
   .span3
-    =image_for(company, "220x") if company.image
+    .row
+      .span3
+        =image_for(company, "220x") if company.image
+      .span3.mt-2
+        %h4=pluralize(22, 'Review')
+        %table.unstyled
+          %tr
+            %td Excellent
+            %td
+              -3.times do
+                %i.icon.icon-star
+          %tr
+            %td Very good
+            %td
+              -1.times do
+                %i.icon.icon-star
+          %tr
+            %td Average
+          %tr
+            %td Poor
+          %tr
+            %td Terrible
+      .span3.mt-2
+        %h4 Links
+        %ul.unstyled
+          %li=link_to_url("www.mumfordandsons.com/", :target => "_blank")
+          %li=link_to("Facebook", "#")
+          %li=link_to("Twitter", "#")
+          %li=link_to("Youtube", "#")
+          %li=link_to("Vimeo", "#")
+          %li=link_to("Soundcloud", "#")
+      .span3.mt-2
+        %h4 Primary contact
+        Fred blogs
+        %br
+        fred@billions.com
+        %br
+        07895 1234567
+      .span3.mt-2
+        %h4 Secondary contact
+        Fred blogs
+        %br
+        fred@billions.com
+        %br
+        07895 1234567
+      .span3.mt-2
+        %h4 Upcoming shows
+        %ul.unstyled
+          -4.times do
+            %li
+              ="Production name #{rand(30)}/#{rand(12)}/12"
+              =link_to("view", "#")
+        
   .span8
     %h1.mb-1=title(company)
     =simple_format(company.description)
