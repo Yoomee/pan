@@ -28,6 +28,8 @@ ym_gem 'ym_core'
 ym_gem 'ym_cms'
 ym_gem 'ym_permalinks'
 ym_gem 'ym_users'
+ym_gem 'ym_tags'
+ym_gem 'ym_posts'
 
 ### Groups
 # Gems used only for assets and not required

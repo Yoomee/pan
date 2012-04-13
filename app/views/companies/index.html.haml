@@ -1,0 +1,12 @@
+.row
+  .span8
+    %h1=title("Companies")
+    -if companies.empty?
+      %p There are no companies yet.
+    %ul
+      -companies.each do |company|
+        %li=link_to_self(company)
+.row
+  .span8
+    =options_panel do
+      =link_if_can("New company", [:new, Company])

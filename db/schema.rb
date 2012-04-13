@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411113655) do
+ActiveRecord::Schema.define(:version => 20120413105718) do
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
@@ -40,6 +48,21 @@ ActiveRecord::Schema.define(:version => 20120411113655) do
 
   add_index "permalinks", ["path"], :name => "index_permalinks_on_path"
 
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.text     "text"
+    t.string   "image_uid"
+    t.string   "video_url"
+    t.string   "video_title"
+    t.text     "video_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["target_id", "target_type"], :name => "index_posts_on_target_id_and_target_type"
+
   create_table "snippets", :force => true do |t|
     t.string   "item_type"
     t.integer  "item_id"
@@ -50,6 +73,23 @@ ActiveRecord::Schema.define(:version => 20120411113655) do
   end
 
   add_index "snippets", ["item_type", "item_id"], :name => "index_snippets_on_item_type_and_item_id"
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

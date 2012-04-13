@@ -11,3 +11,4 @@ tmp/
 .sass-cache/
 vendor/gems
 chromedriver.log
+public/assets

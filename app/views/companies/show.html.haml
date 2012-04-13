@@ -1,0 +1,59 @@
+.row
+  .span3
+    =image_for(company, "220x") if company.image
+  .span8
+    %h1.mb-1=title(company)
+    =simple_format(company.description)
+    .row
+      .span2
+        %h4 Current show:
+        "The Final Tour"
+      .span2
+        %h4 Genres
+        %ul.unstyled
+          %li Music
+          %li Dance
+      .span2
+        %h4 Art forms
+        %ul.unstyled
+          %li Folk
+          %li Rock
+      .span2
+        %h4 Funders
+        Self financing
+    .row
+      .span2
+        %h4 Scale of work
+        Large scale
+    .row.mt-2
+      .span4
+        %h4 Photos/videos
+        .row.mt-1
+          -8.times do
+            .span1.mb-1
+              =image_placeholder("60x60#")
+      .span3.offset1
+        %h4 Venues regularly visited
+        .row.mt-1
+          -6.times do
+            .span1.mb-1
+              =image_placeholder("60x60#")
+    .row.mt-2
+      .span8
+        %h4 Proposed tour dates
+        .row.mt-1
+          -8.times do
+            .span1.mb-1
+              =image_placeholder("60x60#")
+    .row.mt-2
+      .span8
+        %h4 Reviews and comments
+        -if can?(:create, Post)
+          =render("posts/remote_form", :post => current_user.posts.build(:target => company))
+        =render("posts/posts", :posts => posts)
+.row.mt-2
+  .span8
+    =options_panel do
+      =back_link
+      =link_if_can("Edit company", [:edit, company])
+      =link_if_can("Delete company", [:destroy, company], :confirm => "Are you sure?")

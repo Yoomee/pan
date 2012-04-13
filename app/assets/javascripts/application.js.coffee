@@ -8,4 +8,6 @@
 #= require jquery_ujs
 #= require ym_core
 #= require ym_cms
+#= require ym_tags
+#= require ym_posts
 #= require_tree .

@@ -10,20 +10,22 @@
         .span3
           =link_to_slug('About', 'about-tourbook', :class => 'header_link')
           =link_to_slug('contact', :class => 'header_link')
+          =link_to("Sitemap", pages_path, :class => "header_link") if current_user.try(:admin?)
     .span9
       .row
         .span6
           #nav.nav
             %ul.unstyled
               %li=link_to("Home", root_path)
-              %li=link_to("Companies", "#")
+              %li=link_to("Companies", companies_path)
               %li=link_to("Community", "#")
         .span3
-          #header_links
+          #header_links.pull-right
             -if user_signed_in?
-              =link_to_self(current_user, :class => "header_link")
-              =link_to(t(:logout), sign_out_path, :method => :delete, :class=>"header_link", :id=>"login_link")
-              =link_to("Sitemap", pages_path, :class => "header_link")
+              =link_to(t(:logout), sign_out_path, :method => :delete, :class => "pull-right")
+              .header_link.pull-right
+                Logged in as
+                =link_to_self(current_user)
             -else
               =link_to "Register", new_user_path, :class => "header_link"
-              =link_to(t(:login), sign_in_path(:next => request.path), :class=>"header_link", :id=>"login_link")
+              =link_to(t(:login), sign_in_path(:next => request.path), :class => "header_link")
