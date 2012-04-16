@@ -2,7 +2,7 @@
   .navbar-inner
     .container
       %ul.nav
-        =li_with_active(current_page?(posts_path), link_to("Latest", posts_path))
+        =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
         %li=link_to("Notifications (1)", "#")
         %li=link_to("Members", "#")
         %li=link_to("Resources", "#")
