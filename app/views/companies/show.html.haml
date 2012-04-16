@@ -74,13 +74,15 @@
       .span2
         %h4 Scale of work
         Large scale
-    .row.mt-2
-      .span4
-        %h4 Photos/videos
-        .row.mt-1
-          -8.times do
-            .span1.mb-1
-              =image_placeholder("60x60#")
+    .row.mt-2    
+      -if (media_posts = company.posts.where("image_uid LIKE '%'").limit(8)).present?
+        .span4
+          %h4 Photos/videos
+          .row.mt-1
+            -media_posts.each do |media_post|
+              .span1.mb-1
+                =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
+                  =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
       .span3.offset1
         %h4 Venues regularly visited
         .row.mt-1
