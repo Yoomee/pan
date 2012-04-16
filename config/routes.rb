@@ -3,6 +3,11 @@ Pan::Application.routes.draw do
   root :to => 'home#index'
   resources :companies
   resources :promoters
+  resources :tags, :only => [] do 
+    get :autocomplete_genre_name, :on => :collection
+    get :autocomplete_art_form_name, :on => :collection
+    get :autocomplete_funder_name, :on => :collection
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
