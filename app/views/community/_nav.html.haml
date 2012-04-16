@@ -1,12 +1,11 @@
 .navbar
   .navbar-inner
-    .row
-      .span12
-        %ul.nav
-          =li_with_active(current_page?(posts_path), link_to("Latest", posts_path))
-          %li=link_to("Notifications (1)", "#")
-          %li=link_to("Members", "#")
-          %li=link_to("Resources", "#")
-          %li=link_to("Leaderboard", "#")
-          -if current_user
-            =li_with_active(current_page?(current_user), link_to("My profile", current_user))
+    .container
+      %ul.nav
+        =li_with_active(current_page?(posts_path), link_to("Latest", posts_path))
+        %li=link_to("Notifications (1)", "#")
+        %li=link_to("Members", "#")
+        %li=link_to("Resources", "#")
+        %li=link_to("Leaderboard", "#")
+        -if current_user
+          =li_with_active(current_page?(current_user), link_to("My profile", current_user))
