@@ -9,4 +9,10 @@ FactoryGirl.define do
     region "Northern Isles"
   end
   
+  factory :venue do |f|
+    name "Garrison Theatre"
+    region "Northern Isles"
+    association :promoter
+  end
+  
 end

@@ -1,0 +1,11 @@
+=form.inputs do
+  =form.input :promoter_id, :as => :hidden
+  =form.input :name
+  =form.input :region, :as => :select, :collection => Pan::REGIONS
+  =form.input :description
+  =form.input :retained_image, :as => :hidden
+  -if venue.image && venue.errors[:image].empty?
+    =image_for(venue, "100x")
+    =form.input :remove_image, :as => :boolean
+
+  =form.input :image, :as => :file

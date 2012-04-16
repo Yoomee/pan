@@ -1,0 +1,4 @@
+=semantic_form_for(venue, :html => {:multipart => true}) do |form|
+  =tabs('details', 'links', 'contact_info', :form => form)
+  =form.buttons do
+    =form.commit_button "Save"

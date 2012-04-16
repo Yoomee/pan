@@ -2,7 +2,10 @@ Pan::Application.routes.draw do
   
   root :to => 'home#index'
   resources :companies
-  resources :promoters
+  resources :promoters do
+    resources :venues
+  end
+  resources :venues, :except => :new
   resources :tags, :only => [] do 
     get :autocomplete_genre_name, :on => :collection
     get :autocomplete_art_form_name, :on => :collection
