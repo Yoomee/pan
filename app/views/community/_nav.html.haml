@@ -8,3 +8,5 @@
           %li=link_to("Members", "#")
           %li=link_to("Resources", "#")
           %li=link_to("Leaderboard", "#")
+          -if current_user
+            =li_with_active(current_page?(current_user), link_to("My profile", current_user))

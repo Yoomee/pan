@@ -1,0 +1,24 @@
+.row.mb-2
+  =render("community/nav")
+.row
+  .span3
+    .row
+      .span3
+        =image_for(user, "220x")
+      .span3.mt-2
+        Arts Development Officer at
+        =link_to(Promoter.first || "Shetland Arts Development Agency")
+  .span9
+    %h1.mb-1=title(user)
+    =simple_format(user.bio)
+    .row.mt-2
+      .span9
+        %h4.mb-1="#{user.first_name}'s posts"
+        -if can?(:create, Post)
+          =render("posts/remote_form", :post => current_user.posts.build(:target => (current_user==user ? nil : user)))
+        =render("posts/posts", :posts => wall_posts)
+.row.mt-2
+  .span8
+    =options_panel do
+      =back_link
+      =link_if_can("Edit profile", [:edit, user])
