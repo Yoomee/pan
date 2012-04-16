@@ -96,7 +96,7 @@
               =image_placeholder("60x60#")
     .row.mt-2
       .span8
-        %h4 Reviews and comments
+        %h4.mb-1 Updates
         -if can?(:create, Post)
           =render("posts/remote_form", :post => current_user.posts.build(:target => company))
         =render("posts/posts", :posts => posts)

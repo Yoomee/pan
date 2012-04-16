@@ -1,11 +1,22 @@
 .row
-  .span8
-    %h1=title("Companies")
-    -if companies.empty?
+  -if companies.empty?
+    .span12    
       %p There are no companies yet.
-    %ul
-      -companies.each do |company|
-        %li=link_to_self(company)
+  -else
+    .span12.mb-1
+      %h1.pull-left=title("Companies")
+      %form.form-search.pull-right
+        =text_field_tag :company_search, "", :class => "input-medium search-query"
+        =submit_tag "Search", :class => "btn"
+    .span12
+      %table.table.table-bordered.table-striped
+        %tbody
+          -companies.order('name ASC').each do |company|
+            %tr
+              %td.span4
+                =image_for(company, "50x50#", :class => "pull-left mr-1")
+                %h4.pull-left=link_to_self(company)
+              %td.span8=truncate(company.description.to_s, :length => 190)
 .row
   .span8
     =options_panel do
