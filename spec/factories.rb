@@ -6,6 +6,7 @@ FactoryGirl.define do
   
   factory :promoter do
     name "Shetland Arts Development Agency"
+    region "Northern Isles"
   end
   
 end
