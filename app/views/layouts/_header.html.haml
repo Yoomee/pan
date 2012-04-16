@@ -18,7 +18,7 @@
             %ul.unstyled
               =li_with_active(current_page?(root_path), link_to("Home", root_path))
               =li_with_active(current_page?(companies_path), link_to("Companies", companies_path))
-              =li_with_active(false, link_to("Community", "#"))
+              =li_with_active(current_page?(posts_path), link_to("Community", posts_path))
         .span3
           #header_links.pull-right
             -if user_signed_in?
