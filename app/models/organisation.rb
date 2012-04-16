@@ -9,7 +9,7 @@ module Organisation
 
     base.validates :name, :presence => true
     
-    base.validates :website_url, :facebook_url, :email => true, :allow_blank => true
+    base.validates :website_url, :facebook_url, :url => true, :allow_blank => true
 
     base.validates :twitter_name, :format => {:with => /^\s*@?\w+\s*$/, :allow_blank => true}
     

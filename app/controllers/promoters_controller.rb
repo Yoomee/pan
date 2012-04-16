@@ -15,7 +15,7 @@ class PromotersController < ApplicationController
   
   def destroy
     promoter.destroy
-    flash[:notice] = "Deleted promoter, #{promoter}"
+    flash[:notice] = "Deleted promoter #{promoter}"
     redirect_to(promoters_path)
   end
   
