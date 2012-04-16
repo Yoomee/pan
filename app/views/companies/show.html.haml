@@ -22,13 +22,14 @@
             %td Poor
           %tr
             %td Terrible
-      .span3.mt-2
-        %h4 Links
-        %ul.unstyled
-          -if company.website_url.present?
-            %li=link_to_url(company.website_url, :target => "_blank")
-          -company.social_urls.each do |site_name, url|
-            %li=link_to(site_name, url, :target => "_blank")
+      -if company.any_present?(:website_url, :social_urls)
+        .span3.mt-2
+          %h4 Links
+          %ul.unstyled
+            -if company.website_url.present?
+              %li=link_to_url(company.website_url, :target => "_blank")
+            -company.social_urls.each do |site_name, url|
+              %li=link_to(site_name, url, :target => "_blank")
       -if company.contact1_details.present?
         .span3.mt-2
           %h4 Primary contact
@@ -48,30 +49,29 @@
   .span8
     %h1.mb-1=title(company)
     =simple_format(company.description)
-    .row
-      .span2
+    .row.company_tag_lists
+      .span2.mb-1
         %h4 Current show:
         "The Final Tour"
       -if company.genre_list.present?
-        .span2
+        .span2.mb-1
           %h4 Genres
           %ul.unstyled
             -company.genre_list.each do |genre|
               %li=genre.titleize.humanize
       -if company.art_form_list.present?
-        .span2
+        .span2.mb-1
           %h4 Art forms
           %ul.unstyled
             -company.art_form_list.each do |art_form|
               %li=art_form.titleize.humanize
       -if company.funder_list.present?
-        .span2
+        .span2.mb-1
           %h4 Funders
           %ul.unstyled
             -company.funder_list.each do |funder|
               %li=funder.titleize.humanize
-    .row
-      .span2
+      .span2.mb-1
         %h4 Scale of work
         Large scale
     .row.mt-2    
@@ -83,7 +83,7 @@
               .span1.mb-1
                 =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
                   =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
-      .span3.offset1
+      .span3{:class => "#{media_posts.present? ? 'offset1' : ''}"}
         %h4 Venues regularly visited
         .row.mt-1
           -6.times do

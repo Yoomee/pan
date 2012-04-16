@@ -51,3 +51,9 @@
 .nav .active a {
   color: #00558D;
 }
+
+/*========== Company ==========*/
+
+.company_tag_lists .span2 {
+  min-height: 65px;
+}
