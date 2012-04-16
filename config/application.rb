@@ -46,3 +46,12 @@ module Pan
     config.assets.version = '1.0'
   end
 end
+
+Pan::REGIONS = [
+  "Argyll and Bute",
+  "Highland",
+  "Moray",
+  "Northern Isles",
+  "Western Isles",
+  "Perthshire"
+]

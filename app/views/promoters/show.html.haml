@@ -4,35 +4,32 @@
     .span3.mt-2
       %h4 Region
       %p Northern Isles
-    .span3.mt-2
-      %h4 Contact
-      Shetland Arts Development Agency
-      %br
-      Toll Clock Centre
-      %br
-      26 North Road
-      %br
-      Lerwick, Scotland
-      %br
-      ZE1 0DE
-      %br
-      Tel: +44 (0)1595 743843
-      %br
-      Email:
-      =link_to "info@shetlandarts.org", "mailto:info@shetlandarts.org"
-    .span3.mt-2
-      %h4 Secondary contact
-      Fred blogs
-      %br
-      fred@billions.com
-      %br
-      07895 1234567
-    .span3.mt-2
-      %h4 Links
-      %ul.unstyled
-        %li=link_to_url("www.shetlandarts.org/", :target => "_blank")
-        %li=link_to("Facebook", "#")
-        %li=link_to("Twitter", "#")
+    -if promoter.any_present?(:address, :phone, :email)
+      .span3.mt-2
+        %h4 Contact
+        %ul.unstyled
+          -if promoter.address.present?
+            %li
+              =promoter
+              =render_promoter_address(promoter)
+          -if promoter.phone.present?
+            %li
+              Tel:
+              =internationalize_phone_number(promoter.phone)
+          -if promoter.email.present?
+            %li
+              Email:
+              =link_to promoter.email, "mailto:#{promoter.email}"
+    -if promoter.any_present?(:website_url, :facebook_url, :twitter_url)
+      .span3.mt-2
+        %h4 Links
+        %ul.unstyled
+          -if promoter.website_url.present?
+            %li=link_to_url(promoter.website, :target => "_blank")
+          -if promoter.facebook_url.present?
+            %li=link_to("Facebook", promoter.facebook_url)
+          -if promoter.twitter_url.present?
+            %li=link_to("Twitter", promoter.twitter_url, :target => '_blank')
 
     
   .span8
