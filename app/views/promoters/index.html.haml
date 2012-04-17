@@ -1,11 +1,22 @@
 .row
-  .span8
-    %h1=title("Promoters")
-    -if promoters.empty?
+  -if promoters.empty?
+    .span12    
       %p There are no promoters yet.
-    %ul
-      -promoters.each do |promoter|
-        %li=link_to_self(promoter)
+  -else
+    .span12.mb-1
+      %h1.pull-left=title("Companies")
+      %form.form-search.pull-right
+        =text_field_tag :promoter_search, "", :class => "input-medium search-query"
+        =submit_tag "Search", :class => "btn"
+    .span12
+      %table.table.table-bordered.table-striped
+        %tbody
+          -promoters.order('name ASC').each do |promoter|
+            %tr
+              %td.span4
+                =image_for(promoter, "50x50#", :class => "pull-left mr-1")
+                %h4.pull-left=link_to_self(promoter)
+              %td.span8=truncate(promoter.description.to_s, :length => 190)
 .row
   .span8
     =options_panel do

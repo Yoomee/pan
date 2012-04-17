@@ -11,6 +11,7 @@ Pan::Application.routes.draw do
     get :autocomplete_art_form_name, :on => :collection
     get :autocomplete_funder_name, :on => :collection
   end
+  match 'community' => 'posts#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

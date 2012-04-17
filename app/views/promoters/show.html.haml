@@ -1,43 +1,44 @@
 .row
   .span3
-    =image_for(promoter, "220x") if promoter.image
-    .span3.mt-2
-      %h4 Region
-      %p=promoter.region
-    -if promoter.any_present?(:address, :phone, :email)
+    .row
+      .span3
+        =image_for(promoter, "220x") if promoter.image
       .span3.mt-2
-        %h4 Contact
-        %ul.unstyled
-          -if promoter.address.present?
-            %li
-              =promoter
-              =render_address(promoter)
-          -if promoter.phone.present?
-            %li
-              Tel:
-              =internationalize_phone_number(promoter.phone)
-          -if promoter.email.present?
-            %li
-              Email:
-              =link_to promoter.email, "mailto:#{promoter.email}"
-    -if promoter.any_present?(:website_url, :facebook_url, :twitter_url)
-      .span3.mt-2
-        %h4 Links
-        %ul.unstyled
-          -if promoter.website_url.present?
-            %li=link_to_url(promoter.website_url, :target => "_blank")
-          -if promoter.facebook_url.present?
-            %li=link_to("Facebook", promoter.facebook_url)
-          -if promoter.twitter_url.present?
-            %li=link_to("Twitter", promoter.twitter_url, :target => '_blank')
-
+        %h4 Region
+        %p=promoter.region
+      -if promoter.any_present?(:address, :phone, :email)
+        .span3.mt-2
+          %h4 Contact
+          %ul.unstyled
+            -if promoter.address.present?
+              %li
+                =promoter
+                =render_address(promoter)
+            -if promoter.phone.present?
+              %li
+                Tel:
+                =internationalize_phone_number(promoter.phone)
+            -if promoter.email.present?
+              %li
+                Email:
+                =link_to promoter.email, "mailto:#{promoter.email}"
+      -if promoter.any_present?(:website_url, :facebook_url, :twitter_url)
+        .span3.mt-2
+          %h4 Links
+          %ul.unstyled
+            -if promoter.website_url.present?
+              %li=link_to_url(promoter.website_url, :target => "_blank")
+            -if promoter.facebook_url.present?
+              %li=link_to("Facebook", promoter.facebook_url)
+            -if promoter.twitter_url.present?
+              %li=link_to("Twitter", promoter.twitter_url, :target => '_blank')
     
-  .span8
+  .span9
     %h1.mb-1=title(promoter)
     =simple_format(promoter.description)
     .row.mt-2
-      .span8
-        %h4 Venues
+      .span9
+        %h4.mb-1 Venues
         -if promoter.venues.empty?
           =promoter
           doesn't have any venues yet.
@@ -50,45 +51,56 @@
                 =link_to 'View', venue
             
     .row.mt-2
-      .span8
+      .span9
         %h4 Individual profiles
-    .row
-      .span2
-        =link_to '#' do
-          =image_placeholder('120x120#')
-        %h5=link_to 'Kathy Hubbard', '#'
-        %p=link_to 'Head of Development', '#'
-      .span2
-        =link_to '#' do
-          =image_placeholder('120x120#')
-        %h5=link_to 'Donald Anderson', '#'
-        %p=link_to 'Arts Development Officer, Literature', '#'
-      .span2
-        =link_to '#' do
-          =image_placeholder('120x120#')
-        %h5=link_to 'John Haswell', '#'
-        %p=link_to 'Arts Development Officer, Drama', '#'
-      .span2
-        =link_to '#' do
-          =image_placeholder('120x120#')
-        %h5=link_to 'Claire Aldington', '#'
-        %p=link_to 'Arts Development Officer, Visual Arts', '#'
-      
+        .row.mt-1
+          .span2
+            =link_to '#' do
+              =image_placeholder('120x120#')
+            %h5=link_to 'Kathy Hubbard', '#'
+            %p=link_to 'Head of Development', '#'
+          .span2
+            =link_to '#' do
+              =image_placeholder('120x120#')
+            %h5=link_to 'Donald Anderson', '#'
+            %p=link_to 'Arts Development Officer, Literature', '#'
+          .span2
+            =link_to '#' do
+              =image_placeholder('120x120#')
+            %h5=link_to 'John Haswell', '#'
+            %p=link_to 'Arts Development Officer, Drama', '#'
+          .span2
+            =link_to '#' do
+              =image_placeholder('120x120#')
+            %h5=link_to 'Claire Aldington', '#'
+            %p=link_to 'Arts Development Officer, Visual Arts', '#'
     .row.mt-2
-      .span8
-        %h4 Genres/art-forms currently promoting
+      .span9
+        .row
+          .span4
+            %h4.mb-1 Genres/art-forms currently promoting
+            %ul.unstyled
+              %li Alternative
+          -if (tag_list = (promoter.art_form_list + promoter.genre_list).uniq).present?
+            .span4
+              %h4.mb-1 Genres/art-forms interested in
+              %ul.unstyled
+                -tag_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
     .row.mt-2
-      .span8
-        %h4 Genres/art-forms interested in
-    .row.mt-2
-      .span8
+      .span9
         %h4 List of resources
     .row.mt-2
-      .span8
+      .span9
         %h4 Skills matrix
-
+    .row.mt-2
+      .span9
+        %h4.mb-1 Updates
+        -if can?(:create, Post)
+          =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
+        =render("posts/posts", :posts => posts)
 .row.mt-2
-  .span8
+  .span9
     =options_panel do
       =back_link
       =link_if_can("Edit promoter", [:edit, promoter])

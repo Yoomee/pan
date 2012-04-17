@@ -2,6 +2,8 @@ class Promoter < ActiveRecord::Base
   
   include Organisation
 
+  acts_as_taggable_on :genres, :art_forms
+
   has_many :venues, :dependent => :destroy
   
   has_snippets :address1, :address2, :address3, :address4, :postcode, :phone, :region, :email
