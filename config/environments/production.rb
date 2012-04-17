@@ -57,4 +57,18 @@ Pan::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.action_mailer.default_url_options = { :host => 'pan.yoomee.com' }
+  # TODO: uncomment this once DNS has changed
+  # config.action_mailer.default_url_options = { :host => 'unseenamsterdam.com' }
+
+  config.action_mailer.smtp_settings = {
+    :address        => 'mail.studentbabble.com',
+    :domain         => 'mail.studentbabble.com',
+    :authentication => :login,
+    :user_name      => 'info@studentbabble.com',
+    :password       => 'm:HE4,4JF2KL_{mG*;IG;(xGGjOA.;r',
+    :enable_starttls_auto => false
+  }
+  
 end
