@@ -7,12 +7,12 @@
     %span#page_title.mercury-region{:"data-type" => "editable"}
       =raw(page.title)
   -if page.image
-    .row
+    .row.mt-2
       .span8
         .gallery_slideshow.fade_in
           .gallery_slideshow.fade_in
             =image_for(page, "770x446>")
-  .row
+  .row.mt-2
     .span8
       .gallery_description
         -if page.text.blank? && !viewing_mercury_edit? && can?(:edit, page)
