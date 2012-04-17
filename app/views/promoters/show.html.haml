@@ -74,13 +74,19 @@
               =image_placeholder('120x120#')
             %h5=link_to 'Claire Aldington', '#'
             %p=link_to 'Arts Development Officer, Visual Arts', '#'
-      
     .row.mt-2
       .span9
-        %h4 Genres/art-forms currently promoting
-    .row.mt-2
-      .span9
-        %h4 Genres/art-forms interested in
+        .row
+          .span4
+            %h4.mb-1 Genres/art-forms currently promoting
+            %ul.unstyled
+              %li Alternative
+          -if (tag_list = (promoter.art_form_list + promoter.genre_list).uniq).present?
+            .span4
+              %h4.mb-1 Genres/art-forms interested in
+              %ul.unstyled
+                -tag_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
     .row.mt-2
       .span9
         %h4 List of resources
