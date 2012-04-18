@@ -6,7 +6,7 @@ class PromotersController < ApplicationController
   
   def create
     if promoter.save
-      flash[:notice] = 'Created new promoter'
+      flash_notice(promoter)
       redirect_to(promoter)
     else
       render :action => 'new'
@@ -15,7 +15,7 @@ class PromotersController < ApplicationController
   
   def destroy
     promoter.destroy
-    flash[:notice] = "Deleted promoter #{promoter}"
+    flash_notice(promoter)
     redirect_to(promoters_path)
   end
   
@@ -29,7 +29,7 @@ class PromotersController < ApplicationController
   
   def update
     if promoter.save
-      flash[:notice] = 'Updated promoter'
+      flash_notice(promoter)
       redirect_to(promoter)
     else
       render :action => 'edit'
