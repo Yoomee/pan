@@ -37,6 +37,7 @@ PATH
       rails (~> 3.1.0)
       rails_config (~> 0.2.6)
       rinku
+      truncate_html
       will_paginate (~> 3.0.3)
     ym_permalinks (0.0.1)
       rails (~> 3.1.0)
@@ -263,6 +264,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    truncate_html (0.5.4)
     tzinfo (0.3.33)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
