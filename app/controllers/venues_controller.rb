@@ -1,6 +1,7 @@
 class VenuesController < ApplicationController
 
   expose(:venue)
+  expose(:posts) {venue.posts.page(params[:page])}
   
   def create
     if venue.save
