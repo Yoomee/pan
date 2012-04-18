@@ -1,6 +1,6 @@
 .row
   .span3
-    .row
+    .row.profile-left-col
       .span3
         =image_for(company, "220x") if company.image
       .span3.mt-2
@@ -27,7 +27,7 @@
           %h4 Links
           %ul.unstyled
             -if company.website_url.present?
-              %li=link_to_url(company.website_url, :target => "_blank")
+              %li=link_to(truncate(company.website_url, :length => 32), company.website_url, :target => "_blank")
             -company.social_urls.each do |site_name, url|
               %li=link_to(site_name, url, :target => "_blank")
       -if company.contact1_details.present?

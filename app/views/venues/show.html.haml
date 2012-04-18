@@ -1,6 +1,6 @@
 .row
   .span3
-    .row
+    .row.profile-left-col
       .span3
         =image_for(venue, "220x") if venue.image
       .span3.mt-2
@@ -27,7 +27,7 @@
           %h4 Links
           %ul.unstyled
             -if venue.website_url.present?
-              %li=link_to_url(venue.website_url, :target => "_blank")
+              %li=link_to(truncate(venue.website_url, :length => 32), venue.website_url, :target => "_blank")
             -if venue.facebook_url.present?
               %li=link_to("Facebook", venue.facebook_url)
             -if venue.twitter_url.present?

@@ -52,6 +52,12 @@
   color: #00558D;
 }
 
+/*========== Profiles ==========*/
+
+.profile-left-col {
+  overflow: hidden;
+}
+
 /*========== Company ==========*/
 
 .company_tag_lists .span2 {
