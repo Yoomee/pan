@@ -6,7 +6,10 @@
       %h2.homepage-box-title
         =link_to_slug('about-tourbook')
       .homepage-box-content
-        =simple_format(truncate(Page.find_by_slug('about-tourbook').try(:text).to_s, :length => 200))
+        -if (about_tourbook = Page.find_by_slug('about-tourbook')).try(:summary).present?
+          =simple_format(about_tourbook.summary)
+        -else
+          =simple_format(truncate(about_tourbook.try(:text).to_s, :length => 200))
       .homepage-box-links
         =link_to_slug("Find out more", 'about-tourbook')
 .row.mb-2
@@ -15,7 +18,10 @@
       %h2.homepage-box-title
         =link_to_slug('about-pan')
       .homepage-box-content
-        =simple_format(truncate(Page.find_by_slug('about-pan').try(:text).to_s, :length => 200))
+        -if (about_pan = Page.find_by_slug('about-pan')).try(:summary).present?
+          =simple_format(about_pan.summary)
+        -else
+          =simple_format(truncate(about_pan.try(:text).to_s, :length => 200))
       .homepage-box-links
         =link_to_slug("Find out more", 'about-pan')
   .span4

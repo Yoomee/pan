@@ -1,0 +1,14 @@
+=form.inputs do
+  =parent_page_select(form)
+  =form.input :title
+  =form.input :short_title
+  =form.input :summary, :as => :text, :input_html => {:rows => 5, :class => "span4"}
+  -if !page.new_record? && page.image
+    .control-group
+      =image_for(page, "100x100#")
+  =form.input :retained_image, :as => :hidden
+  =form.input :image, :as => :file, :label => "Cover image"
+  =form.input :view_name, :as => :select, :collection => Page::view_names, :include_blank => false, :member_label => "titleize", :label => "Layout"
+  =form.input :permalink_path, :label => "Permalink"
+  =form.input :slug if current_user.try(:yoomee_staff?)  
+  =form.input :published
