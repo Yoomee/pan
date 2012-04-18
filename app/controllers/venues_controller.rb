@@ -5,7 +5,7 @@ class VenuesController < ApplicationController
   
   def create
     if venue.save
-      flash[:notice] = 'Created new venue'
+      flash_notice(venue)
       redirect_to(venue)
     else
       render :action => 'new'
@@ -14,7 +14,7 @@ class VenuesController < ApplicationController
   
   def destroy
     venue.destroy
-    flash[:notice] = "Deleted venue #{venue}"
+    flash_notice(venue)
     redirect_to(venue.promoter)
   end
 
@@ -29,7 +29,7 @@ class VenuesController < ApplicationController
   
   def update
     if venue.save
-      flash[:notice] = 'Updated venue'
+      flash_notice(venue)
       redirect_to(venue)
     else
       render :action => 'edit'
