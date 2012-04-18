@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
 
   def create
     if company.save
-      flash_notice(company, :create)
+      flash_notice(company)
       redirect_to(company)
     else
       render :action => 'new'
@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
 
   def destroy
     company.destroy
-    flash_notice(company, :destroy)
+    flash_notice(company)
     redirect_to(companies_path)
   end
   
@@ -34,7 +34,7 @@ class CompaniesController < ApplicationController
   
   def update
     if company.save
-      flash_notice(company, :update)
+      flash_notice(company)
       redirect_to(company)
     else
       render :action => 'edit'
