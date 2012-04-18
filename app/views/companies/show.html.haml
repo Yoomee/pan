@@ -96,12 +96,13 @@
           -9.times do
             .span1.mb-1
               =image_placeholder("60x60#")
-    .row.mt-2
-      .span9
-        %h4.mb-1 Updates
-        -if can?(:create, Post)
-          =render("posts/remote_form", :post => current_user.posts.build(:target => company))
-        =render("posts/posts", :posts => posts)
+    -if posts.present? || can?(:create, Post)
+      .row.mt-2
+        .span9
+          %h4.mb-1 Updates
+          -if can?(:create, Post)
+            =render("posts/remote_form", :post => current_user.posts.build(:target => company))
+          =render("posts/posts", :posts => posts)
 .row.mt-2
   .span9
     =options_panel do

@@ -93,12 +93,22 @@
     .row.mt-2
       .span9
         %h4 Skills matrix
-    .row.mt-2
-      .span9
-        %h4.mb-1 Updates
-        -if can?(:create, Post)
-          =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
-        =render("posts/posts", :posts => posts)
+    -if (media_posts = promoter.posts.where("image_uid LIKE '%'").limit(8)).present?
+      .row.mt-2
+        .span9
+          %h4 Photos/videos
+          .row.mt-1
+            -media_posts.each do |media_post|
+              .span1.mb-1
+                =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
+                  =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
+    -if posts.present? || can?(:create, Post)
+      .row.mt-2
+        .span9
+          %h4.mb-1 Updates
+          -if can?(:create, Post)
+            =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
+          =render("posts/posts", :posts => posts)
 .row.mt-2
   .span9
     =options_panel do
