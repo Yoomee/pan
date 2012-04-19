@@ -47,10 +47,10 @@ PATH
       jquery-rails
       rails (~> 3.1.0)
       remotipart (~> 1.0)
-      video_info
       ym_core
       ym_tags
       ym_users
+      ym_videos
     ym_tags (0.0.1)
       acts-as-taggable-on (~> 2.2.2)
       rails (~> 3.1.0)
@@ -60,6 +60,9 @@ PATH
       devise
       rails (~> 3.1.0)
       ym_core
+    ym_videos (0.0.1)
+      rails (~> 3.1.0)
+      video_info
 
 GEM
   remote: http://rubygems.org/
