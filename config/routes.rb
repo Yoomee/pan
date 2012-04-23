@@ -1,7 +1,10 @@
 Pan::Application.routes.draw do
   
   root :to => 'home#index'
-  resources :companies
+  resources :companies do
+    resources :tours, :only => [:new]
+  end
+  resources :tours, :except => [:new]
   resources :promoters do
     resources :venues
   end

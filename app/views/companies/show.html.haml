@@ -108,4 +108,7 @@
     =options_panel do
       =back_link
       =link_if_can("Edit company", [:edit, company])
+      -if can?(:new, company.tours.build)
+        =link_to("Add tour", new_company_tour_path(company))
       =link_if_can("Delete company", [:destroy, company], :confirm => "Are you sure?")
+      
