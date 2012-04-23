@@ -1,0 +1,14 @@
+=form.inputs do
+  =form.input :company_id, :as => :hidden
+  =form.input :name
+  =form.input :description, :input_html => {:rows => 5, :class => "span8"}
+  =form.input :requirements, :label => "Other requirements", :input_html => {:rows => 5, :class => "span8"}
+  =form.input :target_age, :label => "Target age range/style", :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :running_time, :label => "Running time/with and without interval", :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :publicity, :label => "Will you provide publicity?", :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :fees, :label => "Fees <small class='small-info-text'>(Please specify if VAT, travel and/or accommodation is to be added to this figure)</small>".html_safe, :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :retained_image, :as => :hidden
+  -if tour.image && tour.errors[:image].empty?
+    =image_for(tour, "100x")
+    =form.input :remove_image, :as => :boolean
+  =form.input :image, :as => :file
