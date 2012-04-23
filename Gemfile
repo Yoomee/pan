@@ -11,6 +11,9 @@ gem "rake", "0.8.7"
 gem 'exception_notification'
 gem 'formtastic-bootstrap', :git => "git://github.com/cgunther/formtastic-bootstrap.git", :branch => "bootstrap-2"
 
+
+gem 'geocoder'
+
 load_ym_gems!
 
 ### Groups

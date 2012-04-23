@@ -63,3 +63,23 @@
 .company_tag_lists .span2 {
   min-height: 65px;
 }
+
+/*========== Venues map ==========*/
+.venue-infowindow img{
+  float:left;
+  width:80px;
+  margin-right:10px;
+  margin-top:3px;
+}
+.venue-infowindow p{
+  float:right;
+  width:240px;
+}
+.venue-infowindow a{
+  float:right;
+  clear:both;
+}
+
+
+
+

@@ -1,8 +1,19 @@
+-if venue.has_lat_lng?
+  =google_maps_javascript_include_tag
+  =content_for :head do
+    :javascript
+      $(document).ready(function() {
+        VenueMap.init(#{venue.lat},#{venue.lng});
+      });
+  
 .row
   .span3
     .row.profile-left-col
       .span3
         =image_for(venue, "220x") if venue.image
+      -if venue.has_lat_lng?
+        .span3.mt-2
+          #map_canvas{:style => "height:220px;width:100%"}
       .span3.mt-2
         %h4 Region
         %p=venue.region
@@ -13,6 +24,7 @@
             -if venue.address.present?
               %li
                 =venue
+                %br
                 =render_address(venue)
             -if venue.phone.present?
               %li
