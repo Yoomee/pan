@@ -6,6 +6,7 @@ Pan::Application.routes.draw do
   end
   resources :tours, :except => [:new]
   resources :promoters do
+    resources :users, :only => [:new, :create]
     resources :venues
   end
   resources :venues, :except => :new
