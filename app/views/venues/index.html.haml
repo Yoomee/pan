@@ -1,9 +1,9 @@
+=google_maps_javascript_include_tag
 =content_for :head do
-  =javascript_include_tag("http://maps.googleapis.com/maps/api/js?key=AIzaSyAIXsdk6KMk2qhPu1iNsN3RNDiWdyT3fXY&sensor=false")
   :javascript
     VenuesMap.venues = #{Venue.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
     $(document).ready(function() {
-      VenuesMap.init();
+      VenuesMap.init(true);
     });
 .row
   #map_canvas.span12{:style => "height:600px"}

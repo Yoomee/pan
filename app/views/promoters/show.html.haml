@@ -1,8 +1,20 @@
+-if !promoter.venues.with_lat_lng.empty?
+  =google_maps_javascript_include_tag
+  =content_for :head do
+    :javascript
+      $(document).ready(function() {
+        VenuesMap.venues = #{promoter.venues.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
+        VenuesMap.init();
+      });
+
 .row
   .span3
     .row.profile-left-col
       .span3
         =image_for(promoter, "220x") if promoter.image
+      -if !promoter.venues.with_lat_lng.empty?
+        .span3.mt-2
+          #map_canvas{:style => "height:220px;width:100%"}
       .span3.mt-2
         %h4 Region
         %p=promoter.region

@@ -29,6 +29,10 @@ class Venue < ActiveRecord::Base
     "UK"
   end
   
+  def has_lat_lng?
+    lat.present? && lng.present?
+  end
+  
   def infowindow_image_url
     (image || default_image).thumb("80x80#").url
   end

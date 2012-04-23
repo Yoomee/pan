@@ -1,11 +1,29 @@
-VenuesMap =
-	init: ->
+VenueMap =
+	init: (lat, lng) ->
     mapOptions = {
-      center: new google.maps.LatLng(58.031372,-4.086914),
-      zoom: 6,
+      center: new google.maps.LatLng(lat, lng),
+      zoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       streetViewControl: false
     }
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map
+    });
+window.VenueMap = VenueMap 
+
+VenuesMap =
+	init: (large) ->
+    large ||= false
+    mapOptions = {
+      center: new google.maps.LatLng(58.031372,-4.086914),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: false
+    }
+    mapOptions.zoom = if large then 6 else 8
+    
     VenuesMap.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
     VenuesMap.infowindow = new google.maps.InfoWindow({maxWidth: 400})
 
@@ -18,10 +36,15 @@ VenuesMap =
       });
       bounds.extend(marker.position)
       marker.venueId = venue.id
-      marker.contentString = "<div class='venue-infowindow'><h3>#{venue.name}</h3><img src='#{venue.infowindow_image_url}'><p>#{venue.short_description}</p><a href='/venues/#{venue.id}'>Show venue &rarr;</a></div>"
-      google.maps.event.addListener marker, 'click', ->
-        VenuesMap.infowindow.close()
-        VenuesMap.infowindow.setContent(this.contentString)
-        VenuesMap.infowindow.open(VenuesMap.map,this);
+      if large
+        marker.contentString = "<div class='venue-infowindow'><h3>#{venue.name}</h3><img src='#{venue.infowindow_image_url}'><p>#{venue.short_description}</p><a href='/venues/#{venue.id}'>Show venue &rarr;</a></div>"
+        google.maps.event.addListener marker, 'click', ->
+          VenuesMap.infowindow.close()
+          VenuesMap.infowindow.setContent(this.contentString)
+          VenuesMap.infowindow.open(VenuesMap.map,this);
+      else
+        google.maps.event.addListener marker, 'click', ->
+          window.location = "/venues/#{this.venueId}"
+      
     VenuesMap.map.setCenter(bounds.getCenter())
 window.VenuesMap = VenuesMap 
