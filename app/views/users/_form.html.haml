@@ -1,0 +1,14 @@
+=semantic_form_for(user, :multipart => true) do |form|
+  =form.inputs do
+  =form.input :promoter_id, :as => :hidden
+    =form.input :first_name
+    =form.input :last_name
+    =form.input :email
+    -if user.new_record?
+      =form.input :password 
+    -else
+      =form.input :bio, :input_html => {:rows => 5, :class => "span6"}
+      =form.input :retained_image, :as => :hidden
+      =form.input :image, :as => :file
+  =form.buttons do
+    =form.commit_button "Save"
