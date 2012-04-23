@@ -1,4 +1,4 @@
 =semantic_form_for(tour, :html => {:multipart => true}) do |form|
-  =tabs('details', ['requirements', 'Technical requirements'], ['suitability', 'Venue suitability'], :form => form)
+  =tabs('details', ['requirements', 'Technical requirements'], ['suitability', 'Venue suitability'], 'dates', :form => form)
   =form.buttons do
     =form.commit_button "Save"

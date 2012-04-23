@@ -2,9 +2,12 @@ class Tour < ActiveRecord::Base
   
   include YmCore::Model
   
-  image_accessor :image  
+  image_accessor :image
   
   belongs_to :company
+  has_many :dates, :class_name => "TourDate", :dependent => :destroy
+  
+  accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :company, :presence => true
   validates :min_playing_area, :numericality => true, :allow_blank => true

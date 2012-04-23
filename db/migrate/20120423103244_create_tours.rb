@@ -22,6 +22,7 @@ class CreateTours < ActiveRecord::Migration
       t.boolean :suits_outdoors, :default => false
       t.timestamps
     end
+    add_index :tours, :company_id    
   end
 
 end
