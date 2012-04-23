@@ -12,3 +12,4 @@ tmp/
 vendor/gems
 chromedriver.log
 public/assets
+db/schema.rb
