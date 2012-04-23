@@ -13,7 +13,8 @@ class Ability
       # admin ability
     elsif user
       # user ability
-      can [:read, :create], Post
+      can :read, Post
+      can :create, Post, :resource => false
       can [:update, :destroy], Post, :user_id => user.id
       can :manage, User, :id => user.id
     end

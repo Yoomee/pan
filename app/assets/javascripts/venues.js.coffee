@@ -1,19 +1,3 @@
-VenueMap =
-	init: (lat, lng) ->
-    mapOptions = {
-      center: new google.maps.LatLng(lat, lng),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      streetViewControl: false
-    }
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-    marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng),
-        map: map
-    });
-window.VenueMap = VenueMap 
-
 VenuesMap =
 	init: (large) ->
     large ||= false
@@ -42,7 +26,7 @@ VenuesMap =
           VenuesMap.infowindow.close()
           VenuesMap.infowindow.setContent(this.contentString)
           VenuesMap.infowindow.open(VenuesMap.map,this);
-      else
+      else if VenuesMap.venues.length > 1
         google.maps.event.addListener marker, 'click', ->
           window.location = "/venues/#{this.venueId}"
       

@@ -3,7 +3,8 @@
   =content_for :head do
     :javascript
       $(document).ready(function() {
-        VenueMap.init(#{venue.lat},#{venue.lng});
+        VenuesMap.venues = [#{venue.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])}];
+        VenuesMap.init()
       });
   
 .row

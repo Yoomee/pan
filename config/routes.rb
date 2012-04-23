@@ -6,6 +6,7 @@ Pan::Application.routes.draw do
   end
   resources :tours, :except => [:new]
   resources :promoters do
+    resources :users, :only => [:new, :create]
     resources :venues
   end
   resources :venues, :except => :new
@@ -17,6 +18,8 @@ Pan::Application.routes.draw do
     end
   end
   match 'community' => 'posts#index'
+  
+  resources :resources, :only => [:index]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

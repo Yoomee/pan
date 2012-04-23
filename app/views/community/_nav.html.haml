@@ -5,7 +5,7 @@
         =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
         %li=link_to("Notifications (1)", "#")
         %li=link_to("Members", "#")
-        %li=link_to("Resources", "#")
+        =li_with_active(current_page?(resources_path), link_to("Resources", resources_path))
         %li=link_to("Leaderboard", "#")
         -if current_user
           =li_with_active(current_page?(current_user), link_to("My profile", current_user))
