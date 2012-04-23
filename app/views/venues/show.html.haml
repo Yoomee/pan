@@ -13,6 +13,7 @@
             -if venue.address.present?
               %li
                 =venue
+                %br
                 =render_address(venue)
             -if venue.phone.present?
               %li

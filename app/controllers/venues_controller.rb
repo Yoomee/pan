@@ -1,6 +1,7 @@
 class VenuesController < ApplicationController
 
   expose(:venue)
+  expose(:venues) {Venue.all}
   expose(:posts) {venue.posts.page(params[:page])}
   
   def create
@@ -19,6 +20,9 @@ class VenuesController < ApplicationController
   end
 
   def edit;end
+  
+  def index
+  end
   
   def new
     promoter = Promoter.find(params[:promoter_id])

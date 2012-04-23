@@ -6,10 +6,12 @@ Pan::Application.routes.draw do
     resources :venues
   end
   resources :venues, :except => :new
-  resources :tags, :only => [] do 
-    get :autocomplete_genre_name, :on => :collection
-    get :autocomplete_art_form_name, :on => :collection
-    get :autocomplete_funder_name, :on => :collection
+  resources :tags, :only => [] do
+    collection do 
+      get 'autocomplete_genre_name'
+      get 'autocomplete_art_form_name'
+      get 'autocomplete_funder_name'
+    end
   end
   match 'community' => 'posts#index'
   
