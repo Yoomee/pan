@@ -43,7 +43,7 @@
         %ul.unstyled
           -4.times do
             %li
-              ="Production name #{rand(30)}/#{rand(12)}/12"
+              ="Production name #{rand(28)+1}/#{rand(13)+1}/12"
               =link_to("view", "#")
         
   .span9
@@ -96,6 +96,11 @@
           -9.times do
             .span1.mb-1
               =image_placeholder("60x60#")
+    -if company.facebook_url.present?
+      .row.mt-2
+        .span9
+          %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => company.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
+    
     -if posts.present? || can?(:create, Post)
       .row.mt-2
         .span9
