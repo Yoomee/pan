@@ -1,4 +1,4 @@
--if can?(:create, Post)
+-if can?((post.new_record? ? :create : :update), post)
   =semantic_form_for(post, :format => :js, :remote => true, :multipart => true, :html => {:class => "post_form#{post.errors.present? ? ' expanded' : ''}"}) do |form|
     =form.inputs do
       =form.input :resource
