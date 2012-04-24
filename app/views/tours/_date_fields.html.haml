@@ -1,5 +1,5 @@
 .nested-fields
   =f.inputs :class => "form-inline" do
     =f.input :venue, :as => :select, :label => false, :prompt => "Select a venue", :wrapper_html => {:class => "pull-left mr-1"}
-    =f.input :date_s, :as => :string, :label => false, :input_html => {:class => "datepicker span2 mr-1", :placeholder => "Click here to set date"}, :wrapper_html => {:class => "pull-left"}, :value_method => :to_s
+    =f.input :date_s, :as => :string, :label => false, :input_html => {:class => "datepicker span2", :placeholder => "Click here to set date"}, :wrapper_html => {:class => "pull-left mr-1"}, :value_method => :to_s
     =link_to_remove_association "x Remove date", f, :class => "pull-left"

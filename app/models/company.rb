@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   
   has_many :posts, :as => :target
   has_many :tours, :dependent => :destroy
+  has_many :tour_dates, :through => :tours, :source => :dates
   
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :youtube_url, :vimeo_url, :soundcloud_url
   

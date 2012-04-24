@@ -93,9 +93,9 @@
       .span9
         %h4 Proposed tour dates
         .row.mt-1
-          -9.times do
+          -company.tour_dates.each do |tour_date|
             .span1.mb-1
-              =image_placeholder("60x60#")
+              =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
     -if company.facebook_url.present?
       .row.mt-2
         .span9
