@@ -6,9 +6,12 @@
     .row
       .span3
         =image_for(user, "220x")
-      .span3.mt-2
-        Arts Development Officer at
-        =link_to(Promoter.first || "Shetland Arts Development Agency")
+      -if user.promoter
+        .span3.mt-2
+          -if user.job_title
+            %strong=user.job_title
+            at
+          =link_to_self user.promoter
   .span9
     %h1.mb-1=title(user)
     =simple_format(user.bio)

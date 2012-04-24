@@ -60,32 +60,23 @@
             -promoter.venues.each do |venue|
               %li
                 =venue
-                =link_to 'View', venue
-            
+                =link_to 'View', venue            
     .row.mt-2
       .span9
         %h4 Individual profiles
+          
         .row.mt-1
-          .span2
-            =link_to '#' do
-              =image_placeholder('120x120#')
-            %h5=link_to 'Kathy Hubbard', '#'
-            %p=link_to 'Head of Development', '#'
-          .span2
-            =link_to '#' do
-              =image_placeholder('120x120#')
-            %h5=link_to 'Donald Anderson', '#'
-            %p=link_to 'Arts Development Officer, Literature', '#'
-          .span2
-            =link_to '#' do
-              =image_placeholder('120x120#')
-            %h5=link_to 'John Haswell', '#'
-            %p=link_to 'Arts Development Officer, Drama', '#'
-          .span2
-            =link_to '#' do
-              =image_placeholder('120x120#')
-            %h5=link_to 'Claire Aldington', '#'
-            %p=link_to 'Arts Development Officer, Visual Arts', '#'
+          -if promoter.users.empty?
+            .span8
+              =promoter
+              doesn't have any individuals yet.
+              =link_if_can "Add one", [:new, promoter, :user]
+          -else
+            -promoter.users.each do |user|
+              .span2
+                =link_to image_for(user,"120x120#"), user
+                %h5=link_to_self user
+                %p=user.job_title
     .row.mt-2
       .span9
         .row
@@ -128,3 +119,4 @@
       =link_if_can("Edit promoter", [:edit, promoter])
       =link_if_can("Delete promoter", [:destroy, promoter], :confirm => "Are you sure?")
       =link_if_can("Add venue", [:new, promoter, :venue])
+      =link_if_can("Add individual", [:new, promoter, :user])

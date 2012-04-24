@@ -3,16 +3,13 @@ class UsersController < ApplicationController
   include YmUsers::UsersController
   
   expose(:wall_posts) {user.wall_posts.page(params[:page])}
-  expose(:promoter)
+  expose(:promoter) {Promoter.find_by_id(params[:promoter_id])}
   
   def new
-    user.promoter = promoter
   end
   
   def create
-    if user.promoter && cannot?(:update,user.promoter)
-      user.promoter = nil
-    end
+    user.promoter = promoter
     if user.save
       redirect_to(user)
     else
