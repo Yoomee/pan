@@ -14,11 +14,15 @@ class TourDate < ActiveRecord::Base
   end
   
   def date_s=(value)
-    begin
-      self.date = Date.strptime(value, "%d/%m/%Y")
-    rescue ArgumentError
+    if value.blank?
+      self.date = nil
+    else
+      begin
+        self.date = Date.strptime(value, "%d/%m/%Y")
+      rescue ArgumentError
+      end
+      @date_s = value
     end
-    @date_s = value
   end
   
 end
