@@ -40,15 +40,17 @@
           =auto_link(tour.contact2_details.join("<br />").html_safe)
       -if tour.sibling_tours.present?
         .span3.mt-2
-          %h4 Upcoming shows
+          %h4 Other shows
           %ul.unstyled
-            -tour.sibling_tours.each do |sibling_tour|
+            -tour.company.tour_dates.where(["tours.id != ?", tour.id]).each do |tour_date|
               %li
-                =sibling_tour
-                =link_to("view", sibling_tour)
+                ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
+                =link_to("view", tour_date.tour)
         
   .span9
-    %h1.mb-1=title(tour)
+    %h1.mb-1
+      =title(tour)
+      %small=link_to_self(tour.company)
     =simple_format(tour.description)
     .row.mt-2
       .span5

@@ -41,10 +41,10 @@
       .span3.mt-2
         %h4 Upcoming shows
         %ul.unstyled
-          -4.times do
+          -company.tour_dates.each do |tour_date|
             %li
-              ="Production name #{rand(28)+1}/#{rand(13)+1}/12"
-              =link_to("view", "#")
+              ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
+              =link_to("view", tour_date.tour)
         
   .span9
     %h1.mb-1=title(company)
@@ -96,6 +96,7 @@
           -company.tour_dates.each do |tour_date|
             .span1.mb-1
               =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
+              %span.small-info-text=tour_date.date.to_s(:date)
     -if company.facebook_url.present?
       .row.mt-2
         .span9

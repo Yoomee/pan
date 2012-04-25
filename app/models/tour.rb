@@ -5,7 +5,7 @@ class Tour < ActiveRecord::Base
   image_accessor :image
   
   belongs_to :company
-  has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true
+  has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
