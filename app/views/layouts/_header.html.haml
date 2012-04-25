@@ -1,30 +1,27 @@
 .container#header
   .row#header_row
-    .span3
+    .span4
       .row
         .span3
           %h1#site_logo
             %span
               =Settings.site_name
         .span3
-          =link_to_slug('About', 'about-tourbook', :class => 'header_link')
-          =link_to_slug('contact', :class => 'header_link')
-          =link_to("Sitemap", pages_path, :class => "header_link") if current_user.try(:admin?)
-    .span9
-      .row
-        .span6
-          #nav.main-nav
-            %ul.unstyled
-              =li_with_active(current_page?(root_path), link_to("Home", root_path))
-              =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
-              =li_with_active(viewing_community?, link_to("Community", community_path))
-        .span3
-          #header_links.pull-right
-            -if user_signed_in?
-              =link_to(t(:logout), sign_out_path, :method => :delete, :class => "pull-right")
-              .header_link.pull-right
-                Logged in as
-                =link_to_self(current_user)
-            -else
-              =link_to "Register", new_user_path, :class => "header_link"
-              =link_to(t(:login), sign_in_path(:next => request.path), :class => "header_link")
+          =link_to_slug('About', 'about-tourbook', :class => 'subnav_link')
+          =link_to_slug('contact', :class => 'subnav_link')
+          =link_to("Sitemap", pages_path, :class => "subnav_link") if current_user.try(:admin?)
+    .span8
+      #nav.main-nav
+        %ul.unstyled
+          =li_with_active(current_page?(root_path), link_to("Home", root_path))
+          =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
+          =li_with_active(viewing_community?, link_to("Community", community_path))
+      #header_links
+        -if user_signed_in?
+          =link_to(t(:logout), sign_out_path, :method => :delete, :class => "pull-right")
+          .header_link.pull-right
+            Logged in as
+            =link_to_self(current_user)
+        -else
+          =link_to "Register", new_user_path, :class => "header_link btn"
+          =link_to(t(:login), sign_in_path(:next => request.path), :class => "header_link btn btn-primary")
