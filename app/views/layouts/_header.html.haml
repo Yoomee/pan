@@ -16,7 +16,7 @@
           #nav.main-nav
             %ul.unstyled
               =li_with_active(current_page?(root_path), link_to("Home", root_path))
-              =li_with_active(controller_name=='companies', link_to("Companies", companies_path))
+              =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
               =li_with_active(viewing_community?, link_to("Community", community_path))
         .span3
           #header_links.pull-right

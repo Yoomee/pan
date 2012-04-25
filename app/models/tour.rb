@@ -4,20 +4,20 @@ class Tour < ActiveRecord::Base
   
   image_accessor :image
   
-  belongs_to :company
+  belongs_to :performer
   has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
-  validates :name, :company, :presence => true
+  validates :name, :performer, :presence => true
   validates :min_playing_area, :numericality => true, :allow_blank => true
   validates_associated :dates
   validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image"
   
-  delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :website_url, :facebook_url, :twitter_name, :youtube_url, :vimeo_url, :soundcloud_url, :social_urls, :to => :company
+  delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :website_url, :facebook_url, :twitter_name, :youtube_url, :vimeo_url, :soundcloud_url, :social_urls, :to => :performer
   
   def sibling_tours
-    company.tours.without(self)
+    performer.tours.without(self)
   end
   
   def technical_details

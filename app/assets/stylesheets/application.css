@@ -4,6 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap
  *= require formtastic-bootstrap
+ *= require font-awesome
  *= require ym_core 
  *= require ym_cms
  *= require ym_tags 
@@ -59,9 +60,9 @@
   overflow: hidden;
 }
 
-/*========== Company ==========*/
+/*========== Performer ==========*/
 
-.company_tag_lists .span2 {
+.performer_tag_lists .span2 {
   min-height: 65px;
 }
 

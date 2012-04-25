@@ -1,8 +1,9 @@
 =form.inputs do
+  %legend Booking contact
+  =form.input :user, :collection => venue.promoter.users, :include_blank => true, :label => false
+
   %legend Contact details
   =form.input :address1, :label => 'Address 1'
   =form.input :address2, :label => 'Address 2'
   =form.input :city
   =form.input :postcode
-  =form.input :phone
-  =form.input :email

@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :company do
+  factory :performer do
     name "Mumford and Sons"
   end
   
@@ -17,7 +17,7 @@ FactoryGirl.define do
   
   factory :tour do
     name "A Tour"
-    association :company
+    association :performer
   end
   
   factory :tour_date do

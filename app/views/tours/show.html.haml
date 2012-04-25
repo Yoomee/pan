@@ -42,7 +42,7 @@
         .span3.mt-2
           %h4 Other shows
           %ul.unstyled
-            -tour.company.tour_dates.where(["tours.id != ?", tour.id]).each do |tour_date|
+            -tour.performer.tour_dates.where(["tours.id != ?", tour.id]).each do |tour_date|
               %li
                 ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
                 =link_to("view", tour_date.tour)
@@ -50,7 +50,7 @@
   .span9
     %h1.mb-1
       =title(tour)
-      %small=link_to_self(tour.company)
+      %small=link_to_self(tour.performer)
     =simple_format(tour.description)
     .row.mt-2
       .span5

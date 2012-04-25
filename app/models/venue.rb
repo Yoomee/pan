@@ -5,11 +5,9 @@ class Venue < ActiveRecord::Base
   include Organisation
   
   belongs_to :promoter
+  belongs_to :user
   has_many :tour_dates, :dependent => :nullify
   
-  has_snippets :phone, :email  
-  
-  #has_snippets :address1, :address2, :address3, :address4, :postcode, :phone, :region, :email
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode#,  :if => lambda{ |obj| obj.address_changed? }
   

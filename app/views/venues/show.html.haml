@@ -18,23 +18,28 @@
       .span3.mt-2
         %h4 Region
         %p=venue.region
-      -if venue.any_present?(:address, :phone, :email)
+      -if venue.address.present?
         .span3.mt-2
-          %h4 Contact
+          %h4 Address
           %ul.unstyled
-            -if venue.address.present?
-              %li
-                =venue
-                %br
-                =render_address(venue)
-            -if venue.phone.present?
+            %li
+              =venue
+              %br
+              =render_address(venue)
+      -if venue.user
+        .span3.mt-2
+          %h4 Booking contact
+          =link_to_self(venue.user)
+          %ul.unstyled          
+            -if venue.user.phone.present?
               %li
                 Tel:
-                =internationalize_phone_number(venue.phone)
-            -if venue.email.present?
+                =internationalize_phone_number(venue.user.phone)
+            -if venue.user.email.present?
               %li
                 Email:
-                =link_to venue.email, "mailto:#{venue.email}"
+                =mail_to venue.user.email, venue.user.email
+        
       -if venue.any_present?(:website_url, :facebook_url, :twitter_url)
         .span3.mt-2
           %h4 Links
@@ -54,9 +59,10 @@
     .row.mt-2
       .span9
         %h4 Keyholder contact details
-    .row.mt-2
-      .span9
-        %h4 Booking contact details
+    -#
+      .row.mt-2
+        .span9
+          %h4 Booking contact
     .row.mt-2
       .span9
         %h4 Technical information
