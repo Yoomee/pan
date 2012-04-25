@@ -1,8 +1,10 @@
 Pan::Application.routes.draw do
   
   root :to => 'home#index'
-  match 'performers/directory(/:letter)' => 'performers#directory', :as => 'directory_performers' # Must come before resources :performers
   resources :performers do
+    collection do
+      get 'directory(/:letter)', :action => 'directory', :as => 'directory'
+    end
     resources :tours, :only => [:new]
   end
   resources :tours, :except => [:new]
