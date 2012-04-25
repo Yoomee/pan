@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   include Organisation  
   
   image_accessor :image
-  acts_as_taggable_on :genres, :art_forms, :funders  
+  acts_as_taggable_on :genres, :art_forms, :funders, :work_scales
   
   has_many :posts, :as => :target
   has_many :tours, :dependent => :destroy

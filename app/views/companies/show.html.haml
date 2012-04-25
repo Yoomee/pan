@@ -50,9 +50,10 @@
     %h1.mb-1=title(company)
     =simple_format(company.description)
     .row.company_tag_lists
-      .span2.mb-1
-        %h4 Current show:
-        "The Final Tour"
+      -if current_tour = company.tours.first
+        .span2.mb-1
+          %h4 Current show:
+          =link_to_self(current_tour)
       -if company.genre_list.present?
         .span2.mb-1
           %h4 Genres
@@ -71,9 +72,12 @@
           %ul.unstyled
             -company.funder_list.each do |funder|
               %li=funder.titleize.humanize
-      .span2.mb-1
-        %h4 Scale of work
-        Large scale
+      -if company.work_scale_list.present?
+        .span2.mb-1
+          %h4 Scale of work
+          %ul.unstyled
+            -company.work_scale_list.each do |work_scale|
+              %li=work_scale.titleize.humanize
     .row.mt-2    
       -if (media_posts = company.posts.where("image_uid LIKE '%'").limit(8)).present?
         .span4
