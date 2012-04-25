@@ -1,0 +1,5 @@
+=semantic_form_for(resource, :multipart => true) do |form|
+  =form.inputs do
+    =form.input :file, :as => :file
+  =form.buttons do
+    =form.commit_button "Save"

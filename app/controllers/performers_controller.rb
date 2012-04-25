@@ -44,6 +44,16 @@ class PerformersController < ApplicationController
   def new
   end
   
+  def search
+    @query = strip_tags(params[:q]).to_s.strip
+    if @query.present?
+      @performers = Performer.search(@query)
+    else
+      @performers = []
+    end
+    render :action => "index"
+  end
+  
   def show
     
   end

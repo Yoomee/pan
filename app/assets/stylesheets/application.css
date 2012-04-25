@@ -153,35 +153,6 @@ body, p {
   color: #00558D;
 }
 
-/*========== Profiles ==========*/
-
-.profile-left-col {
-  overflow: hidden;
-}
-
-/*========== Performer ==========*/
-
-.performer_tag_lists .span2 {
-  min-height: 65px;
-}
-
-/*========== Venues map ==========*/
-.venue-infowindow img{
-  float:left;
-  width:80px;
-  margin-right:10px;
-  margin-top:3px;
-}
-.venue-infowindow p{
-  float:right;
-  width:240px;
-}
-.venue-infowindow a{
-  float:right;
-  clear:both;
-}
-
-
 /*========== Footer ==========*/
 /*
 Sticky Footer by Ryan Fait
@@ -213,6 +184,45 @@ html, body {
   color: #BFBFBF;
 }
 
+/*========== Profiles ==========*/
 
+.profile-left-col {
+  overflow: hidden;
+}
 
+/*========== Performer ==========*/
 
+.performer_tag_lists .span2 {
+  min-height: 65px;
+}
+
+/*========== Venues map ==========*/
+.venue-infowindow img{
+  float:left;
+  width:80px;
+  margin-right:10px;
+  margin-top:3px;
+}
+.venue-infowindow p{
+  float:right;
+  width:240px;
+}
+.venue-infowindow a{
+  float:right;
+  clear:both;
+}
+
+/*========== Resources ==========*/
+
+.resource {
+  height: 135px;
+  overflow: hidden;
+}
+.resource .resource-image {
+  float: left;
+  margin-right: 10px;
+}
+.resource .resource-info {
+  float: left;
+  width: 165px;
+}

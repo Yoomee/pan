@@ -2,14 +2,18 @@
   .span12
     %h1.pull-left
       =title("Performers")
-    %form.form-search.pull-right
-      =text_field_tag :performer_search, "", :class => "input-medium search-query"
-      =submit_tag "Search", :class => "btn"
+    %form.form-search.pull-right{:action => search_performers_path, :method => 'get'}
+      =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+      %input.btn{:type => 'submit', :value => "Search"}
+      
 .row
   .span12
     %ul.nav.nav-tabs
       =li_with_active(action_name.index?, link_to("Latest", performers_path))
       =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, directory_performers_path(:letter => 'A')))
+      -if action_name.search?
+        =li_with_active(true, link_to('Search', '#'))
+      
 -if action_name.directory?
   .row
     .span12
@@ -24,12 +28,14 @@
     -if @performers.empty?
       %p
         There are no performers
-        ="beginning with \"#{@letter}\"" if @letter
-        yet.
+        -if @query
+          ="that match \"#{@query}\""
+        -elsif @letter
+          ="beginning with \"#{@letter}\""
     -else
       %table.table.table-bordered.table-striped
         %tbody
-          -@performers.order('name ASC').each do |performer|
+          -@performers.each do |performer|
             %tr
               %td.span4
                 =image_for(performer, "50x50#", :class => "pull-left mr-1")

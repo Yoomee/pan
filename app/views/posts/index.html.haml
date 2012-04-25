@@ -4,10 +4,10 @@
       =render("community/nav")
   .row.mb-2
     .span8
-      %h1=title(controller_name.resources? ? "Resources" : "Discussions")
+      %h1=title("Discussions")
   .row
     .span2
       =render("tags/list", :tags => top_tags)
     .span8
-      =render("posts/remote_form", :post => current_user.posts.build(:resource => controller_name.resources?))
+      =render("posts/remote_form", :post => current_user.posts.build)
       =render("posts/posts", :posts => posts)

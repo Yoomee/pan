@@ -3,6 +3,12 @@ class Performer < ActiveRecord::Base
   include YmCore::Model
   include Organisation  
   
+  define_index do
+    indexes name, :sortable => true
+    indexes description
+    has created_at, updated_at
+  end
+  
   image_accessor :image
   acts_as_taggable_on :genres, :art_forms, :funders, :work_scales
   
