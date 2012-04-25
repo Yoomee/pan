@@ -16,6 +16,7 @@ class Ability
       can [:read, :create], Post
       can [:update, :destroy], Post, :user_id => user.id
       can :manage, User, :id => user.id
+      can :search, :all
     end
   end
   

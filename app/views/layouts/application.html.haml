@@ -10,7 +10,11 @@
     =yield :head
     =google_analytics_js
   -body_tag do
-    -if flash.present?
-      =yield_with_bootstrap(render_flash)
-    =render("layouts/header")
-    =yield_with_bootstrap(yield)
+    .main-wrapper
+      -if flash.present?
+        =yield_with_bootstrap(render_flash)
+      =render("layouts/header")
+      =yield_with_bootstrap(yield)
+      .push
+    .footer-wrapper
+      =render("layouts/footer")
