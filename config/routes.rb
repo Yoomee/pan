@@ -19,7 +19,7 @@ Pan::Application.routes.draw do
   end
   match 'community' => 'posts#index'
   
-  resources :resources, :only => [:index]
+  resources :resources, :except => [:update]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

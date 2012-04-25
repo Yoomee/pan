@@ -82,6 +82,17 @@
   clear:both;
 }
 
+/*========== Resources ==========*/
 
-
-
+.resource {
+  height: 135px;
+  overflow: hidden;
+}
+.resource .resource-image {
+  float: left;
+  margin-right: 10px;
+}
+.resource .resource-info {
+  float: left;
+  width: 165px;
+}
