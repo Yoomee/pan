@@ -9,6 +9,7 @@
  *= require ym_cms
  *= require ym_tags 
  *= require ym_posts
+ *= require chosen
  *= require_self
 */
 

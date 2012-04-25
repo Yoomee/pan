@@ -12,3 +12,14 @@
 #= require ym_posts
 #= require cocoon
 #= require_tree .
+
+$(document).ready () ->
+  $("select[multiple='multiple']").chosen(
+    persistent_create_option: false,
+    create_option_text: "Add",
+    create_option: (term) ->
+      this.append_option(
+        value: term,
+        text: term
+      )
+  )

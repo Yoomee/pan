@@ -49,10 +49,11 @@
   .span9
     %h1.mb-1=title(performer)
     =simple_format(performer.description)
-    .row.performer_tag_lists
-      .span2.mb-1
-        %h4 Current show:
-        "The Final Tour"
+    .row.company_tag_lists
+      -if current_tour = performer.tours.first
+        .span2.mb-1
+          %h4 Current show:
+          =link_to_self(current_tour)
       -if performer.genre_list.present?
         .span2.mb-1
           %h4 Genres
@@ -71,9 +72,12 @@
           %ul.unstyled
             -performer.funder_list.each do |funder|
               %li=funder.titleize.humanize
-      .span2.mb-1
-        %h4 Scale of work
-        Large scale
+      -if performer.work_scale_list.present?
+        .span2.mb-1
+          %h4 Scale of work
+          %ul.unstyled
+            -performer.work_scale_list.each do |work_scale|
+              %li=work_scale.titleize.humanize
     .row.mt-2    
       -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
         .span4
@@ -86,9 +90,10 @@
       .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
         %h4 Venues regularly visited
         .row.mt-1
-          -7.times do
+          -performer.venues.each do |venue|
             .span1.mb-1
-              =image_placeholder("60x60#")
+              =link_to(image_for(venue, "60x60#"), venue)
+              =link_to_self(venue, :class => "small-info-text")
     .row.mt-2
       .span9
         %h4 Proposed tour dates
