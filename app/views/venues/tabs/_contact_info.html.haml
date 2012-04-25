@@ -6,3 +6,4 @@
   =form.input :postcode
   =form.input :phone
   =form.input :email
+  =form.input :user, :collection => venue.promoter.users, :include_blank => true, :label => "Booking contact"

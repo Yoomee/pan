@@ -18,6 +18,8 @@
         =summarize(Page.find_by_slug('about-pan'), :length => 200)
       .homepage-box-links
         =link_to_slug("Find out more", 'about-pan')
+      .homepage-box-links
+        =link_to("Explore our venues", venues_path)
   .span4
     .homepage-box
       %h2.homepage-box-title

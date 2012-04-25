@@ -54,9 +54,11 @@
     .row.mt-2
       .span9
         %h4 Keyholder contact details
-    .row.mt-2
-      .span9
-        %h4 Booking contact details
+    -if venue.user
+      .row.mt-2
+        .span9
+          %h4 Booking contact
+          =link_to_self(venue.user)
     .row.mt-2
       .span9
         %h4 Technical information

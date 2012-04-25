@@ -5,6 +5,7 @@ class Venue < ActiveRecord::Base
   include Organisation
   
   belongs_to :promoter
+  belongs_to :user
   has_many :tour_dates, :dependent => :nullify
   
   has_snippets :phone, :email  
