@@ -17,6 +17,7 @@ class Ability
       can :create, Post, :resource => false
       can [:update, :destroy], Post, :user_id => user.id
       can :manage, User, :id => user.id
+      can :search, :all
     end
   end
   
