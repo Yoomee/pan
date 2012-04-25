@@ -2,7 +2,7 @@
   .span3
     .row.profile-left-col
       .span3
-        =image_for(company, "220x") if company.image
+        =image_for(performer, "220x") if performer.image
       .span3.mt-2
         %h4=pluralize(22, 'Review')
         %table.unstyled
@@ -22,60 +22,60 @@
             %td Poor
           %tr
             %td Terrible
-      -if company.any_present?(:website_url, :social_urls)
+      -if performer.any_present?(:website_url, :social_urls)
         .span3.mt-2
           %h4 Links
           %ul.unstyled
-            -if company.website_url.present?
-              %li=link_to(truncate(company.website_url, :length => 32), company.website_url, :target => "_blank")
-            -company.social_urls.each do |site_name, url|
+            -if performer.website_url.present?
+              %li=link_to(truncate(performer.website_url, :length => 32), performer.website_url, :target => "_blank")
+            -performer.social_urls.each do |site_name, url|
               %li=link_to(site_name, url, :target => "_blank")
-      -if company.contact1_details.present?
+      -if performer.contact1_details.present?
         .span3.mt-2
           %h4 Primary contact
-          =auto_link(company.contact1_details.join("<br />").html_safe)
-      -if company.contact2_details.present?
+          =auto_link(performer.contact1_details.join("<br />").html_safe)
+      -if performer.contact2_details.present?
         .span3.mt-2
           %h4 Secondary contact
-          =auto_link(company.contact2_details.join("<br />").html_safe)
+          =auto_link(performer.contact2_details.join("<br />").html_safe)
       .span3.mt-2
         %h4 Upcoming shows
         %ul.unstyled
-          -company.tour_dates.each do |tour_date|
+          -performer.tour_dates.each do |tour_date|
             %li
               ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
               =link_to("view", tour_date.tour)
         
   .span9
-    %h1.mb-1=title(company)
-    =simple_format(company.description)
-    .row.company_tag_lists
+    %h1.mb-1=title(performer)
+    =simple_format(performer.description)
+    .row.performer_tag_lists
       .span2.mb-1
         %h4 Current show:
         "The Final Tour"
-      -if company.genre_list.present?
+      -if performer.genre_list.present?
         .span2.mb-1
           %h4 Genres
           %ul.unstyled
-            -company.genre_list.each do |genre|
+            -performer.genre_list.each do |genre|
               %li=genre.titleize.humanize
-      -if company.art_form_list.present?
+      -if performer.art_form_list.present?
         .span2.mb-1
           %h4 Art forms
           %ul.unstyled
-            -company.art_form_list.each do |art_form|
+            -performer.art_form_list.each do |art_form|
               %li=art_form.titleize.humanize
-      -if company.funder_list.present?
+      -if performer.funder_list.present?
         .span2.mb-1
           %h4 Funders
           %ul.unstyled
-            -company.funder_list.each do |funder|
+            -performer.funder_list.each do |funder|
               %li=funder.titleize.humanize
       .span2.mb-1
         %h4 Scale of work
         Large scale
     .row.mt-2    
-      -if (media_posts = company.posts.where("image_uid LIKE '%'").limit(8)).present?
+      -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
         .span4
           %h4 Photos/videos
           .row.mt-1
@@ -93,28 +93,28 @@
       .span9
         %h4 Proposed tour dates
         .row.mt-1
-          -company.tour_dates.each do |tour_date|
+          -performer.tour_dates.each do |tour_date|
             .span1.mb-1
               =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
               %span.small-info-text=tour_date.date.to_s(:date)
-    -if company.facebook_url.present?
+    -if performer.facebook_url.present?
       .row.mt-2
         .span9
-          %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => company.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
+          %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => performer.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
     
     -if posts.present? || can?(:create, Post)
       .row.mt-2
         .span9
           %h4.mb-1 Updates
           -if can?(:create, Post)
-            =render("posts/remote_form", :post => current_user.posts.build(:target => company))
+            =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
           =render("posts/posts", :posts => posts)
 .row.mt-2
   .span9
     =options_panel do
       =back_link
-      =link_if_can("Edit company", [:edit, company])
-      -if can?(:new, company.tours.build)
-        =link_to("Add tour", new_company_tour_path(company))
-      =link_if_can("Delete company", [:destroy, company], :confirm => "Are you sure?")
+      =link_if_can("Edit performer", [:edit, performer])
+      -if can?(:new, performer.tours.build)
+        =link_to("Add tour", new_performer_tour_path(performer))
+      =link_if_can("Delete performer", [:destroy, performer], :confirm => "Are you sure?")
       

@@ -5,7 +5,7 @@
   =form.input :art_form_list, :label => "Art forms", :input_html => {:'data-autocomplete' => autocomplete_art_form_name_tags_path, :'data-delimiter' => ', '}
   =form.input :funder_list, :label => "Funders", :input_html => {:'data-autocomplete' => autocomplete_funder_name_tags_path, :'data-delimiter' => ', '}
   =form.input :retained_image, :as => :hidden
-  -if company.image && company.errors[:image].empty?
-    =image_for(company, "100x")
+  -if performer.image && performer.errors[:image].empty?
+    =image_for(performer, "100x")
     =form.input :remove_image, :as => :boolean
   =form.input :image, :as => :file

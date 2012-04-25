@@ -1,7 +1,7 @@
 Pan::Application.routes.draw do
   
   root :to => 'home#index'
-  resources :companies do
+  resources :performers do
     resources :tours, :only => [:new]
   end
   resources :tours, :except => [:new]

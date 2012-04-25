@@ -1,0 +1,23 @@
+.row
+  -if performers.empty?
+    .span12    
+      %p There are no performers yet.
+  -else
+    .span12.mb-1
+      %h1.pull-left=title("Performers")
+      %form.form-search.pull-right
+        =text_field_tag :performer_search, "", :class => "input-medium search-query"
+        =submit_tag "Search", :class => "btn"
+    .span12
+      %table.table.table-bordered.table-striped
+        %tbody
+          -performers.order('name ASC').each do |performer|
+            %tr
+              %td.span4
+                =image_for(performer, "50x50#", :class => "pull-left mr-1")
+                %h4.pull-left=link_to_self(performer)
+              %td.span8=truncate(performer.description.to_s, :length => 190)
+.row
+  .span8
+    =options_panel do
+      =link_if_can("New performer", [:new, Performer])
