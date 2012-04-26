@@ -1,7 +1,6 @@
 class ResourcesController < ApplicationController
     
   expose(:resource)
-  expose(:resources) {current_tag ? Resource.tagged_with(current_tag) : Resource.scoped}
   expose(:top_tags) {Resource.tag_counts_on(:resource_tags, :limit => 10)}
   expose(:current_tag) {Tag.find_by_name(params[:tag])}
   
@@ -16,6 +15,7 @@ class ResourcesController < ApplicationController
   end
   
   def index
+    @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped
   end
   
   def destroy

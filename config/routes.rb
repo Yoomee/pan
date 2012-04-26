@@ -23,6 +23,10 @@ Pan::Application.routes.draw do
   end
   match 'community' => 'posts#index'
 
-  resources :resources
+  resources :resources do
+    collection do
+      get 'search'
+    end
+  end
   
 end
