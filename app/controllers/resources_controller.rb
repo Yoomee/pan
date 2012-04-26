@@ -17,6 +17,7 @@ class ResourcesController < ApplicationController
   
   def destroy
     flash_notice(resource)
+    resource.destroy
     redirect_to resources_path
   end
 

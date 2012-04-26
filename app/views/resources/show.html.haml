@@ -25,6 +25,6 @@
   .span12
     =options_panel do
       =back_link
-      =link_if_can("Edit resource", [:edit, Resource])
-      =link_if_can("Delete resource", [:destroy, Resource], :confirm => "Are you sure?")
+      =link_if_can("Edit resource", [:edit, resource])
+      =link_if_can("Delete resource", [:destroy, resource], :confirm => "Are you sure?")
       =link_if_can("Add resource", [:new, Resource])
