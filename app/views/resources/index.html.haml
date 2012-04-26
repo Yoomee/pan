@@ -6,10 +6,7 @@
     %h1=title("Resources")
 .row
   .span3
-    %form.form-search
-      =text_field_tag :term, "", :class => "span2"
-      =submit_tag "Search", :class => "btn"
-    =render("resources/tag_list", :tags => top_tags)
+    =render("resources/left_col")
   .span9
     -if resources.empty?
       %p
@@ -22,7 +19,9 @@
             .resource-info
               =link_to_self(resource, :class => "resource-title")
               =summarize(resource, :length => 100)
-              =render("resources/tag_list", :tags => resource.resource_tags)
+              %ul.tag-list.tag-list-horizontal
+                -resource.resource_tags.each do |tag|
+                  %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
           
 .row
   .span12

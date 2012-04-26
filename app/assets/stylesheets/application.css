@@ -11,6 +11,7 @@
  *= require ym_cms
  *= require ym_tags 
  *= require ym_posts
+ *= require ym_docs 
  *= require chosen
  *= require_self
 */
@@ -233,8 +234,4 @@ div.resource .resource-image {
 div.resource .resource-info {
   float: left;
   width: 200px;
-}
-div.resource ul.tag-list li {
-  float: left;
-  margin-right: 5px;
 }

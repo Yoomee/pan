@@ -9,7 +9,7 @@ class ResourcesController < ApplicationController
     resource.user = current_user
     if resource.save
       flash_notice(resource)
-      redirect_to resources_path
+      redirect_to resource
     else
       render :action => "new"
     end
@@ -26,7 +26,7 @@ class ResourcesController < ApplicationController
   def update
     if resource.save
       flash_notice(resource)
-      redirect_to resources_path
+      redirect_to resource
     else
       render :action => "edit"
     end
