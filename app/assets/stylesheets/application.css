@@ -11,6 +11,7 @@
  *= require ym_cms
  *= require ym_tags 
  *= require ym_posts
+ *= require ym_docs 
  *= require chosen
  *= require_self
 */
@@ -68,6 +69,14 @@ body, p {
 	font-weight: 300;
 	font-size: 15px;
 	color: #777;
+}
+
+/*========== General ==========*/
+
+.shadow {
+  -webkit-box-shadow: 1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);
+	-moz-box-shadow: 1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);
+	box-shadow:1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);  
 }
 
 /*========== Header ==========*/
@@ -219,15 +228,15 @@ html, body {
 
 /*========== Resources ==========*/
 
-.resource {
+div.resource {
   height: 135px;
   overflow: hidden;
 }
-.resource .resource-image {
+div.resource .resource-image {
   float: left;
   margin-right: 10px;
 }
-.resource .resource-info {
+div.resource .resource-info {
   float: left;
-  width: 165px;
+  width: 200px;
 }

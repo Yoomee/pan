@@ -1,0 +1,6 @@
+%form.form-search
+  =text_field_tag :term, "", :class => "span2"
+  =submit_tag "Search", :class => "btn"
+%ul.tag-list
+  -top_tags.each do |tag|
+    %li=link_to(tag_label(tag, :active => tag==current_tag), resources_path(:tag => tag.to_s), :class => "tag")

@@ -7,5 +7,6 @@ class Tag < ActsAsTaggableOn::Tag
   scope :art_forms, for_context('art_forms')
   scope :funders, for_context('funders')
   scope :work_scales, for_context('work_scales')
+  scope :resource_tags, for_context('resource_tags')
   
 end

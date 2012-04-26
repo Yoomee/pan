@@ -1,30 +1,29 @@
-.container
-  .row.mb-2
-    .span12
-      =render("community/nav")
-  .row.mb-2
-    .span12
-      %h1=title("Resources")
-  .row
-    .span3
-      %form.form-search
-        =text_field_tag :term, "", :class => "span2"
-        =submit_tag "Search", :class => "btn"
-      =render("tags/list", :tags => top_tags)
-    .span9
-      -if resources.empty?
-        %p
-          No resources have been added to the site yet.
-      -else
-        .row      
-          -resources.each do |resource|
-            .span4.resource.mb-2
-              =link_to(image_for(resource, "90x135"), resource, :class => "resource-image")
-              .resource-info
-                =link_to_self(resource, :class => "resource-title")
-                =summarize(resource, :length => 100)
-            
-  .row
-    .span12
-      =options_panel do
-        =link_if_can("Add resource", [:new, Resource])
+.row.mb-2
+  .span12
+    =render("community/nav")
+.row.mb-2
+  .span12
+    %h1=title("Resources")
+.row
+  .span3
+    =render("resources/left_col")
+  .span9
+    -if resources.empty?
+      %p
+        No resources have been added to the site yet.
+    -else
+      .row      
+        -resources.each do |resource|
+          .span4.resource.mb-2
+            =link_to(image_for(resource, "90x140"), resource, :class => "resource-image shadow")
+            .resource-info
+              =link_to_self(resource, :class => "resource-title")
+              =summarize(resource, :length => 100)
+              %ul.tag-list.tag-list-horizontal
+                -resource.resource_tags.each do |tag|
+                  %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
+          
+.row
+  .span12
+    =options_panel do
+      =link_if_can("Add resource", [:new, Resource])
