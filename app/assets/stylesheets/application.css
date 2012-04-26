@@ -240,3 +240,17 @@ div.resource .resource-info {
   float: left;
   width: 200px;
 }
+
+
+/*========== User ==========*/
+ul.links li {
+  margin-top:5px;
+}
+ul.links li img {
+  margin-top:-5px;
+  width:16px;
+  height:16px;
+}
+ul.links li a {
+  color:#333;
+}
