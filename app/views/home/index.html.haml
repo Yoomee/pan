@@ -1,6 +1,7 @@
-.row.mb-2
-  .span8
-    =image_placeholder("620x300")
+.row.mb-2.fade_in
+  #headline_image.span8.fade_in
+    =image_tag "headline_image.jpg"
+    =#image_placeholder("620x300")
   .span4
     .homepage-box
       %h2.homepage-box-title
@@ -9,7 +10,7 @@
         =summarize(Page.find_by_slug('about-tourbook'), :length => 200)
       .homepage-box-links
         =link_to_slug("Find out more", 'about-tourbook')
-.row.mb-2
+.row.mb-2.fade_in
   .span4
     .homepage-box
       %h2.homepage-box-title
@@ -36,7 +37,7 @@
         %p If you are a member of PAN then you can access the community tools here.
       .homepage-box-links
         =link_to("Register", new_user_path)
-.row.mb-2
+.row.mb-2.fade_in
   .span4
     .homepage-box.homepage-box-short
       %h2.homepage-box-title
@@ -45,7 +46,7 @@
         -if tweet = latest_tweet("panpromoters")
           %p=auto_link(tweet.text)
   .span4
-    .homepage-box.homepage-box-short
+    #social_media_links.homepage-box.homepage-box-short
       .homepage-box-content
         %ul.unstyled
           %li=link_to("Facebook", "http://www.facebook.com/PromotersArtsNetwork?ref=ts", :target => "_blank")
