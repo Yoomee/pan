@@ -98,6 +98,12 @@
               %ul.unstyled
                 -promoter.funder_list.each do |tag_name|
                   %li=tag_name.titleize.humanize
+          -if promoter.audience_list.present?
+            .span3
+              %h4.mb-1 Who we promote to
+              %ul.unstyled
+                -promoter.audience_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
                   
     .row.mt-2
       .span9

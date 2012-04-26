@@ -2,10 +2,11 @@
   =form.input :name
   =form.input :region, :as => :select, :collection => Pan::REGIONS
   =form.input :description, :input_html => {:rows => 10, :class => "span8"}
-  =form.input :genre_list, :label => "Genres currently promoting", :as => :select, :multiple => true, :collection => tag_list_options(:genres, promoter, Tag.genres)
-  =form.input :genre_interest_list, :label => "Genres interested in", :as => :select, :multiple => true, :collection => tag_list_options(:genre_interests, promoter, Tag.genres)
-  =form.input :art_form_list, :label => "Art forms currently promoting", :as => :select, :multiple => true, :collection => tag_list_options(:art_forms, promoter, Tag.art_forms)
-  =form.input :art_form_interest_list, :label => "Art forms interested in", :as => :select, :multiple => true, :collection => tag_list_options(:art_form_interests, promoter, Tag.art_forms)
+  =form.input :audience_list, :label => "Who do you promote to?", :as => :select, :multiple => true, :collection => tag_list_options(:audiences, promoter)
+  =form.input :genre_list, :label => "Genres you currently promote", :as => :select, :multiple => true, :collection => tag_list_options(:genres, promoter, Tag.genres)
+  =form.input :genre_interest_list, :label => "Genres you're interested in", :as => :select, :multiple => true, :collection => tag_list_options(:genre_interests, promoter, Tag.genres)
+  =form.input :art_form_list, :label => "Art forms you currently promote", :as => :select, :multiple => true, :collection => tag_list_options(:art_forms, promoter, Tag.art_forms)
+  =form.input :art_form_interest_list, :label => "Art forms you're interested in", :as => :select, :multiple => true, :collection => tag_list_options(:art_form_interests, promoter, Tag.art_forms)
   =form.input :funder_list, :label => "Funding sources", :as => :select, :multiple => true, :collection => tag_list_options(:funders, promoter)
   =form.input :retained_image, :as => :hidden
   -if promoter.image && promoter.errors[:image].empty?
