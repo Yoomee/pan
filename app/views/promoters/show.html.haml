@@ -107,7 +107,32 @@
                   
     .row.mt-2
       .span9
-        %h4 List of resources
+        %h3.mb-1 List of resources
+        .row
+          -if promoter.marketing_resource_list.present?
+            .span3
+              %h4 Promotions/marketing
+              %ul.unstyled
+                -promoter.marketing_resource_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.pr_resource_list.present?
+            .span3
+              %h4 PR
+              %ul.unstyled
+                -promoter.pr_resource_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.equipment_list.present?
+            .span3
+              %h4 Equipment
+              %ul.unstyled
+                -promoter.equipment_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.hireable_resource_list.present?
+            .span3
+              %h4.mb-1 Hireable skills
+              %ul.unstyled
+                -promoter.hireable_resource_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
     .row.mt-2
       .span9
         %h4 Skills matrix
