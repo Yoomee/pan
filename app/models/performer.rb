@@ -17,10 +17,9 @@ class Performer < ActiveRecord::Base
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true
   
-  has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :youtube_url, :vimeo_url, :soundcloud_url
+  has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
-  validates :youtube_url, :vimeo_url, :soundcloud_url, :url => true, :allow_blank => true
   
   def contact1_details
     [contact1_name, contact1_email, contact1_phone].compact

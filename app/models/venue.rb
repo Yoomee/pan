@@ -13,7 +13,6 @@ class Venue < ActiveRecord::Base
   
   scope :with_lat_lng, where("lat IS NOT NULL AND lng IS NOT NULL")
   
-  validates :email, :email => true, :allow_blank => true
   validates :region, :presence => true
   
   def address

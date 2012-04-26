@@ -12,6 +12,14 @@
             %strong=user.job_title
             at
           =link_to_self user.promoter
+      -if !user.links.empty?
+        .span3.mt-2
+          %h4 Links
+          %ul.unstyled.links
+            -user.links.each do |link|
+              %li
+                =image_tag(link.favicon)
+                =link_to(link, link.url, :target => '_blank')
   .span9
     %h1.mb-1=title(user)
     =simple_format(user.bio)
