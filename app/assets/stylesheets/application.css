@@ -196,6 +196,11 @@ html, body {
   min-height: 65px;
 }
 
+#directorynav li a{
+  padding-left:11px;
+  padding-right:11px;
+}
+
 /*========== Venues map ==========*/
 .venue-infowindow img{
   float:left;

@@ -17,7 +17,7 @@
 -if action_name.directory?
   .row
     .span12
-      %ul.nav.nav-pills
+      %ul#directorynav.nav.nav-pills
         -('A'..'Z').each do |letter|
           %li{:class => "#{'active' if @letter == letter}"}
             =link_to(letter, directory_performers_path(:letter => letter))

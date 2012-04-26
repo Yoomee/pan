@@ -41,15 +41,15 @@
   .span4
     .homepage-box.homepage-box-short
       %h2.homepage-box-title
-        =link_to("Twitter", "https://twitter.com/#!/panpromoters", :target => "_blank")
+        =link_to("Twitter", "http://twitter.com/panpromoters", :target => "_blank")
       .homepage-box-content
-        -if tweet = latest_tweet("panpromoters")
+        -if tweet = latest_tweet("panpromoters", :count => 30)
           %p=auto_link(tweet.text)
   .span4
     #social_media_links.homepage-box.homepage-box-short
       .homepage-box-content
         %ul.unstyled
-          %li=link_to("Facebook", "http://www.facebook.com/PromotersArtsNetwork?ref=ts", :target => "_blank")
+          %li=link_to("Facebook", "http://www.facebook.com/PromotersArtsNetwork", :target => "_blank")
           %li=link_to("Youtube", "#")
           %li=link_to("Vimeo", "#")
           %li=link_to("Flickr", "#")

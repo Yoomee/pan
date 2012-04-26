@@ -9,6 +9,9 @@ class TourDate < ActiveRecord::Base
   validates :date_s, :date => true, :presence => true
   validates :tour, :presence => true, :on => :update
   
+  scope :past, where("date < ?", Date.today)
+  scope :future, where("date >= ?", Date.today)
+  
   def date_s
     @date_s || date.try(:strftime, "%d/%m/%Y") || ''
   end
