@@ -134,6 +134,7 @@ Copyright (c) 2011 by Harvest
       this.results_none_found = this.options.no_results_text || "No results match";
       this.create_option = this.options.create_option || false;
       this.persistent_create_option = this.options.persistent_create_option || false;
+      this.create_option_showing = false;
       return this.create_option_text = this.options.create_option_text || "Add option";
     };
 
@@ -227,10 +228,13 @@ Copyright (c) 2011 by Harvest
           return true;
         case 9:
         case 38:
-        case 40:
         case 16:
         case 91:
         case 17:
+          break;
+        case 40:
+          if(this.create_option_showing)
+            this.search_results.find(".create-option a").click();
           break;
         default:
           return this.results_search();
@@ -866,10 +870,12 @@ Copyright (c) 2011 by Harvest
       create_option_html = $('<li class="create-option"><a href="javascript:void(0);">' + this.create_option_text + '</a>: "' + terms + '"</li>').bind("click", function(evt) {
         return _this.select_create_option(terms);
       });
+      this.create_option_showing = true;
       return this.search_results.append(create_option_html);
     };
 
     Chosen.prototype.create_option_clear = function() {
+      this.create_option_showing = false;
       return this.search_results.find(".create-option").remove();
     };
 
@@ -882,6 +888,7 @@ Copyright (c) 2011 by Harvest
           text: terms
         });
       }
+      this.create_option_showing = false;
     };
 
     Chosen.prototype.select_append_option = function(options) {
