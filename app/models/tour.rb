@@ -16,6 +16,10 @@ class Tour < ActiveRecord::Base
   
   delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :website_url, :facebook_url, :twitter_name, :youtube_url, :vimeo_url, :soundcloud_url, :social_urls, :to => :performer
   
+  scope :past, joins(:dates).where("tour_dates.date < ?", Date.today).group("tours.id")
+  scope :future, joins(:dates).where("tour_dates.date >= ?", Date.today).group("tours.id")
+  
+  
   def sibling_tours
     performer.tours.without(self)
   end

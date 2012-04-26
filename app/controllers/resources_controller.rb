@@ -19,12 +19,22 @@ class ResourcesController < ApplicationController
     flash_notice(resource)
     redirect_to resources_path
   end
-  
+
   def download
     send_file(resource.file_path, :filename => "#{resource.name.parameterize}.#{resource.file_ext}")
   end
   
   def index
+  end
+
+  def search
+    @query = strip_tags(params[:q]).to_s.strip
+    if @query.present?
+      @resources = Resource.search(@query)
+    else
+      @resources = []
+    end
+    render :action => "index"
   end
   
   def update

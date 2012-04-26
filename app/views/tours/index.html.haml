@@ -1,0 +1,34 @@
+.row
+  .span12.mb-1
+    %h1.pull-left
+      =title("Tours")
+      -if performer
+        %small=link_to_self(performer)
+.row
+  .span12
+    %ul.nav.nav-tabs
+      %li.active=link_to("Upcoming", '#future', :"data-toggle" => "tab")
+      %li=link_to("Past", '#past', :"data-toggle" => "tab")
+    .tab-content
+      -%w{future past}.each do |future_or_past|
+        .tab-pane{:id => future_or_past, :class => "#{'active' if future_or_past == 'future'}"}
+          %table.table
+            %tbody
+              -tours.each do |tour|
+                %tr
+                  %td
+                    =image_for(tour, "100x100#", :class => "pull-left mr-1")
+                  %td
+                    %h3=link_to_self(tour)
+                    =simple_format(truncate(tour.description.to_s, :length => 300))
+                    %h4 Shows
+                    %ul.unstyled
+                      -tour.dates.send(future_or_past).each do |tour_date|
+                        %li
+                          =tour_date.date.to_s(:month_day_year_or_not)
+                          \-
+                          =link_to_self(tour_date.venue)
+
+.row
+  .span8
+    =options_panel

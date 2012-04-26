@@ -7,4 +7,4 @@
     });
 =form.semantic_fields_for :dates do |date_form|
   =render("tours/date_fields", :f => date_form)
-=link_to_add_association "+ Add a date", form, :dates
+=link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#dates .add_fields'

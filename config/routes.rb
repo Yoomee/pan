@@ -6,7 +6,7 @@ Pan::Application.routes.draw do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search' 
     end
-    resources :tours, :only => [:new]
+    resources :tours, :only => [:new, :index]
   end
   resources :tours, :except => [:new]
   resources :promoters do

@@ -38,13 +38,22 @@
         .span3.mt-2
           %h4 Secondary contact
           =auto_link(performer.contact2_details.join("<br />").html_safe)
-      .span3.mt-2
-        %h4 Upcoming shows
-        %ul.unstyled
-          -performer.tour_dates.each do |tour_date|
-            %li
-              ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
-              =link_to("view", tour_date.tour)
+      -if future_tour = performer.tours.future.first
+        .span3.mt-2
+          %h4 Upcoming shows
+          %ul.unstyled
+            -future_tour.dates.future.each do |tour_date|
+              %li
+                =tour_date.date.to_s(:month_day_year_or_not)
+                \-
+                =link_to_self(tour_date.venue)
+          =link_to("View all future shows", performer_tours_path(performer, :anchor => 'future'))
+      -if !performer.tours.past.empty?
+        .span3.mt-2
+          %h4 Past shows
+          =link_to("View all past shows", performer_tours_path(performer, :anchor => 'past'))
+        
+
         
   .span9
     %h1.mb-1=title(performer)

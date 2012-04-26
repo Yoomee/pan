@@ -13,6 +13,9 @@ class ToursController < ApplicationController
     end
   end
   
+  def index
+  end
+  
   def update
     if tour.save
       flash_notice(tour)

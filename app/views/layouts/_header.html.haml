@@ -18,10 +18,13 @@
           =li_with_active(viewing_community?, link_to("Community", community_path))
       #header_links
         -if user_signed_in?
-          =link_to(t(:logout), sign_out_path, :method => :delete, :class => "pull-right")
-          .header_link.pull-right
-            Logged in as
-            =link_to_self(current_user)
+          =link_to(sign_out_path, :method => :delete, :class => "header_link btn") do
+            %icon.icon-signout
+            =t(:logout)
+          -#
+            .header_link.pull-right
+              Logged in as
+              =link_to_self(current_user)
         -else
           =link_to "Register", new_user_path, :class => "header_link btn"
-          =link_to(t(:login), sign_in_path(:next => request.path), :class => "header_link btn btn-primary")
+          =link_to(t(:login), sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary")
