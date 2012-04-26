@@ -1,0 +1,65 @@
+=form.inputs(:class => "form-horizontal") do
+  %legend Hall
+  =form.input :size, :label => "Size (sq m)"
+  =form.input :height, :label => "Height (m)"
+  =form.input :num_seats_min, :label => "Capacity (seated)"
+  =form.input :num_seats_max, :label => "Capacity without additional staging (seated)"
+  =form.input :num_seats_tiered, :label => "Tiered capacity (seated)"
+  =form.input :tiered_seating, :label => "Tiered seating"
+=form.inputs(:class => "form-horizontal") do
+  %legend Stage
+  =form.input :stage_depth, :label => "Depth (m)"
+  =form.input :stage_width, :label => "Width (m)"
+  =form.input :stage_curtaining, :label => "Curtaining"
+  .controls
+    %label.control-group{:for => 'venue_no_stage_text'}
+      ="If the venue has no staging - how do performers normally use the space?"
+  =form.input :no_stage_text, :label => false, :input_html => {:rows => 5, :class => "span8"}
+=form.inputs(:class => "form-horizontal") do
+  %legend Blackout
+  =form.input :full_blackout
+  =form.input :curtains
+  =form.input :high_windows
+=form.inputs(:class => "form-horizontal") do
+  %legend Sound/lighting
+  =form.input :pa_system, :label => "PA"
+  =form.input :stereo_sound, :label => "Stereo sound output"
+  =form.input :sound_technician, :label => "Sound technician available"
+  =form.input :lighting
+  =form.input :light_stand
+  =form.input :light_rigging, :label => "LX rig"
+  =form.input :light_washes, :label => "Washes"
+  =form.input :light_spots, :label => "Spots"
+  =form.input :light_dimmer, :label => "Dimmer"
+  =form.input :light_technician, :label => "Light technician available"
+  .controls
+    %label.control-group{:for => 'venue_light_installation_text'}
+      ="If companies usually bring their own sound/lighting equipment - how is this installed and manned?"
+  =form.input :light_installation_text, :label => false, :input_html => {:rows => 5, :class => "span8"}
+=form.inputs(:class => "form-horizontal") do
+  %legend Resources
+  =form.input :piano
+  =form.input :piano_text, :label => "What type of piano?", :as => :string
+  =form.input :piano_in_tune, :label => "Is the piano in tune?"
+  =form.input :dressing_room
+  =form.input :kitchen
+  =form.input :bar
+  =form.input :loop_system
+=form.inputs(:class => "form-horizontal") do
+  %legend Accessibility
+  =form.input :wheelchair_accessible
+  =form.input :num_steps, :label => "Number of steps"
+  =form.input :door_width, :label => "Width of doors"
+  =form.input :accessibility_text
+  =form.input :help_for_entering
+  =form.input :help_for_exiting
+  =form.input :lorry_parking
+=form.inputs(:class => "form-horizontal") do
+  %legend Licences
+  =form.input :prs_licence
+  =form.input :alcohol_licence
+  =form.input :theatre_licence
+  =form.input :temporary_licence
+  =form.input :outdoor_licence
+  =form.input :public_entertainment_licence
+  =form.input :licence_text
