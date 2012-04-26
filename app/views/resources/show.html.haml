@@ -19,7 +19,7 @@
             %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
         %br
         %hr
-        =link_to("Click here to download PDF", "#", :class => "download-doc download-doc-pdf")
+        =link_if_can("Click here to download PDF", [:download, resource], :class => "download-doc download-doc-pdf")
 
 .row
   .span12

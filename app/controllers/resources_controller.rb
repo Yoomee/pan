@@ -15,12 +15,16 @@ class ResourcesController < ApplicationController
     end
   end
   
-  def index
-  end
-  
   def destroy
     flash_notice(resource)
     redirect_to resources_path
+  end
+  
+  def download
+    send_file(resource.file_path, :filename => "#{resource.name.parameterize}.#{resource.file_ext}")
+  end
+  
+  def index
   end
   
   def update
