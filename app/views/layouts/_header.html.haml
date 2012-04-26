@@ -27,4 +27,4 @@
               =link_to_self(current_user)
         -else
           =link_to "Register", new_user_path, :class => "header_link btn"
-          =link_to(t(:login), sign_in_path(:next => request.path), :class => "header_link btn btn-primary")
+          =link_to(t(:login), sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary")

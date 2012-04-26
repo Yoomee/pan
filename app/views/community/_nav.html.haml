@@ -3,7 +3,10 @@
     .container
       %ul.nav
         =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
-        %li=link_to("Notifications (1)", "#")
+        %li
+          =link_to "#" do
+            Notifications
+            %span.badge.badge-inverse 1
         %li=link_to("Members", "#")
         =li_with_active(current_page?(resources_path), link_to("Resources", resources_path))
         %li=link_to("Leaderboard", "#")

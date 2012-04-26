@@ -23,6 +23,16 @@ class ResourcesController < ApplicationController
     redirect_to resources_path
   end
   
+  def search
+    @query = strip_tags(params[:q]).to_s.strip
+    if @query.present?
+      @resources = Resource.search(@query)
+    else
+      @resources = []
+    end
+    render :action => "index"
+  end
+  
   def update
     if resource.save
       flash_notice(resource)
