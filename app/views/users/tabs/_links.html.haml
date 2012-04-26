@@ -8,4 +8,4 @@
     });
 =form.semantic_fields_for :links do |link_form|
   =render("users/link_fields", :f => link_form)
-=link_to_add_association "+ Add a link", form, :links, :"data-association-insertion-node" => '#links .add_fields'
+=link_to_add_association "+ Add a link", form, :links, :partial => "users/link_fields", :"data-association-insertion-node" => '#links .add_fields'

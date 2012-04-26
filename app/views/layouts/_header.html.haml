@@ -26,6 +26,19 @@
               %span.caret
             %ul.dropdown-menu.pull-right
               %li
+                =link_to(performers_path) do
+                  %icon.icon-music
+                  Performers
+              %li
+                =link_to(promoters_path) do
+                  %icon.icon-flag
+                  Promoters
+              %li
+                =link_to(venues_path) do
+                  %icon.icon-map-marker
+                  Venues
+              %li.divider
+              %li
                 =link_to(edit_user_path(current_user)) do
                   %icon.icon-cog
                   Account settings
@@ -33,10 +46,6 @@
                 =link_to(sign_out_path, :method => :delete) do
                   %icon.icon-signout
                   =t(:logout)
-          -#
-            .header_link.pull-right
-              Logged in as
-              =link_to_self(current_user)
         -else
           =link_to "Register", new_user_path, :class => "header_link btn"
           =link_to(sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary") do

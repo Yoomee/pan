@@ -22,14 +22,15 @@
             %td Poor
           %tr
             %td Terrible
-      -if performer.any_present?(:website_url, :social_urls)
+      -if !performer.links.empty?
         .span3.mt-2
           %h4 Links
-          %ul.unstyled
-            -if performer.website_url.present?
-              %li=link_to(truncate(performer.website_url, :length => 32), performer.website_url, :target => "_blank")
-            -performer.social_urls.each do |site_name, url|
-              %li=link_to(site_name, url, :target => "_blank")
+          %ul.unstyled.links
+            -performer.links.each do |link|
+              %li
+                =image_tag(link.favicon)
+                =link_to(link, link.url, :target => '_blank')
+
       -if performer.contact1_details.present?
         .span3.mt-2
           %h4 Primary contact

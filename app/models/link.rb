@@ -19,7 +19,7 @@ class Link < ActiveRecord::Base
   
   private
   def resolve_host_and_title
-    self.host = URI.parse(url).host
-    self.title = host.sub(/^www\./,'').split(/\./).first.humanize if title.blank?
+    self.host = URI.parse(url).host.sub(/^www\./,'')
+    self.title = host.split(/\./).first.humanize if title.blank?
   end
 end

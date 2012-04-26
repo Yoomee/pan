@@ -4,18 +4,21 @@ module Organisation
     base.send(:include, YmCore::Model)
     base.image_accessor :image
 
-    base.has_many :posts, :as => :target
-    
-    base.has_snippets :website_url, :facebook_url, :twitter_name
+    base.has_many :posts, :as => :target    
+  
+    base.has_many :links, :as => :attachable, :dependent => :destroy
+    base.accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
     
     base.validates :name, :presence => true
-    base.validates :website_url, :facebook_url, :url => true, :allow_blank => true
-    base.validates :twitter_name, :format => {:with => /^\s*@?\w+\s*$/, :allow_blank => true}
     base.send(:validates_property, :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image")
-  end  
+  end 
+  
+  def facebook_url
+    links.find_by_host('facebook.com').try(:url)
+  end 
 
-  def twitter_url
-    twitter_name.present? ? "http://twitter.com/#{twitter_name.strip.sub(/@/, '')}" : ''
-  end
+  def facebook_url
+    links.find_by_host('twitter.com').try(:url)
+  end 
   
 end
