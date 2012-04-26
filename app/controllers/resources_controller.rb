@@ -17,12 +17,20 @@ class ResourcesController < ApplicationController
   def index
     @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped
   end
-  
+
   def destroy
     flash_notice(resource)
+    resource.destroy
     redirect_to resources_path
   end
+
+  def download
+    send_file(resource.file_path, :filename => "#{resource.name.parameterize}.#{resource.file_ext}")
+  end
   
+  def index
+  end
+
   def search
     @query = strip_tags(params[:q]).to_s.strip
     if @query.present?
