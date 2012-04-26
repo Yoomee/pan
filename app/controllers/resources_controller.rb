@@ -27,9 +27,6 @@ class ResourcesController < ApplicationController
   def download
     send_file(resource.file_path, :filename => "#{resource.name.parameterize}.#{resource.file_ext}")
   end
-  
-  def index
-  end
 
   def search
     @query = strip_tags(params[:q]).to_s.strip
