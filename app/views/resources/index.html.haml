@@ -8,12 +8,15 @@
   .span3
     =render("resources/left_col")
   .span9
-    -if resources.empty?
+    -if @resources.empty?
       %p
-        No resources have been added to the site yet.
+        -if @query
+          ="No resources match \"#{@query}\"."
+        -else
+          No resources have been added to the site yet.
     -else
       .row      
-        -resources.each do |resource|
+        -@resources.each do |resource|
           .span4.resource.mb-2
             =link_to(image_for(resource, "90x140"), resource, :class => "resource-image shadow")
             .resource-info
