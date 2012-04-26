@@ -1,0 +1,5 @@
+=form.inputs do
+  =form.input :marketing_resource_list, :label => "Promotions/marketing", :as => :select, :multiple => true, :collection => tag_list_options(:marketing_resources, promoter)
+  =form.input :pr_resource_list, :label => "PR", :as => :select, :multiple => true, :collection => tag_list_options(:pr_resources, promoter)
+  =form.input :equipment_list, :label => "Equipment", :as => :select, :multiple => true, :collection => tag_list_options(:equipment, promoter)
+  =form.input :hireable_resource_list, :label => "Hireable skills", :as => :select, :multiple => true, :collection => tag_list_options(:hireable_resources, promoter)

@@ -2,7 +2,7 @@ class Promoter < ActiveRecord::Base
   
   include Organisation
 
-  acts_as_taggable_on :genres, :art_forms
+  acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources
   
   has_many :users, :dependent => :nullify
   has_many :venues, :dependent => :destroy
