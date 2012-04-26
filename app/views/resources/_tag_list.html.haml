@@ -1,0 +1,4 @@
+%ul.tag-list.unstyled
+  -tags.each do |tag|
+    %li
+      =link_to(tag_label(tag, :active => tag==current_tag), resources_path(:tag => tag.to_s), :class => "tag")

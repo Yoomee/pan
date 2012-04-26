@@ -9,5 +9,6 @@
     .span2
       =render("tags/list", :tags => top_tags)
     .span8
-      =render("posts/remote_form", :post => current_user.posts.build)
+      -if can?(:create, Post)
+        =render("posts/remote_form", :post => current_user.posts.build)
       =render("posts/posts", :posts => posts)

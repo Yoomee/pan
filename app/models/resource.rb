@@ -2,15 +2,10 @@ class Resource < ActiveRecord::Base
   
   belongs_to :user
   
-  acts_as_taggable
+  acts_as_taggable_on :resource_tags
+  
   has_pdf
   
-  def to_s
-    file_name
-  end
-  
-  def summary
-    file_intro
-  end
+  validates :name, :file, :presence => true
   
 end
