@@ -134,7 +134,39 @@
                   %li=tag_name.titleize.humanize
     .row.mt-2
       .span9
-        %h4 Skills matrix
+        %h3.mb-1 Skills matrix
+        .row
+          -if promoter.skill_list.present?
+            .span3
+              %h4 Main skills
+              %ul.unstyled
+                -promoter.skill_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.skills_needed_list.present?
+            .span3
+              %h4 Support needed
+              %ul.unstyled
+                -promoter.skills_needed_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.skills_need_training_list.present?
+            .span3
+              %h4 Training needed
+              %ul.unstyled
+                -promoter.skills_need_training_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.skills_underused_list.present?
+            .span3
+              %h4.mb-1 Underused skills
+              %ul.unstyled
+                -promoter.skills_underused_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          -if promoter.skills_offered_list.present?
+            .span3
+              %h4.mb-1 Shareable skills
+              %ul.unstyled
+                -promoter.skills_offered_list.each do |tag_name|
+                  %li=tag_name.titleize.humanize
+          
     -if (media_posts = promoter.posts.where("image_uid LIKE '%'").limit(8)).present?
       .row.mt-2
         .span9

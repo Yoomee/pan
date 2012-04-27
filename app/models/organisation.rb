@@ -17,7 +17,7 @@ module Organisation
     links.find_by_host('facebook.com').try(:url)
   end 
 
-  def facebook_url
+  def twitter_url
     links.find_by_host('twitter.com').try(:url)
   end 
   

@@ -1,4 +1,13 @@
 =form.inputs do
+  %legend Skills
+  =form.input :skill_list, :label => "Main skill areas", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_needed_list, :label => "Skill areas where support is needed", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_need_training_list, :label => "Skill areas where training is needed", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_underused_list, :label => "Skill areas that are underused", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_offered_list, :label => "Skill areas that can be shared with others in the PAN network", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+
+=form.inputs do
+  %legend Resources
   =form.input :marketing_resource_list, :label => "Promotions/marketing", :as => :select, :multiple => true, :collection => tag_list_options(:marketing_resources, promoter)
   =form.input :pr_resource_list, :label => "PR", :as => :select, :multiple => true, :collection => tag_list_options(:pr_resources, promoter)
   =form.input :equipment_list, :label => "Equipment", :as => :select, :multiple => true, :collection => tag_list_options(:equipment, promoter)

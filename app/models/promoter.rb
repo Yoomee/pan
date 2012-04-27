@@ -12,6 +12,8 @@ class Promoter < ActiveRecord::Base
   validates :region, :presence => true
   validates :email, :email => true, :allow_blank => true
   
+  acts_as_taggable_on :skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered
+  
   def address
     %w{address1 address2 address3 address4 postcode}.map {|fld| send(fld)}.select(&:present?).join(', ')
   end
