@@ -8,6 +8,8 @@ class Venue < ActiveRecord::Base
   belongs_to :user
   has_many :tour_dates, :dependent => :nullify
   
+  acts_as_taggable_on :floor_surfaces, :power_sources
+  
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode#,  :if => lambda{ |obj| obj.address_changed? }
   

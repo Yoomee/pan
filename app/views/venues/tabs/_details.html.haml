@@ -7,5 +7,4 @@
   -if venue.image && venue.errors[:image].empty?
     =image_for(venue, "100x")
     =form.input :remove_image, :as => :boolean
-
   =form.input :image, :as => :file

@@ -1,27 +1,26 @@
-=form.inputs(:class => "form-horizontal") do
+=form.inputs do
   %legend Hall
   =form.input :size, :label => "Size (sq m)"
   =form.input :height, :label => "Height (m)"
   =form.input :num_seats_min, :label => "Capacity (seated)"
   =form.input :num_seats_max, :label => "Capacity without additional staging (seated)"
-  =form.input :num_seats_tiered, :label => "Tiered capacity (seated)"
   =form.input :tiered_seating, :label => "Tiered seating"
-=form.inputs(:class => "form-horizontal") do
+  =form.input :num_seats_tiered, :label => "Tiered capacity (seated)"
+  =form.input :floor_surface_list, :label => "Floor surface", :as => :select, :multiple => true, :collection => tag_list_options(:floor_surface, venue)
+
   %legend Stage
   =form.input :stage_depth, :label => "Depth (m)"
   =form.input :stage_width, :label => "Width (m)"
   =form.input :stage_curtaining, :label => "Curtaining"
-  .controls
-    %label.control-group{:for => 'venue_no_stage_text'}
-      ="If the venue has no staging - how do performers normally use the space?"
-  =form.input :no_stage_text, :label => false, :input_html => {:rows => 5, :class => "span8"}
-=form.inputs(:class => "form-horizontal") do
+  =form.input :no_stage_text, :label => "If the venue has no staging - how do performers normally use the space?", :input_html => {:rows => 5, :class => "span8"}
+
   %legend Blackout
   =form.input :full_blackout
   =form.input :curtains
   =form.input :high_windows
-=form.inputs(:class => "form-horizontal") do
+
   %legend Sound/lighting
+  =form.input :power_source_list, :label => "Power sources", :as => :select, :multiple => true, :collection => tag_list_options(:power_sources, venue)  
   =form.input :pa_system, :label => "PA"
   =form.input :stereo_sound, :label => "Stereo sound output"
   =form.input :sound_technician, :label => "Sound technician available"
@@ -32,11 +31,8 @@
   =form.input :light_spots, :label => "Spots"
   =form.input :light_dimmer, :label => "Dimmer"
   =form.input :light_technician, :label => "Light technician available"
-  .controls
-    %label.control-group{:for => 'venue_light_installation_text'}
-      ="If companies usually bring their own sound/lighting equipment - how is this installed and manned?"
-  =form.input :light_installation_text, :label => false, :input_html => {:rows => 5, :class => "span8"}
-=form.inputs(:class => "form-horizontal") do
+  =form.input :light_installation_text, :label => "If companies usually bring their own sound/lighting equipment - how is this installed and manned?", :input_html => {:rows => 5, :class => "span8"}
+
   %legend Resources
   =form.input :piano
   =form.input :piano_text, :label => "What type of piano?", :as => :string
@@ -45,21 +41,21 @@
   =form.input :kitchen
   =form.input :bar
   =form.input :loop_system
-=form.inputs(:class => "form-horizontal") do
+
   %legend Accessibility
-  =form.input :wheelchair_accessible
+  =form.input :wheelchair_accessible, :label => "Fully accessible to wheelchair users"
   =form.input :num_steps, :label => "Number of steps"
   =form.input :door_width, :label => "Width of doors"
-  =form.input :accessibility_text
-  =form.input :help_for_entering
-  =form.input :help_for_exiting
-  =form.input :lorry_parking
-=form.inputs(:class => "form-horizontal") do
+  =form.input :accessibility_text, :label => "Other accessibility details", :input_html => {:rows => 5, :class => "span8"}
+  =form.input :help_for_entering, :label => "Help available for getting in"
+  =form.input :help_for_exiting, :label => "Help available for getting out"
+  =form.input :lorry_parking, :label => "Parking for trucks/lorries"
+  
   %legend Licences
-  =form.input :prs_licence
+  =form.input :prs_licence, :label => "PRS"
   =form.input :alcohol_licence
   =form.input :theatre_licence
-  =form.input :temporary_licence
+  =form.input :temporary_licence, :label => "Able to get temporary licence"
   =form.input :outdoor_licence
   =form.input :public_entertainment_licence
-  =form.input :licence_text
+  =form.input :licence_text, :label => "Other licence details", :input_html => {:rows => 5, :class => "span8"}
