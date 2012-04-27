@@ -21,6 +21,8 @@ class VenuesController < ApplicationController
 
   def edit;end
   
+  def location;end
+   
   def index
   end
   

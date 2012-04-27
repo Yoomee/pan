@@ -14,7 +14,14 @@
         =image_for(venue, "220x") if venue.image
       -if venue.has_lat_lng?
         .span3.mt-2
-          #map_canvas{:style => "height:220px;width:100%"}
+          #map-canvas{:style => "height:220px;width:100%"}
+          =link_if_can("Edit marker location", [:edit_location, venue])
+      -elsif can?(:edit_location,venue)
+        .span3.mt-2
+          .alert.alert-error
+            %strong LOCATION MISSING 
+            %p We couldn't work out the location of this venue from it's address.
+            =link_to("Click here to set it", edit_location_venue_path(venue))
       .span3.mt-2
         %h4 Region
         %p=venue.region

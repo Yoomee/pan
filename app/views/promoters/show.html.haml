@@ -14,7 +14,7 @@
         =image_for(promoter, "220x") if promoter.image
       -if !promoter.venues.with_lat_lng.empty?
         .span3.mt-2
-          #map_canvas{:style => "height:220px;width:100%"}
+          #map-canvas{:style => "height:220px;width:100%"}
       .span3.mt-2
         %h4 Region
         %p=promoter.region

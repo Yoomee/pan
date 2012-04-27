@@ -2,4 +2,5 @@
 =semantic_form_for(user, {:multipart => true}.merge(url_option)) do |form|
   =tabs('details', 'profile', 'links', :form => form)
   =form.buttons do
-    =form.commit_button "Save"
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
+    

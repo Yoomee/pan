@@ -6,7 +6,7 @@
       =description_tag("Height", "#{venue.height} m") if venue.height?
       =description_tag("Capacity", pluralize(venue.num_seats_max, "seat")) if venue.num_seats_max.present?
       =description_tag("Capacity without additional staging", pluralize(venue.num_seats_min, "seat")) if venue.num_seats_min.present?
-      =description_tag("Tiered seating", venue.tiered_seating.yes_or_no.titleize)
+      =description_tag("Tiered seating", venue.tiered_seating?.yes_or_no.titleize)
       =description_tag("Tiered capacity", pluralize(venue.num_seats_tiered, "seat")) if venue.num_seats_tiered.present?
       =description_tag("Floor surface", venue.floor_surface_list.join("<br />").html_safe) if venue.floor_surface_list.present?
 
@@ -17,61 +17,61 @@
         =description_tag("This venue has no stage", venue.no_stage_text)
       -else
         =description_tag("Size", "#{venue.stage_width} x #{venue.stage_depth} m")
-        =description_tag("Curtaining", venue.stage_curtaining.yes_or_no.titleize)
+        =description_tag("Curtaining", venue.stage_curtaining?.yes_or_no.titleize)
     %h3 Blackout
     %dl
-      =description_tag("Full blackout available", venue.full_blackout.yes_or_no.titleize)
-      =description_tag("Curtains", venue.curtains.yes_or_no.titleize)
-      =description_tag("High windows", venue.high_windows.yes_or_no.titleize)
+      =description_tag("Full blackout available", venue.full_blackout?.yes_or_no.titleize)
+      =description_tag("Curtains", venue.curtains?.yes_or_no.titleize)
+      =description_tag("High windows", venue.high_windows?.yes_or_no.titleize)
 .row
   .span4
     %h3 Sound
     %dl
-      =description_tag("PA", venue.pa_system.yes_or_no.titleize)
-      =description_tag("Stereo sound output", venue.stereo_sound.yes_or_no.titleize)
-      =description_tag("Sound technician available", venue.sound_technician.yes_or_no.titleize)
+      =description_tag("PA", venue.pa_system?.yes_or_no.titleize)
+      =description_tag("Stereo sound output", venue.stereo_sound?.yes_or_no.titleize)
+      =description_tag("Sound technician available", venue.sound_technician?.yes_or_no.titleize)
       =description_tag("Power sources", venue.power_source_list.join("<br />").html_safe) if venue.power_source_list.present?
       =description_tag("How is personal equipment usually installed?", venue.equipment_installation) if venue.equipment_installation?
   .span4.offset1
     %h3 Lighting
     %dl
-      =description_tag("Lighting", venue.lighting.yes_or_no.titleize)
-      =description_tag("Light stand", venue.light_stand.yes_or_no.titleize)
-      =description_tag("LX rig", venue.light_rigging.yes_or_no.titleize)
-      =description_tag("Washes", venue.light_washes.yes_or_no.titleize)
-      =description_tag("Spots", venue.light_spots.yes_or_no.titleize)
-      =description_tag("Dimmer", venue.light_dimmer.yes_or_no.titleize)
-      =description_tag("Light technician available", venue.light_technician.yes_or_no.titleize)
+      =description_tag("Lighting", venue.lighting?.yes_or_no.titleize)
+      =description_tag("Light stand", venue.light_stand?.yes_or_no.titleize)
+      =description_tag("LX rig", venue.light_rigging?.yes_or_no.titleize)
+      =description_tag("Washes", venue.light_washes?.yes_or_no.titleize)
+      =description_tag("Spots", venue.light_spots?.yes_or_no.titleize)
+      =description_tag("Dimmer", venue.light_dimmer?.yes_or_no.titleize)
+      =description_tag("Light technician available", venue.light_technician?.yes_or_no.titleize)
 .row
   .span4
     %h3 Resources
     %dl
-      =description_tag("Piano", venue.piano.yes_or_no.titleize)
+      =description_tag("Piano", venue.piano?.yes_or_no.titleize)
       -if venue.piano?
         =description_tag("Piano type", venue.piano_text) if venue.piano_text?
-        =description_tag("Piano in tune", venue.piano_in_tune.yes_or_no.titleize)
-      =description_tag("Dressing room", venue.dressing_room.yes_or_no.titleize)
-      =description_tag("Kitchen", venue.kitchen.yes_or_no.titleize)
-      =description_tag("Bar", venue.bar.yes_or_no.titleize)
-      =description_tag("Loop system", venue.loop_system.yes_or_no.titleize)
+        =description_tag("Piano in tune", venue.piano_in_tune?.yes_or_no.titleize)
+      =description_tag("Dressing room", venue.dressing_room?.yes_or_no.titleize)
+      =description_tag("Kitchen", venue.kitchen?.yes_or_no.titleize)
+      =description_tag("Bar", venue.bar?.yes_or_no.titleize)
+      =description_tag("Loop system", venue.loop_system?.yes_or_no.titleize)
   .span4.offset1
     %h3 Accessibility
     %dl
-      =description_tag("Fully accessible to wheelchair users", venue.wheelchair_accessible.yes_or_no.titleize)
+      =description_tag("Fully accessible to wheelchair users", venue.wheelchair_accessible?.yes_or_no.titleize)
       =description_tag("Number of steps", venue.num_steps) if venue.num_steps.present?
       =description_tag("Width of doors", venue.door_width) if venue.door_width.present?
-      =description_tag("Help available for getting in", venue.help_for_entering.yes_or_no.titleize)
-      =description_tag("Help available for getting out", venue.help_for_exiting.yes_or_no.titleize)
-      =description_tag("Parking for trucks/lorries", venue.lorry_parking.yes_or_no.titleize)
+      =description_tag("Help available for getting in", venue.help_for_entering?.yes_or_no.titleize)
+      =description_tag("Help available for getting out", venue.help_for_exiting?.yes_or_no.titleize)
+      =description_tag("Parking for trucks/lorries", venue.lorry_parking?.yes_or_no.titleize)
       =description_tag("Other accessibility details", venue.accessibility_text) if venue.accessibility_text?
 .row
   .span4
     %h3 Licences
     %dl
-      =description_tag("PRS", venue.prs_licence.yes_or_no.titleize)
-      =description_tag("Alcohol licence", venue.alcohol_licence.yes_or_no.titleize)
-      =description_tag("Theatre licence", venue.theatre_licence.yes_or_no.titleize)
-      =description_tag("Able to get temporary licence", venue.temporary_licence.yes_or_no.titleize)
-      =description_tag("Outdoor licence", venue.outdoor_licence.yes_or_no.titleize)
-      =description_tag("Public entertainment licence", venue.public_entertainment_licence.yes_or_no.titleize)
+      =description_tag("PRS", venue.prs_licence?.yes_or_no.titleize)
+      =description_tag("Alcohol licence", venue.alcohol_licence?.yes_or_no.titleize)
+      =description_tag("Theatre licence", venue.theatre_licence?.yes_or_no.titleize)
+      =description_tag("Able to get temporary licence", venue.temporary_licence?.yes_or_no.titleize)
+      =description_tag("Outdoor licence", venue.outdoor_licence?.yes_or_no.titleize)
+      =description_tag("Public entertainment licence", venue.public_entertainment_licence?.yes_or_no.titleize)
       =description_tag("Other licence details", venue.licence_text) if venue.licence_text?

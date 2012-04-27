@@ -1,4 +1,5 @@
 class Venue < ActiveRecord::Base
+  
 
   include Organisation
   
@@ -11,7 +12,7 @@ class Venue < ActiveRecord::Base
   has_snippets :keyholder_name, :keyholder_email, :keyholder_phone
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
-  after_validation :geocode#,  :if => lambda{ |obj| obj.address_changed? }
+  after_validation :geocode,  :if => lambda{ |obj| obj.address_changed? }
   
   scope :with_lat_lng, where("lat IS NOT NULL AND lng IS NOT NULL")
   
@@ -41,6 +42,10 @@ class Venue < ActiveRecord::Base
     (image || default_image).thumb("80x80#").url
   end
   
+  def lat_lng_or_default
+    has_lat_lng? ? [lat,lng] : Venue::DEFAULT_LOCATION
+  end
+  
   def promoter=(promoter)
     # default to promoter's region
     self.region = promoter.region
@@ -51,3 +56,5 @@ class Venue < ActiveRecord::Base
   end
   
 end
+
+Venue::DEFAULT_LOCATION = [58.031372,-4.086914]

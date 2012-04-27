@@ -13,7 +13,11 @@ Pan::Application.routes.draw do
     resources :users, :only => [:new, :create]
     resources :venues
   end
-  resources :venues, :except => :new
+  resources :venues, :except => :new do
+    member do
+      get 'location', :as => 'edit_location'
+    end
+  end
   resources :tags, :only => []
   match 'community' => 'posts#index'
 

@@ -1,0 +1,23 @@
+=google_maps_javascript_include_tag
+-content_for :head do
+  :javascript
+    $(document).ready(function() {
+      VenueLocationMap.init(#{venue.lat_lng_or_default.join(',')},#{venue.has_lat_lng?});
+    });
+
+%h2=venue
+%p
+  %strong Drag
+  and
+  %strong zoom
+  the map to fine-tune the location of
+  %strong
+    =render_address(venue, :br => false)
+
+#map-canvas{:style => "width:100%;height:400px;"}
+=semantic_form_for venue do |form|
+  =form.inputs do
+    =form.input :lat, :as => :hidden
+    =form.input :lng, :as => :hidden
+  =form.buttons do
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
