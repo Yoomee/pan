@@ -29,6 +29,7 @@ VenuesMap =
       else if VenuesMap.venues.length > 1
         google.maps.event.addListener marker, 'click', ->
           window.location = "/venues/#{this.venueId}"
-      
-    VenuesMap.map.setCenter(bounds.getCenter())
+    
+    if VenuesMap.venues.length  
+      VenuesMap.map.setCenter(bounds.getCenter())
 window.VenuesMap = VenuesMap 
