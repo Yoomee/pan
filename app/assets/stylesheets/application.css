@@ -248,6 +248,10 @@ div.resource .resource-info {
 
 
 /*========== User ==========*/
+#links .nested-fields .remove_fields {
+  margin-top:27px;
+}
+
 ul.links li {
   margin-top:5px;
 }

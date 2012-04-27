@@ -5,6 +5,6 @@
   =form.input :bio, :input_html => {:rows => 7, :class => "span5"}
 =form.inputs do
   %legend Skills
-  =form.input :skill_list, :label => "Main skill areas", :as => :select, :multiple => true, :collection => Tag.all.collect(&:name)
-  =form.input :skills_offered_list, :label => "Skills offered", :as => :select, :multiple => true, :collection => Tag.all.collect(&:name)
-  =form.input :skills_needed_list, :label => "Skills needed", :as => :select, :multiple => true, :collection => Tag.all.collect(&:name)
+  =form.input :skill_list, :label => "Main skill areas", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_offered_list, :label => "Skills offered", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_needed_list, :label => "Skills needed", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
