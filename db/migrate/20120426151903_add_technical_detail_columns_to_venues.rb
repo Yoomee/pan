@@ -25,7 +25,7 @@ class AddTechnicalDetailColumnsToVenues < ActiveRecord::Migration
       t.boolean :light_spots
       t.boolean :light_dimmer
       t.boolean :light_technician
-      t.text :light_installation_text
+      t.text :equipment_installation
       t.boolean :piano
       t.boolean :piano_in_tune
       t.text :piano_text

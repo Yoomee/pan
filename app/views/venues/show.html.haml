@@ -39,7 +39,19 @@
               %li
                 Email:
                 =mail_to venue.user.email, venue.user.email
-        
+      -if venue.any_present?(:keyholder_name, :keyholder_email, :keyholder_phone)
+        .span3.mt-2
+          %h4 Keyholder contact
+          =venue.keyholder_name
+          %ul.unstyled          
+            -if venue.keyholder_phone.present?
+              %li
+                Tel:
+                =internationalize_phone_number(venue.keyholder_phone)
+            -if venue.keyholder_email.present?
+              %li
+                Email:
+                =mail_to venue.keyholder_email, venue.keyholder_email
       -if !venue.links.empty?
         .span3.mt-2
           %h4 Links
@@ -50,36 +62,35 @@
                 =link_to(link, link.url, :target => '_blank')
 
   .span9
-    %h1.mb-1 Venue profile:
-    %h2=venue
-    %h3=link_to_self venue.promoter
-    =simple_format(venue.description)
-    .row.mt-2
-      .span9
-        %h4 Keyholder contact details
-    -#
-      .row.mt-2
-        .span9
-          %h4 Booking contact
-    .row.mt-2
-      .span9
-        %h4 Technical information
-    -if (media_posts = venue.posts.where("image_uid LIKE '%'").limit(8)).present?
-      .row.mt-2
-        .span9
-          %h4 Photos/videos
-          .row.mt-1
-            -media_posts.each do |media_post|
-              .span1.mb-1
-                =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                  =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")        
-    -if posts.present? || can?(:create, Post)
-      .row.mt-2
-        .span9
-          %h4.mb-1 Updates
-          -if can?(:create, Post)
-            =render("posts/remote_form", :post => current_user.posts.build(:target => venue))
-          =render("posts/posts", :posts => posts)
+    %h1
+      =venue
+      %small=link_to_self(venue.promoter)
+    %ul.nav.nav-tabs
+      %li.active
+        =link_to("Profile", "#profile", :data => {:toggle => "tab"})
+      %li
+        =link_to("Technical details", "#technical", :data => {:toggle => "tab"})
+    .tab-content
+      #profile.tab-pane.fade.in.active
+        =simple_format(venue.description)
+        -if (media_posts = venue.posts.where("image_uid LIKE '%'").limit(8)).present?
+          .row.mt-2
+            .span9
+              %h4 Photos/videos
+              .row.mt-1
+                -media_posts.each do |media_post|
+                  .span1.mb-1
+                    =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
+                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")        
+        -if posts.present? || can?(:create, Post)
+          .row.mt-2
+            .span9
+              %h4.mb-1 Updates
+              -if can?(:create, Post)
+                =render("posts/remote_form", :post => current_user.posts.build(:target => venue))
+              =render("posts/posts", :posts => posts)
+      #technical.tab-pane.fade
+        =render("venues/technical", :venue => venue)
 
 .row.mt-2
   .span9

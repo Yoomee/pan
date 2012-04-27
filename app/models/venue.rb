@@ -1,7 +1,5 @@
 class Venue < ActiveRecord::Base
-  
-  include YmCore::Model
-  
+
   include Organisation
   
   belongs_to :promoter
@@ -9,6 +7,8 @@ class Venue < ActiveRecord::Base
   has_many :tour_dates, :dependent => :nullify
   
   acts_as_taggable_on :floor_surfaces, :power_sources
+  
+  has_snippets :keyholder_name, :keyholder_email, :keyholder_phone
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode#,  :if => lambda{ |obj| obj.address_changed? }
@@ -23,6 +23,10 @@ class Venue < ActiveRecord::Base
   
   def address_changed?
     address1_changed? || address2_changed? || city_changed? || postcode_changed?
+  end
+  
+  def keyholder_details
+    [keyholder_name, keyholder_email, keyholder_phone].compact
   end
   
   def country

@@ -1,7 +1,12 @@
 =form.inputs do
   %legend Booking contact
   =form.input :user, :collection => venue.promoter.users, :include_blank => true, :label => false
-
+=form.inputs do
+  %legend Keyholder contact
+  =form.input :keyholder_name, :label => 'Name'
+  =form.input :keyholder_email, :label => 'Email'
+  =form.input :keyholder_phone, :label => 'Phone'
+=form.inputs do
   %legend Contact details
   =form.input :address1, :label => 'Address 1'
   =form.input :address2, :label => 'Address 2'
