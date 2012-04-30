@@ -234,7 +234,7 @@ html, body {
 /*========== Resources ==========*/
 
 div.resource {
-  height: 135px;
+  height: 155px;
   overflow: hidden;
 }
 div.resource .resource-image {
@@ -253,9 +253,16 @@ h6.resource-publication-date {
   margin-bottom:12px;
 }
 div.resource .resource-title-summary {
-  height: 102px;
+  max-height: 102px;
   overflow: hidden;
   margin-bottom: 3px;
+}
+div.resource .resource-title-summary p {
+  font-size: 12px;
+  margin: 0;
+}
+div.resource .tag-list {
+  margin: 0;
 }
 
 

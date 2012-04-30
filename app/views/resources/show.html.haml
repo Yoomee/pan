@@ -26,7 +26,12 @@
         %br
         %hr
         =link_if_can("Click here to download PDF", [:download, resource], :class => "download-doc download-doc-pdf")
-
+      -if posts.present? || can?(:create, Post)
+        .span9.mt-2
+          %h4.mb-1 Comments
+          -if can?(:create, Post)
+            =render("posts/remote_form", :post => current_user.posts.build(:target => resource))
+          =render("posts/posts", :posts => posts)
 .row
   .span12
     =options_panel do
