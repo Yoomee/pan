@@ -1,0 +1,16 @@
+.row
+  .span12
+    %h1=title "Tags"
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs
+        -tag_contexts.each do |tag_context, tags|
+          %li{:class => "#{'active' if tag_context == tag_contexts.first[0]}"}
+            =link_to(tag_context.humanize, "##{tag_context.parameterize}", :data => {:toggle => "tab"})
+      .tab-content
+        -tag_contexts.each do |tag_context, tags|    
+          .tab-pane.fade.in.active{:id => "#{tag_context.parameterize}", :class => "#{'active' if tag_context == tag_contexts.first[0]}"}
+            %table.table.table-striped.table-compact
+              %tbody
+                -tags.each do |tag|
+                  %tr
+                    %td=tag
