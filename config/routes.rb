@@ -18,7 +18,7 @@ Pan::Application.routes.draw do
       get 'location', :as => 'edit_location'
     end
   end
-  resources :tags, :only => []
+  resources :tags, :only => [:index]
   match 'community' => 'posts#index'
 
   resources :resources do

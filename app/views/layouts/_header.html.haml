@@ -38,6 +38,12 @@
                   %icon.icon-map-marker
                   Venues
               %li.divider
+              -if can?(:index,Tag)
+                %li
+                  =link_to(tags_path) do
+                    %icon.icon-tags
+                    Manage tags
+              %li.divider
               %li
                 =link_to(edit_user_path(current_user)) do
                   %icon.icon-cog
