@@ -1,6 +1,5 @@
 class Performer < ActiveRecord::Base
   
-  include YmCore::Model
   include Organisation  
   
   define_index do
