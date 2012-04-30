@@ -10,5 +10,11 @@
   =form.input :image, :as => :file, :label => "Cover image"
   =form.input :view_name, :as => :select, :collection => Page::view_names, :include_blank => false, :member_label => "titleize", :label => "Layout"
   =form.input :permalink_path, :label => "Permalink"
-  =form.input :slug if current_user.try(:yoomee_staff?)  
-  =form.input :published
+  =form.input :slug if current_user.try(:yoomee_staff?)
+  .boolean.control-group.optional#page_published_input
+    %label{:class => 'control-label'}
+    .controls
+      %label{:class => 'checkbox', :for => 'page_published_at'}
+        =publish_check_box(form, page)
+        Published
+  =form.input :published_at_s, :as => :string, :label => 'or publish at', :input_html => {:class => 'datetime'}  

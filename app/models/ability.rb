@@ -7,9 +7,10 @@ class Ability
     
     # open ability
     can :show, Page, :published => true
+    can :index, Page
     
     if user.try(:admin?)
-      can :manage, :all      
+      can :manage, :all
       # admin ability
     elsif user
       # user ability
