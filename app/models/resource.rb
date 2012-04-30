@@ -1,8 +1,11 @@
 class Resource < ActiveRecord::Base
   
   belongs_to :user  
+  has_many :posts, :as => :target
+    
   acts_as_taggable_on :resource_tags
   has_pdf
+  
   validates :name, :file, :presence => true
   
   define_index do

@@ -3,6 +3,7 @@ class ResourcesController < ApplicationController
   expose(:resource)
   expose(:top_tags) {Resource.tag_counts_on(:resource_tags, :limit => 10)}
   expose(:current_tag) {Tag.find_by_name(params[:tag])}
+  expose(:posts) {resource.posts.page(params[:page])}
   
   def create
     resource.user = current_user

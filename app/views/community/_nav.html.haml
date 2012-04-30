@@ -8,7 +8,7 @@
             Notifications
             %span.badge.badge-inverse 1
         %li=link_to("Members", "#")
-        =li_with_active(current_page?(resources_path), link_to("Resources", resources_path))
+        =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         %li=link_to("Leaderboard", "#")
         -if current_user
           =li_with_active(current_page?(current_user), link_to("My profile", current_user))
