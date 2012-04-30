@@ -1,6 +1,15 @@
 =form.inputs do
   %legend Booking contact
-  =form.input :user, :collection => venue.promoter.users, :include_blank => true, :label => false
+  -if venue.promoter.users.empty?
+    .control-group
+      .controls
+        %p
+          ="#{venue.promoter} has no individuals yet."
+          %br
+          =link_to("Add an individual", new_promoter_user_path(venue.promoter), :target => "_blank")
+          and you will then be able to select them here as the booking contact.
+  -else
+    =form.input :user, :collection => venue.promoter.users, :include_blank => true, :label => false
 =form.inputs do
   %legend Keyholder contact
   =form.input :keyholder_name, :label => 'Name'
