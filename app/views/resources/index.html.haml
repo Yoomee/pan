@@ -18,13 +18,18 @@
       .row      
         -@resources.each do |resource|
           .span4.resource.mb-2
-            =link_to(image_for(resource, "90x140"), resource, :class => "resource-image shadow")
+            =link_to(image_for(resource, "90x150"), resource, :class => "resource-image shadow")
             .resource-info
-              =link_to_self(resource, :class => "resource-title")
-              =summarize(resource, :length => 100)
+              .resource-title-summary
+                =link_to_self(resource, :class => "resource-title")
+                =summarize(resource, :length => 100)
               %ul.tag-list.tag-list-horizontal
                 -resource.resource_tags.each do |tag|
                   %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
+              -if !resource.posts.empty?
+                =link_to(resource, :class => "small-info-text pull-left clear mt-1") do
+                  %i.icon.icon-comment
+                  =pluralize(resource.posts.count, "comment")
           
 .row
   .span12

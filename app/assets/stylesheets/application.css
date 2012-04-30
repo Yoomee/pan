@@ -252,7 +252,6 @@ a .icon-trash:hover {
 
 div.resource {
   height: 160px;
-
 }
 div.resource .resource-image {
   float: left;
@@ -269,6 +268,26 @@ div.resource .resource-info p {
 a.resource-title {
   font-weight: bold;
 }
+h2.resource-title {
+  line-height:24px;
+  margin-bottom:3px;
+}
+h6.resource-publication-date {
+  margin-bottom:12px;
+}
+div.resource .resource-title-summary {
+  max-height: 102px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+div.resource .resource-title-summary p {
+  font-size: 12px;
+  margin: 0;
+}
+div.resource .tag-list {
+  margin: 0;
+}
+
 /*========== User ==========*/
 #links .nested-fields .remove_fields {
   margin-top:27px;

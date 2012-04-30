@@ -10,6 +10,7 @@ gem "rake", "0.8.7"
 ### Frequently used
 gem 'exception_notification'
 gem 'formtastic-bootstrap', :git => "git://github.com/cgunther/formtastic-bootstrap.git", :branch => "bootstrap-2"
+gem 'whenever', :require => false
 
 gem 'geocoder'
 gem 'cocoon'

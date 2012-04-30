@@ -14,7 +14,7 @@ class Tour < ActiveRecord::Base
   validates_associated :dates
   validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image"
   
-  delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :website_url, :facebook_url, :twitter_name, :youtube_url, :vimeo_url, :soundcloud_url, :social_urls, :to => :performer
+  delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :to => :performer
   
   scope :past, joins(:dates).where("tour_dates.date < ?", Date.today).group("tours.id")
   scope :future, joins(:dates).where("tour_dates.date >= ?", Date.today).group("tours.id")

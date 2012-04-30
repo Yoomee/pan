@@ -9,7 +9,7 @@
         .span3
           =link_to_slug('About', 'about-tourbook', :class => 'subnav_link')
           =link_to_slug('contact', :class => 'subnav_link')
-          =link_to("Sitemap", pages_path, :class => "subnav_link") if current_user.try(:admin?)
+          =link_to("Sitemap", pages_path, :class => "subnav_link")
     .span8
       #nav.main-nav
         %ul.unstyled
