@@ -38,7 +38,7 @@ class PerformersController < ApplicationController
   end
   
   def index
-    @performers = Performer.order(:created_at)
+    @performers = Performer.order("created_at DESC")
   end
   
   def new
