@@ -245,6 +245,18 @@ div.resource .resource-info {
   float: left;
   width: 200px;
 }
+h2.resource-title {
+  line-height:24px;
+  margin-bottom:3px;
+}
+h6.resource-publication-date {
+  margin-bottom:12px;
+}
+div.resource .resource-title-summary {
+  height: 102px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
 
 
 /*========== User ==========*/

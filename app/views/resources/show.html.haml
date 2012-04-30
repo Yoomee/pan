@@ -12,7 +12,13 @@
       .span3
         =image_for(resource, "220x", :class => "shadow")
       .span6
-        %h2=title(resource)
+        %h2.resource-title
+          =title(resource)
+        -if resource.publication_date.present?
+          %h6.resource-publication-date 
+            Published
+            =resource.publication_date
+        
         =summarize(resource, :length => 200)
         %ul.tag-list.tag-list-horizontal
           -resource.resource_tags.each do |tag|
