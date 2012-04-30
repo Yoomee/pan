@@ -1,0 +1,41 @@
+-content_for(:head) do
+  :javascript
+    $(document).ready(function() {
+      $('#slideshow_#{slideshow.id} .slideshow_cycle').cycle({
+        fx: 'fade',
+        timeout: 0,
+        prev: "#slideshow_#{slideshow.id} .slideshow_prev",
+        next: "#slideshow_#{slideshow.id} .slideshow_next",
+        pager: ".slideshow_numbers",
+        before: function(currSlideElement, nextSlideElement, options, forwardFlag) {
+          var slideshowItemId = $(nextSlideElement).attr("data-slideshow-item-id");
+          $(".slideshow_item_text span").hide();
+          $("#slideshow_item_text_" + slideshowItemId).fadeIn();
+        }
+      });
+      #{'$(".slideshow_item_text span").show();'if slideshow.slides.size == 1}
+    });
+    
+.slideshow{:id => "slideshow_#{slideshow.id}"}
+  .slideshow_cycle
+    -slideshow.slides.each do |slideshow_item|
+      .slideshow_slide{"data-slideshow-item-id" => slideshow_item.id}
+        -if slideshow_item.has_video?
+          %iframe{:width => 700, :height => 400, :src => slideshow_item.video_embed_url, :frameborder => 0, :allowfullscreen => true}
+        -else
+          =image_for(slideshow_item, "700x400>")
+  .slideshow_left
+    .row
+      .span9
+        .slideshow_item_text
+          -slideshow.slides.each_with_index do |slideshow_item, index|
+            -if slideshow_item.caption.present?
+              %span{:id => "slideshow_item_text_#{slideshow_item.id}"}
+                =simple_format(slideshow_item.caption)
+    -if slideshow.slides.size > 1
+      .slideshow_nav.row
+        .span7
+          .slideshow_numbers
+        .span2
+          .slideshow_next.slideshow_arrow >    
+          .slideshow_prev.slideshow_arrow <

@@ -77,6 +77,9 @@
         =link_to("Profile", "#profile", :data => {:toggle => "tab"})
       %li
         =link_to("Technical details", "#technical", :data => {:toggle => "tab"})
+      -if venue.slideshow
+        %li
+          =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
     .tab-content
       #profile.tab-pane.fade.in.active
         =simple_format(venue.description)
@@ -98,6 +101,9 @@
               =render("posts/posts", :posts => posts)
       #technical.tab-pane.fade
         =render("venues/technical", :venue => venue)
+      -if venue.slideshow
+        #gallery.tab-pane
+          =render("venues/slideshow", :slideshow => venue.slideshow)
 
 .row.mt-2
   .span9

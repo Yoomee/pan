@@ -11,7 +11,8 @@
  *= require ym_cms
  *= require ym_tags 
  *= require ym_posts
- *= require ym_docs 
+ *= require ym_docs
+ *= require slideshow 
  *= require chosen
  *= require_self
 */
@@ -303,4 +304,93 @@ ul.links li img {
 }
 ul.links li a {
   color:#333;
+}
+
+/*========== Slideshow ==========*/
+
+div.slideshow {
+  float: left;
+  clear: both;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  margin: 0 0 30px 0px;
+}
+.slideshow .slideshow_cycle {
+  text-align: center;
+  height: 400px;
+  width: 100%;
+  margin: 0;
+  float: left;
+  position: relative;
+  z-index: 3;
+}
+.slideshow .slideshow_cycle .slideshow_slide {
+  width: 100%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+.slideshow .slideshow_cycle .slideshow_slide object {
+  display: inline;
+}
+.slideshow .slideshow_left {
+  padding: 0px;
+  padding-top: 10px;
+  float: left;
+  width: 100%;
+  margin-right: 0;
+  position: relative;
+  margin-left: 0;
+  padding-left: 0;
+}
+.slideshow_item_text span {
+  float: left;
+  margin: 15px 12px 0 25px;
+}
+.slideshow_arrow:hover {
+	background-color: #fff;	
+}
+.slideshow .slideshow_bottom .slideshow_item_text span {
+  display:none;
+}
+.slideshow .slideshow_bottom .slideshow_nav {
+  float: right;
+}
+.slideshow_arrow {
+  float: right;
+  padding: 0;
+  width: 26px;
+  height: 25px;
+  background: #474646 url(/assets/slideshow_arrow_r.png) no-repeat center;
+  text-indent: -9000em;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+.slideshow_prev {
+  margin-right: 7px;
+  background-image: url(/assets/slideshow_arrow_l.png);
+}
+.slideshow_numbers {
+  margin-left: 10px;
+}
+.slideshow_numbers a {
+  float: left;
+  display: block;
+  padding: 3px 7px 5px 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  color: #777;
+}
+.slideshow_numbers a.activeSlide {
+  color: #fff;
+}
+.slideshow_nav {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: 1px solid #333;	
+}
+.slideshow_nav .slideshow_next {
+  margin-right: 10px;
 }
