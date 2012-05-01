@@ -115,7 +115,7 @@
   .span9
     =options_panel do
       =back_link
-      =link_if_can("Edit tour", [:edit, tour])
       -if can?(:edit,tour)
+        =link_to("Edit tour", edit_tour_path(tour))
         =link_to("Edit tour dates", edit_tour_path(tour, :anchor => "dates"))
       =link_if_can("Delete tour", [:destroy, tour], :confirm => "Are you sure?")
