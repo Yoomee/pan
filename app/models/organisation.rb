@@ -4,6 +4,8 @@ module Organisation
     base.send(:include, YmCore::Model)
     base.extend(ClassMethods)
     base.image_accessor :image
+    
+    base.has_slideshow
 
     base.has_many :posts, :as => :target    
   

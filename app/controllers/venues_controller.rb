@@ -35,19 +35,19 @@ class VenuesController < ApplicationController
         @letter = '#'
         @venues = @venues.where("name REGEXP '^[^a-zA-Z]'")
       end
-      render :template => 'layouts/directory'
+      render :template => 'organisations/directory'
     end
   end
 
   
   def index
     @venues = Venue.order("created_at DESC")
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def latest
     @venues = Venue.order("created_at DESC").limit(10)
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def search
@@ -57,7 +57,7 @@ class VenuesController < ApplicationController
     else
       @venues = []
     end
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   

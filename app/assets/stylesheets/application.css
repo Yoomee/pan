@@ -351,7 +351,7 @@ div.slideshow {
   z-index: 3;
 }
 .slideshow .slideshow_cycle .slideshow_slide {
-  width: 100%;
+  width: 100% !important;
   background-color: transparent;
   background-repeat: no-repeat;
 }

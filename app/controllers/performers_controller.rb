@@ -30,7 +30,7 @@ class PerformersController < ApplicationController
         @letter = '#'
         @performers = @performers.where("name REGEXP '^[^a-zA-Z]'")
       end
-      render :template => 'layouts/directory'
+      render :template => 'organisations/directory'
     end
   end
   
@@ -39,7 +39,7 @@ class PerformersController < ApplicationController
   
   def index
     @performers = Performer.order("created_at DESC").limit(10)
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def new
@@ -52,7 +52,7 @@ class PerformersController < ApplicationController
     else
       @performers = []
     end
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def show

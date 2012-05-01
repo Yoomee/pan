@@ -31,14 +31,14 @@ class PromotersController < ApplicationController
         @letter = '#'
         @promoters = @promoters.where("name REGEXP '^[^a-zA-Z]'")
       end
-      render :template => 'layouts/directory'
+      render :template => 'organisations/directory'
     end
   end
 
   
   def index
     @promoters = Promoter.order("created_at DESC").limit(10)
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def search
@@ -48,7 +48,7 @@ class PromotersController < ApplicationController
     else
       @promoters = []
     end
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def edit;end

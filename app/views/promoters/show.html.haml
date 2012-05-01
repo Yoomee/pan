@@ -46,143 +46,156 @@
     
   .span9
     %h1.mb-1=title(promoter)
-    =simple_format(promoter.description)
-    .row.mt-2
-      .span9
-        %h4.mb-1 Venues
-        -if promoter.venues.empty?
-          =promoter
-          doesn't have any venues yet.
-          =link_if_can "Add one", [:new, promoter, :venue]
-        -else
-          %ul.unstyled
-            -promoter.venues.each do |venue|
-              %li
-                =venue
-                =link_to 'View', venue
-    .row.mt-2
-      .span9
-        %h4 Individual profiles
-          
-        .row.mt-1
-          -if promoter.users.empty?
-            .span8
+    -if promoter.slideshow    
+      %ul.nav.nav-tabs
+        %li.active
+          =link_to("Profile", "#profile", :data => {:toggle => "tab"})
+        %li
+          =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
+    .tab-content
+      #profile.tab-pane.fade.in.active
+    
+        =simple_format(promoter.description)
+        .row.mt-2
+          .span9
+            %h4.mb-1 Venues
+            -if promoter.venues.empty?
               =promoter
-              doesn't have any individuals yet.
-              =link_if_can "Add one", [:new, promoter, :user]
-          -else
-            -promoter.users.each do |user|
-              .span2
-                =link_to image_for(user,"120x120#"), user
-                %h5=link_to_self user
-                %p=user.job_title
-    .row.mt-2
-      .span9
-        .row
-          -if (tag_list = (promoter.art_form_list + promoter.genre_list).uniq).present?
-            .span3
-              %h4.mb-1 Genres/art-forms currently promoting
+              doesn't have any venues yet.
+              =link_if_can "Add one", [:new, promoter, :venue]
+            -else
               %ul.unstyled
-                -tag_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if (tag_list = (promoter.art_form_interest_list + promoter.genre_interest_list).uniq).present?
-            .span3
-              %h4.mb-1 Genres/art-forms interested in
-              %ul.unstyled
-                -tag_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.funder_list.present?
-            .span3
-              %h4.mb-1 Funding sources
-              %ul.unstyled
-                -promoter.funder_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.audience_list.present?
-            .span3
-              %h4.mb-1 Who we promote to
-              %ul.unstyled
-                -promoter.audience_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-                  
-    .row.mt-2
-      .span9
-        %h3.mb-1 List of resources
-        .row
-          -if promoter.marketing_resource_list.present?
-            .span3
-              %h4 Promotions/marketing
-              %ul.unstyled
-                -promoter.marketing_resource_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.pr_resource_list.present?
-            .span3
-              %h4 PR
-              %ul.unstyled
-                -promoter.pr_resource_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.equipment_list.present?
-            .span3
-              %h4 Equipment
-              %ul.unstyled
-                -promoter.equipment_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.hireable_resource_list.present?
-            .span3
-              %h4.mb-1 Hireable skills
-              %ul.unstyled
-                -promoter.hireable_resource_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-    .row.mt-2
-      .span9
-        %h3.mb-1 Skills matrix
-        .row
-          -if promoter.skill_list.present?
-            .span3
-              %h4 Main skills
-              %ul.unstyled
-                -promoter.skill_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.skills_needed_list.present?
-            .span3
-              %h4 Support needed
-              %ul.unstyled
-                -promoter.skills_needed_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.skills_need_training_list.present?
-            .span3
-              %h4 Training needed
-              %ul.unstyled
-                -promoter.skills_need_training_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.skills_underused_list.present?
-            .span3
-              %h4.mb-1 Underused skills
-              %ul.unstyled
-                -promoter.skills_underused_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
-          -if promoter.skills_offered_list.present?
-            .span3
-              %h4.mb-1 Shareable skills
-              %ul.unstyled
-                -promoter.skills_offered_list.each do |tag_name|
-                  %li=tag_name.titleize.humanize
+                -promoter.venues.each do |venue|
+                  %li
+                    =venue
+                    =link_to 'View', venue
+        .row.mt-2
+          .span9
+            %h4 Individual profiles
           
-    -if (media_posts = promoter.posts.where("image_uid LIKE '%'").limit(8)).present?
-      .row.mt-2
-        .span9
-          %h4 Photos/videos
-          .row.mt-1
-            -media_posts.each do |media_post|
-              .span1.mb-1
-                =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                  =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
-    -if posts.present? || can?(:create, Post)
-      .row.mt-2
-        .span9
-          %h4.mb-1 Updates
-          -if can?(:create, Post)
-            =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
-          =render("posts/posts", :posts => posts)
+            .row.mt-1
+              -if promoter.users.empty?
+                .span8
+                  =promoter
+                  doesn't have any individuals yet.
+                  =link_if_can "Add one", [:new, promoter, :user]
+              -else
+                -promoter.users.each do |user|
+                  .span2
+                    =link_to image_for(user,"120x120#"), user
+                    %h5=link_to_self user
+                    %p=user.job_title
+        .row.mt-2
+          .span9
+            .row
+              -if (tag_list = (promoter.art_form_list + promoter.genre_list).uniq).present?
+                .span3
+                  %h4.mb-1 Genres/art-forms currently promoting
+                  %ul.unstyled
+                    -tag_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if (tag_list = (promoter.art_form_interest_list + promoter.genre_interest_list).uniq).present?
+                .span3
+                  %h4.mb-1 Genres/art-forms interested in
+                  %ul.unstyled
+                    -tag_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.funder_list.present?
+                .span3
+                  %h4.mb-1 Funding sources
+                  %ul.unstyled
+                    -promoter.funder_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.audience_list.present?
+                .span3
+                  %h4.mb-1 Who we promote to
+                  %ul.unstyled
+                    -promoter.audience_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+                  
+        .row.mt-2
+          .span9
+            %h3.mb-1 List of resources
+            .row
+              -if promoter.marketing_resource_list.present?
+                .span3
+                  %h4 Promotions/marketing
+                  %ul.unstyled
+                    -promoter.marketing_resource_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.pr_resource_list.present?
+                .span3
+                  %h4 PR
+                  %ul.unstyled
+                    -promoter.pr_resource_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.equipment_list.present?
+                .span3
+                  %h4 Equipment
+                  %ul.unstyled
+                    -promoter.equipment_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.hireable_resource_list.present?
+                .span3
+                  %h4.mb-1 Hireable skills
+                  %ul.unstyled
+                    -promoter.hireable_resource_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+        .row.mt-2
+          .span9
+            %h3.mb-1 Skills matrix
+            .row
+              -if promoter.skill_list.present?
+                .span3
+                  %h4 Main skills
+                  %ul.unstyled
+                    -promoter.skill_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.skills_needed_list.present?
+                .span3
+                  %h4 Support needed
+                  %ul.unstyled
+                    -promoter.skills_needed_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.skills_need_training_list.present?
+                .span3
+                  %h4 Training needed
+                  %ul.unstyled
+                    -promoter.skills_need_training_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.skills_underused_list.present?
+                .span3
+                  %h4.mb-1 Underused skills
+                  %ul.unstyled
+                    -promoter.skills_underused_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+              -if promoter.skills_offered_list.present?
+                .span3
+                  %h4.mb-1 Shareable skills
+                  %ul.unstyled
+                    -promoter.skills_offered_list.each do |tag_name|
+                      %li=tag_name.titleize.humanize
+          
+        -if (media_posts = promoter.posts.where("image_uid LIKE '%'").limit(8)).present?
+          .row.mt-2
+            .span9
+              %h4 Photos/videos
+              .row.mt-1
+                -media_posts.each do |media_post|
+                  .span1.mb-1
+                    =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
+                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
+        -if posts.present? || can?(:create, Post)
+          .row.mt-2
+            .span9
+              %h4.mb-1 Updates
+              -if can?(:create, Post)
+                =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
+              =render("posts/posts", :posts => posts)
+      -if promoter.slideshow
+        #gallery.tab-pane.fade
+          .span9
+            =render("organisations/slideshow", :slideshow => promoter.slideshow)
 .row.mt-2
   .span9
     =options_panel do

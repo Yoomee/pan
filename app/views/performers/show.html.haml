@@ -58,72 +58,86 @@
         
   .span9
     %h1.mb-1=title(performer)
-    =simple_format(performer.description)
-    .row.company_tag_lists
-      -if current_tour = performer.tours.first
-        .span2.mb-1
-          %h4 Current show:
-          =link_to_self(current_tour)
-      -if performer.genre_list.present?
-        .span2.mb-1
-          %h4 Genres
-          %ul.unstyled
-            -performer.genre_list.each do |genre|
-              %li=genre.titleize.humanize
-      -if performer.art_form_list.present?
-        .span2.mb-1
-          %h4 Art forms
-          %ul.unstyled
-            -performer.art_form_list.each do |art_form|
-              %li=art_form.titleize.humanize
-      -if performer.funder_list.present?
-        .span2.mb-1
-          %h4 Funders
-          %ul.unstyled
-            -performer.funder_list.each do |funder|
-              %li=funder.titleize.humanize
-      -if performer.work_scale_list.present?
-        .span2.mb-1
-          %h4 Scale of work
-          %ul.unstyled
-            -performer.work_scale_list.each do |work_scale|
-              %li=work_scale.titleize.humanize
-    .row.mt-2    
-      -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
-        .span4
-          %h4 Photos/videos
-          .row.mt-1
-            -media_posts.each do |media_post|
-              .span1.mb-1
-                =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                  =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
-      .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
-        %h4 Venues regularly visited
-        .row.mt-1
-          -performer.venues.each do |venue|
-            .span1.mb-1
-              =link_to(image_for(venue, "60x60#"), venue)
-              =link_to_self(venue, :class => "small-info-text")
-    .row.mt-2
-      .span9
-        %h4 Proposed tour dates
-        .row.mt-1
-          -performer.tour_dates.each do |tour_date|
-            .span1.mb-1
-              =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
-              %span.small-info-text=tour_date.date.to_s(:date)
-    -if performer.facebook_url.present?
-      .row.mt-2
-        .span9
-          %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => performer.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
+    -if performer.slideshow    
+      %ul.nav.nav-tabs
+        %li.active
+          =link_to("Profile", "#profile", :data => {:toggle => "tab"})
+        %li
+          =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
+    .tab-content
+      #profile.tab-pane.fade.in.active
+        =simple_format(performer.description)
+        .row.company_tag_lists
+          -if current_tour = performer.tours.first
+            .span2.mb-1
+              %h4 Current show:
+              =link_to_self(current_tour)
+          -if performer.genre_list.present?
+            .span2.mb-1
+              %h4 Genres
+              %ul.unstyled
+                -performer.genre_list.each do |genre|
+                  %li=genre.titleize.humanize
+          -if performer.art_form_list.present?
+            .span2.mb-1
+              %h4 Art forms
+              %ul.unstyled
+                -performer.art_form_list.each do |art_form|
+                  %li=art_form.titleize.humanize
+          -if performer.funder_list.present?
+            .span2.mb-1
+              %h4 Funders
+              %ul.unstyled
+                -performer.funder_list.each do |funder|
+                  %li=funder.titleize.humanize
+          -if performer.work_scale_list.present?
+            .span2.mb-1
+              %h4 Scale of work
+              %ul.unstyled
+                -performer.work_scale_list.each do |work_scale|
+                  %li=work_scale.titleize.humanize
+        .row.mt-2    
+          -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
+            .span4
+              %h4 Photos/videos
+              .row.mt-1
+                -media_posts.each do |media_post|
+                  .span1.mb-1
+                    =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
+                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
+          .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
+            %h4 Venues regularly visited
+            .row.mt-1
+              -performer.venues.each do |venue|
+                .span1.mb-1
+                  =link_to(image_for(venue, "60x60#"), venue)
+                  =link_to_self(venue, :class => "small-info-text")
+        .row.mt-2
+          .span9
+            %h4 Proposed tour dates
+            .row.mt-1
+              -performer.tour_dates.each do |tour_date|
+                .span1.mb-1
+                  =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
+                  %span.small-info-text=tour_date.date.to_s(:date)
+        -if performer.facebook_url.present?
+          .row.mt-2
+            .span9
+              %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => performer.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
     
-    -if posts.present? || can?(:create, Post)
-      .row.mt-2
-        .span9
-          %h4.mb-1 Updates
-          -if can?(:create, Post)
-            =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
-          =render("posts/posts", :posts => posts)
+        -if posts.present? || can?(:create, Post)
+          .row.mt-2
+            .span9
+              %h4.mb-1 Updates
+              -if can?(:create, Post)
+                =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
+              =render("posts/posts", :posts => posts)
+        
+      -if performer.slideshow
+        #gallery.tab-pane.fade
+          .span9
+            =render("organisations/slideshow", :slideshow => performer.slideshow)
+    
 .row.mt-2
   .span9
     =options_panel do

@@ -29,13 +29,13 @@ class UsersController < ApplicationController
         @letter = '#'
         @users = @users.where("last_name REGEXP '^[^a-zA-Z]'")
       end
-      render :template => 'layouts/directory'
+      render :template => 'organisations/directory'
     end
   end
   
   def index
     @users = User.order("created_at DESC").limit(10)
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   def search
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     else
       @users = []
     end
-    render :template => 'layouts/directory'
+    render :template => 'organisations/directory'
   end
   
   

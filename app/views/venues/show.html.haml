@@ -103,7 +103,8 @@
         =render("venues/technical", :venue => venue)
       -if venue.slideshow
         #gallery.tab-pane
-          =render("venues/slideshow", :slideshow => venue.slideshow)
+          .span9
+            =render("organisations/slideshow", :slideshow => venue.slideshow)
 
 .row.mt-2
   .span9

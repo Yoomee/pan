@@ -16,7 +16,6 @@ class Venue < ActiveRecord::Base
   acts_as_taggable_on :floor_surfaces, :power_sources
   
   has_snippets :keyholder_name, :keyholder_email, :keyholder_phone
-  has_slideshow
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   
   after_validation :geocode,  :if => lambda{ |obj| obj.address_changed? }
