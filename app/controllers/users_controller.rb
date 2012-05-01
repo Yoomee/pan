@@ -17,4 +17,36 @@ class UsersController < ApplicationController
     end
   end
   
+  def directory
+    @users = User.order([:last_name,:first_name])
+    @letter = params[:letter].to_s.first.upcase.presence || User.present_directory_letters.first
+    if @letter != params[:letter]
+      redirect_to directory_users_path(:letter => @letter)
+    else
+      if @letter =~ /^[a-zA-Z]/
+        @users = @users.where("last_name LIKE?","#{@letter}%")
+      else
+        @letter = '#'
+        @users = @users.where("last_name REGEXP '^[^a-zA-Z]'")
+      end
+      render :template => 'layouts/directory'
+    end
+  end
+  
+  def index
+    @users = User.order("created_at DESC").limit(10)
+    render :template => 'layouts/directory'
+  end
+  
+  def search
+    @query = strip_tags(params[:q]).to_s.strip
+    if @query.present?
+      @users = User.search(@query)
+    else
+      @users = []
+    end
+    render :template => 'layouts/directory'
+  end
+  
+  
 end

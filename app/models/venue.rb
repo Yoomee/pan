@@ -1,7 +1,13 @@
 class Venue < ActiveRecord::Base
   
-
   include Organisation
+  
+  define_index do
+    indexes name, :sortable => true
+    indexes description
+    has created_at, updated_at
+  end
+  
   
   belongs_to :promoter
   belongs_to :user

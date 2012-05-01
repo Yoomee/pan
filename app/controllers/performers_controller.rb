@@ -20,7 +20,7 @@ class PerformersController < ApplicationController
   
   def directory
     @performers = Performer.order('name')
-    @letter = params[:letter].to_s.first.upcase.presence || 'A'
+    @letter = params[:letter].to_s.first.upcase.presence || Performer.present_directory_letters.first
     if @letter != params[:letter]
       redirect_to directory_performers_path(:letter => @letter)
     else
@@ -30,7 +30,7 @@ class PerformersController < ApplicationController
         @letter = '#'
         @performers = @performers.where("name REGEXP '^[^a-zA-Z]'")
       end
-      render :action => "index"
+      render :template => 'layouts/directory'
     end
   end
   
@@ -38,7 +38,8 @@ class PerformersController < ApplicationController
   end
   
   def index
-    @performers = Performer.order("created_at DESC")
+    @performers = Performer.order("created_at DESC").limit(10)
+    render :template => 'layouts/directory'
   end
   
   def new
@@ -51,7 +52,7 @@ class PerformersController < ApplicationController
     else
       @performers = []
     end
-    render :action => "index"
+    render :template => 'layouts/directory'
   end
   
   def show

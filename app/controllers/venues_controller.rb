@@ -22,9 +22,44 @@ class VenuesController < ApplicationController
   def edit;end
   
   def location;end
-   
-  def index
+  
+  def directory
+    @venues = Venue.order('name')
+    @letter = params[:letter].to_s.first.upcase.presence || Venue.present_directory_letters.first
+    if @letter != params[:letter]
+      redirect_to directory_venues_path(:letter => @letter)
+    else
+      if @letter =~ /^[a-zA-Z]/
+        @venues = @venues.where("name LIKE?","#{@letter}%")
+      else
+        @letter = '#'
+        @venues = @venues.where("name REGEXP '^[^a-zA-Z]'")
+      end
+      render :template => 'layouts/directory'
+    end
   end
+
+  
+  def index
+    @venues = Venue.order("created_at DESC")
+    render :template => 'layouts/directory'
+  end
+  
+  def latest
+    @venues = Venue.order("created_at DESC").limit(10)
+    render :template => 'layouts/directory'
+  end
+  
+  def search
+    @query = strip_tags(params[:q]).to_s.strip
+    if @query.present?
+      @venues = Venue.search(@query)
+    else
+      @venues = []
+    end
+    render :template => 'layouts/directory'
+  end
+  
   
   def new
     promoter = Promoter.find(params[:promoter_id])

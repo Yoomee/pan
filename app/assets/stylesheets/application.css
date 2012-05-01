@@ -60,6 +60,11 @@
   
 }
 
+/*========== Bootstrap overrides ==========*/
+#map-canvas img,
+.map-canvas img{
+  max-width:none;
+}
 
 /*========== Font stuff ==========*/
 body, p {
@@ -228,10 +233,27 @@ a .icon-trash:hover {
   min-height: 65px;
 }
 
+/*========== Directory ==========*/
+
 #directorynav li a{
   padding-left:11px;
   padding-right:11px;
 }
+
+#directorynav li.disabled a{
+  color:#ccc;
+  cursor:default;
+}
+#directorynav li.disabled a:hover{
+  background:#fff;
+}
+
+
+h4.directory-item {
+  max-width:220px;
+}
+
+
 
 /*========== Venues map ==========*/
 .venue-infowindow img{

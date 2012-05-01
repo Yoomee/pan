@@ -2,6 +2,12 @@ class Promoter < ActiveRecord::Base
   
   include Organisation
 
+  define_index do
+    indexes name, :sortable => true
+    indexes description
+    has created_at, updated_at
+  end
+
   acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources
   
   has_many :users, :dependent => :nullify

@@ -37,6 +37,10 @@
                 =link_to(venues_path) do
                   %icon.icon-map-marker
                   Venues
+              %li
+                =link_to(users_path) do
+                  %icon.icon-user
+                  Users
               %li.divider
               -if can?(:index,Tag)
                 %li
