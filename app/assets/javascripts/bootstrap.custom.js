@@ -1449,6 +1449,8 @@
   $(function () {
     $('body').on('click.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
       e.preventDefault()
+      //CHANGED
+      window.location.hash = e.target.hash
       $(this).tab('show')
     })
   })

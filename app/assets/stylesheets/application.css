@@ -69,6 +69,17 @@
   max-width:none;
 }
 
+/*========== Bootstrap extensions ==========*/
+.popover-footer {
+  padding: 9px 15px;
+  line-height: 1;
+  background-color: #f5f5f5;
+  border-top: 1px solid #EEE;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+}
+
 /*========== Font stuff ==========*/
 body, p {
   font-size: 14px;
@@ -418,4 +429,42 @@ div.slideshow {
 }
 .slideshow_nav .slideshow_next {
   margin-right: 10px;
+}
+
+
+/*========== Tour availability ==========*/
+#availability_datepicker{
+  position:relative;
+}
+
+#availability_datepicker .ui-state-active{
+  border-color:#ccc;
+  background: #F6F6F6 url(/assets/jquery-ui/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
+  font-weight: bold;
+  color: #1C94C4;
+}
+#availability_datepicker .ui-datepicker-available a{
+  background:#468847;
+  color:#fff;
+}
+#availability_datepicker .ui-datepicker-booked a{
+  background:#B94A48;
+  color:#fff;
+}
+#availability_datepicker .ui-datepicker-unavailable a{
+  background:#468847;
+  background:#F89406;
+  background:#7CAC7D;
+  
+  color:#fff;
+}
+#availability_popover .close{
+  position: absolute;
+  top: 14px;
+  right: 20px;
+}
+
+#availability_popover .popover-footer{
+  height: 28px;
+  margin-top: -15px;
 }

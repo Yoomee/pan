@@ -5,27 +5,20 @@ class TourDate < ActiveRecord::Base
   belongs_to :tour
   belongs_to :venue
   
-  validates :date, :venue, :presence => true
-  validates :date_s, :date => true, :presence => true
+  date_accessor :date
+  
+  validates :date, :date_s, :presence => true
   validates :tour, :presence => true, :on => :update
   
   scope :past, where("date < ?", Date.today)
   scope :future, where("date >= ?", Date.today)
   
-  def date_s
-    @date_s || date.try(:strftime, "%d/%m/%Y") || ''
+  def to_hash
+    {
+      :booked => booked,
+      :venue_id => venue.try(:try)
+    }
   end
   
-  def date_s=(value)
-    if value.blank?
-      self.date = nil
-    else
-      begin
-        self.date = Date.strptime(value, "%d/%m/%Y")
-      rescue ArgumentError
-      end
-      @date_s = value
-    end
-  end
   
 end

@@ -1,10 +1,11 @@
 -content_for(:head) do
   :javascript
     $(document).ready(function() {
-      $('#dates').bind('insertion-callback', function() {
+      $('#booked_dates').bind('insertion-callback', function() {
         YmCore.Forms.initDatepickers();
       });
     });
+
 =form.semantic_fields_for :dates do |date_form|
   =render("tours/date_fields", :f => date_form)
-=link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#dates .add_fields'
+=link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#booked_dates .add_fields'

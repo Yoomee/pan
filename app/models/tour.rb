@@ -7,6 +7,8 @@ class Tour < ActiveRecord::Base
   belongs_to :performer
   has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
   
+  date_accessors :start_on, :end_on
+  
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :performer, :presence => true

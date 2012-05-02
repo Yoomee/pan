@@ -1,4 +1,17 @@
 =semantic_form_for(tour, :html => {:multipart => true}) do |form|
-  =tabs('details', ['requirements', 'Technical requirements'], ['suitability', 'Venue suitability'], 'dates', :form => form)
+  
+  .tabbable
+    %ul.nav.nav-tabs
+      %li.active=link_to("Details",'#details', :'data-toggle' => 'tab')
+      %li=link_to("Technical requirements",'#requirements', :'data-toggle' => 'tab')
+      %li=link_to("Venue suitability",'#suitability', :'data-toggle' => 'tab')
+      %li=link_to("Availability",'#availability', :'data-toggle' => 'tab')
+      %li=link_to("Bookings",'#bookings')
+    .tab-content
+      #details.tab-pane.active=render('tours/tabs/details', :form => form)
+      #requirements.tab-pane=render('tours/tabs/requirements', :form => form)
+      #suitability.tab-pane=render('tours/tabs/suitability', :form => form)
+      #availability.tab-pane=render('tours/tabs/availability', :form => form)
+  
   =form.buttons do
     =form.commit_button "Save"
