@@ -7,7 +7,8 @@
  *= require bootstrap
  *= require formtastic-bootstrap
  *= require font-awesome
- *= require ym_core 
+ *= require ym_core
+ *= require jquery-ui-bootstrap 
  *= require ym_cms
  *= require ym_tags 
  *= require ym_posts
@@ -433,30 +434,46 @@ div.slideshow {
 
 
 /*========== Tour availability ==========*/
+.booking-visible {display:none}
 #availability_datepicker{
   position:relative;
 }
-
 #availability_datepicker .ui-state-active{
-  border-color:#ccc;
-  background: #F6F6F6 url(/assets/jquery-ui/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
-  font-weight: bold;
-  color: #1C94C4;
+  background-color:#fff;
+  color:gray;
 }
+#availability_datepicker .ui-state-active,
+#availability_datepicker .ui-state-default:hover,
+#availability_datepicker .ui-state-highlight{
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+#availability_key{
+  width:400px;
+  font-size:13px;
+  margin-bottom:15px;
+}
+#availability_key td {
+  border-top:2px solid white;
+}
+#availability_key .key-color{
+  width:18px;
+}
+#availability_key .key-color-available,
 #availability_datepicker .ui-datepicker-available a{
   background:#468847;
   color:#fff;
 }
+#availability_key .key-color-booked,
 #availability_datepicker .ui-datepicker-booked a{
   background:#B94A48;
   color:#fff;
 }
+#availability_key .key-color-unavailable,
 #availability_datepicker .ui-datepicker-unavailable a{
-  background:#468847;
-  background:#F89406;
-  background:#7CAC7D;
-  
-  color:#fff;
+  background:#B6D0B6;
+  color:#666;  
 }
 #availability_popover .close{
   position: absolute;

@@ -1,5 +1,5 @@
 TourForm = 
-  bookingMode:true
+  bookingMode:false
   init: ->
     $('#availability_datepicker').datepicker({
       hideIfNoPrevNext: true,
@@ -7,6 +7,8 @@ TourForm =
       beforeShowDay: TourForm.beforeShowDay
       dateFormat: 'dd/mm/yy'
     })
+    TourForm.startDate = TourForm.getStartDate()
+    TourForm.endDate = TourForm.getEndDate()
     $('a[href="#availability"]').on 'shown', (e)=>
       TourForm.bookingMode = true
       TourForm.toggleMode()
@@ -14,13 +16,15 @@ TourForm =
       $('a[href="#availability"]').click()
       TourForm.bookingMode = false
       TourForm.toggleMode()
-      
-    if TourForm.startDate() && TourForm.endDate()
+    if TourForm.startDate && TourForm.endDate
       TourForm.updateAvailability()
     $('#tour_start_on_s,#tour_end_on_s').change =>
-      setTimeout "TourForm.updateAvailability(true)", 10
-    $('#popover_external_venue_name').keydown =>
+      setTimeout "TourForm.updateAvailability(true)", 200
+    $('#popover_external_venue_name').keydown (e) =>
       $('#popover_venue_id').val(null)
+      if e.keyCode == 13
+        e.preventDefault()
+        TourForm.savePopover()
     $('#popover_venue_id').change =>
       $('#popover_external_venue_name').val(null)
     $('#popover_save').click (e) =>
@@ -35,28 +39,34 @@ TourForm =
   toggleMode: ->
     if TourForm.bookingMode
       TourForm.bookingMode = false
-      $('#availability_start_end').show()
+      $('.booking-visible').hide()
+      $('.availability-visible').show()
     else
       TourForm.bookingMode = true
       $('ul.nav-tabs li.active').removeClass('active')
       $('ul.nav-tabs li:has("a[href=\'#bookings\']")').addClass('active')
-      $('#availability_start_end').hide()
-  startDate: ->
+      $('.availability-visible').hide()
+      $('.booking-visible').show()
+  getStartDate: ->
     $.datepicker.parseDate('dd/mm/yy', $('#tour_start_on_s').val());
-  endDate: ->
+  getEndDate: ->
     $.datepicker.parseDate('dd/mm/yy', $('#tour_end_on_s').val());
+  setStartDate: (date)->
+    $('#tour_start_on_s').val($.datepicker.formatDate('dd/mm/yy', date));
+  setEndDate: (date)->
+    $('#tour_end_on_s').val($.datepicker.formatDate('dd/mm/yy', date));
   availableMonths: ->
-    startMonth = (TourForm.startDate().getYear() * 12) + TourForm.startDate().getMonth()
-    endMonth = (TourForm.endDate().getYear() * 12) + TourForm.endDate().getMonth()
+    startMonth = (TourForm.startDate.getYear() * 12) + TourForm.startDate.getMonth()
+    endMonth = (TourForm.endDate.getYear() * 12) + TourForm.endDate.getMonth()
     months = endMonth - startMonth + 1
-    if months > 3
-      [months / 3, 3]
+    if months > 2
+      [months / 2, 2]
     else
       months
   dateToString: (date) ->
     "#{('0' + date.getDate()).slice(-2)}/#{('0' + (date.getMonth() + 1)).slice(-2)}/#{date.getFullYear()}"
   beforeShowDay: (date) ->
-    selectable = date >= TourForm.startDate() && date <= TourForm.endDate()
+    selectable = date >= TourForm.startDate && date <= TourForm.endDate
     dateString = TourForm.dateToString(date)
     tourDate= TourForm.dates[dateString]
     if tourDate?
@@ -65,7 +75,7 @@ TourForm =
       else
         dateClass= "ui-datepicker-available"
     else
-      dateClass= ''#'ui-datepicker-unavailable'
+      dateClass= 'ui-datepicker-unavailable'
     [selectable, dateClass]
   onSelect: (dateText, inst) ->
     TourForm.selectedDateText = dateText
@@ -101,7 +111,6 @@ TourForm =
     $('#availability_popover').hide()
     $('#availability_datepicker').datepicker('refresh');
   showPopover: (dateText) ->
-    console.log dateText
     $('#availability_popover').hide()
     tourDate = TourForm.dates[dateText]
     if tourDate.booked
@@ -145,14 +154,55 @@ TourForm =
       delete TourForm.dates[dateText]
       $("#availability .nested-fields:has('input[value=\"#{dateText}\"]') a.remove_fields").click()      
   updateAvailability: (addDates)->
-    if addDates?
-      `for (var date in TourForm.dates)TourForm.removeDate(date,false);`
-      date = TourForm.startDate()
-      endDate = TourForm.endDate()
-      while date <= endDate
-        TourForm.addDate(TourForm.dateToString(date))
-        date = new Date(date.getTime() + 86400000)
-    $('#availability_datepicker').datepicker( "option", "minDate", TourForm.startDate());
-    $('#availability_datepicker').datepicker( "option", "maxDate", TourForm.endDate());
-    $('#availability_datepicker').datepicker( "option", "numberOfMonths", TourForm.availableMonths());
+    newStartDate = TourForm.getStartDate()
+    newEndDate = TourForm.getEndDate()
+    if newStartDate > newEndDate 
+      alert "ERROR\nThe start date must be before the end date"
+      TourForm.setStartDate(TourForm.startDate)
+      TourForm.setEndDate(TourForm.endDate)
+      return  
+    datesToAdd = []
+    datesToRemove = []
+    if newStartDate - TourForm.startDate != 0
+      if newStartDate > TourForm.startDate
+        date = TourForm.startDate
+        while date < newStartDate
+          datesToRemove.push(date)
+          date = new Date(date.getTime() + 86400000)
+      else
+        date = TourForm.startDate
+        while date > newStartDate
+          date = new Date(date.getTime() - 86400000)
+          datesToAdd.push(date)
+    else if newEndDate - TourForm.endDate != 0
+      if newEndDate > TourForm.endDate
+        date = TourForm.endDate
+        while date < newEndDate
+          date = new Date(date.getTime() + 86400000)
+          datesToAdd.push(date)
+      else
+        date = TourForm.endDate
+        while date > newEndDate
+          datesToRemove.push(date)
+          date = new Date(date.getTime() - 86400000)
+    
+    error = false
+    $.each datesToRemove, (index, value) =>
+      tourDate = TourForm.dates[TourForm.dateToString(value)]
+      error = true if tourDate? && tourDate.booked
+    
+    if error  
+      alert "ERROR\nThere are existing tour bookings outside this date range."
+      TourForm.setStartDate(TourForm.startDate)
+      TourForm.setEndDate(TourForm.endDate)
+    else
+      $.each datesToAdd, (index,value) =>
+        TourForm.addDate(TourForm.dateToString(value))
+      $.each datesToRemove, (index,value) =>
+        TourForm.removeDate(TourForm.dateToString(value))
+      TourForm.startDate = newStartDate
+      TourForm.endDate = newEndDate
+      $('#availability_datepicker').datepicker( "option", "minDate", TourForm.startDate);
+      $('#availability_datepicker').datepicker( "option", "maxDate", TourForm.endDate);
+      $('#availability_datepicker').datepicker( "option", "numberOfMonths", TourForm.availableMonths());
 window.TourForm = TourForm  

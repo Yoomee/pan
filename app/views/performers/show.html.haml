@@ -43,11 +43,14 @@
         .span3.mt-2
           %h4 Upcoming shows
           %ul.unstyled
-            -future_tour.dates.future.each do |tour_date|
+            -future_tour.dates.where(:booked => true).future.each do |tour_date|
               %li
                 =tour_date.date.to_s(:month_day_year_or_not)
-                \-
-                =link_to_self(tour_date.venue)
+                -if tour_date.venue
+                  \-
+                  =link_to_self(tour_date.venue)
+                -elsif tour_date.external_venue_name.present?
+                  ="- #{tour_date.external_venue_name}"
           =link_to("View all future shows", performer_tours_path(performer, :anchor => 'future'))
       -if !performer.tours.past.empty?
         .span3.mt-2
@@ -116,7 +119,7 @@
           .span9
             %h4 Proposed tour dates
             .row.mt-1
-              -performer.tour_dates.each do |tour_date|
+              -performer.tour_dates.future.each do |tour_date|
                 .span1.mb-1
                   =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
                   %span.small-info-text=tour_date.date.to_s(:date)

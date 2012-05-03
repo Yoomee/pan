@@ -45,8 +45,11 @@
             -tour.dates.future.each do |tour_date|
               %li
                 =tour_date.date.to_s(:month_day_year_or_not)
-                \-
-                =link_to_self(tour_date.venue)
+                -if tour_date.venue
+                  \-
+                  =link_to_self(tour_date.venue)
+                -elsif tour_date.external_venue_name.present?
+                  ="- #{tour_date.external_venue_name}"
       -if !tour.dates.past.empty?
         .span3.mt-2
           %h4 Past shows
@@ -117,5 +120,4 @@
       =back_link
       -if can?(:edit,tour)
         =link_to("Edit tour", edit_tour_path(tour))
-        =link_to("Edit tour dates", edit_tour_path(tour, :anchor => "dates"))
       =link_if_can("Delete tour", [:destroy, tour], :confirm => "Are you sure?")

@@ -18,9 +18,12 @@ class Tour < ActiveRecord::Base
   
   delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :to => :performer
   
-  scope :past, joins(:dates).where("tour_dates.date < ?", Date.today).group("tours.id")
-  scope :future, joins(:dates).where("tour_dates.date >= ?", Date.today).group("tours.id")
+  scope :past, joins(:dates).where("booked = 1 && tour_dates.date < ?", Date.today).group("tours.id")
+  scope :future, joins(:dates).where("booked = 1 && tour_dates.date >= ?", Date.today).group("tours.id")
   
+  def booked_dates
+    dates.where(:booked => true)
+  end
   
   def sibling_tours
     performer.tours.without(self)

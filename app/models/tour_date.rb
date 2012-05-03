@@ -10,8 +10,8 @@ class TourDate < ActiveRecord::Base
   validates :date, :date_s, :presence => true
   validates :tour, :presence => true, :on => :update
   
-  scope :past, where("date < ?", Date.today)
-  scope :future, where("date >= ?", Date.today)
+  scope :past, where(:booked => true).where("date < ?", Date.today)
+  scope :future, where(:booked => true).where("date >= ?", Date.today)
   
   def to_hash
     {
