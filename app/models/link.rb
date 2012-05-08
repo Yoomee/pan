@@ -1,7 +1,7 @@
 class Link < ActiveRecord::Base
   belongs_to :attachable, :polymorphic => true
   validates :url, :presence => true, :url => true
-  before_save :resolve_host_and_title  
+  before_save :prepend_http_resolve_host_and_title  
   
   class << self
     def favicon(url)
@@ -18,8 +18,9 @@ class Link < ActiveRecord::Base
   end
   
   private
-  def resolve_host_and_title
-    self.host = URI.parse(url).host.sub(/^www\./,'')
+  def prepend_http_resolve_host_and_title
+    self.url = "http://" + url unless url.match(/^.*:\/\//)
+    self.host = URI.parse(url).host.to_s.sub(/^www\./,'')
     self.title = host.split(/\./).first.humanize if title.blank?
   end
 end
