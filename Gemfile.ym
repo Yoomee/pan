@@ -1,11 +1,11 @@
 ### Yoomee gems
 ym_gem 'core'
+ym_gem 'activity'
 ym_gem 'videos'
 ym_gem 'cms'
 ym_gem 'permalinks'
 ym_gem 'users'
 ym_gem 'tags'
 ym_gem 'posts'
-ym_gem 'videos'
 ym_gem 'docs'
 ym_gem 'search'
