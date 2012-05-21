@@ -45,7 +45,8 @@ class Venue < ActiveRecord::Base
   end
   
   def infowindow_image_url
-    (image || default_image).thumb("80x80#").url
+    img = (image || default_image)
+    img.nil? ? '' : img.thumb("80x80#").url
   end
   
   def lat_lng_or_default
