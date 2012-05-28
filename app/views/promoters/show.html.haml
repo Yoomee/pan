@@ -44,8 +44,11 @@
                 =link_to(link, link.url, :target => '_blank')
 
     
-  .span9
+  .span6
     %h1.mb-1=title(promoter)
+  .span3
+    =link_to('&uarr; All promoters'.html_safe, promoters_path, :class => "back-to-all")
+  .span9
     -if promoter.slideshow    
       %ul.nav.nav-tabs
         %li.active

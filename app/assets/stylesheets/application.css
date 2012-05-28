@@ -81,6 +81,12 @@
   border-radius: 0 0 3px 3px;
 }
 
+a.back-to-all{
+  color:#999;
+  margin-top:8px;
+  float:right;
+}
+
 /*========== Font stuff ==========*/
 body, p {
   font-size: 14px;

@@ -68,10 +68,13 @@
                 =image_tag(link.favicon)
                 =link_to(link, link.url, :target => '_blank')
 
-  .span9
+  .span6
     %h1
       =venue
       %small=link_to_self(venue.promoter)
+  .span3
+    =link_to('&uarr; All venues'.html_safe, venues_path, :class => "back-to-all")
+  .span9
     %ul.nav.nav-tabs
       %li.active
         =link_to("Profile", "#profile", :data => {:toggle => "tab"})

@@ -59,8 +59,11 @@
         
 
         
-  .span9
+  .span6
     %h1.mb-1=title(performer)
+  .span3
+    =link_to('&uarr; All performers'.html_safe, performers_path, :class => "back-to-all")
+  .span9
     -if performer.slideshow    
       %ul.nav.nav-tabs
         %li.active
