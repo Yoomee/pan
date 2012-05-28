@@ -2,8 +2,9 @@
   =form.input :promoter_id, :as => :hidden
   =form.input :name
   =form.input :region, :as => :select, :collection => Pan::REGIONS
+  =form.input :summary, :label => "Summary - <em>Maximum 255 characters</em>".html_safe, :as => :text, :input_html => {:rows => 3, :maxlength => 255, :class => "span8"}
   =form.input :description, :input_html => {:rows => 8, :class => "span8"}
-  =form.input :notes, :label => "Notes <em>(Only visible to Administrators)</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
+  =form.input :notes, :label => "Notes - <em>Only visible to Administrators</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
   =form.input :retained_image, :as => :hidden
   -if venue.image && venue.errors[:image].empty?
     =image_for(venue, "100x")
