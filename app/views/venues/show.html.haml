@@ -74,6 +74,7 @@
       %small=link_to_self(venue.promoter)
   .span3
     =link_to('&uarr; All venues'.html_safe, venues_path, :class => "back-to-all")
+  .span9=render('organisations/notes', :organisation => venue)
   .span9
     %ul.nav.nav-tabs
       %li.active
