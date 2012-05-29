@@ -65,6 +65,11 @@
 .tab-content {
   overflow:visible;
 }
+.tabs-left .tab-content,
+.tabs-right .tab-content {
+  overflow:auto;
+}
+
 #map-canvas img,
 .map-canvas img{
   max-width:none;

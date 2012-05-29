@@ -4,7 +4,7 @@ class Resource < ActiveRecord::Base
   has_many :posts, :as => :target
     
   acts_as_taggable_on :resource_tags
-  has_pdf
+  has_doc
   
   validates :name, :file, :presence => true
   
