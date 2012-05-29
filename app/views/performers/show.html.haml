@@ -30,7 +30,6 @@
               %li
                 =image_tag(link.favicon)
                 =link_to(link, link.url, :target => '_blank')
-
       -if performer.contact1_details.present?
         .span3.mt-2
           %h4 Primary contact
@@ -127,10 +126,7 @@
                 .span1.mb-1
                   =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
                   %span.small-info-text=tour_date.date.to_s(:date)
-        -if performer.facebook_url.present?
-          .row.mt-2
-            .span9
-              %iframe{:src => "//www.facebook.com/plugins/likebox.php?#{{:href => performer.facebook_url, :width => "100%", :height => "300px", :colorscheme => "light", :show_faces => false, :stream => true, :header => false}.to_query}", :scrolling => "no", :allowTransparency => "true", :style => "border:none; overflow:hidden; width:100%; height:300px;"}
+        =render("organisations/facebook_twitter", :organisation => performer)
     
         -if posts.present? || can?(:create, Post)
           .row.mt-2
