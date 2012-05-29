@@ -37,6 +37,7 @@
         %ul.unstyled
           -user.skills_needed_list.each do |tag_name|
             %li=tag_name.titleize.humanize
+    =render("organisations/facebook_twitter", :organisation => user)
     .row.mt-2
       .span9
         %h4.mb-1="#{user.first_name}'s posts"

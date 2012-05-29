@@ -96,6 +96,7 @@
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
                       =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")        
+        =render("organisations/facebook_twitter", :organisation => venue)
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9

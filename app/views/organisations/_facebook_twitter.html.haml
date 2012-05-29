@@ -1,9 +1,9 @@
--if organisation.facebook_url.present? || organisation.twitter_url.present?
+-if organisation.twitter_url.present? || (organisation.facebook_url.present? && !organisation.is_a?(User))
   .row.mt-2
-    -if organisation.facebook_url.present? && organisation.twitter_url.present?
-      .span6=facebook_likebox(organisation.facebook_url)
-      .span3=twitter_widget(organisation.twitter_username, :count => 5, :height => 208)
+    -if organisation.is_a?(User) || organisation.facebook_url.blank?
+      .span9=twitter_widget(organisation.twitter_username, :count => 5, :height => 208)
     -elsif organisation.twitter_url.blank?
       .span9=facebook_likebox(organisation.facebook_url)
     -else
-      .span9=twitter_widget(organisation.twitter_username, :count => 5, :height => 208)
+      .span6=facebook_likebox(organisation.facebook_url)
+      .span3=twitter_widget(organisation.twitter_username, :count => 5, :height => 208)
