@@ -1,0 +1,13 @@
+-if @user.organisation_type == "performer"
+  %h2 Tell us about your performing arts company.
+  =form.semantic_fields_for :performer do |performer|
+    =performer.input :name
+-else
+  %h2 Which organisation do you belong to?
+  =form.semantic_fields_for :promoter do |promoter|
+    =promoter.input :name
+    =promoter.input :region, :as => :select, :collection => Pan::REGIONS
+
+=form.buttons do
+  =form.commit_button "Back", :button_html => {:name => "back_button", :class => 'btn pull-left'}
+  =form.commit_button "Continue", :button_html => {:class => 'btn-primary pull-right'}
