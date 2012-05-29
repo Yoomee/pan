@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
     has role, created_at, updated_at
   end
   
+  belongs_to :performer
+  accepts_nested_attributes_for :performer
   belongs_to :promoter
+  accepts_nested_attributes_for :promoter
+  
   has_many :venues, :dependent => :nullify
 
   has_many :links, :as => :attachable, :dependent => :destroy
