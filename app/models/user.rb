@@ -9,18 +9,18 @@ class User < ActiveRecord::Base
     has role, created_at, updated_at
   end
   
-  belongs_to :performer
-  accepts_nested_attributes_for :performer
-  belongs_to :promoter
-  accepts_nested_attributes_for :promoter
+  belongs_to :performer, :autosave => true
+  belongs_to :promoter, :autosave => true
   
   has_many :venues, :dependent => :nullify
 
   has_many :links, :as => :attachable, :dependent => :destroy
   accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
   
-  after_validation :build_organisation, :on => :create
+  before_save :create_organisation, :on => :create
   attr_accessor :organisation_type, :organisation_name, :organisation_region
+  validates_presence_of :organisation_name, :if => lambda{|u| u.current_step == "organisation_details"}
+  validates_presence_of :organisation_region, :if => lambda{|u| u.organisation_type == 'promoter' && u.current_step == "organisation_details"}
   
   acts_as_taggable_on :skills
   acts_as_taggable_on :skills_offered
@@ -51,12 +51,12 @@ class User < ActiveRecord::Base
   end
   
   private
-  def build_organisation
+  def create_organisation
     if organisation_type.present?
       if organisation_type == 'promoter'
-        self.promoter ||= Promoter.new
+        self.create_promoter(:name => organisation_name, :region => organisation_region)
       else
-        self.performer ||= Performer.new
+        self.create_performer(:name => organisation_name)
       end
     end
   end

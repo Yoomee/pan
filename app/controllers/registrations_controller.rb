@@ -13,6 +13,8 @@ class RegistrationsController < ApplicationController
     elsif params[:organisation_type_promoter]
       params[:user][:organisation_type] = "promoter"
     end
+    # Reject empty params to make going back easier
+    params[:user].reject!{|k,v| v.blank?}
     session[:user_params].deep_merge!(params[:user]) if params[:user]
     @user = User.new(session[:user_params])
     @user.current_step = session[:user_step]
@@ -30,9 +32,13 @@ class RegistrationsController < ApplicationController
       render "new"
     else
       session[:user_step] = session[:user_params] = nil
-      flash[:notice] = "User saved"
+      flash[:notice] = "Welcome to Tourbook"
       sign_in(@user)
-      redirect_to @user
+      if @user.performer
+        redirect_to @user.performer
+      else
+        redirect_to @user.promoter
+      end
     end
   end
   
