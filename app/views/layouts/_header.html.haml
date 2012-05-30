@@ -57,7 +57,7 @@
                   %icon.icon-signout
                   =t(:logout)
         -else
-          =link_to "Register", new_user_path, :class => "header_link btn"
+          =link_to "Register", new_registration_path, :class => "header_link btn"
           =link_to(sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary") do
             %icon.icon-signin
             =t(:login)
