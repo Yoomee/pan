@@ -96,7 +96,7 @@ TourForm =
   savePopover: ->
     dateText= TourForm.selectedDateText
     dateFields = $("#availability .nested-fields:has('input[value=\"#{dateText}\"]')")
-    dateFields.find('input[name$="[booked]"]').attr('checked',true)    
+    dateFields.find('input[name$="[booked]"]').val(1)    
     TourForm.dates[dateText].booked = true
     if $('#popover_venue_id').val()? && $('#popover_venue_id').val() != ""
       dateFields.find('input[name$="[venue_id]"]').val($('#popover_venue_id').val())
@@ -133,7 +133,7 @@ TourForm =
       dateText = TourForm.selectedDateText
       if dateText?
         dateFields = $("#availability .nested-fields:has('input[value=\"#{dateText}\"]')")
-        dateFields.find('input[name$="[booked]"]').attr('checked',false)
+        dateFields.find('input[name$="[booked]"]').val(0)
         dateFields.find('input[name$="[venue_id]"]').val(null)
         dateFields.find('input[name$="[external_venue_name]"]').val(null)
         TourForm.dates[dateText].booked = false
