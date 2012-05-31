@@ -13,6 +13,9 @@ class ToursController < ApplicationController
     end
   end
   
+  def bookings
+  end
+  
   def index
   end
   
@@ -21,7 +24,7 @@ class ToursController < ApplicationController
       flash_notice(tour)
       redirect_to tour
     else
-      render :action => "edit"
+      render :action => request.referrer =~ /\/bookings/ ? 'bookings' : 'edit'
     end
   end
   

@@ -9,13 +9,6 @@ TourForm =
     })
     TourForm.startDate = TourForm.getStartDate()
     TourForm.endDate = TourForm.getEndDate()
-    $('a[href="#availability"]').on 'shown', (e)=>
-      TourForm.bookingMode = true
-      TourForm.toggleMode()
-    $('a[href="#bookings"]').click (e)=>
-      $('a[href="#availability"]').click()
-      TourForm.bookingMode = false
-      TourForm.toggleMode()
     if TourForm.startDate && TourForm.endDate
       TourForm.updateAvailability()
     $('#tour_start_on_s,#tour_end_on_s').change =>
@@ -36,17 +29,6 @@ TourForm =
     $('#popover_close').click (e) =>
       e.preventDefault()
       TourForm.closePopover()
-  toggleMode: ->
-    if TourForm.bookingMode
-      TourForm.bookingMode = false
-      $('.booking-visible').hide()
-      $('.availability-visible').show()
-    else
-      TourForm.bookingMode = true
-      $('ul.nav-tabs li.active').removeClass('active')
-      $('ul.nav-tabs li:has("a[href=\'#bookings\']")').addClass('active')
-      $('.availability-visible').hide()
-      $('.booking-visible').show()
   getStartDate: ->
     $.datepicker.parseDate('dd/mm/yy', $('#tour_start_on_s').val());
   getEndDate: ->
@@ -155,14 +137,24 @@ TourForm =
       $("#availability .nested-fields:has('input[value=\"#{dateText}\"]') a.remove_fields").click()      
   updateAvailability: (addDates)->
     newStartDate = TourForm.getStartDate()
-    newEndDate = TourForm.getEndDate()
-    if newStartDate > newEndDate 
+    newEndDate   = TourForm.getEndDate()
+    
+    oldStartDate = TourForm.startDate
+    oldEndDate   = TourForm.endDate
+    
+    TourForm.startDate ||= newStartDate
+    TourForm.endDate ||= newEndDate
+    
+    return unless TourForm.startDate? && TourForm.endDate?
+
+    if newStartDate > newEndDate
       alert "ERROR\nThe start date must be before the end date"
       TourForm.setStartDate(TourForm.startDate)
       TourForm.setEndDate(TourForm.endDate)
       return  
     datesToAdd = []
     datesToRemove = []
+
     if newStartDate - TourForm.startDate != 0
       if newStartDate > TourForm.startDate
         date = TourForm.startDate
@@ -185,6 +177,12 @@ TourForm =
         while date > newEndDate
           datesToRemove.push(date)
           date = new Date(date.getTime() - 86400000)
+    else if !oldStartDate? || !oldEndDate?
+      #First time
+      date = TourForm.startDate
+      while date <= TourForm.endDate
+        datesToAdd.push(date)
+        date = new Date(date.getTime() + 86400000)
     
     error = false
     $.each datesToRemove, (index, value) =>

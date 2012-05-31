@@ -10,7 +10,11 @@ Pan::Application.routes.draw do
     resources :tours, :only => [:new, :index]
   end
   
-  resources :tours, :except => [:new]
+  resources :tours, :except => [:new] do
+    member do
+      get 'bookings', :action => 'bookings'
+    end
+  end
   
   resources :promoters do
     resources :users, :only => [:new, :create]
