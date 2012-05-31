@@ -29,7 +29,7 @@
       .homepage-box-content
         %p If you are performing arts company wanting to promote your events in the Highlands and Islands of Scotland then sign up here.
       .homepage-box-links
-        =link_to("Sign up for FREE", new_user_path)
+        =link_to_slug("Sign up for FREE", 'performer-signup')
   .span4
     .homepage-box
       %h2.homepage-box-title
@@ -37,7 +37,7 @@
       .homepage-box-content
         %p If you are a member of PAN then you can access the community tools here.
       .homepage-box-links
-        =link_to("Register", new_user_path)
+        =link_to_slug("Register", 'promoter-signup')
 .row.mb-2.fade_in
   .span4
     .homepage-box.homepage-box-short
