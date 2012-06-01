@@ -1,0 +1,15 @@
+.nested-fields
+  =f.inputs :class => "form-inline" do
+    =f.input :name, :as => :string, :label => "Name", :wrapper_html => {:class => "pull-left mr-1"}
+    =f.input :retained_file, :as => :hidden
+    -if f.object.file
+      .pull-left.mr-1.file.control-group
+        %label
+          File
+          %abbr{:title => "required"}*
+        .controls
+          %em=f.object.file.name
+    -else
+      =f.input :file, :as => :file, :label => "File", :wrapper_html => {:class => "pull-left mr-1"}
+    =link_to_remove_association "x Remove resource", f, :class => "pull-left"
+  %hr

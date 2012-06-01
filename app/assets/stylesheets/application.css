@@ -338,7 +338,8 @@ div.resource .tag-list {
 }
 
 /*========== User ==========*/
-#links .nested-fields .remove_fields {
+#links .nested-fields .remove_fields,
+#resources .nested-fields .remove_fields {
   margin-top:27px;
 }
 
@@ -498,4 +499,9 @@ height: 234px;
 #availability_popover .popover-footer{
   height: 28px;
   margin-top: -15px;
+}
+
+/*========== Resources tab ==========*/
+#resources .nested-fields .file{
+  width:200px;
 }

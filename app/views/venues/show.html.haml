@@ -84,6 +84,10 @@
       -if venue.slideshow
         %li
           =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
+      -if venue.resources.present?
+        %li
+          =link_to("Downloads", "#resources", :data => {:toggle => "tab"})
+      
     .tab-content
       #profile.tab-pane.fade.in.active
         =simple_format(venue.description)
@@ -119,7 +123,17 @@
         #gallery.tab-pane
           .span9
             =render("organisations/slideshow", :slideshow => venue.slideshow)
-
+      -if venue.resources.present?
+        #resources.tab-pane.fade
+          .row.mt-2
+            .span9
+              %table.table.table-striped
+                %tbody
+                  -venue.resources.each do |resource|
+                    %tr
+                      %td
+                        %i{:class => "icon-doc-#{resource.file_ext}"}
+                        =link_if_can(resource.name, [:download, resource])
 .row.mt-2
   .span9
     =options_panel do
