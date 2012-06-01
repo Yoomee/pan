@@ -83,7 +83,7 @@
               %h4 Genres
               %ul.unstyled
                 -performer.genre_list.each do |genre|
-                  %li=genre.titleize.humanize
+                  %li=link_to(genre.titleize.humanize, tag_performers_path('genres',genre))
           -if performer.art_form_list.present?
             .span2.mb-1
               %h4 Art forms

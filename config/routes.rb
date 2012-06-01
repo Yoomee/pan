@@ -5,7 +5,8 @@ Pan::Application.routes.draw do
   resources :performers do
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
-      get 'search' 
+      get 'search'
+      get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
     resources :tours, :only => [:new, :index]
   end

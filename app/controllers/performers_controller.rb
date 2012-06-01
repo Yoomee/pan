@@ -38,7 +38,11 @@ class PerformersController < ApplicationController
   end
   
   def index
-    @performers = Performer.order("created_at DESC").limit(10)
+    if (@tag_context = params[:tag_context]).present? && (@tag = params[:tag]).present?
+      @performers = Performer.tagged_with(@tag, :on => @tag_context)
+    else
+      @performers = Performer.order("created_at DESC").limit(10)
+    end
     render :template => 'organisations/directory'
   end
   
