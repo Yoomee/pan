@@ -9,6 +9,8 @@ class Tour < ActiveRecord::Base
   
   date_accessors :start_on, :end_on
   
+  acts_as_taggable_on :genres
+  
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :performer, :presence => true

@@ -73,6 +73,13 @@
       =title(tour)
       %small=link_to_self(tour.performer)
     =simple_format(tour.description)
+    -if tour.genre_list.present?
+      .row.mt-2
+        .span5.mb-1
+          %h4 Genres
+          %ul.unstyled
+            -tour.genre_list.each do |genre|
+              %li=genre.titleize.humanize
     .row.mt-2
       .span5
         %h4 Technical requirements

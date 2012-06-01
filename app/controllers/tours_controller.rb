@@ -19,6 +19,11 @@ class ToursController < ApplicationController
   def index
   end
   
+  def new
+    @performer = Performer.find(params[:performer_id])
+    @tour = @performer.tours.build(:genre_list => @performer.genre_list)
+  end
+  
   def update
     if tour.save
       flash_notice(tour)
