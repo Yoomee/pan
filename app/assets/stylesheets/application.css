@@ -446,8 +446,11 @@ div.slideshow {
 
 /*========== Tour availability ==========*/
 .booking-visible {display:none}
-#availability_datepicker{
-  position:relative;
+#availability_datepicker .ui-datepicker{
+  padding:0;
+}
+#availability_datepicker .ui-datepicker-group {
+height: 234px;
 }
 #availability_datepicker .ui-state-active{
   background-color:#fff;

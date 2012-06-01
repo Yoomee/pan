@@ -1,14 +1,14 @@
 -content_for(:head) do
   :javascript
     $(document).ready(function() {
-      TourForm.dates = #{{}.tap{|hash| tour.dates.each{|date| hash[date.date_s] = date}}.to_json};
-      TourForm.bookingMode = true
-      TourForm.init();
+      VenueBookingForm.dates = #{{}.tap{|hash| venue.booked_dates.each{|date| hash[date.date_s] = date}}.to_json};
+      VenueBookingForm.init();
     });
 
 %h1
-  =title("Manage tour bookings")
-  %small=tour.name_with_performer
+  =title("Manage venue bookings")
+  %small=venue
+
 %legend.booking-visible Click a date to add or edit a booking
 #availability_datepicker.pull-left.mt-2.mr-2
   #availability_popover.popover.right
@@ -19,17 +19,15 @@
         #popover_close.close &times;
       .popover-content
         .form
-          .control-group
-            %label Venue
+          .control-group#tour_select_controls
+            %label Tour
             .controls
-              =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(Venue.all, 'id', 'name')}".html_safe
-          .control-group
-            %label Or a venue that isn't on Tourbook
-            .controls
-              =text_field_tag 'popover_venue_name', '', :id => 'popover_external_venue_name'
-              
+              =select_tag 'popover_tour_id', "<option value=''>Select a tour</option>#{options_from_collection_for_select(Tour.all, 'id', 'name_with_performer')}".html_safe
+          .control-group#unavailable_controls
+            %label This date is currently unavailable.
       .popover-footer
         =link_to('Delete booking','#', :class => 'btn btn-danger pull-left', :id => 'popover_destroy')
+        =link_to('Make unavailable','#', :class => 'btn pull-left btn-danger', :id => 'popover_unavailable')
         =link_to('Save booking','#', :class => 'btn btn-primary pull-right', :id => 'popover_save')
 %table.table.table-condensed#availability_key.pull-left.mt-2
   %thead
@@ -56,15 +54,13 @@
           \- edit tour to change availability         
 
 .clearfix
-=semantic_form_for(tour) do |form|
+=semantic_form_for(venue) do |form|
   -# Needs to have ID of availability for JS to work
   #availability.hide
     =form.inputs do
-      =form.input :start_on_s, :as => :hidden
-      =form.input :end_on_s, :as => :hidden
-      =form.semantic_fields_for :dates do |date_form|
-        =render("tours/date_fields", :f => date_form)
-      =link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"  
+      =form.semantic_fields_for :booked_dates do |date_form|
+        =render("venues/booked_date_fields", :f => date_form)
+    =link_to_add_association "+ Add a date", form, :booked_dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"  
   =form.buttons do
     =form.commit_button "Save"
 

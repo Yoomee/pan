@@ -41,6 +41,7 @@ TourForm =
     startMonth = (TourForm.startDate.getYear() * 12) + TourForm.startDate.getMonth()
     endMonth = (TourForm.endDate.getYear() * 12) + TourForm.endDate.getMonth()
     months = endMonth - startMonth + 1
+    months = 2 if months < 2
     if months > 2
       [months / 2, 2]
     else

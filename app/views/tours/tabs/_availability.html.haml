@@ -5,11 +5,11 @@
       TourForm.init();
     });
 
-=form.inputs 'Set the start and end dates of the tour', :class => 'availability-visible' do
+=form.inputs 'Set the start and end dates of the tour' do
   =form.input :start_on_s, :as => :string, :label => "Start date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
   =form.input :end_on_s, :as => :string, :label => "End date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mt-2'}
 =form.inputs do
-  %legend.availability-visible Click a date to toggle its availability
+  %legend Click a date to toggle its availability
   #availability_datepicker.pull-left.mt-2.mr-2
   %table.table.table-condensed#availability_key.pull-left.mt-2
     %thead
@@ -20,19 +20,19 @@
         %td.key-color.key-color-available
         %td
           %b Available
-          %em.availability-visible
+          %em
             \- click to make unavailable 
       %tr
         %td.key-color.key-color-unavailable
         %td
           %b Unavailable
-          %em.availability-visible
+          %em
             \- click to make available       
       %tr
         %td.key-color.key-color-booked
         %td
           %b Booked
-          %em.availability-visible
+          %em
             \- go to 'Manage bookings' to change          
 .hide
   =form.inputs do

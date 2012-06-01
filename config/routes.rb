@@ -28,6 +28,7 @@ Pan::Application.routes.draw do
   resources :venues, :except => :new do
     member do
       get 'location', :as => 'edit_location'
+      get 'bookings', :action => 'bookings'
     end
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'

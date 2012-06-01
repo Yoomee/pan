@@ -21,6 +21,10 @@ class Tour < ActiveRecord::Base
   scope :past, joins(:dates).where("booked = 1 && tour_dates.date < ?", Date.today).group("tours.id")
   scope :future, joins(:dates).where("booked = 1 && tour_dates.date >= ?", Date.today).group("tours.id")
   
+  def name_with_performer
+    "#{performer} - #{name}"
+  end
+  
   def booked_dates
     dates.where(:booked => true)
   end

@@ -96,12 +96,12 @@
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
                       =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
-        -if venue.tour_dates.present?
+        -if venue.tour_dates.future.present?
           .row.mt-2
             .span9
               %h4.mb-1 Events
               %table.table.table-striped
-                -venue.tour_dates.each do |tour_date|
+                -venue.tour_dates.future.order(:date).each do |tour_date|
                   %tr
                     %td.span2=tour_date.date.to_s(:month_day_year_or_not)
                     %td=link_to("#{tour_date.tour.performer} - #{tour_date.tour}", tour_date.tour)
@@ -126,3 +126,4 @@
       =back_link
       =link_if_can("Edit venue", [:edit, venue])
       =link_if_can("Delete venue", [:destroy, venue], :confirm => "Are you sure?")
+      =link_to("Manage bookings", bookings_venue_path(venue)) if can?(:edit,venue)      
