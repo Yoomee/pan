@@ -24,7 +24,7 @@ class RegistrationsController < ApplicationController
       elsif @user.last_step?
         @user.save if @user.all_valid?
       else
-        @user.next_step
+        @user.next_step unless @user.current_step=="organisation_type" && @user.organisation_type.blank?
       end
       session[:user_step] = @user.current_step
     end

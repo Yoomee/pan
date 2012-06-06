@@ -505,3 +505,16 @@ height: 234px;
 #resources .nested-fields .file{
   width:200px;
 }
+
+/*========== Registration ==========*/
+
+form.registration-form .registration-title {
+  margin-bottom: 20px;
+}
+form.registration-form .organisation-type-box {
+  height: 145px;
+}
+form.registration-form .organisation-type-box p {
+  margin-top: 5px;
+  height: 80px;
+}

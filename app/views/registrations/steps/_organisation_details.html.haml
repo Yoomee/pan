@@ -1,9 +1,9 @@
 -if @user.organisation_type == "performer"
-  %h2 What's the name of your performing arts company?
+  %h2.registration-title What's the name of your performing arts company?
   =form.inputs do
     =form.input :organisation_name, :label => "Name"
 -else
-  %h2 Tell us about your organisation?
+  %h2.registration-title Tell us about your organisation?
   =form.inputs do
     =form.input :organisation_name, :label => "Name"
     =form.input :organisation_region, :label => "Region", :as => :select, :collection => Pan::REGIONS

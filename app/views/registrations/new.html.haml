@@ -1,2 +1,2 @@
-=semantic_form_for @user, :url => registrations_path, :html => {:class => "loading-text-disabled"},  do |form|
+=semantic_form_for(@user, :url => registrations_path, :html => {:class => "loading-text-disabled registration-form"})  do |form|
   =render("registrations/steps/#{@user.current_step}", :form => form)
