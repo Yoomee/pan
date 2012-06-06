@@ -21,10 +21,6 @@ GIT
 PATH
   remote: vendor/gems
   specs:
-    ym_activity (0.0.1)
-      rails (~> 3.1.0)
-      ym_core
-      ym_users
     ym_cms (0.0.1)
       mercury-rails (~> 0.3.1)
       rack-cache
@@ -339,7 +335,6 @@ DEPENDENCIES
   shoulda-matchers
   uglifier
   whenever
-  ym_activity!
   ym_cms!
   ym_core!
   ym_docs!
