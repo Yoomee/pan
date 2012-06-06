@@ -68,10 +68,14 @@
                 =image_tag(link.favicon)
                 =link_to(link, link.url, :target => '_blank')
 
-  .span9
+  .span6
     %h1
       =venue
       %small=link_to_self(venue.promoter)
+  .span3
+    =link_to('&uarr; All venues'.html_safe, venues_path, :class => "back-to-all")
+  .span9=render('organisations/notes', :organisation => venue)
+  .span9
     %ul.nav.nav-tabs
       %li.active
         =link_to("Profile", "#profile", :data => {:toggle => "tab"})
@@ -92,6 +96,7 @@
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
                       =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")        
+        =render("organisations/facebook_twitter", :organisation => venue)
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9

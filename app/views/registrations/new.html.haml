@@ -1,0 +1,2 @@
+=semantic_form_for @user, :url => registrations_path, :html => {:class => "loading-text-disabled"},  do |form|
+  =render("registrations/steps/#{@user.current_step}", :form => form)

@@ -1,0 +1,13 @@
+-if @user.organisation_type == "performer"
+  %h2 What's the name of your performing arts company?
+  =form.inputs do
+    =form.input :organisation_name, :label => "Name"
+-else
+  %h2 Tell us about your organisation?
+  =form.inputs do
+    =form.input :organisation_name, :label => "Name"
+    =form.input :organisation_region, :label => "Region", :as => :select, :collection => Pan::REGIONS
+
+=form.buttons do
+  =form.commit_button "Back", :button_html => {:name => "back_button", :class => 'btn pull-left'}
+  =form.commit_button "Continue", :button_html => {:class => 'btn-primary pull-right'}

@@ -23,11 +23,15 @@ module Organisation
   end
   
   def facebook_url
-    links.find_by_host('facebook.com').try(:url)
+    @facebook_url ||= links.find_by_host('facebook.com').try(:url)
   end 
 
   def twitter_url
-    links.find_by_host('twitter.com').try(:url)
-  end 
+    @twitter_url ||= links.find_by_host('twitter.com').try(:url)
+  end
+  
+  def twitter_username
+    @twitter_username ||= twitter_url.nil? ? '' : twitter_url.scan(/twitter\.com\/(#!\/)?(\w*)/).flatten.last
+  end
   
 end

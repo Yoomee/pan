@@ -44,8 +44,12 @@
                 =link_to(link, link.url, :target => '_blank')
 
     
-  .span9
+  .span6
     %h1.mb-1=title(promoter)
+  .span3
+    =link_to('&uarr; All promoters'.html_safe, promoters_path, :class => "back-to-all")
+  .span9=render('organisations/notes', :organisation => promoter)
+  .span9
     -if promoter.slideshow    
       %ul.nav.nav-tabs
         %li.active
@@ -112,69 +116,70 @@
                   %ul.unstyled
                     -promoter.audience_list.each do |tag_name|
                       %li=tag_name.titleize.humanize
-                  
-        .row.mt-2
-          .span9
-            %h3.mb-1 List of resources
-            .row
-              -if promoter.marketing_resource_list.present?
-                .span3
-                  %h4 Promotions/marketing
-                  %ul.unstyled
-                    -promoter.marketing_resource_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.pr_resource_list.present?
-                .span3
-                  %h4 PR
-                  %ul.unstyled
-                    -promoter.pr_resource_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.equipment_list.present?
-                .span3
-                  %h4 Equipment
-                  %ul.unstyled
-                    -promoter.equipment_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.hireable_resource_list.present?
-                .span3
-                  %h4.mb-1 Hireable skills
-                  %ul.unstyled
-                    -promoter.hireable_resource_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-        .row.mt-2
-          .span9
-            %h3.mb-1 Skills matrix
-            .row
-              -if promoter.skill_list.present?
-                .span3
-                  %h4 Main skills
-                  %ul.unstyled
-                    -promoter.skill_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.skills_needed_list.present?
-                .span3
-                  %h4 Support needed
-                  %ul.unstyled
-                    -promoter.skills_needed_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.skills_need_training_list.present?
-                .span3
-                  %h4 Training needed
-                  %ul.unstyled
-                    -promoter.skills_need_training_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.skills_underused_list.present?
-                .span3
-                  %h4.mb-1 Underused skills
-                  %ul.unstyled
-                    -promoter.skills_underused_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
-              -if promoter.skills_offered_list.present?
-                .span3
-                  %h4.mb-1 Shareable skills
-                  %ul.unstyled
-                    -promoter.skills_offered_list.each do |tag_name|
-                      %li=tag_name.titleize.humanize
+        -if promoter.resources_present?          
+          .row.mt-2
+            .span9
+              %h3.mb-1 List of resources
+              .row
+                -if promoter.marketing_resource_list.present?
+                  .span3
+                    %h4 Promotions/marketing
+                    %ul.unstyled
+                      -promoter.marketing_resource_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.pr_resource_list.present?
+                  .span3
+                    %h4 PR
+                    %ul.unstyled
+                      -promoter.pr_resource_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.equipment_list.present?
+                  .span3
+                    %h4 Equipment
+                    %ul.unstyled
+                      -promoter.equipment_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.hireable_resource_list.present?
+                  .span3
+                    %h4.mb-1 Hireable skills
+                    %ul.unstyled
+                      -promoter.hireable_resource_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+        -if promoter.skills_present?
+          .row.mt-2
+            .span9
+              %h3.mb-1 Skills matrix
+              .row
+                -if promoter.skill_list.present?
+                  .span3
+                    %h4 Main skills
+                    %ul.unstyled
+                      -promoter.skill_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.skills_needed_list.present?
+                  .span3
+                    %h4 Support needed
+                    %ul.unstyled
+                      -promoter.skills_needed_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.skills_need_training_list.present?
+                  .span3
+                    %h4 Training needed
+                    %ul.unstyled
+                      -promoter.skills_need_training_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.skills_underused_list.present?
+                  .span3
+                    %h4.mb-1 Underused skills
+                    %ul.unstyled
+                      -promoter.skills_underused_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
+                -if promoter.skills_offered_list.present?
+                  .span3
+                    %h4.mb-1 Shareable skills
+                    %ul.unstyled
+                      -promoter.skills_offered_list.each do |tag_name|
+                        %li=tag_name.titleize.humanize
           
         -if (media_posts = promoter.posts.where("image_uid LIKE '%'").limit(8)).present?
           .row.mt-2
@@ -185,6 +190,7 @@
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
                       =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
+        =render("organisations/facebook_twitter", :organisation => promoter)
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9

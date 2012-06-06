@@ -65,6 +65,11 @@
 .tab-content {
   overflow:visible;
 }
+.tabs-left .tab-content,
+.tabs-right .tab-content {
+  overflow:auto;
+}
+
 #map-canvas img,
 .map-canvas img{
   max-width:none;
@@ -79,6 +84,12 @@
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
+}
+
+a.back-to-all{
+  color:#999;
+  margin-top:8px;
+  float:right;
 }
 
 /*========== Font stuff ==========*/

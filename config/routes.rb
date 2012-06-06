@@ -42,6 +42,8 @@ Pan::Application.routes.draw do
   resources :tags, :only => [:index]
   
   match 'community' => 'posts#index'
+  
+  resources :registrations, :only => [:new, :create]
 
   resources :resources do
     collection do
