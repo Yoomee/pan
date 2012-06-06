@@ -1,6 +1,5 @@
 ### Yoomee gems
 ym_gem 'core'
-ym_gem 'activity'
 ym_gem 'videos'
 ym_gem 'cms'
 ym_gem 'permalinks'

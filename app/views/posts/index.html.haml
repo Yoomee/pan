@@ -10,10 +10,3 @@
       -if can?(:create, Post)
         =render("posts/remote_form", :post => current_user.posts.build)
       =render("posts/posts", :posts => posts)
-    .span4
-      %h3 Latest activity
-      %ul.unstyled
-        -YmActivity::ActivityItem.order("created_at DESC").each do |activity_item|
-          %li
-            =render("activity_items/#{activity_item.resource_type.downcase}", :activity_item => activity_item)
-        

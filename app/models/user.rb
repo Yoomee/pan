@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   
-  # after_create :record_activity
-
   before_save :create_organisation, :on => :create
   attr_accessor :organisation_type, :organisation_name, :organisation_region
   validates_presence_of :organisation_name, :if => lambda{|u| u.current_step == "organisation_details"}
@@ -60,9 +58,5 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
-  # def record_activity
-  #   record_activity!(self)
-  # end  
   
 end
