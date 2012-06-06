@@ -2,6 +2,7 @@
   =form.input :performer_id, :as => :hidden
   =form.input :name
   =form.input :description, :input_html => {:rows => 5, :class => "span8"}
+  =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres)
   =form.input :requirements, :label => "Other requirements", :input_html => {:rows => 5, :class => "span8"}
   =form.input :target_age, :label => "Target age range/style", :as => :text, :input_html => {:rows => 2, :class => "span8"}
   =form.input :running_time, :label => "Running time/with and without interval", :as => :text, :input_html => {:rows => 2, :class => "span8"}

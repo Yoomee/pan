@@ -5,12 +5,17 @@ Pan::Application.routes.draw do
   resources :performers do
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
-      get 'search' 
+      get 'search'
+      get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
     resources :tours, :only => [:new, :index]
   end
   
-  resources :tours, :except => [:new]
+  resources :tours, :except => [:new] do
+    member do
+      get 'bookings', :action => 'bookings'
+    end
+  end
   
   resources :promoters do
     resources :users, :only => [:new, :create]
@@ -24,6 +29,7 @@ Pan::Application.routes.draw do
   resources :venues, :except => :new do
     member do
       get 'location', :as => 'edit_location'
+      get 'bookings', :action => 'bookings'
     end
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
@@ -42,6 +48,8 @@ Pan::Application.routes.draw do
   resources :tags, :only => [:index]
   
   match 'community' => 'posts#index'
+  
+  resources :registrations, :only => [:new, :create]
 
   resources :resources do
     collection do

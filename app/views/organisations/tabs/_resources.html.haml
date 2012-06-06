@@ -1,0 +1,3 @@
+=form.semantic_fields_for :resources do |link_form|
+  =render("organisations/resource_fields", :f => link_form)
+=link_to_add_association "+ Add a resource", form, :resources, :partial => "organisations/resource_fields", :"data-association-insertion-node" => '#resources .add_fields'

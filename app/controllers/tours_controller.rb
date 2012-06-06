@@ -13,7 +13,15 @@ class ToursController < ApplicationController
     end
   end
   
+  def bookings
+  end
+  
   def index
+  end
+  
+  def new
+    @performer = Performer.find(params[:performer_id])
+    @tour = @performer.tours.build(:genre_list => @performer.genre_list)
   end
   
   def update
@@ -21,7 +29,7 @@ class ToursController < ApplicationController
       flash_notice(tour)
       redirect_to tour
     else
-      render :action => "edit"
+      render :action => request.referrer =~ /\/bookings/ ? 'bookings' : 'edit'
     end
   end
   

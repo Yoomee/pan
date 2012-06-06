@@ -1,0 +1,22 @@
+%h2 Thanks! What type of profile would you like on Tourbook?
+%p
+  Tourbook connects touring companies with promoters in Scotland and the Highlands. Which are you?
+.row
+  .span1
+    %br
+  .span4
+    .well
+      %h3 Register as a Performer
+      %p If you are a performer wanting to promote your events in the Highlands and Islands of Scotland then sign up here.
+      =form.commit_button "I'm a performer", :button_html => {:name => "organisation_type_performer", :class => 'btn btn-primary'}
+  .span2
+    %br
+  .span4
+    .well
+      %h3 Register as a Promoter
+      %p If you promote events in the Highlands and Islands of Scotland then sign up here.
+      =form.commit_button "I'm a promoter", :button_html => {:name => "organisation_type_promoter", :class => 'btn btn-primary'}
+  .span1
+    %br
+=form.buttons do
+  =form.commit_button "Back", :button_html => {:name => "back_button", :class => 'btn pull-left'}

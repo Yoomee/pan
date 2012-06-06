@@ -68,10 +68,14 @@
                 =image_tag(link.favicon)
                 =link_to(link, link.url, :target => '_blank')
 
-  .span9
+  .span7
     %h1
       =venue
       %small=link_to_self(venue.promoter)
+  .span2
+    =link_to('&uarr; All venues'.html_safe, venues_path, :class => "back-to-all")
+  .span9=render('organisations/notes', :organisation => venue)
+  .span9
     %ul.nav.nav-tabs
       %li.active
         =link_to("Profile", "#profile", :data => {:toggle => "tab"})
@@ -80,6 +84,10 @@
       -if venue.slideshow
         %li
           =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
+      -if venue.resources.present?
+        %li
+          =link_to("Downloads", "#resources", :data => {:toggle => "tab"})
+      
     .tab-content
       #profile.tab-pane.fade.in.active
         =simple_format(venue.description)
@@ -91,7 +99,17 @@
                 -media_posts.each do |media_post|
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")        
+                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
+        -if venue.tour_dates.future.present?
+          .row.mt-2
+            .span9
+              %h4.mb-1 Events
+              %table.table.table-striped
+                -venue.tour_dates.future.order(:date).each do |tour_date|
+                  %tr
+                    %td.span2=tour_date.date.to_s(:month_day_year_or_not)
+                    %td=link_to("#{tour_date.tour.performer} - #{tour_date.tour}", tour_date.tour)
+        =render("organisations/facebook_twitter", :organisation => venue)
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9
@@ -105,10 +123,21 @@
         #gallery.tab-pane
           .span9
             =render("organisations/slideshow", :slideshow => venue.slideshow)
-
+      -if venue.resources.present?
+        #resources.tab-pane.fade
+          .row.mt-2
+            .span9
+              %table.table.table-striped
+                %tbody
+                  -venue.resources.each do |resource|
+                    %tr
+                      %td
+                        %i{:class => "icon-doc-#{resource.file_ext}"}
+                        =link_if_can(resource.name, [:download, resource])
 .row.mt-2
   .span9
     =options_panel do
       =back_link
       =link_if_can("Edit venue", [:edit, venue])
       =link_if_can("Delete venue", [:destroy, venue], :confirm => "Are you sure?")
+      =link_to("Manage bookings", bookings_venue_path(venue)) if can?(:edit,venue)      

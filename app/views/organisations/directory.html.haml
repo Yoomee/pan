@@ -21,10 +21,12 @@
         =li_with_active(action_name.index?, link_to("Map",venues_path))
         =li_with_active(action_name.latest?, link_to("Latest", {:controller => controller_name, :action => 'latest'}))
       -else
-        =li_with_active(action_name.index?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
+        =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
       =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
       -if action_name.search?
         =li_with_active(true, link_to('Search', '#'))
+      -if @tag
+        =li_with_active(true, link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag}".html_safe, '#'))
       
 -if action_name.directory?
   .row
@@ -56,7 +58,8 @@
                 %td.span4
                   =image_for(directory_item, "50x50#", :class => "pull-left mr-1")
                   %h4.pull-left.directory-item=link_to_self(directory_item)
-                %td.span8=truncate(directory_item.try(:description).to_s, :length => 190)
+                %td.span8
+                  =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
 .row
   .span12
     =options_panel do

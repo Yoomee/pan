@@ -11,7 +11,11 @@ class Venue < ActiveRecord::Base
   
   belongs_to :promoter
   belongs_to :user
-  has_many :tour_dates, :dependent => :nullify
+  has_many :booked_dates, :class_name => "TourDate", :dependent => :nullify
+  accepts_nested_attributes_for :booked_dates, :reject_if => :all_blank, :allow_destroy => true
+  
+  has_many :resources, :as => :target
+  accepts_nested_attributes_for :resources, :reject_if => :all_blank, :allow_destroy => true
   
   acts_as_taggable_on :floor_surfaces, :power_sources
   
@@ -60,6 +64,10 @@ class Venue < ActiveRecord::Base
   
   def short_description
     description.truncate(190)
+  end
+  
+  def tour_dates
+    booked_dates.where("tour_id IS NOT NULL")
   end
   
 end

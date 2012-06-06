@@ -65,6 +65,11 @@
 .tab-content {
   overflow:visible;
 }
+.tabs-left .tab-content,
+.tabs-right .tab-content {
+  overflow:auto;
+}
+
 #map-canvas img,
 .map-canvas img{
   max-width:none;
@@ -79,6 +84,12 @@
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
+}
+
+a.back-to-all{
+  color:#999;
+  margin-top:8px;
+  float:right;
 }
 
 /*========== Font stuff ==========*/
@@ -327,7 +338,8 @@ div.resource .tag-list {
 }
 
 /*========== User ==========*/
-#links .nested-fields .remove_fields {
+#links .nested-fields .remove_fields,
+#resources .nested-fields .remove_fields {
   margin-top:27px;
 }
 
@@ -435,8 +447,11 @@ div.slideshow {
 
 /*========== Tour availability ==========*/
 .booking-visible {display:none}
-#availability_datepicker{
-  position:relative;
+#availability_datepicker .ui-datepicker{
+  padding:0;
+}
+#availability_datepicker .ui-datepicker-group {
+height: 234px;
 }
 #availability_datepicker .ui-state-active{
   background-color:#fff;
@@ -484,4 +499,9 @@ div.slideshow {
 #availability_popover .popover-footer{
   height: 28px;
   margin-top: -15px;
+}
+
+/*========== Resources tab ==========*/
+#resources .nested-fields .file{
+  width:200px;
 }

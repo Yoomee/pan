@@ -24,4 +24,12 @@ class Promoter < ActiveRecord::Base
     "UK"
   end
   
+  def resources_present?
+    [:marketing_resource_list, :pr_resource_list, :equipment_list, :hireable_resource_list].any?{|list| !send(list).empty?}
+  end
+  
+  def skills_present?
+    [:skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered].any?{|list| !send(list).empty?}
+  end
+  
 end

@@ -4,6 +4,9 @@ class VenuesController < ApplicationController
   expose(:venues) {Venue.all}
   expose(:posts) {venue.posts.page(params[:page])}
   
+  def bookings
+  end
+  
   def create
     if venue.save
       flash_notice(venue)

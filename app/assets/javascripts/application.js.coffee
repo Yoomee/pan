@@ -39,3 +39,8 @@ $(document).ready () ->
         text: term
       )
   )
+  
+  $('textarea[maxlength]').live 'keyup blur', ->
+    maxlength = $(this).attr('maxlength');
+    val = $(this).val();
+    $(this).val(val.slice(0, maxlength)) if val.length > maxlength

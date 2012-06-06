@@ -1,0 +1,8 @@
+%h2 We're delighted that you want to register on Tourbook
+=form.inputs do
+  =form.input :first_name
+  =form.input :last_name
+  =form.input :email
+  =form.input :password
+=form.buttons do
+  =form.commit_button "Continue", :button_html => {:class => 'btn-primary pull-right'}

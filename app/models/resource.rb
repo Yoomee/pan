@@ -1,10 +1,11 @@
 class Resource < ActiveRecord::Base
   
-  belongs_to :user  
+  belongs_to :user
+  belongs_to :target, :polymorphic => true  
   has_many :posts, :as => :target
     
   acts_as_taggable_on :resource_tags
-  has_pdf
+  has_doc
   
   validates :name, :file, :presence => true
   
