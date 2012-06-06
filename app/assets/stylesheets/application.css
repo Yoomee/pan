@@ -521,3 +521,18 @@ form.registration-form .organisation-type-box p {
   margin: 5px 0 10px 0;
   height: 80px;
 }
+
+/*========== Venue profile ==========*/
+
+body.controller_venues #technical.tab-pane dl,
+body.controller_venues #technical.tab-pane h3 {
+  float: left;
+  clear: both;
+}
+body.controller_venues #technical.tab-pane dt {
+  float: left;
+  clear: left;
+}
+body.controller_venues #technical.tab-pane dd {
+  float: left;
+}
