@@ -1,4 +1,12 @@
-%h2 We're delighted that you want to register on Tourbook
+%h2.mb-2 We're delighted that you want to register on Tourbook
+%p.mb-2
+  It's easy to register with one of these sites you already use. We promise not to post to your account or spam your friends.
+.mb-2
+  =link_to_function(image_tag("register-facebook.png"), "alert('Sorry this is not available yet')", :class => "mr-1")
+  =link_to_function(image_tag("register-twitter.png"), "alert('Sorry this is not available yet')", :class => "mr-1")
+  =link_to_function(image_tag("register-linkedin.png"), "alert('Sorry this is not available yet')", :class => "mr-1")
+%p.mb-2
+  Or you can enter your details manually...
 =form.inputs do
   =form.input :first_name
   =form.input :last_name
