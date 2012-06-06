@@ -150,4 +150,4 @@
         =link_to("Manage tours", performer_tours_path(performer, :anchor => 'all'))
         =link_to("Add tour", new_performer_tour_path(performer))
       =link_if_can("Delete performer", [:destroy, performer], :confirm => "Are you sure?")
-      
+    =render("welcome_modal", :performer => performer) if params[:modal] == "welcome"

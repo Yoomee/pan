@@ -36,7 +36,7 @@ class RegistrationsController < ApplicationController
       flash[:notice] = "Welcome to Tourbook"
       sign_in(@user)
       if @user.performer
-        redirect_to @user.performer
+        redirect_to performer_path(@user.performer, :modal => "welcome")
       else
         redirect_to @user.promoter
       end
