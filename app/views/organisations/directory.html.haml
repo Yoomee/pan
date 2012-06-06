@@ -65,3 +65,5 @@
     =options_panel do
       =back_link
       =link_if_can("New #{controller_name.singularize}", [:new, controller_name.classify.constantize]) unless controller_name.venues?
+      -if controller_name.promoters? && can?(:read, Enquiry)
+        =link_to("List applications to join", enquiries_path)

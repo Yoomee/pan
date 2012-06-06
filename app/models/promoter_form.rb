@@ -4,7 +4,7 @@ module PromoterForm
   
   title "Application to join #{Settings.site_name}"
   intro "I'm afraid you can't join #{Settings.site_name} until your organisation has been added to the site. Please complete the form below and somebody will get in touch with you soon."
-  fields :first_name, :last_name, :promoter_name, :promoter_region, :email, :phone
+  fields :first_name, :last_name, :promoter_name, :promoter_region, :email, :phone, :message
   
   validates :first_name, :last_name, :promoter_name, :promoter_region, :email, :phone, :presence => true
   validates :email, :email => true, :allow_blank => true
