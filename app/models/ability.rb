@@ -13,12 +13,16 @@ class Ability
     if user.try(:admin?)
       can :manage, :all
       # admin ability
-    elsif user
-      # user ability
-      can [:read, :create], Post
-      can [:update, :destroy], Post, :user_id => user.id
-      can :manage, User, :id => user.id
-      can :search, :all
+    else
+      if user.try(:promoter)
+        can [:read, :create], Post        
+      end
+      if user
+        # user ability
+        can [:update, :destroy], Post, :user_id => user.id
+        can :manage, User, :id => user.id
+        can :search, :all
+      end
     end
   end
   
