@@ -511,10 +511,13 @@ height: 234px;
 form.registration-form .registration-title {
   margin-bottom: 20px;
 }
+form.registration-form p {
+  margin-bottom: 20px;
+}
 form.registration-form .organisation-type-box {
   height: 145px;
 }
 form.registration-form .organisation-type-box p {
-  margin-top: 5px;
+  margin: 5px 0 10px 0;
   height: 80px;
 }
