@@ -78,9 +78,7 @@
       .row.mt-2
         .span5.mb-1
           %h4 Genres
-          %ul.unstyled
-            -tour.genre_list.each do |genre|
-              %li=genre.titleize.humanize
+          =list_tags(tour, :genres)
     .row.mt-2
       .span5
         %h4 Technical requirements

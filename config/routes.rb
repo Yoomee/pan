@@ -12,9 +12,13 @@ Pan::Application.routes.draw do
     end
   end
   
-  resources :tours, :except => [:new] do
+  resources :tours, :except => [:new]
+  resources :tours, :only => [] do
     member do
       get 'bookings', :action => 'bookings'
+    end
+    collection do
+      get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
   end
   
