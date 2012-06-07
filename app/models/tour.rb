@@ -28,9 +28,16 @@ class Tour < ActiveRecord::Base
   end
   
   def name_with_dates
-    return name if !all_present?(:start_on, :end_on)
-    dts = DateTimeSpan.new(start_on, end_on, "%o %b %Y")
-    "#{name} #{dts}"
+    "#{name} #{dates_string}".strip
+  end
+  
+  def dates_string
+    date_format = "%o %b %Y"
+    if all_present?(:start_on, :end_on)
+      DateTimeSpan.new(start_on, end_on, date_format).to_s
+    else
+      start_on.try(:strftime, date_format) || end_on.try(:strftime, date_format)
+    end
   end
   
   def booked_dates
