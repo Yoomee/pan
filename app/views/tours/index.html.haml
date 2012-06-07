@@ -40,3 +40,5 @@
   .span12
     =options_panel do
       =back_link
+      -if can?(:new, performer.tours.build)
+        =link_to("Add a tour", new_performer_tour_path(performer))

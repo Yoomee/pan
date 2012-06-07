@@ -1,14 +1,15 @@
 Pan::Application.routes.draw do
   
   root :to => 'home#index'
-  
-  resources :performers do
+
+  resources :performers
+  resources :performers, :only => [] do
+    resources :tours, :only => [:new, :index]    
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
-    resources :tours, :only => [:new, :index]
   end
   
   resources :tours, :except => [:new] do
