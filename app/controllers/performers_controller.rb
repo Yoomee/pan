@@ -1,4 +1,6 @@
 class PerformersController < ApplicationController
+
+  load_and_authorize_resource
   
   expose(:performer)
   expose(:posts) {performer.posts.page(params[:page])}
