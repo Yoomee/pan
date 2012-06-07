@@ -9,24 +9,34 @@ class Ability
     can :create, Enquiry
     can :show, Page, :published => true
     can :index, Page
+    can :create, User, :promoter_id => nil
     
     if user.try(:admin?)
       can :manage, :all
       # admin ability
-    else
-      if user.try(:performer)
-        can :create, Post
+    elsif user
+      # user ability
+      can [:create, :read], Post
+      can [:update, :destroy], Post, :user_id => user.id
+      can :update, User, :id => user.id
+      can :search, :all
+      can :read, User
+      can :read, Performer
+      can :read, Promoter        
+      can :read, Tour
+      can :read, Venue
+      
+      # performer ability
+      if user.try(:performer_id)
         can :update, Performer, :id => user.performer_id
-        can [:create, :update, :destroy], Tour, :performer_id => user.performer_id
+        can [:create, :update], Tour, :performer_id => user.performer_id
       end
-      if user
-        # user ability
-        can :read, Post
-        can [:update, :destroy], Post, :user_id => user.id
-        can :manage, User, :id => user.id
-        can :search, :all
-        can :read, Performer
-        can :read, Tour
+      
+      # promoter admin ability
+      if user.promoter_admin?
+        can [:create, :update], Promoter, :id => user.promoter_id
+        can :manage, User, :promoter_id => user.promoter_id
+        can :manage, Venue, :promoter_id => user.promoter_id
       end
     end
   end

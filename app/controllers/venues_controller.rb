@@ -1,5 +1,7 @@
 class VenuesController < ApplicationController
 
+  load_and_authorize_resource
+
   expose(:venue)
   expose(:venues) {Venue.all}
   expose(:posts) {venue.posts.page(params[:page])}

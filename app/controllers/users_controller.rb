@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
   include YmUsers::UsersController
-  
+  load_and_authorize_resource
+
   expose(:wall_posts) {user.wall_posts.page(params[:page])}
   expose(:promoter) {Promoter.find_by_id(params[:promoter_id])}
   

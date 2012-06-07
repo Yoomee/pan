@@ -1,5 +1,7 @@
 class PromotersController < ApplicationController
 
+  load_and_authorize_resource
+
   expose(:promoters) {Promoter.order('name')}
   expose(:promoter)
   expose(:posts) {promoter.posts.page(params[:page])}
