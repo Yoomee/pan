@@ -14,6 +14,7 @@ gem 'whenever', :require => false
 
 gem 'geocoder'
 gem 'cocoon'
+gem 'datetimespan'
 
 load_ym_gems!
 

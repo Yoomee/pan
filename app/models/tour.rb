@@ -27,6 +27,12 @@ class Tour < ActiveRecord::Base
     "#{performer} - #{name}"
   end
   
+  def name_with_dates
+    return name if !all_present?(:start_on, :end_on)
+    dts = DateTimeSpan.new(start_on, end_on, "%o %b %Y")
+    "#{name} #{dts}"
+  end
+  
   def booked_dates
     dates.where(:booked => true)
   end

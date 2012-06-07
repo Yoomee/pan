@@ -1,4 +1,6 @@
 class ToursController < ApplicationController
+
+  load_and_authorize_resource
   
   expose(:tour)  
   expose(:performer) {params[:performer_id] ? Performer.find(params[:performer_id]) : nil}

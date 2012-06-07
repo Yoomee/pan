@@ -102,10 +102,6 @@
         -else
           =simple_format(performer.description)
         .row.company_tag_lists
-          -if current_tour = performer.tours.first
-            .span2.mb-1
-              %h4 Current show:
-              =link_to_self(current_tour)
           -if logged_in_as_performer?(performer) || performer.genre_list.present?
             .span2.mb-1
               %h4 Genres
@@ -146,6 +142,11 @@
                 %ul.unstyled
                   -performer.work_scale_list.each do |work_scale|
                     %li=work_scale.titleize.humanize
+        -if current_tour = performer.tours.first
+          .row
+            .span12
+              %h4 Current show:
+              =link_to(current_tour.name_with_dates, current_tour)
         .row.mt-2
           -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
             .span4

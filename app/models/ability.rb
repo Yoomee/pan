@@ -17,6 +17,7 @@ class Ability
       if user.try(:performer)
         can [:read, :create], Post
         can :update, Performer, :id => user.performer_id
+        can [:create, :update, :destroy], Tour, :performer_id => user.performer_id
       end
       if user
         # user ability
@@ -24,6 +25,7 @@ class Ability
         can :manage, User, :id => user.id
         can :search, :all
         can :read, Performer
+        can :read, Tour
       end
     end
   end
