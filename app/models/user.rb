@@ -20,10 +20,12 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   
-  before_create :create_organisation
+  before_create :create_organisation, :set_role
   
   attr_writer :organisation_type, :organisation_name
   boolean_accessor :stepping_back
+  
+  has_roles :admin, :promoter_staff, :promoter_admin
   
   validates_presence_of :organisation_name, :if => lambda{|u| !u.stepping_back? && u.organisation_type == 'performer' && u.current_step_gte("organisation_details")}
   validates_presence_of :promoter, :if => lambda{|u| !u.stepping_back? && u.organisation_type == 'promoter' && u.current_step_gte("organisation_details")}
@@ -80,6 +82,14 @@ class User < ActiveRecord::Base
     if performer.present? && promoter.present?
       errors.add(:promoter, "can't have a promoter and a performer")
     end
+  end
+  
+  def set_role
+    return true if role.present?
+    if promoter.present?
+      self.role = "promoter_staff"
+    end
+    true
   end
   
 end

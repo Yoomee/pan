@@ -38,7 +38,7 @@ class RegistrationsController < ApplicationController
       if @user.performer
         redirect_to performer_path(@user.performer, :modal => "welcome")
       else
-        redirect_to @user.promoter
+        redirect_to promoter_path(@user.promoter, :modal => "welcome")
       end
     end
   end
