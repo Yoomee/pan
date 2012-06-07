@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   
-  before_save :create_organisation, :on => :create
+  before_create :create_organisation
   
   attr_writer :organisation_type, :organisation_name
   boolean_accessor :stepping_back
@@ -71,12 +71,8 @@ class User < ActiveRecord::Base
   
   private
   def create_organisation
-    if organisation_type.present?
-      if organisation_type == 'performer'
-        self.create_performer(:name => organisation_name)        
-      else
-        # self.create_promoter(:name => organisation_name, :region => organisation_region)
-      end
+    if @organisation_type == 'performer' && performer.nil? && promoter.nil?
+      self.create_performer(:name => organisation_name)
     end
   end
   
