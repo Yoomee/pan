@@ -58,6 +58,7 @@ class PromotersController < ApplicationController
   
   def edit;end
   
+  def individuals;end  
   
   def new;end
 

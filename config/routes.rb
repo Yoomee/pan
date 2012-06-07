@@ -2,8 +2,8 @@ Pan::Application.routes.draw do
   
   root :to => 'home#index'
 
-  resources :performers
-  resources :performers, :only => [] do
+  resources :performers, :except => :show
+  resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
@@ -22,13 +22,14 @@ Pan::Application.routes.draw do
     end
   end
   
-  resources :promoters
-  resources :promoters, :only => [] do
+  resources :promoters, :except => :show
+  resources :promoters, :only => [:show] do
     resources :users, :only => [:new, :create]
     resources :venues
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
-      get 'search' 
+      get 'search'
+      get 'individuals'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'      
     end
   end
@@ -49,6 +50,9 @@ Pan::Application.routes.draw do
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
+    end
+    member do
+      put 'update_role/:role', :action => 'update_role', :as => 'update_role'
     end
   end
   

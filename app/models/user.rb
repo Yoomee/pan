@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   def description
     bio
   end
+  alias_method :summary, :description
   
   def facebook_url
     @facebook_url ||= links.find_by_host('facebook.com').try(:url)
