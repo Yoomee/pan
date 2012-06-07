@@ -26,7 +26,7 @@
       -if action_name.search?
         =li_with_active(true, link_to('Search', '#'))
       -if @tag
-        =li_with_active(true, link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag}".html_safe, '#'))
+        =li_with_active(true, link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag.to_s.titleize.humanize}".html_safe, '#'))
       
 -if action_name.directory?
   .row

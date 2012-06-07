@@ -18,12 +18,14 @@ Pan::Application.routes.draw do
     end
   end
   
-  resources :promoters do
+  resources :promoters
+  resources :promoters, :only => [] do
     resources :users, :only => [:new, :create]
     resources :venues
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search' 
+      get ':tag_context/:tag', :action => 'index', :as => 'tag'      
     end
   end
   

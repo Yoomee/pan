@@ -109,9 +109,7 @@
                 .italic
                   =link_to("Add some genres", edit_performer_path(performer))
               -else
-                %ul.unstyled
-                  -performer.genre_list.each do |genre|
-                    %li=link_to(genre.titleize.humanize, tag_performers_path('genres',genre))
+                =list_tags(performer, :genres)
           -if logged_in_as_performer?(performer) || performer.art_form_list.present?
             .span2.mb-1
               %h4 Art forms
@@ -119,9 +117,7 @@
                 .italic
                   =link_to("Add some art forms", edit_performer_path(performer))
               -else
-                %ul.unstyled
-                  -performer.art_form_list.each do |art_form|
-                    %li=art_form.titleize.humanize
+                =list_tags(performer, :art_forms)
           -if logged_in_as_performer?(performer) || performer.funder_list.present?
             .span2.mb-1
               %h4 Funders
@@ -129,9 +125,7 @@
                 .italic
                   =link_to("Add your funders", edit_performer_path(performer))
               -else
-                %ul.unstyled
-                  -performer.funder_list.each do |funder|
-                    %li=funder.titleize.humanize
+                =list_tags(performer, :funders)
           -if logged_in_as_performer?(performer) || performer.work_scale_list.present?
             .span2.mb-1
               %h4 Scale of work
@@ -139,9 +133,7 @@
                 .italic
                   =link_to("Add info on your scale of work", edit_performer_path(performer))
               -else
-                %ul.unstyled
-                  -performer.work_scale_list.each do |work_scale|
-                    %li=work_scale.titleize.humanize
+                =list_tags(performer, :work_scales)
         -if current_tour = performer.tours.first
           .row
             .span12
