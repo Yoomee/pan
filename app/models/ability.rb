@@ -15,12 +15,13 @@ class Ability
       # admin ability
     else
       if user.try(:performer)
-        can [:read, :create], Post
+        can :create, Post
         can :update, Performer, :id => user.performer_id
         can [:create, :update, :destroy], Tour, :performer_id => user.performer_id
       end
       if user
         # user ability
+        can :read, Post
         can [:update, :destroy], Post, :user_id => user.id
         can :manage, User, :id => user.id
         can :search, :all
