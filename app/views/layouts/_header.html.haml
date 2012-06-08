@@ -28,24 +28,34 @@
             =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle') do
               %span.caret
             %ul.dropdown-menu.pull-right
-              %li
-                =link_to(performers_path) do
-                  %icon.icon-music
-                  Performers
-              %li
-                =link_to(promoters_path) do
-                  %icon.icon-flag
-                  Promoters
-              %li
-                =link_to(venues_path) do
-                  %icon.icon-map-marker
-                  Venues
-              %li
-                =link_to(users_path) do
-                  %icon.icon-user
-                  Users
-              %li.divider
-              -if can?(:index,Tag)
+              -if current_user.promoter
+                %li
+                  =link_to(current_user.promoter) do
+                    %icon.icon-flag
+                    =current_user.promoter
+              -elsif current_user.performer
+                %li
+                  =link_to(current_user.performer) do
+                    %icon.icon-music
+                    =current_user.performer
+              -elsif current_user.admin?
+                %li
+                  =link_to(performers_path) do
+                    %icon.icon-music
+                    Performers
+                %li
+                  =link_to(promoters_path) do
+                    %icon.icon-flag
+                    Promoters
+                %li
+                  =link_to(venues_path) do
+                    %icon.icon-map-marker
+                    Venues
+                %li
+                  =link_to(users_path) do
+                    %icon.icon-user
+                    Users
+                %li.divider
                 %li
                   =link_to(tags_path) do
                     %icon.icon-tags
