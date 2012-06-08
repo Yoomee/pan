@@ -1,0 +1,17 @@
+!!!
+%html
+  %body
+    %p
+      ="Hi #{@user.first_name},"
+    %p
+      ="You are now an administrator for #{@user.promoter}."
+    %p
+      ="You can view and edit your promoter details here: #{link_to_url(promoter_url(@user.promoter))}.".html_safe
+    %p
+      Thanks,
+    %p
+      ="The #{Settings.site_name} team"
+      %br
+      =Settings.site_url
+    
+    

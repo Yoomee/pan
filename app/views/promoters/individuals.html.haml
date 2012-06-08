@@ -14,7 +14,7 @@
           .span8
             %table.table.table-bordered
               %tbody
-                -promoter.users.order("role='promoter_admin' DESC, first_name ASC, last_name ASC").each do |user|
+                -promoter.users.order("role='promoter_admin' DESC").each do |user|
                   %tr
                     %td.span5
                       =link_to_self(user, :target => "_blank")
@@ -24,9 +24,8 @@
                       -if user.promoter_admin?
                         =link_to("Remove admin rights", update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?")
                       -else
-                        =link_to("Make admin", update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure?")
+                        =link_to("Make admin", update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.")
                         
-                  
 .row
   .span12
     =options_panel do

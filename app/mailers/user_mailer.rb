@@ -9,4 +9,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Welcome to #{Settings.site_name}")
   end
   
+  def new_admin(user)
+    @user = user
+    mail(:to => user.email, :subject => "#{Settings.site_name}: Your are now an administrator")
+  end
+  
 end

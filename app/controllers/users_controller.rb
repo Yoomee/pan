@@ -51,6 +51,7 @@ class UsersController < ApplicationController
   
   def update_role
     if user.update_attribute(:role, params[:role])
+      UserMailer.new_admin(user).deliver if user.promoter_admin?
       flash[:notice] = "#{user} updated"
     else
       flash[:error] = "#{user} could not be updated"
