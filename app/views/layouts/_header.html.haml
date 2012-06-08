@@ -14,7 +14,10 @@
       #nav.main-nav
         %ul.unstyled
           =li_with_active(current_page?(root_path), link_to("Home", root_path))
-          =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
+          -if can?(:index, Performer)
+            =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
+          -else
+            =li_with_active(slug_is?('for-artists'), link_to_slug('Performers', 'for-performers'))
           -if can?(:read, Post)
             =li_with_active(viewing_community?, link_to("Community", community_path))
           -else
