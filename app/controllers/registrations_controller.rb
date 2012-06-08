@@ -34,6 +34,7 @@ class RegistrationsController < ApplicationController
     else
       session[:user_step] = session[:user_params] = nil
       flash[:notice] = "Welcome to Tourbook"
+      UserMailer.welcome_email(@user).deliver
       sign_in(@user)
       if @user.performer
         redirect_to performer_path(@user.performer, :modal => "welcome")
