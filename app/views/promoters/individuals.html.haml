@@ -18,15 +18,23 @@
                   %tbody
                     -promoter.users.order("role='promoter_admin' DESC").each do |user|
                       %tr
-                        %td.span5
+                        %td.span8
                           =link_to_self(user, :target => "_blank")
                           -if user.promoter_admin?
                             %span.label Admin
-                        %td.span3
-                          -if user.promoter_admin?
-                            =link_to("Remove admin rights", update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?")
-                          -else
-                            =link_to("Make admin", update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.")
+                          .pull-right
+                            -if user.promoter_admin?
+                              =link_to(update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?", :class => "btn") do
+                                %i.icon.icon-minus
+                                Undo admin
+                            -else
+                              =link_to(update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.", :class => "btn") do
+                                %i.icon.icon-plus
+                                Make admin                            
+                            -if can?(:destroy, user)
+                              =link_to(user_path(user, :return_to => individuals_promoters_path), :method => :delete, :confirm => "Are you sure?", :class => "btn btn-danger") do
+                                %i.icon.icon-trash
+                                Delete user
 .row
   .span12
     =options_panel do
