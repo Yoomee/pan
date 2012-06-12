@@ -28,12 +28,15 @@
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
         =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
       -else
-        =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
+        =li_with_active(action_name.index? && @tag_context.nil? &&  @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+      -if controller_name.performers?
+        =li_with_active(@tag_context == 'genres' &&  @tag.nil?, link_to('Genres', genres_performers_path))
+        =li_with_active(@tag_context == 'art_forms' &&  @tag.nil?, link_to('Art forms', art_forms_performers_path))
       -if action_name.search?
         =li_with_active(true, link_to('Search', '#'))
       -if @tag
-        =li_with_active(true, link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag.to_s.titleize.humanize}".html_safe, '#'))
+        =li_with_active(true, link_to(@tag.to_s.titleize.humanize, '#'))
       
 -if action_name.directory?
   .row
@@ -47,6 +50,16 @@
 .row
   -if current_page?(venues_path)
     #map-canvas.span12{:style => "height:600px"}
+  -elsif @tag_context.present? && @tag.nil?
+    .span12
+      %table.table.table-striped
+        %tbody
+          -@tags.each do |tag|
+            %tr
+              %td.span1
+                %span.badge.pull-right=tag.count
+              %td
+                =link_to_tag_in_context(tag.name, controller_name, @tag_context)
   -else
     .span12    
       -if directory_items.empty?

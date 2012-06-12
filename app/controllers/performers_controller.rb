@@ -40,8 +40,12 @@ class PerformersController < ApplicationController
   end
   
   def index
-    if (@tag_context = params[:tag_context]).present? && (@tag = params[:tag]).present?
-      @performers = Performer.tagged_with(@tag, :on => @tag_context)
+    if (@tag_context = params[:tag_context]).present?
+      if (@tag = params[:tag]).present?
+        @performers = Performer.tagged_with(@tag, :on => @tag_context)
+      else
+        @tags = Performer.tag_counts_on(@tag_context)
+      end
     else
       @performers = Performer.order("created_at DESC").limit(10)
     end
