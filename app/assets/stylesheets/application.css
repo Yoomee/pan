@@ -117,7 +117,20 @@ select[multiple='multiple']{
 }
 
 /*========== Header ==========*/
-
+#beta-bar {
+  background: #418dcc;
+  padding: 8px 0;
+  text-align: center;
+  color: #fff;
+}
+#beta-bar a {
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+#beta-bar a:hover {
+  border-color: #fff;
+  text-decoration: none;
+}
 #header {
   margin-bottom: 20px;  
 }
@@ -527,6 +540,7 @@ h2.register-title {
 
 form.registration-form .registration-title {
   margin-bottom: 20px;
+  clear: both;
 }
 form.registration-form p {
   margin-bottom: 20px;

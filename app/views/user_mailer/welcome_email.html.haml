@@ -13,7 +13,7 @@
       %p
         ="Congratulations, you now have #{link_to('your own individual profile', user_url(@user))} and you have been added to #{link_to(@user.promoter, promoter_url(@user.promoter))}.".html_safe
       %p
-        ="If you are expecting administrator rights for your promoter, this will happen soon and you will be notified via email. If not, you can connect with other promoters and performers on the #{link_to('community page', community_url)}.".html_safe
+        ="If you are expecting administrator rights for your organisation, this will happen soon and you will be notified via email. If not, you can connect with other promoters and performers on the #{link_to('community page', community_url)}.".html_safe
     -else
       %p
         ="To login to the site, just follow this link: #{link_to_url(sign_in_url)}.".html_safe
