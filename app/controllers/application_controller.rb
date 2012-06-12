@@ -7,6 +7,16 @@ class ApplicationController < ActionController::Base
 
   AUTH_USERS = { "pan" => "highlands123" }
 
+  def after_sign_in_path_for(user)
+    if user.promoter
+      promoter_path(user.promoter)
+    elsif user.performer
+      performer_path(user.performer)
+    else
+      params.delete(:next) || super
+    end
+  end
+
   private
   def authenticate
     return true unless Rails.env.production?
