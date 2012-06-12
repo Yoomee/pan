@@ -1,7 +1,3 @@
-#beta-bar
-  This website is a work in progress. 
-  =link_to_slug('Click here to read more about the beta.', :beta)
-  
 .container#header
   .row#header_row
     .span3
@@ -15,9 +11,9 @@
       #header_links
         -if user_signed_in?
           .btn-group
-            =link_to(current_user, :class => 'btn') do
+            =link_to(current_user.performer || current_user, :class => 'btn') do
               %icon.icon-user
-              =current_user
+              =current_user.performer || current_user
             =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle') do
               %span.caret
             %ul.dropdown-menu.pull-right
@@ -26,11 +22,7 @@
                   =link_to(current_user.promoter) do
                     %icon.icon-flag
                     =current_user.promoter
-              -elsif current_user.performer
-                %li
-                  =link_to(current_user.performer) do
-                    %icon.icon-music
-                    =current_user.performer
+                %li.divider                    
               -elsif current_user.admin?
                 %li
                   =link_to(performers_path) do
@@ -53,7 +45,7 @@
                   =link_to(tags_path) do
                     %icon.icon-tags
                     Manage tags
-              %li.divider
+                %li.divider
               %li
                 =link_to(edit_user_path(current_user)) do
                   %icon.icon-cog

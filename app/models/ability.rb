@@ -5,6 +5,8 @@ class Ability
   
   def initialize(user)
     
+    alias_action :index, :show, :directory, :to => :read
+    
     # open ability
     can :create, Enquiry
     can :show, Page, :published => true
@@ -18,7 +20,7 @@ class Ability
       # user ability
       can [:create, :show], Post
       can [:update, :destroy], Post, :user_id => user.id
-      can [:show, :update], User, :id => user.id
+      can [:show, :update, :edit], User, :id => user.id
       can :search, :all
       can :read, Performer
       can :read, Promoter        
@@ -35,7 +37,7 @@ class Ability
         can [:create, :update], Promoter, :id => user.promoter_id
         can :read, Post        
         can :read, User        
-        can :read, Venue        
+        can :read, Venue
         can :manage, User, :promoter_id => user.promoter_id
         can :manage, Venue, :promoter_id => user.promoter_id
       end

@@ -35,7 +35,11 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.order("created_at DESC").limit(10)
+    if (@tag_context = params[:tag_context]).present? && (@tag = params[:tag]).present?
+      @users = User.tagged_with(@tag, :on => @tag_context)
+    else    
+      @users = User.order("created_at DESC").limit(10)
+    end
     render :template => 'organisations/directory'
   end
   
@@ -47,6 +51,12 @@ class UsersController < ApplicationController
       @users = []
     end
     render :template => 'organisations/directory'
+  end
+  
+  def show
+    if user.performer
+      redirect_to(user.performer)
+    end
   end
   
   def update_role

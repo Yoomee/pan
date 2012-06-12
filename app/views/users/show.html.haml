@@ -1,6 +1,7 @@
-.row.mb-2
-  .span12
-    =render("community/nav")
+-if can?(:index, Post)
+  .row.mb-2
+    .span12
+      =render("community/nav")
 .row
   .span3
     .row
@@ -25,18 +26,27 @@
     =simple_format(user.bio)
     .row
       .span9
-        %h4.mb-1 My main skill area is
-        %ul.unstyled
-          -user.skill_list.each do |tag_name|
-            %li=tag_name.titleize.humanize
-        %h4.mb-1 I can offer help with
-        %ul.unstyled
-          -user.skills_offered_list.each do |tag_name|
-            %li=tag_name.titleize.humanize
-        %h4.mb-1 I would like help with 
-        %ul.unstyled
-          -user.skills_needed_list.each do |tag_name|
-            %li=tag_name.titleize.humanize
+        %h4 My main skill areas are
+        -if user.skill_list.empty?
+          .italic
+            %span Nothing entered yet.
+            =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
+        -else
+          =list_tags(user, :skills)
+        %h4.mt-1 I can offer help with
+        -if user.skills_offered_list.empty?
+          .italic        
+            %span Nothing entered yet.
+            =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)          
+        -else        
+          =list_tags(user, :skills_offered)
+        %h4.mt-1 I would like help with 
+        -if user.skills_needed_list.empty?
+          .italic        
+            %span Nothing entered yet.
+            =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
+        -else
+          =list_tags(user, :skills_needed)
     =render("organisations/facebook_twitter", :organisation => user)
     .row.mt-2
       .span9
