@@ -496,3 +496,20 @@ div.slideshow {
   height: 28px;
   margin-top: -15px;
 }
+
+/*========= Registration steps ===========*/
+p.registration-step {
+  font-size: 16px;
+  line-height: 20px;
+  background: #f5f5f5;
+  padding:7px 10px;
+  border-radius:4px;
+  float: left;
+  color: #666;
+  font-weight: 300;
+  margin: 0 0 15px;
+}
+h2.register-title {
+  clear: both;
+  margin: 0 0 15px;
+}
