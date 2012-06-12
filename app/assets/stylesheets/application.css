@@ -144,7 +144,17 @@ select[multiple='multiple']{
 #site_logo {
   font-size: 40px;
   line-height: 40px;
-  margin:7px 0 0 0;
+  margin:5px 0 10px 0;
+}
+#site_logo a {
+  color: #000;
+}
+#site_logo a:hover {
+  text-decoration: none;
+}
+.main-nav {
+  float: right;
+  margin-right: 30px;
 }
 .main-nav li {
   float: left;
@@ -152,7 +162,7 @@ select[multiple='multiple']{
 }
 .main-nav a {
 	margin: 0px 0 0 0;
-  padding: 0 30px 5px 10px;
+  padding: 0 15px 10px 15px;
   border-bottom: 1px solid #f5f5f5;
   font-size: 26px;
   line-height: 26px;
@@ -210,6 +220,7 @@ select[multiple='multiple']{
 }
 .main-nav .active a {
   color: #00558D;
+  border-bottom: 1px solid #000;
 }
 /*========== Page show ==========*/
 .options_panel {
