@@ -6,7 +6,9 @@
         VenuesMap.venues = #{promoter.venues.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
         VenuesMap.init();
       });
-
+.row.mb-2
+  .span12
+    =render("community/nav")
 .row
   .span3
     .row.profile-left-col
