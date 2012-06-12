@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
   
   def directory
-    @users = User.order([:last_name,:first_name])
+    @users = User.order([:last_name, :first_name]).where(:performer_id => nil)
     @letter = params[:letter].to_s.first.upcase.presence || User.present_directory_letters.first
     if @letter != params[:letter]
       redirect_to directory_users_path(:letter => @letter)
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     else    
       @users = User.order("created_at DESC").limit(10)
     end
+    @users = @users.where(:performer_id => nil)
     render :template => 'organisations/directory'
   end
   
