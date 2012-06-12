@@ -1,6 +1,9 @@
 -url_option = user.new_record? && promoter ? {:url => promoter_users_path(promoter)} : {}
 =semantic_form_for(user, {:multipart => true}.merge(url_option)) do |form|
-  =tabs('details', 'profile', 'organisations/tabs/links', :form => form)
+  -if user.performer
+    =tabs('details', :form => form)
+  -else
+    =tabs('details', 'profile', 'organisations/tabs/links', :form => form)
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
     

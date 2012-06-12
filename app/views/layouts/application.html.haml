@@ -11,6 +11,9 @@
     =google_analytics_js
   -body_tag do
     .main-wrapper
+      #beta-bar
+        This website is a work in progress. 
+        =link_to_slug('Click here to read more about the beta.', :beta)
       -if flash.present?
         =yield_with_bootstrap(render_flash)
       =render("layouts/header")

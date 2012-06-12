@@ -20,7 +20,7 @@ class Ability
       # user ability
       can [:create, :show], Post
       can [:update, :destroy], Post, :user_id => user.id
-      can [:show, :update], User, :id => user.id
+      can [:show, :update, :edit], User, :id => user.id
       can :search, :all
       can :read, Performer
       can :read, Promoter        
