@@ -1,4 +1,4 @@
--filtered_tours = @tag ? tours.tagged_with(@tag, :on => @tag_context) : tours.send(future_past_all)
+-filtered_tours = @tag ? tours.order('start_on').tagged_with(@tag, :on => @tag_context) : tours.order('start_on').send(future_past_all)
 -if filtered_tours.empty?
   %p No tours found.
 -else
@@ -9,16 +9,18 @@
           %td.span2
             =image_for(tour, "100x100#", :class => "pull-left mr-1")
           %td
-            %h3=link_to_self(tour)
+            %h3
+              =link_to_self(tour)
+              %small=tour.dates_string
             =simple_format(truncate(tour.description.to_s, :length => 300))
-            %h4 Shows
-            %ul.unstyled
-              -tour.dates.send(future_past_all || 'all').each do |tour_date|
-                %li
-                  =tour_date.date.to_s(:month_day_year_or_not)
-                  \-
-                  =link_to_self(tour_date.venue)
-            -if future_past_all == 'all' && can?(:edit,tour)
+            -if !tour.booked_dates.empty?
+              %h4 Shows
+              %ul.unstyled
+                -tour.booked_dates.send(future_past_all || 'all').each do |tour_date|
+                  %li
+                    =tour_date.date.to_s(:month_day_year_or_not)
+                    \-
+                    =link_to_self(tour_date.venue)
+            -if future_past_all == 'all' && can?(:edit, tour)
               .options_panel
                 =link_to("Edit tour", edit_tour_path(tour))
-                =link_to("Edit tour dates", edit_tour_path(tour, :anchor => "dates"))

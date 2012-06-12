@@ -134,7 +134,7 @@
                   =link_to("Add info on your scale of work", edit_performer_path(performer))
               -else
                 =list_tags(performer, :work_scales)
-        -if current_tour = performer.tours.first
+        -if current_tour = performer.tours.order('start_on').first
           .row
             .span12
               %h4 Current show:

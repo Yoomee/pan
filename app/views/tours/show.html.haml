@@ -58,15 +58,14 @@
               %li
                 =tour_date.date.to_s(:month_day_year_or_not)
                 \-
-                =link_to_self(tour_date.venue)          
+                =link_to_self(tour_date.venue)
       -if tour.sibling_tours.present?
         .span3.mt-2
           %h4 Other shows
           %ul.unstyled
-            -tour.performer.tour_dates.where(["tours.id != ?", tour.id]).each do |tour_date|
+            -tour.sibling_tours.each do |other_tour|
               %li
-                ="#{tour_date.tour} #{tour_date.date.to_s(:date)}"
-                =link_to("view", tour_date.tour)
+                =link_to(other_tour.name_with_dates, other_tour)
         
   .span9
     %h1
@@ -126,4 +125,4 @@
       =back_link
       =link_to("Edit tour", edit_tour_path(tour)) if can?(:edit,tour)
       =link_if_can("Delete tour", [:destroy, tour], :confirm => "Are you sure?")
-      =link_to("Manage bookings", bookings_tour_path(tour)) if can?(:edit,tour)      
+      =link_to("Manage bookings", bookings_tour_path(tour)) if can?(:bookings, tour)
