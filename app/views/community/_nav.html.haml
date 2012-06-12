@@ -3,7 +3,9 @@
     .container
       %ul.nav
         =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
-        =li_with_active(current_page?(users_path), link_to("Members", directory_users_path(:letter => 'A')))
+        %li
+          =link_to_function "Notifications", "alert('Sorry this is not available yet')"
+        =li_with_active((controller_name == 'users' && action_name != 'show'), link_to("Members", directory_users_path(:letter => 'A')))
         =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         =li_with_active(controller_name == "venues", link_to("Venues", venues_path))
         -if current_user

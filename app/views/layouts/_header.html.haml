@@ -1,27 +1,13 @@
 .container#header
   .row#header_row
-    .span4
+    .span3
       .row
         .span3
           %h1#site_logo
             %span
-              =Settings.site_name
-        .span3
-          =link_to_slug('About', 'about-tourbook', :class => 'subnav_link')
-          =link_to_slug('contact', :class => 'subnav_link')
-          =link_to("Sitemap", pages_path, :class => "subnav_link")
-    .span8
-      #nav.main-nav
-        %ul.unstyled
-          =li_with_active(current_page?(root_path), link_to("Home", root_path))
-          -if can?(:index, Performer)
-            =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
-          -else
-            =li_with_active(slug_is?('for-artists'), link_to_slug('Performers', 'for-performers'))
-          -if can?(:read, Post)
-            =li_with_active(viewing_community?, link_to("Community", community_path))
-          -else
-            =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))
+              =link_to "/" do
+                =Settings.site_name
+    .span9
       #header_links
         -if user_signed_in?
           .btn-group
@@ -73,3 +59,14 @@
           =link_to(sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary") do
             %icon.icon-signin
             =t(:login)
+      #nav.main-nav
+        %ul.unstyled
+          =li_with_active(current_page?(root_path), link_to("Home", root_path))
+          -if can?(:index, Performer)
+            =li_with_active(controller_name=='performers', link_to("Performers", performers_path))
+          -else
+            =li_with_active(slug_is?('for-artists'), link_to_slug('Performers', 'for-performers'))
+          -if can?(:read, Post)
+            =li_with_active(viewing_community?, link_to("Community", community_path))
+          -else
+            =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))            

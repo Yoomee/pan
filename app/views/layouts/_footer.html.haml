@@ -2,4 +2,6 @@
   .row
     .span12
       %footer.footer
-        Yoomee
+        =link_to_slug('About', 'about-tourbook', :class => 'subnav_link')
+        =link_to_slug('contact', :class => 'subnav_link')
+        =link_to("Sitemap", pages_path, :class => "subnav_link")
