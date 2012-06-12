@@ -50,6 +50,7 @@ Pan::Application.routes.draw do
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
+      get ':tag_context/:tag', :action => 'index', :as => 'tag'      
     end
     member do
       put 'update_role/:role', :action => 'update_role', :as => 'update_role'

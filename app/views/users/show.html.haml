@@ -32,27 +32,21 @@
             %span Nothing entered yet.
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
         -else
-          %ul.unstyled.mt-1
-            -user.skill_list.each do |tag_name|
-              %li=tag_name.titleize.humanize
+          =list_tags(user, :skills)
         %h4.mt-1 I can offer help with
         -if user.skills_offered_list.empty?
           .italic        
             %span Nothing entered yet.
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)          
         -else        
-          %ul.unstyled.mt-1
-            -user.skills_offered_list.each do |tag_name|
-              %li=tag_name.titleize.humanize
+          =list_tags(user, :skills_offered)
         %h4.mt-1 I would like help with 
         -if user.skills_needed_list.empty?
           .italic        
             %span Nothing entered yet.
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
         -else
-          %ul.unstyled.mt-1
-            -user.skills_needed_list.each do |tag_name|
-              %li=tag_name.titleize.humanize
+          =list_tags(user, :skills_needed)
     =render("organisations/facebook_twitter", :organisation => user)
     .row.mt-2
       .span9
