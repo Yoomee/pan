@@ -24,9 +24,12 @@
       -if controller_name.venues?
         =li_with_active(action_name.index?, link_to("Map",venues_path))
         =li_with_active(action_name.latest?, link_to("Latest", {:controller => controller_name, :action => 'latest'}))
+      -elsif controller_name.users?
+        =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+        =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
       -else
         =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
-      =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+        =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
       -if action_name.search?
         =li_with_active(true, link_to('Search', '#'))
       -if @tag
