@@ -16,15 +16,13 @@ class Ability
       # admin ability
     elsif user
       # user ability
-      can [:create, :read], Post
+      can [:create, :show], Post
       can [:update, :destroy], Post, :user_id => user.id
-      can :update, User, :id => user.id
+      can [:show, :update], User, :id => user.id
       can :search, :all
-      can :show, User
       can :read, Performer
       can :read, Promoter        
       can :read, Tour
-      can :read, Venue
       
       # performer ability
       if user.try(:performer_id)
@@ -35,6 +33,9 @@ class Ability
       # promoter admin ability
       if user.promoter_admin?
         can [:create, :update], Promoter, :id => user.promoter_id
+        can :read, Post        
+        can :read, User        
+        can :read, Venue        
         can :manage, User, :promoter_id => user.promoter_id
         can :manage, Venue, :promoter_id => user.promoter_id
       end
