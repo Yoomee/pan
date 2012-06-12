@@ -1,3 +1,7 @@
+-if current_page?(users_path)
+  .row.mb-2
+    .span12
+      =render("community/nav")
 -if current_page?(venues_path)
   =google_maps_javascript_include_tag
   =content_for :head do

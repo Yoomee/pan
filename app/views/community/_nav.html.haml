@@ -7,7 +7,7 @@
           =link_to "#" do
             Notifications
             %span.badge 1
-        %li=link_to("Members", "#")
+        =li_with_active(controller_name == "users", link_to("Members", users_path))
         =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         %li=link_to("Leaderboard", "#")
         -if current_user
