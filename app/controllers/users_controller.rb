@@ -53,6 +53,12 @@ class UsersController < ApplicationController
     render :template => 'organisations/directory'
   end
   
+  def show
+    if user.performer
+      redirect_to(user.performer)
+    end
+  end
+  
   def update_role
     if user.update_attribute(:role, params[:role])
       UserMailer.new_admin(user).deliver if user.promoter_admin?
