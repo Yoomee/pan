@@ -338,7 +338,8 @@ div.resource .tag-list {
 }
 
 /*========== User ==========*/
-#links .nested-fields .remove_fields {
+#links .nested-fields .remove_fields,
+#resources .nested-fields .remove_fields {
   margin-top:27px;
 }
 
@@ -446,8 +447,11 @@ div.slideshow {
 
 /*========== Tour availability ==========*/
 .booking-visible {display:none}
-#availability_datepicker{
-  position:relative;
+#availability_datepicker .ui-datepicker{
+  padding:0;
+}
+#availability_datepicker .ui-datepicker-group {
+height: 234px;
 }
 #availability_datepicker .ui-state-active{
   background-color:#fff;
@@ -512,4 +516,40 @@ p.registration-step {
 h2.register-title {
   clear: both;
   margin: 0 0 15px;
+}
+
+/*========== Resources tab ==========*/
+#resources .nested-fields .file{
+  width:200px;
+}
+
+/*========== Registration ==========*/
+
+form.registration-form .registration-title {
+  margin-bottom: 20px;
+}
+form.registration-form p {
+  margin-bottom: 20px;
+}
+form.registration-form .organisation-type-box {
+  height: 145px;
+}
+form.registration-form .organisation-type-box p {
+  margin: 5px 0 10px 0;
+  height: 80px;
+}
+
+/*========== Venue profile ==========*/
+
+body.controller_venues #technical.tab-pane dl,
+body.controller_venues #technical.tab-pane h3 {
+  float: left;
+  clear: both;
+}
+body.controller_venues #technical.tab-pane dt {
+  float: left;
+  clear: left;
+}
+body.controller_venues #technical.tab-pane dd {
+  float: left;
 }

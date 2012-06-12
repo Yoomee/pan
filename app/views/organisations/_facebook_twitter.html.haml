@@ -7,3 +7,7 @@
     -else
       .span6=facebook_likebox(organisation.facebook_url)
       .span3=twitter_widget(organisation.twitter_username, :count => 5, :height => 208)
+-elsif organisation.is_a?(Performer) && logged_in_as_performer?(organisation)
+  .italic
+    A live feed of your Facebook posts and your Twitter stream can be displayed here. You just need to add links to your Facebook page and your Twitter profile.
+    =link_to("Click here to add them", edit_performer_path(organisation, :anchor => "links"))

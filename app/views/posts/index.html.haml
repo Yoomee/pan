@@ -6,8 +6,6 @@
     .span8
       %h1=title("Discussions")
   .row
-    .span2
-      =render("tags/list", :tags => top_tags)
     .span8
       -if can?(:create, Post)
         =render("posts/remote_form", :post => current_user.posts.build)

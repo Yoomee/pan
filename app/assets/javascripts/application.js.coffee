@@ -30,6 +30,7 @@ Link =
 window.Link = Link
 
 $(document).ready () ->
+  $("select.chosen:not([multiple='multiple'])").chosen()
   $("select[multiple='multiple']").chosen(
     persistent_create_option: false,
     create_option_text: "Add",

@@ -8,15 +8,13 @@ class Promoter < ActiveRecord::Base
     has created_at, updated_at
   end
 
-  acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources
+  acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources, :skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered
   
   has_many :users, :dependent => :nullify
   has_many :venues, :dependent => :destroy
   
   validates :region, :presence => true
   validates :email, :email => true, :allow_blank => true
-  
-  acts_as_taggable_on :skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered
   
   def address
     %w{address1 address2 city postcode country}.map {|fld| send(fld)}.select(&:present?).join(', ')

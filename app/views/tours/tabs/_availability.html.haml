@@ -5,34 +5,12 @@
       TourForm.init();
     });
 
-
-=form.inputs 'Set the start and end dates of the tour', :class => 'availability-visible' do
+=form.inputs 'Set the start and end dates of the tour' do
   =form.input :start_on_s, :as => :string, :label => "Start date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
   =form.input :end_on_s, :as => :string, :label => "End date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mt-2'}
 =form.inputs do
-  %legend.availability-visible Click a date to toggle its availability
-  %legend.booking-visible Click a date to add or edit a booking
+  %legend Click a date to toggle its availability
   #availability_datepicker.pull-left.mt-2.mr-2
-    #availability_popover.popover.right
-      .arrow
-      .popover-inner
-        .popover-title
-          %h4 Add a booking
-          #popover_close.close &times;
-        .popover-content
-          .form
-            .control-group
-              %label Venue
-              .controls
-                =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(Venue.all, 'id', 'name')}".html_safe
-            .control-group
-              %label Or a venue that isn't on Tourbook
-              .controls
-                =text_field_tag 'popover_venue_name', '', :id => 'popover_external_venue_name'
-              
-        .popover-footer
-          =link_to('Delete','#', :class => 'btn btn-danger pull-left', :id => 'popover_destroy')
-          =link_to('Save booking','#', :class => 'btn btn-primary pull-right', :id => 'popover_save')
   %table.table.table-condensed#availability_key.pull-left.mt-2
     %thead
       %tr
@@ -42,26 +20,20 @@
         %td.key-color.key-color-available
         %td
           %b Available
-          %em.availability-visible
+          %em
             \- click to make unavailable 
-          %em.booking-visible
-            \- click to add booking
       %tr
         %td.key-color.key-color-unavailable
         %td
           %b Unavailable
-          %em.availability-visible
-            \- click to make available 
-          %em.booking-visible
-            \- go to 'Tour dates' tab to change          
+          %em
+            \- click to make available       
       %tr
         %td.key-color.key-color-booked
         %td
           %b Booked
-          %em.availability-visible
-            \- go to 'Bookings' tab to change          
-          %em.booking-visible
-            \- click to edit or remove booking
+          %em
+            \- go to 'Manage bookings' to change          
 .hide
   =form.inputs do
     =form.semantic_fields_for :dates do |date_form|

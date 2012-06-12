@@ -69,10 +69,16 @@
                 =link_to("view", tour_date.tour)
         
   .span9
-    %h1.mb-1
+    %h1
       =title(tour)
       %small=link_to_self(tour.performer)
+    %h3.mb-1=tour.dates_string
     =simple_format(tour.description)
+    -if tour.genre_list.present?
+      .row.mt-2
+        .span5.mb-1
+          %h4 Genres
+          =list_tags(tour, :genres)
     .row.mt-2
       .span5
         %h4 Technical requirements
@@ -118,6 +124,6 @@
   .span9
     =options_panel do
       =back_link
-      -if can?(:edit,tour)
-        =link_to("Edit tour", edit_tour_path(tour))
+      =link_to("Edit tour", edit_tour_path(tour)) if can?(:edit,tour)
       =link_if_can("Delete tour", [:destroy, tour], :confirm => "Are you sure?")
+      =link_to("Manage bookings", bookings_tour_path(tour)) if can?(:edit,tour)      

@@ -1,0 +1,9 @@
+#welcome.modal.hide.fade
+  .modal-header
+    %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
+    %h3="Welcome to #{Settings.site_name}"
+  .modal-body
+    ="Congratulations, you have created a profile for #{performer}."
+    Now you can update it with content and share it with promoters.
+  .modal-footer
+    =link_to("Close", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')

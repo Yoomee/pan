@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  
   include YmUsers::User
   include YmCore::Multistep
   
@@ -16,15 +17,20 @@ class User < ActiveRecord::Base
 
   has_many :links, :as => :attachable, :dependent => :destroy
   accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
+
+  acts_as_taggable_on :skills, :skills_offered, :skills_needed
   
-  before_save :create_organisation, :on => :create
-  attr_accessor :organisation_type, :organisation_name, :organisation_region
-  validates_presence_of :organisation_name, :if => lambda{|u| u.current_step == "organisation_details"}
-  validates_presence_of :organisation_region, :if => lambda{|u| u.organisation_type == 'promoter' && u.current_step == "organisation_details"}
+  before_create :create_organisation, :set_role
   
-  acts_as_taggable_on :skills
-  acts_as_taggable_on :skills_offered
-  acts_as_taggable_on :skills_needed
+  attr_writer :organisation_type, :organisation_name
+  boolean_accessor :stepping_back
+  
+  has_roles :admin, :promoter_staff, :promoter_admin
+  
+  validates_presence_of :organisation_name, :if => lambda{|u| !u.stepping_back? && u.organisation_type == 'performer' && u.current_step_gte("organisation_details")}
+  validates_presence_of :promoter, :if => lambda{|u| !u.stepping_back? && u.organisation_type == 'promoter' && u.current_step_gte("organisation_details")}
+  
+  validate :only_has_one_organisation
   
   def self.present_directory_letters
     order(:last_name).select("UCASE(SUBSTR(last_name,1,1)) AS letter").group("SUBSTR(last_name,1,1)").collect(&:letter)
@@ -33,9 +39,25 @@ class User < ActiveRecord::Base
   def description
     bio
   end
+  alias_method :summary, :description
   
   def facebook_url
     @facebook_url ||= links.find_by_host('facebook.com').try(:url)
+  end
+  
+  def organisation_name
+    @organisation_name.presence || performer.try(:name) || promoter.try(:name)
+  end
+  
+  def organisation_type
+    case
+    when @organisation_type.present?
+      @organisation_type
+    when performer.present?
+      'performer'
+    when promoter.present?
+      'promoter'
+    end
   end
   
   def steps
@@ -52,14 +74,23 @@ class User < ActiveRecord::Base
   
   private
   def create_organisation
-    if organisation_type.present?
-      if organisation_type == 'promoter'
-        self.create_promoter(:name => organisation_name, :region => organisation_region)
-      else
-        self.create_performer(:name => organisation_name)
-      end
+    if @organisation_type == 'performer' && performer.nil? && promoter.nil?
+      self.create_performer(:name => organisation_name)
     end
   end
   
+  def only_has_one_organisation
+    if performer.present? && promoter.present?
+      errors.add(:promoter, "can't have a promoter and a performer")
+    end
+  end
+  
+  def set_role
+    return true if role.present?
+    if promoter.present?
+      self.role = "promoter_staff"
+    end
+    true
+  end
   
 end

@@ -1,13 +1,15 @@
 -if @user.organisation_type == "performer"
-  %h2 What's the name of your performing arts company?
+  %h2.registration-title Tell us about your performing organisation
   =form.inputs do
     =form.input :organisation_name, :label => "Name"
 -else
-  %h2 Tell us about your organisation?
+  %h2.registration-title Which organisation do you belong to?
+  %p Please select your organisation below and click continue.
   =form.inputs do
-    =form.input :organisation_name, :label => "Name"
-    =form.input :organisation_region, :label => "Region", :as => :select, :collection => Pan::REGIONS
-
+    =form.input :promoter, :as => :select, :label => false, :input_html => {:class => "chosen", :"data-placeholder" => "Select your organisation"}
+  %p.mt-2
+    Can't find your organisation in the list?
+    =link_to("Click here", new_enquiry_path('promoter'))
 =form.buttons do
   =form.commit_button "Back", :button_html => {:name => "back_button", :class => 'btn pull-left'}
   =form.commit_button "Continue", :button_html => {:class => 'btn-primary pull-right'}

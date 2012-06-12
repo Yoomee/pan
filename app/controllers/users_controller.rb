@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
   include YmUsers::UsersController
-  
+  load_and_authorize_resource
+
   expose(:wall_posts) {user.wall_posts.page(params[:page])}
   expose(:promoter) {Promoter.find_by_id(params[:promoter_id])}
   
@@ -48,5 +49,18 @@ class UsersController < ApplicationController
     render :template => 'organisations/directory'
   end
   
+  def update_role
+    if user.update_attribute(:role, params[:role])
+      UserMailer.new_admin(user).deliver if user.promoter_admin?
+      flash[:notice] = "#{user} updated"
+    else
+      flash[:error] = "#{user} could not be updated"
+    end
+    if params[:role].match(/promoter/)
+      redirect_to individuals_promoters_path
+    else
+      redirect_to users_path
+    end
+  end  
   
 end

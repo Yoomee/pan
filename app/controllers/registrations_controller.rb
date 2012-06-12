@@ -18,13 +18,14 @@ class RegistrationsController < ApplicationController
     session[:user_params].deep_merge!(params[:user]) if params[:user]
     @user = User.new(session[:user_params])
     @user.current_step = session[:user_step]
+    @user.stepping_back = params[:back_button].present?
     if @user.valid?
-      if params[:back_button]
+      if @user.stepping_back?
         @user.previous_step
       elsif @user.last_step?
         @user.save if @user.all_valid?
       else
-        @user.next_step
+        @user.next_step unless @user.current_step=="organisation_type" && @user.organisation_type.blank?
       end
       session[:user_step] = @user.current_step
     end
@@ -33,11 +34,12 @@ class RegistrationsController < ApplicationController
     else
       session[:user_step] = session[:user_params] = nil
       flash[:notice] = "Welcome to Tourbook"
+      UserMailer.welcome_email(@user).deliver
       sign_in(@user)
       if @user.performer
-        redirect_to @user.performer
+        redirect_to performer_path(@user.performer, :modal => "welcome")
       else
-        redirect_to @user.promoter
+        redirect_to promoter_path(@user.promoter, :modal => "welcome")
       end
     end
   end

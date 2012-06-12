@@ -1,0 +1,12 @@
+#welcome.modal.hide.fade
+  .modal-header
+    %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
+    %h3="Welcome to #{Settings.site_name}"
+  .modal-body
+    %p
+      ="Congratulations, you now have your own individual profile and you have been added to #{promoter}."
+    %p
+      If you are expecting administrator rights for your promoter, this will happen soon and you will be notified via email.
+      If not, you can connect with other promoters and performers on the community page.
+  .modal-footer
+    =link_to("Close", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')

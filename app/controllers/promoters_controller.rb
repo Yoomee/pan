@@ -1,5 +1,7 @@
 class PromotersController < ApplicationController
 
+  load_and_authorize_resource
+
   expose(:promoters) {Promoter.order('name')}
   expose(:promoter)
   expose(:posts) {promoter.posts.page(params[:page])}
@@ -34,10 +36,13 @@ class PromotersController < ApplicationController
       render :template => 'organisations/directory'
     end
   end
-
   
   def index
-    @promoters = Promoter.order("created_at DESC").limit(10)
+    if (@tag_context = params[:tag_context]).present? && (@tag = params[:tag]).present?
+      @promoters = Promoter.tagged_with(@tag, :on => @tag_context)
+    else
+      @promoters = Promoter.order("created_at DESC").limit(10)
+    end
     render :template => 'organisations/directory'
   end
   
@@ -53,6 +58,7 @@ class PromotersController < ApplicationController
   
   def edit;end
   
+  def individuals;end  
   
   def new;end
 

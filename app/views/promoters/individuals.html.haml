@@ -1,0 +1,33 @@
+.row
+  -if promoters.empty?
+    .span12    
+      %p There are no promoters yet.
+  -else
+    .span12.mb-1
+      %h1.pull-left=title("Promoter individuals")
+    .span12
+      %table.table
+        %tbody
+          -promoters.joins(:users).group('promoters.id').each do |promoter|
+            %tr
+              %td
+                =image_for(promoter, "50x50#", :class => "pull-left mr-1")
+                %h4.directory-item.pull-left=link_to_self(promoter)
+              %td
+                %table.table.table-bordered
+                  %tbody
+                    -promoter.users.order("role='promoter_admin' DESC").each do |user|
+                      %tr
+                        %td.span5
+                          =link_to_self(user, :target => "_blank")
+                          -if user.promoter_admin?
+                            %span.label Admin
+                        %td.span3
+                          -if user.promoter_admin?
+                            =link_to("Remove admin rights", update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?")
+                          -else
+                            =link_to("Make admin", update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.")
+.row
+  .span12
+    =options_panel do
+      =back_link

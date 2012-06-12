@@ -9,6 +9,8 @@ class Tour < ActiveRecord::Base
   
   date_accessors :start_on, :end_on
   
+  acts_as_taggable_on :genres
+  
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :performer, :presence => true
@@ -20,6 +22,23 @@ class Tour < ActiveRecord::Base
   
   scope :past, joins(:dates).where("booked = 1 && tour_dates.date < ?", Date.today).group("tours.id")
   scope :future, joins(:dates).where("booked = 1 && tour_dates.date >= ?", Date.today).group("tours.id")
+  
+  def name_with_performer
+    "#{performer} - #{name}"
+  end
+  
+  def name_with_dates
+    "#{name} #{dates_string}".strip
+  end
+  
+  def dates_string
+    date_format = "%o %b %Y"
+    if all_present?(:start_on, :end_on)
+      DateTimeSpan.new(start_on, end_on, date_format).to_s
+    else
+      start_on.try(:strftime, date_format) || end_on.try(:strftime, date_format)
+    end
+  end
   
   def booked_dates
     dates.where(:booked => true)

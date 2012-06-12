@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   include YmUsers::ApplicationController
   
-  before_filter :authenticate
+  before_filter :authenticate, :clear_registration_session!
 
   AUTH_USERS = { "pan" => "highlands123" }
 
@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
     return true unless Rails.env.production?
     authenticate_or_request_with_http_basic do |username|
       AUTH_USERS[username]
+    end
+  end
+
+  def clear_registration_session!
+    unless %{registrations enquiries}.include?(controller_name)
+      session[:user_params] = session[:user_step] = nil
     end
   end
   

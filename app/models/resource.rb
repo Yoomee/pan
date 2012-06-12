@@ -1,6 +1,7 @@
 class Resource < ActiveRecord::Base
   
-  belongs_to :user  
+  belongs_to :user
+  belongs_to :target, :polymorphic => true  
   has_many :posts, :as => :target
     
   acts_as_taggable_on :resource_tags

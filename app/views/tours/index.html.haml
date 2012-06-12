@@ -7,36 +7,29 @@
 .row
   .span12
     %ul.nav.nav-tabs
-      %li.active=link_to("Upcoming", '#future', :"data-toggle" => "tab")
-      %li=link_to("Past", '#past', :"data-toggle" => "tab")
-      -if can?(:edit, Tour)
-        %li=link_to("All", '#all', :"data-toggle" => "tab")
+      -if @tag
+        %li=link_to("Upcoming", tours_path(:anchor => 'future'))
+        %li=link_to("Past", tours_path(:anchor => 'past'))
+        -if can?(:edit, Tour)
+          %li=link_to("All", tours_path(:anchor => 'all'))
+        %li.active
+          =link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag.to_s.titleize.humanize}".html_safe, '#')
+      -else
+        %li{:class => "#{@tag.nil? ? 'active' : ''}"}=link_to("Upcoming", '#future', :"data-toggle" => "tab")
+        %li=link_to("Past", '#past', :"data-toggle" => "tab")
+        -if can?(:edit, Tour)
+          %li=link_to("All", '#all', :"data-toggle" => "tab")
     .tab-content
-      -%w{future past all}.each do |future_past_all|
-        .tab-pane{:id => future_past_all, :class => "#{'active' if future_past_all == 'future'}"}
-          %table.table
-            %tbody
-              -tours.send(future_past_all).each do |tour|
-                %tr
-                  %td.span2
-                    =image_for(tour, "100x100#", :class => "pull-left mr-1")
-                  %td
-                    %h3=link_to_self(tour)
-                    =simple_format(truncate(tour.description.to_s, :length => 300))
-                    %h4 Shows
-                    %ul.unstyled
-                      -tour.dates.send(future_past_all).each do |tour_date|
-                        %li
-                          =tour_date.date.to_s(:month_day_year_or_not)
-                          \-
-                          =link_to_self(tour_date.venue)
-                    -if future_past_all == 'all' && can?(:edit,tour)
-                      .options_panel
-                        =link_to("Edit tour", edit_tour_path(tour))
-                        =link_to("Edit tour dates", edit_tour_path(tour, :anchor => "dates"))
-                    
-
+      -if @tag
+        .tab-pane.active
+          =render("tours/table", :future_past_all => nil)
+      -else
+        -%w{future past all}.each do |future_past_all|
+          .tab-pane{:id => future_past_all, :class => "#{future_past_all == 'future' ? 'active' : ''}"}
+            =render("tours/table", :future_past_all => future_past_all)
 .row
   .span12
     =options_panel do
       =back_link
+      -if performer && can?(:new, performer.tours.build)
+        =link_to("Add a tour", new_performer_tour_path(performer))

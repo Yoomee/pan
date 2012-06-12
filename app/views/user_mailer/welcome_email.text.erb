@@ -1,0 +1,21 @@
+Welcome to <%=Settings.site_name%>
+===============================================
+ 
+Hi <%=@user.first_name%>,
+
+<%if @user.performer%>
+Congratulations, you now have your own profile: <%=user_url(@user)%>.
+
+A performer profile has also been created for <%=@user.performer%>. You can view and edit it here: <%=performer_url(@user.performer)%>.
+<%elsif @user.promoter%>
+Congratulations, you now have your own individual profile: <%=user_url(@user)%>. You have also been added to <%=@user.promoter%>: <%=promoter_url(@user.promoter)%>.
+
+If you are expecting administrator rights for your promoter, this will happen soon and you will be notified via email. If not, you can connect with other promoters and performers on the community page: <%=community_url%>.
+<%else%>
+To login to the site, just follow this link: <%=sign_in_url%>.
+<%end%>
+
+Thanks,
+
+The <%=Settings.site_name%> team
+<%=Settings.site_url%>
