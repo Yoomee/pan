@@ -8,6 +8,8 @@ Pan::Application.routes.draw do
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
+      get 'genres', :action => 'index', :as => 'genres', :tag_context => 'genres'
+      get 'art_forms', :action => 'index', :as => 'art_forms', :tag_context => 'art_forms'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
   end
