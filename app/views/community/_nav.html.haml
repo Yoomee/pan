@@ -10,3 +10,4 @@
         =li_with_active(controller_name == "venues", link_to("Venues", venues_path))
         -if current_user
           =li_with_active(current_page?(current_user), link_to("My profile", current_user))
+        %li=link_to_function "Notifications", "alert('Sorry this is not available yet')"
