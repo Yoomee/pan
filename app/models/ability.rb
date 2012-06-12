@@ -23,7 +23,6 @@ class Ability
       can :read, Performer
       can :read, Promoter        
       can :read, Tour
-      can :read, Venue
       
       # performer ability
       if user.try(:performer_id)
@@ -36,6 +35,7 @@ class Ability
         can [:create, :update], Promoter, :id => user.promoter_id
         can :read, Post        
         can :read, User        
+        can :read, Venue        
         can :manage, User, :promoter_id => user.promoter_id
         can :manage, Venue, :promoter_id => user.promoter_id
       end
