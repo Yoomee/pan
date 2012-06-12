@@ -1,6 +1,6 @@
 -params[:id] ||= params[:enquiry][:form_name]
 
-%h1=title(@enquiry.form_title)
+%h1.mb-2=title(@enquiry.form_title)
 -if @enquiry.form_intro.present?
   %p=@enquiry.form_intro
 =render("form", :enquiry => @enquiry)

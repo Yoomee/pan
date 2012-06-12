@@ -2,6 +2,10 @@ Pan::Application.routes.draw do
   
   root :to => 'home#index'
 
+  match 'beta' => 'enquiries#new', :id => 'feedback', :as => 'beta'
+  match '/promoters/applications' => 'enquiries#index', :form_name => 'promoter', :as => 'promoter_enquiries'
+  match '/beta/feedback' => 'enquiries#index', :form_name => 'feedback', :as => 'feedback_enquiries'
+
   resources :performers, :except => [:show]
   resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    

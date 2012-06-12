@@ -11,7 +11,7 @@ module PromoterForm
   
   email_from Settings.site_email
   email_subject "New application to join #{Settings.site_name}"
-  email_to "ian@yoomee.com"
+  email_to "panpromoters@gmail.com"
 
   response_message "Thank you for submitting your application. We will get in touch with you soon."
   

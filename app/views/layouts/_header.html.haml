@@ -45,6 +45,10 @@
                   =link_to(tags_path) do
                     %icon.icon-tags
                     Manage tags
+                %li
+                  =link_to(feedback_enquiries_path) do
+                    %i.icon-bullhorn
+                    Beta feedback                    
                 %li.divider
               %li
                 =link_to(edit_user_path(current_user)) do
