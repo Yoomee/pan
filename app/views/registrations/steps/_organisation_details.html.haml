@@ -1,11 +1,12 @@
 %p.registration-step Step 3 of 3
 -if @user.organisation_type == "performer"
   %h2.registration-title Tell us about your performing organisation
+  %p Please type in the name of the organisation you represent:
   =form.inputs do
     =form.input :organisation_name, :label => "Name"
 -else
-  %h2.registration-title Nearly there!
-  %p We need to know which organisation you belong to. Please select from the list below and click continue:
+  %h2.registration-title Who do you work for?
+  %p Please select from the list below and click continue:
   =form.inputs do
     =form.input :promoter, :as => :select, :label => false, :input_html => {:class => "chosen", :"data-placeholder" => "Select your organisation"}
   %p.mt-2
