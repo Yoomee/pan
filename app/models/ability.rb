@@ -32,10 +32,13 @@ class Ability
         can [:create, :update], Tour, :performer_id => user.performer_id
       end
       
+      if user.promoter
+        can :read, Post              
+      end
+      
       # promoter admin ability
       if user.promoter_admin?
-        can [:create, :update], Promoter, :id => user.promoter_id
-        can :read, Post        
+        can [:create, :update], Promoter, :id => user.promoter_id    
         can :read, User        
         can :read, Venue
         can :manage, User, :promoter_id => user.promoter_id

@@ -2,5 +2,7 @@
 
 %h1.mb-2=title(@enquiry.form_title)
 -if @enquiry.form_intro.present?
-  %p=@enquiry.form_intro
+  %p.well.help-text
+    %i.icon-info-sign
+    =@enquiry.form_intro
 =render("form", :enquiry => @enquiry)

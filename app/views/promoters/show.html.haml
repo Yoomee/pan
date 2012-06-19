@@ -46,12 +46,14 @@
                 =link_to(link, link.url, :target => '_blank')
 
     
-  .span7
+  .span6
     %h1.mb-1=title(promoter)
-  .span2
-    =link_to('&uarr; All promoters'.html_safe, promoters_path, :class => "back-to-all")
-  .span9=render('organisations/notes', :organisation => promoter)
-  .span9
+  -if false  
+    .span2
+      =link_to('&uarr; All promoters'.html_safe, promoters_path, :class => "back-to-all")
+    
+  .span6=render('organisations/notes', :organisation => promoter)
+  .span6
     -if promoter.slideshow    
       %ul.nav.nav-tabs
         %li.active
@@ -196,6 +198,23 @@
         #gallery.tab-pane.fade
           .span9
             =render("organisations/slideshow", :slideshow => promoter.slideshow)
+
+  .span2.well
+    %b.icon-info-sign
+      Help
+    %p
+      What can you do on this page?
+    %li
+      =link_to() do
+        Edit your organisation's profile
+    %li
+      =link_to() do
+        Add a venue
+    %li
+      =link_to() do
+        Post a comment for the community to see
+
+    
 .row.mt-2
   .span9
     =options_panel do
