@@ -32,4 +32,10 @@ class Promoter < ActiveRecord::Base
     [:skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered].any?{|list| !send(list).empty?}
   end
   
+  class << self
+    def region_from_url(region_url)
+      Pan::REGIONS.each.collect { |region| region if region.to_url == region_url }.compact[0]
+    end
+  end
+  
 end

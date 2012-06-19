@@ -34,6 +34,7 @@ Pan::Application.routes.draw do
     resources :venues
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
+      get 'region(/:region_url)', :action => 'region', :as => 'region'
       get 'search'
       get 'individuals'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'      

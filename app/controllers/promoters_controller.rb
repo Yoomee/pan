@@ -37,6 +37,13 @@ class PromotersController < ApplicationController
     end
   end
   
+  def region
+    @region_url = params[:region_url].presence || 'argyll-and-bute'
+    @region = Promoter.region_from_url(@region_url)
+    @promoters = Promoter.where(:region => @region)
+      render :template => 'organisations/region'
+  end
+  
   def index
     if (@tag_context = params[:tag_context]).present? && (@tag = params[:tag]).present?
       @promoters = Promoter.tagged_with(@tag, :on => @tag_context)

@@ -1,0 +1,51 @@
+-if viewing_community?
+  .row.mb-2
+    .span12
+      =render("community/nav")
+
+.row
+  .span12
+    %h1.pull-left
+      =title(controller_name.titleize)
+    %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
+      =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+      %input.btn{:type => 'submit', :value => "Search"}
+      
+.row
+  .span12
+    %ul.nav.nav-tabs
+      =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+      =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
+      =li_with_active(action_name.region? && @tag.nil?, link_to("Regions", {:controller => controller_name, :action => 'region'}))      
+
+.row
+  .span12
+    %ul#directorynav.nav.nav-pills
+      -Pan::REGIONS.each do |region|
+        %li{ :class => "#{region == @region ? 'active' : ''}"}
+          =link_to(region, {:controller => controller_name, :action => 'region', :region_url => region.to_url})
+
+.row
+  .span12    
+    -if directory_items.empty?
+      %p
+        There are no promoters in this region
+    -else
+      %table.table.table-bordered.table-striped
+        %tbody
+          -directory_items.each do |directory_item|
+            %tr
+              %td.span4
+                =image_for(directory_item, "50x50#", :class => "pull-left mr-1")
+                %h4.pull-left.directory-item=link_to_self(directory_item)
+              %td.span8
+                =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
+
+.row
+  .span12
+    =options_panel do
+      =back_link
+      =link_if_can("New #{controller_name.singularize}", [:new, controller_name.classify.constantize]) unless controller_name.venues?
+      -if controller_name.promoters?
+        =link_to("Manage individuals", individuals_promoters_path) if can?(:individuals, Promoter)
+        =link_to("List applications to join", promoter_enquiries_path) if can?(:read, Enquiry)

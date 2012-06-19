@@ -3,6 +3,7 @@
     .container
       %ul.nav
         =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
+        =li_with_active((controller_name == 'promoters' && action_name != 'show'), link_to("Promoters", directory_promoters_path(:letter => 'A')))
         =li_with_active((controller_name == 'users' && action_name != 'show'), link_to("Members", directory_users_path(:letter => 'A')))
         =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         =li_with_active(controller_name == "venues", link_to("Venues", venues_path))
