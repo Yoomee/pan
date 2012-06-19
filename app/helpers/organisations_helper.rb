@@ -14,7 +14,7 @@ module OrganisationsHelper
   
   def directory_title
     if controller_name.promoters?
-      "Promoters"
+      "Organisations"
     elsif controller_name.users?
       "People"
     else
