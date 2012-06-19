@@ -12,4 +12,14 @@ module OrganisationsHelper
     end
   end
   
+  def directory_title
+    if controller_name.promoters?
+      "Promoters"
+    elsif controller_name.users?
+      "People"
+    else
+      controller_name.titleize
+    end
+  end
+  
 end
