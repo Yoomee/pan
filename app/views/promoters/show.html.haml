@@ -53,7 +53,7 @@
       =link_to('&uarr; All promoters'.html_safe, promoters_path, :class => "back-to-all")
     
   .span6=render('organisations/notes', :organisation => promoter)
-  .span6
+  .span5
     -if promoter.slideshow    
       %ul.nav.nav-tabs
         %li.active
@@ -199,21 +199,13 @@
           .span9
             =render("organisations/slideshow", :slideshow => promoter.slideshow)
 
-  .span2.well
-    %b.icon-info-sign
-      Help
-    %p
-      What can you do on this page?
-    %li
-      =link_to() do
-        Edit your organisation's profile
-    %li
-      =link_to() do
-        Add a venue
-    %li
-      =link_to() do
-        Post a comment for the community to see
-
+  .span3.well
+    -if logged_in_as_promoter_admin?(promoter)
+      =render("helpboxes/promoter_admin")
+    -elsif logged_in_as_promoter?(promoter)
+      =render("helpboxes/promoter_member")
+    -else
+      =render("helpboxes/promoter_viewing")
     
 .row.mt-2
   .span9
