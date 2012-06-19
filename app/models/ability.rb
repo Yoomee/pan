@@ -23,7 +23,6 @@ class Ability
       can [:show, :update, :edit], User, :id => user.id
       can :search, :all
       can :read, Performer
-      can :read, Promoter        
       can :read, Tour
       
       # performer ability
@@ -32,8 +31,12 @@ class Ability
         can [:create, :update], Tour, :performer_id => user.performer_id
       end
       
+      # promoter ability      
       if user.promoter
-        can :read, Post              
+        can :read, Post  
+        can :read, User
+        can :read, Venue   
+        can [:read, :region], Promoter                
       end
       
       # promoter admin ability
