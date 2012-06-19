@@ -47,11 +47,11 @@ module Pan
   end
 end
 
-Pan::REGIONS = [
-  "Argyll and Bute",
-  "Highland",
-  "Moray",
-  "Northern Isles",
-  "Western Isles",
-  "Perthshire"
-]
+Pan::REGIONS = {
+    "argyll-and-bute" => "Argyll and Bute",
+    "highland" => "Highland",
+    "moray" => "Moray",
+    "northern-isles" => "Northern Isles",
+    "western-isles" => "Western Isles",
+    "perthshire" => "Perthshire"
+  }
