@@ -19,8 +19,11 @@
                 -tour.booked_dates.send(future_past_all || 'all').each do |tour_date|
                   %li
                     =tour_date.date.to_s(:month_day_year_or_not)
-                    \-
-                    =link_to_self(tour_date.venue)
+                    -if tour_date.venue
+                      \-
+                      =link_to_self(tour_date.venue)
+                    -elsif tour_date.external_venue_name.present?
+                      ="- #{tour_date.external_venue_name}"
             -if future_past_all == 'all' && can?(:edit, tour)
               .options_panel
                 =link_to("Edit tour", edit_tour_path(tour))

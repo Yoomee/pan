@@ -34,7 +34,7 @@ class Promoter < ActiveRecord::Base
   
   class << self
     def region_from_url(region_url)
-      Pan::REGIONS.each.collect { |region| region if region.to_url == region_url }.compact[0]
+      Pan::REGIONS[region_url]
     end
   end
   

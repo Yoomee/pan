@@ -2,7 +2,7 @@
   =form.input :first_name
   =form.input :last_name
   =form.input :promoter_name, :label => "Organisation name"
-  =form.input :promoter_region, :label => "Region", :as => :select, :collection => Pan::REGIONS
+  =form.input :promoter_region, :label => "Region", :as => :select, :collection => Pan::REGIONS.values
   =form.input :email, :label => "Email address"
   =form.input :phone, :label => "Telephone number"
   =form.input :message, :label => "Optional message", :as => :text, :input_html => {:class => "span6", :rows => 5}

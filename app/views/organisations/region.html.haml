@@ -21,7 +21,7 @@
 .row
   .span12
     %ul#directorynav.nav.nav-pills
-      -Pan::REGIONS.each do |region|
+      -Pan::REGIONS.values.each do |region|
         %li{ :class => "#{region == @region ? 'active' : ''}"}
           =link_to(region, {:controller => controller_name, :action => 'region', :region_url => region.to_url})
 
