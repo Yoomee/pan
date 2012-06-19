@@ -41,7 +41,7 @@ class PromotersController < ApplicationController
     @region_url = params[:region_url].presence || 'argyll-and-bute'
     @region = Promoter.region_from_url(@region_url)
     @promoters = Promoter.where(:region => @region).order(:name)
-      render :template => 'organisations/region'
+    render :template => 'organisations/region'
   end
   
   def index
