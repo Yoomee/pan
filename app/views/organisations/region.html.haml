@@ -16,7 +16,11 @@
     %ul.nav.nav-tabs
       =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
       =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
-      =li_with_active(action_name.region? && @tag.nil?, link_to("Regions", {:controller => controller_name, :action => 'region'}))      
+      =li_with_active(action_name.region? && @tag.nil?, link_to("Regions", {:controller => controller_name, :action => 'region'}))
+      =li_with_active(@tag_context == 'genres' &&  @tag.nil?, link_to('Genres', genres_promoters_path))
+      =li_with_active(@tag_context == 'art_forms' &&  @tag.nil?, link_to('Art forms', art_forms_promoters_path))
+      =li_with_active(@tag_context == 'funders' &&  @tag.nil?, link_to('Funders', funders_promoters_path))
+      =li_with_active(@tag_context == 'work_scales' &&  @tag.nil?, link_to('Scale of work', scale_of_work_promoters_path))      
 
 .row
   .span12

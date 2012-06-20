@@ -37,6 +37,10 @@ Pan::Application.routes.draw do
       get 'region(/:region_url)', :action => 'region', :as => 'region'
       get 'search'
       get 'individuals'
+      get 'genres', :action => 'index', :as => 'genres', :tag_context => 'genres'
+      get 'art_forms', :action => 'index', :as => 'art_forms', :tag_context => 'art_forms'
+      get 'funders', :action => 'index', :as => 'funders', :tag_context => 'funders'
+      get 'scale_of_work', :action => 'index', :as => 'scale_of_work', :tag_context => 'work_scales'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'      
     end
   end
