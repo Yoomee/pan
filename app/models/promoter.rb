@@ -16,8 +16,11 @@ class Promoter < ActiveRecord::Base
   validates :region, :presence => true
   validates :email, :email => true, :allow_blank => true
   
-  def address
-    %w{address1 address2 city postcode country}.map {|fld| send(fld)}.select(&:present?).join(', ')
+  def address(options={})
+    options.reverse_merge!(:country=>true)
+    fields = %w{address1 address2 city postcode}
+    fields << "country" if options[:country]
+    fields.map {|fld| send(fld)}.select(&:present?).join(', ')
   end  
   
   def country
