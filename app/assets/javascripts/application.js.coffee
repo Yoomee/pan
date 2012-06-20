@@ -40,6 +40,9 @@ $(document).ready () ->
         text: term
       )
   )
+  $('a[data-scroll]').live 'click', (event) ->
+    event.preventDefault()
+    $.scrollTo(`$(this)`.data('scroll'), {duration: 1000})
   
   $('textarea[maxlength]').live 'keyup blur', ->
     maxlength = $(this).attr('maxlength');
