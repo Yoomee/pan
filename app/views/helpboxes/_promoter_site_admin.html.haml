@@ -1,0 +1,17 @@
+%b.icon-info-sign
+  Help
+%p
+  As a website administration you can do the following here:
+%ul
+  %li
+    =link_to("Edit their general details", edit_promoter_path(promoter) )
+  %li
+    =link_to("Update contact details", edit_promoter_path(promoter) + "#contact_info")
+  %li
+    =link_to("Update skills and resources", edit_promoter_path(promoter) + "#resources")
+  %li
+    =link_to("Add website links", edit_promoter_path(promoter) + "#resources")    
+  %li
+    =link_to("Add a venue", new_promoter_venue_path(promoter))
+  %li
+    =link_to("Add photos to their gallery", edit_promoter_path(promoter) + "#slideshow")

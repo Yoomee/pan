@@ -1,0 +1,13 @@
+%b.icon-info-sign
+  Help
+%p
+  This is your organisation's profile page. What can you do here?
+%ul
+  %li
+    =link_to("Edit this organisation", edit_promoter_path(promoter) )
+  %li
+    =link_to("Add a venue", new_promoter_venue_path(promoter))
+  %li
+    =link_to("View other organisations", directory_promoters_path)
+  %li
+    =link_to("Read useful resources")

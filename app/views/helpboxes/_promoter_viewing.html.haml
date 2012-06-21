@@ -1,0 +1,11 @@
+%b.icon-info-sign
+  Help
+%p
+  What can you do on this page?
+%ul
+  %li
+    =link_to("Post a message on their wall", "#", :data => {:scroll => "#wall"})
+  %li
+    =link_to("Find other organisations", directory_promoters_path)
+  %li
+    =link_to("View my own organisation", current_user.promoter)
