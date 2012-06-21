@@ -28,7 +28,7 @@
               %li
                 =promoter
                 =render_address(promoter)
-            -elsif logged_in_as_promoter_admin?(promoter)
+            -elsif logged_in_as_admin_of_this_promoter?(promoter)
               No contact details entered yet.  
               =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info")
             -else
@@ -212,7 +212,7 @@
             =render("organisations/slideshow", :slideshow => promoter.slideshow)
 
   .span3.well
-    -if logged_in_as_promoter_admin?(promoter)
+    -if logged_in_as_admin_of_this_promoter?(promoter)
       =render("helpboxes/promoter_admin")
     -elsif logged_in_as_promoter?(promoter)
       =render("helpboxes/promoter_member")

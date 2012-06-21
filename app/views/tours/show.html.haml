@@ -121,6 +121,11 @@
         .span9
           %h4 Fees
           =simple_format(tour.fees)
+          
+      .span12
+        .span9
+          Book a date
+        =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
             
 .row.mt-2
   .span9

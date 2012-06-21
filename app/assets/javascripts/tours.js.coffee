@@ -91,7 +91,7 @@ TourForm =
       dateFields.find('input[name$="[external_venue_name]"]').val($('#popover_external_venue_name').val())
       TourForm.dates[dateText].venue_id = null
       TourForm.dates[dateText].external_venue_name = $('#popover_external_venue_name').val()
-    if TourForm.performerPage
+    unless TourForm.bookingsPage
       $('form').submit()
     $('#availability_popover').hide()
     $('#availability_datepicker').datepicker('refresh');
