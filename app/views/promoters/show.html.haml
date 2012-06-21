@@ -29,6 +29,7 @@
                 =promoter
                 =render_address(promoter)
             -elsif logged_in_as_promoter_admin?(promoter)
+              No contact details entered yet.  
               =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info")
             -else
               No contact details entered yet.  
@@ -67,13 +68,20 @@
     .tab-content
       #profile.tab-pane.fade.in.active
     
-        =simple_format(promoter.description)
+        -if promoter.description.present?
+          =simple_format(promoter.description)
+        -else
+          No description has been entered yet.
+          -if logged_in_as_promoter_admin?(promoter)
+            %br
+            =link_to("Click to update", edit_promoter_path(promoter))
+                    
         .row.mt-2
           .span9
-            %h4.mb-1 Venues
+            %h4 Venues
             -if promoter.venues.empty?
-              =promoter
-              doesn't have any venues yet.
+              This organinisation has no venues.
+              %br
               =link_if_can "Add one", [:new, promoter, :venue]
             -else
               %ul.unstyled
