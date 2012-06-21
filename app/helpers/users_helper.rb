@@ -10,7 +10,7 @@ module UsersHelper
     current_user.try(:promoter) == promoter
   end
   
-  def logged_in_as_promoter_admin?(promoter)
+  def logged_in_as_admin_of_this_promoter?(promoter)
     current_user.try(:promoter_admin?) && logged_in_as_promoter?(promoter) 
   end
   

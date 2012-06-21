@@ -7,6 +7,11 @@
         TourForm.performerPage = true
         TourForm.init();
       });
+      
+-if current_user.role_is?(:promoter_admin)
+  hello promoter_admin
+-else
+  hello not promoter_admin
 .row
   .span3
     .row.profile-left-col
@@ -224,7 +229,7 @@
                     =form.commit_button "Save"         
 
           -future_tours = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
-          -if future_tours
+          -unless future_tours.empty?
             .row.mt-2
               .span12
                 %h4 Other future shows:
