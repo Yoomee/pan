@@ -1,3 +1,6 @@
+.alert
+  %b.icon-info-sign
+  Use this form to define the skills and resources offered by this organisation.
 =form.inputs do
   %legend Skills
   =form.input :skill_list, :label => "Main skill areas", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
