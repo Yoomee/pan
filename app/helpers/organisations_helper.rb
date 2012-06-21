@@ -14,12 +14,18 @@ module OrganisationsHelper
   
   def directory_title
     if controller_name.promoters?
-      "Organisations"
+      title = "Organisations"
     elsif controller_name.users?
-      "People"
+      title = "People"
     else
-      controller_name.titleize
+      title = controller_name.titleize
     end
+    if @tag
+      title += " with " + @tag_context +  " \"" + @tag + "\""
+      title.gsub!('_',' ')
+      title.gsub!('-',' ') 
+    end
+    title
   end
   
 end
