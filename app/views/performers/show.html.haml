@@ -151,7 +151,8 @@
           .row.mt-2
             .span12
               %h4 Current show:
-              =link_to(current_tour.name_with_dates, current_tour)
+              .span9
+                =link_to(current_tour.name_with_dates, current_tour)
               =render("tours/calendar_form", :tour => current_tour, :bookings_page => false, :remote => true)
 
           -future_tours = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
