@@ -6,7 +6,7 @@
 .row
   .span12
     %h1.pull-left
-      =title(controller_name.titleize)
+      =title(directory_title)
     %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
       =text_field_tag 'q', params[:q], :class => "input-medium search-query"
       %input.btn{:type => 'submit', :value => "Search"}
