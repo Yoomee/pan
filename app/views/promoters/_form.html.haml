@@ -1,4 +1,6 @@
-=semantic_form_for(promoter, :html => {:multipart => true}) do |form|
-  =tabs('details', ['resources', 'Skills & Resources'], 'organisations/tabs/links', 'contact_info', ["slideshow", "Photo gallery"], :form => form)
-  =form.buttons do
-    =form.commit_button "Save"
+%p
+  =semantic_form_for(promoter, :html => {:multipart => true}) do |form|
+    =tabs(['details','General details'], 'contact_info', ['resources', 'Skills & Resources'], 'organisations/tabs/links', ["slideshow", "Photo gallery"], :form => form)
+    =form.buttons do
+      =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
+      
