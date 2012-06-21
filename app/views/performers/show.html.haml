@@ -1,9 +1,18 @@
+-if current_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).first
+  -content_for(:head) do
+    :javascript
+      $(document).ready(function() {
+        TourForm.dates = #{{}.tap{|hash| current_tour.dates.each{|date| hash[date.date_s] = date}}.to_json};
+        TourForm.bookingMode = true
+        TourForm.performerPage = true
+        TourForm.init();
+      });
 .row
   .span3
     .row.profile-left-col
       .span3
         -if performer.image
-        =image_for(performer, "220x")
+          =image_for(performer, "220x")
         -elsif logged_in_as_performer?(performer)
           =link_to(image_placeholder("220x", :text => "Add an image"), edit_performer_path(performer))
       .span3.mt-2
@@ -134,12 +143,7 @@
                   =link_to("Add info on your scale of work", edit_performer_path(performer))
               -else
                 =list_tags(performer, :work_scales)
-        -if current_tour = performer.tours.order('start_on').first
-          .row
-            .span12
-              %h4 Current show:
-              =link_to(current_tour.name_with_dates, current_tour)
-        .row.mt-2
+        .row
           -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
             .span4
               %h4 Photos/videos
@@ -147,24 +151,98 @@
                 -media_posts.each do |media_post|
                   .span1.mb-1
                     =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")
-          -if !performer.venues.empty?
-            .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
-              %h4 Venues regularly visited
-              .row.mt-1
-                -performer.venues.each do |venue|
-                  .span1.mb-1
-                    =link_to(image_for(venue, "60x60#"), venue)
-                    =link_to_self(venue, :class => "small-info-text")
-        -if !performer.tour_dates.future.empty?
+                      =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")   
+
+
+        = # TODO: remember to check who should be able to see the calendar and book dates
+        = # and which venues they should be able to choose
+        -if current_tour.present?
           .row.mt-2
-            .span9
-              %h4 Proposed tour dates
-              .row.mt-1
-                -performer.tour_dates.future.each do |tour_date|
-                  .span1.mb-1
-                    =link_to(image_for(tour_date.tour, "60x60#"), tour_date.tour)
-                    %span.small-info-text=tour_date.date.to_s(:date)
+            .span12
+              %h4 Current show:
+              =link_to(current_tour.name_with_dates, current_tour)
+              .span9 Click a date to add or edit a booking
+              #availability_datepicker.pull-left.mt-2.mr-2
+                #availability_popover.popover.right
+                  .arrow
+                  .popover-inner
+                    .popover-title
+                      %h4 Add a booking
+                      #popover_close.close &times;
+                    .popover-content
+                      .form
+                        .control-group
+                          %label Venue
+                          .controls
+                            =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(Venue.all, 'id', 'name')}".html_safe
+                        .control-group
+                          %label Or a venue that isn't on Tourbook
+                          .controls
+                            =text_field_tag 'popover_venue_name', '', :id => 'popover_external_venue_name'
+                    .popover-footer
+                      =link_to('Delete booking','#', :class => 'btn btn-danger pull-left', :id => 'popover_destroy')
+                      =link_to('Save booking','#', :class => 'btn btn-primary pull-right', :id => 'popover_save')
+                      
+                  
+
+
+              %table.table.table-condensed#availability_key.pull-left.mt-2
+                %thead
+                  %tr
+                    %th{:colspan => 2} Key
+                %tbody
+                  %tr
+                    %td.key-color.key-color-available
+                    %td
+                      %b Available
+                      %em
+                        \- click to add booking
+                  %tr
+                    %td.key-color.key-color-booked
+                    %td
+                      %b Booked       
+                      %em
+                        \- click to edit or remove booking
+                  %tr
+                    %td.key-color.key-color-unavailable
+                    %td
+                      %b Unavailable
+                      %em
+                                 
+
+              .clearfix
+              =semantic_form_for(current_tour, :remote => true) do |form|
+                -# Needs to have ID of availability for JS to work
+                #availability.hide
+                  =form.inputs do
+                    =form.input :start_on_s, :as => :hidden
+                    =form.input :end_on_s, :as => :hidden
+                    =form.semantic_fields_for :dates do |date_form|
+                      =render("date_fields", :f => date_form)
+                    =link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"
+                  =form.buttons do
+                    =form.commit_button "Save"         
+
+          -future_tours = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
+          -if future_tours
+            .row.mt-2
+              .span12
+                %h4 Other future shows:
+                -future_tours.each do |tour|
+                  .span9
+                    =link_to(tour.name_with_dates, tour)
+
+            
+              
+          -if performer.venues.present?
+            .row.mt-2
+              .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
+                %h4 Venues regularly visited
+                .row.mt-1
+                  -performer.venues.each do |venue|
+                    .span1.mb-1
+                      =link_to(image_for(venue, "60x60#"), venue)
+                      =link_to_self(venue, :class => "small-info-text")
         =render("organisations/facebook_twitter", :organisation => performer)
     
         -if posts.present? || can?(:create, Post)

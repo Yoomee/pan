@@ -3,6 +3,7 @@
     $(document).ready(function() {
       TourForm.dates = #{{}.tap{|hash| tour.dates.each{|date| hash[date.date_s] = date}}.to_json};
       TourForm.bookingMode = true
+      TourForm.performerPage = false
       TourForm.init();
     });
 

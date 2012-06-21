@@ -28,7 +28,7 @@
         =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
       -elsif controller_name.promoters?
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
-        =li_with_active(action_name.index? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
+        =li_with_active(action_name.index? && @tag_context.nil? && @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
         =li_with_active(action_name.regions? && @tag.nil?, link_to("Regions", {:controller => controller_name, :action => 'region'}))
         =li_with_active(@tag_context == 'genres' &&  @tag.nil?, link_to('Genres', genres_promoters_path))
         =li_with_active(@tag_context == 'art_forms' &&  @tag.nil?, link_to('Art forms', art_forms_promoters_path))
