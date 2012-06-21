@@ -1,0 +1,75 @@
+-content_for(:head) do
+  :javascript
+    $(document).ready(function() {
+      TourForm.dates = #{{}.tap{|hash| tour.dates.each{|date| hash[date.date_s] = date}}.to_json};
+      TourForm.bookingMode = true
+      TourForm.bookingsPage = #{bookings_page}
+      TourForm.init();
+    });
+    
+%legend.booking-visible Click a date to add or edit a booking
+#availability_datepicker.pull-left.mt-2.mr-2
+  #availability_popover.popover.right
+    .arrow
+    .popover-inner
+      .popover-title
+        %h4 Add a booking
+        #popover_close.close &times;
+      .popover-content
+        .form
+          .control-group
+            %label Venue
+            .controls
+              -if bookings_page
+                =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(Venue.all, 'id', 'name')}".html_safe
+              -else
+                -if current_user.role_is?(:promoter_admin)
+                  =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(current_user.promoter.venues, 'id', 'name')}".html_safe
+                -else
+                  =select_tag 'popover_venue_id', "<option value=''>Select a venue</option>#{options_from_collection_for_select(Venue.all, 'id', 'name')}".html_safe
+          .control-group
+            %label Or a venue that isn't on Tourbook
+            .controls
+              =text_field_tag 'popover_venue_name', '', :id => 'popover_external_venue_name'
+
+      .popover-footer
+        =link_to('Delete booking','#', :class => 'btn btn-danger pull-left', :id => 'popover_destroy')
+        =link_to('Save booking','#', :class => 'btn btn-primary pull-right', :id => 'popover_save')
+%table.table.table-condensed#availability_key.pull-left.mt-2
+  %thead
+    %tr
+      %th{:colspan => 2} Key
+  %tbody
+    %tr
+      %td.key-color.key-color-available
+      %td
+        %b Available
+        %em
+          \- click to add booking
+    %tr
+      %td.key-color.key-color-booked
+      %td
+        %b Booked       
+        %em
+          \- click to edit or remove booking
+    %tr
+      %td.key-color.key-color-unavailable
+      %td
+        %b Unavailable
+        -if bookings_page
+          %em
+            \- edit tour to change availability         
+
+.clearfix
+=semantic_form_for(tour, :remote => remote) do |form|
+  -# Needs to have ID of availability for JS to work
+  #availability.hide
+    =form.inputs do
+      =form.input :start_on_s, :as => :hidden
+      =form.input :end_on_s, :as => :hidden
+      =form.semantic_fields_for :dates do |date_form|
+        =render("tours/date_fields", :f => date_form)
+      =link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"  
+  %div{:class => "#{bookings_page ? '' : 'hide'}"}
+    =form.buttons do
+      =form.commit_button "Save"
