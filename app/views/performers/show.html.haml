@@ -170,7 +170,7 @@
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9
-              %h4.mb-1 Updates
+              %h4.mb-1 Posting wall
               -if can?(:create, Post)
                 =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
               =render("posts/posts", :posts => posts)
