@@ -12,12 +12,11 @@
       });
 .row
   .span12
-    %h1.pull-left
+    %h2.pull-left
       =title(directory_title)
     %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
       =text_field_tag 'q', params[:q], :class => "input-medium search-query"
       %input.btn{:type => 'submit', :value => "Search"}
-      
 .row
   .span12
     %ul.nav.nav-tabs
@@ -71,7 +70,7 @@
                   =link_to_tag_in_context(tag.name, controller_name, @tag_context)
           -else
             %tr
-              %td No promoter has used "#{@tag_context.titleize}" yet
+              %td No organisation has entered information for this yet.
                 
   -else
     .span12    
