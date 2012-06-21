@@ -22,12 +22,16 @@
         %p=promoter.region
       -if promoter.any_present?(:address, :phone, :email)
         .span3.mt-2
-          %h4 Contact
+          %h4 Contact details
           %ul.unstyled
-            -if promoter.address.present?
+            -if promoter.address(:country=>false).present?
               %li
                 =promoter
                 =render_address(promoter)
+            -elsif logged_in_as_promoter_admin?(promoter)
+              =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info")
+            -else
+              No contact details entered yet.  
             -if promoter.phone.present?
               %li
                 Tel:
@@ -79,7 +83,7 @@
                     =link_to 'View', venue
         .row.mt-2
           .span9
-            %h4 Individual profiles
+            %h4 People that work here
           
             .row.mt-1
               -if promoter.users.empty?
@@ -98,7 +102,6 @@
             .row
               -if promoter.any_present?(:genre_list, :art_form_list)
                 .span4
-                  %h3.mb-1 Currently promoting
                   .row
                     -if !promoter.genre_list.empty?
                       .span2
@@ -190,10 +193,11 @@
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9
-              %h4.mb-1 Updates
-              -if can?(:create, Post)
-                =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
-              =render("posts/posts", :posts => posts)
+              #wall
+                %h4.mb-1 Posting wall
+                -if can?(:create, Post)
+                  =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
+                =render("posts/posts", :posts => posts)
       -if promoter.slideshow
         #gallery.tab-pane.fade
           .span9
@@ -204,6 +208,8 @@
       =render("helpboxes/promoter_admin")
     -elsif logged_in_as_promoter?(promoter)
       =render("helpboxes/promoter_member")
+    -elsif logged_in_as_site_admin?
+      =render("helpboxes/promoter_site_admin")
     -else
       =render("helpboxes/promoter_viewing")
     
