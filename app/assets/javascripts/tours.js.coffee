@@ -91,18 +91,20 @@ TourForm =
       dateFields.find('input[name$="[external_venue_name]"]').val($('#popover_external_venue_name').val())
       TourForm.dates[dateText].venue_id = null
       TourForm.dates[dateText].external_venue_name = $('#popover_external_venue_name').val()
+    if TourForm.performerPage
+      $('form').submit()
     $('#availability_popover').hide()
     $('#availability_datepicker').datepicker('refresh');
   showPopover: (dateText) ->
     $('#availability_popover').hide()
     tourDate = TourForm.dates[dateText]
     if tourDate.booked
-      $('.popover-title h4').html('Edit booking')
+      $('.popover-title h4').html('Edit booking - #{dateText}')
       $('#popover_destroy').show()
       $('#popover_venue_id').val(tourDate.venue_id)
       $('#popover_external_venue_name').val(tourDate.external_venue_name)
     else
-      $('.popover-title h4').html('Add a booking')
+      $('.popover-title h4').html("Add a booking - #{dateText}")
       $('#popover_venue_id').val(null)
       $('#popover_external_venue_name').val(null)
       $('#popover_destroy').hide()
