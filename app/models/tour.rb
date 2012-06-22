@@ -7,6 +7,9 @@ class Tour < ActiveRecord::Base
   belongs_to :performer
   has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
   
+  has_many :links, :as => :attachable, :dependent => :destroy
+  accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true
+  
   date_accessors :start_on, :end_on
   
   acts_as_taggable_on :genres
@@ -43,6 +46,11 @@ class Tour < ActiveRecord::Base
   def booked_dates
     dates.where(:booked => true)
   end
+  
+  def links_or_performer_links
+    links.presence || performer.links
+  end
+  
   
   def sibling_tours
     performer.tours.without(self)
