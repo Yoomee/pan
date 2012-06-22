@@ -53,32 +53,27 @@
           .span3.mt-2
             %h4 Secondary contact
             =auto_link(performer.contact2_details.join("<br />").html_safe)
-      -future_tour = performer.tours.future.first
+      -future_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now)
       -if logged_in_as_performer?(performer) || future_tour.present?
         .span3.mt-2
-          %h4 Upcoming shows
+          %h4
+            ="Upcoming #{future_tour.count > 1 ? "tours" : "tour"}"
           -if future_tour.nil?
             .italic
               =link_to("Click here", new_performer_tour_path(performer))
               to enter information about your next tour.
-          -elsif future_tour.dates.where(:booked => true).future.empty?
+          -elsif future_tour.empty?
             .italic
               =link_to("Click here", performer_tours_path(performer, :anchor => 'all'))
               to manage all your tours and dates.
           -else
             %ul.unstyled
-              -future_tour.dates.where(:booked => true).future.each do |tour_date|
+              -future_tour.each do |tour|
                 %li
-                  =tour_date.date.to_s(:month_day_year_or_not)
-                  -if tour_date.venue
-                    \-
-                    =link_to_self(tour_date.venue)
-                  -elsif tour_date.external_venue_name.present?
-                    ="- #{tour_date.external_venue_name}"
-            =link_to("View all future shows", performer_tours_path(performer, :anchor => 'future'))
+                  =link_to(tour.name_with_dates, tour)
       -if !performer.tours.past.empty?
         .span3.mt-2
-          %h4 Past shows
+          %h4 Past tours
           =link_to("View all past shows", performer_tours_path(performer, :anchor => 'past'))
         
   .span7
@@ -148,11 +143,12 @@
         = # TODO: remember to check who should be able to see the calendar and book dates
         = # and which venues they should be able to choose
         -if current_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).first
+        
           .row.mt-2
             .span12
               %h4 Current tour - make a booking here:
+              =link_to(current_tour.name_with_dates, current_tour)
               .span9
-                =link_to(current_tour.name_with_dates, current_tour)
               =render("tours/calendar_form", :tour => current_tour, :bookings_page => false, :remote => true)
 
           -future_tours = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
