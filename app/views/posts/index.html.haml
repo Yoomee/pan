@@ -3,10 +3,24 @@
     .span12
       =render("community/nav")
   .row.mb-2
-    .span8
+    .span12
       %h1=title("Discussions")
   .row
     .span8
       -if can?(:create, Post)
         =render("posts/remote_form", :post => current_user.posts.build)
       =render("posts/posts", :posts => posts)
+    .span3.well
+      %b.icon-info-sign
+        Help
+      %p
+        Welcome to the community area for promoters. Here you can see the latest messages and content shared by members.
+      %p
+        You can write something on the top of this page, or alternatively:
+      %ul
+        %li
+          =link_to("Find other organisations", directory_promoters_path)
+        %li
+          =link_to("View my own organisation", current_user.promoter)
+        %li
+          =link_to("Edit your own profile", user_path(current_user))
