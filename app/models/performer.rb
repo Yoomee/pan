@@ -45,5 +45,9 @@ class Performer < ActiveRecord::Base
     end.compact
   end
   
+  def overall_rating
+    return 0 if reviews.count.zero?
+    (reviews.sum(:overall_rating).to_f/reviews.count).ceil
+  end
   
 end
