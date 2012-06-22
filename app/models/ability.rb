@@ -48,7 +48,7 @@ class Ability
         can [:update], Promoter, :id => user.promoter_id    
         can :read, User        
         can :read, Venue
-        can :manage, User, :promoter_id => user.promoter_id
+        can :create, User, :promoter_id => user.promoter_id
         can :manage, Venue, :promoter_id => user.promoter_id
       end
     end

@@ -1,8 +1,7 @@
 -content_for(:head) do
   :javascript
     $(document).ready(function() {
-      TourForm.dates = #{{}.tap{|hash| tour.dates.each{|date| hash[date.date_s] = date}}.to_json};
-      TourForm.tooltips = #{{}.tap{|hash| tour.dates.where('venue_id IS NOT NULL').each{|date| hash[date.date_s] = date.venue.to_s}}.to_json};
+      TourForm.dates = #{{}.tap{|hash| tour.dates.includes(:venue).each{|date| hash[date.date_s] = date}}.to_json(:methods => :venue_name)};
       TourForm.bookingMode = true
       TourForm.bookingsPage = #{bookings_page}
       TourForm.init();

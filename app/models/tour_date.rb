@@ -20,5 +20,8 @@ class TourDate < ActiveRecord::Base
     }
   end
   
+  def venue_name
+    (venue || external_venue_name).to_s
+  end
   
 end
