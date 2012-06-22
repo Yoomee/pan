@@ -38,9 +38,9 @@
                     %icon.icon-music
                     Performers
                 %li
-                  =link_to(promoters_path) do
+                  =link_to(individuals_promoters_path) do
                     %icon.icon-flag
-                    Promoters
+                    Promoters                  
                 %li
                   =link_to(venues_path) do
                     %icon.icon-map-marker
@@ -50,14 +50,19 @@
                     %icon.icon-user
                     Users
                 %li.divider
-                %li
-                  =link_to(tags_path) do
-                    %icon.icon-tags
-                    Manage tags
+                  %li
+                    =link_to(promoter_enquiries_path) do
+                      %icon.icon-comment
+                      Promoter applications                    
                 %li
                   =link_to(feedback_enquiries_path) do
                     %i.icon-bullhorn
                     Beta feedback                    
+                %li
+                  =link_to(tags_path) do
+                    %icon.icon-tags
+                    Manage tags
+
                 %li.divider
               %li
                 =link_to(edit_user_path(current_user)) do
@@ -75,7 +80,7 @@
       #nav.main-nav
         %ul.unstyled
           =li_with_active(current_page?(root_path), link_to("Home", root_path))
-          -if can?(:read, Post)
+          -if can?(:index, Post)
             =li_with_active(viewing_community?, link_to("Community", community_path))
           -else
             =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))          

@@ -1,10 +1,13 @@
+.alert
+  %i.icon-info-sign
+  Use this form to edit your name and contact details.
 =form.inputs do
   =form.input :retained_image, :as => :hidden
-  =form.input :image, :as => :file
-  =form.input :job_title, :label => 'Role'
-  =form.input :bio, :input_html => {:rows => 7, :class => "span5"}
+  =form.input :image, :as => :file, :label=> "Your profile photo - <em>Choose a file to upload</em>".html_safe
+  =form.input :job_title, :label => "Role - <em>What is your main job role?</em>".html_safe
+  =form.input :bio, :input_html => {:rows => 7, :class => "span5"}, :label => "Bio - <em>Enter a short paragraph describing who you are</em>".html_safe
 =form.inputs do
   %legend Skills
-  =form.input :skill_list, :label => "Main skill areas", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
-  =form.input :skills_offered_list, :label => "Skills offered", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
-  =form.input :skills_needed_list, :label => "Skills needed", :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skill_list, :label => "What are your main skills? - <em>Enter a list of keywords</em>".html_safe, :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_offered_list, :label => "In what ways could you help other members? - <em>Enter a list of keywords</em>".html_safe, :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)
+  =form.input :skills_needed_list, :label => "In what areas could you do with support? - <em>Enter a list of keywords</em>".html_safe, :as => :select, :multiple => true, :collection => tag_list_options(:skills, form.object, Tag.skills)

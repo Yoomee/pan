@@ -1,0 +1,12 @@
+%h1.mb-2=title "Reviews for #{@performer}"
+%table.table.table-striped
+  %tbody
+    -@reviews.each do |review|
+      %tr
+        %td.span3
+          %h4=review.title
+          =rating_stars(review.overall_rating)
+        %td
+          =simple_format(review.description)
+=options_panel do
+  =back_link

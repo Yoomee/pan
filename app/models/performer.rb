@@ -14,8 +14,9 @@ class Performer < ActiveRecord::Base
   has_many :posts, :as => :target
   has_many :tours, :dependent => :destroy
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
-  has_many :users, :dependent => :nullify
   has_many :venues, :through => :tour_dates, :uniq => true
+  has_many :users, :dependent => :nullify
+  has_many :reviews, :dependent => :destroy
   
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
@@ -44,5 +45,9 @@ class Performer < ActiveRecord::Base
     end.compact
   end
   
+  def overall_rating
+    return 0 if reviews.count.zero?
+    (reviews.sum(:overall_rating).to_f/reviews.count).ceil
+  end
   
 end

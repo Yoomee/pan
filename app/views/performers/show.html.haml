@@ -7,24 +7,12 @@
         -elsif logged_in_as_performer?(performer)
           =link_to(image_placeholder("220x", :text => "Add an image"), edit_performer_path(performer))
       .span3.mt-2
-        %h4=pluralize(22, 'Review')
-        %table.unstyled
-          %tr
-            %td Excellent
-            %td
-              -3.times do
-                %i.icon.icon-star
-          %tr
-            %td Very good
-            %td
-              -1.times do
-                %i.icon.icon-star
-          %tr
-            %td Average
-          %tr
-            %td Poor
-          %tr
-            %td Terrible
+        %h4=pluralize(performer.reviews.count, 'Review')
+        %div=rating_stars(performer.overall_rating)
+        %ul.unstyled
+          %li=link_to 'Read reviews', performer_reviews_path(performer) unless performer.reviews.count.zero?
+          %li=link_to 'Write a review', new_performer_review_path(performer)              
+       
       -if logged_in_as_performer?(performer) || !performer.links.empty?
         .span3.mt-2
           %h4 Links

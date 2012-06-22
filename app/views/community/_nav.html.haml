@@ -5,8 +5,7 @@
         =li_with_active(current_page?(community_path) || current_page?(posts_path), link_to("Latest", community_path))
         =li_with_active((controller_name == 'promoters' && action_name != 'show'), link_to("Organisations", directory_promoters_path(:letter => 'A')))
         =li_with_active((controller_name == 'users' && action_name != 'show'), link_to("People", directory_users_path(:letter => 'A')))
-        =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         =li_with_active(controller_name == "venues", link_to("Venues", venues_path))
+        =li_with_active(controller_name == "resources", link_to("Resources", resources_path))
         -if current_user
           =li_with_active(current_page?(current_user), link_to("My profile", current_user))
-        %li=link_to_function "Notifications", "alert('Sorry this is not available yet')"
