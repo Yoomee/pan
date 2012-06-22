@@ -201,6 +201,7 @@ select[multiple='multiple']{
 }
 #header_links {
   float: right;
+  width: 170px;
 }
 .header_link {
   font-size: 14px;
