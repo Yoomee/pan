@@ -29,11 +29,20 @@ class Performer < ActiveRecord::Base
     [contact2_name, contact2_email, contact2_phone].compact
   end
   
+  def current_tour
+    tours.order(:end_on).where("end_on > :now", now: Time.now).first
+  end  
+  
+  def future_tours
+    tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
+  end
+  
   def social_urls
     %w{facebook twitter youtube vimeo soundcloud}.collect do |site_name|
       url = send("#{site_name}_url")
       [site_name.humanize, url] if url.present?
     end.compact
   end
+  
   
 end
