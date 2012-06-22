@@ -7,3 +7,5 @@ class Review < ActiveRecord::Base
   
   default_scope order("created_at DESC")
 end
+
+Review::RATING_OPTIONS = [["Terrible", 1], ["Poor", 2], ["Average", 3], ["Very good", 4], ["Excellent", 5]]
