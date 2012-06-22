@@ -124,6 +124,11 @@ body, p {
 	margin-bottom:40px;
 }
 
+.action-link {
+	font-size: 11px;
+	color: #0088cc;
+}
+
 /*========== Forms ==========*/
 select[multiple='multiple']{
   width:620px;
@@ -281,6 +286,10 @@ html, body {
 }
 
 /*========== Profiles ==========*/
+
+.overflow-hidden {
+  overflow: hidden;
+}
 
 .profile-left-col {
   overflow: hidden;

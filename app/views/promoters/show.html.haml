@@ -30,7 +30,7 @@
                 =render_address(promoter)
             -elsif logged_in_as_admin_of_this_promoter?(promoter)
               No contact details entered yet.  
-              =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info")
+              =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info", :class=>'action-link')
             -else
               No contact details entered yet.  
             -if promoter.phone.present?
@@ -72,7 +72,7 @@
           =simple_format(promoter.description)
         -else
           No description has been entered yet.
-          -if logged_in_as_promoter_admin?(promoter)
+          -if logged_in_as_admin_of_this_promoter?(promoter)
             %br
             =link_to("Click to update", edit_promoter_path(promoter))
                     
@@ -88,7 +88,7 @@
                 -promoter.venues.each do |venue|
                   %li
                     =venue
-                    =link_to 'View', venue
+                    =link_to 'View', venue, :class=>'action-link'
         .row.mt-2
           .span9
             %h4 People that work here
