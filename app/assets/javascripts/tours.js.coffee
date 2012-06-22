@@ -10,7 +10,7 @@ TourForm =
     TourForm.startDate = TourForm.getStartDate()
     TourForm.endDate = TourForm.getEndDate()
     if TourForm.startDate && TourForm.endDate
-      TourForm.updateAvailability()
+      TourForm.updateAvailability()      
     $('#tour_start_on_s,#tour_end_on_s').change =>
       setTimeout "TourForm.updateAvailability(true)", 200
     $('#popover_external_venue_name').keydown (e) =>
@@ -51,7 +51,8 @@ TourForm =
   beforeShowDay: (date) ->
     selectable = date >= TourForm.startDate && date <= TourForm.endDate
     dateString = TourForm.dateToString(date)
-    tourDate= TourForm.dates[dateString]
+    tourDate = TourForm.dates[dateString]
+    tooltip = TourForm.tooltips[dateString]
     if tourDate?
       if tourDate.booked
         dateClass= "ui-datepicker-booked"
@@ -59,7 +60,7 @@ TourForm =
         dateClass= "ui-datepicker-available"
     else
       dateClass= 'ui-datepicker-unavailable'
-    [selectable, dateClass]
+    [selectable, dateClass, tooltip]
   onSelect: (dateText, inst) ->
     TourForm.selectedDateText = dateText
     if TourForm.bookingMode
@@ -206,4 +207,5 @@ TourForm =
       $('#availability_datepicker').datepicker( "option", "minDate", TourForm.startDate);
       $('#availability_datepicker').datepicker( "option", "maxDate", TourForm.endDate);
       $('#availability_datepicker').datepicker( "option", "numberOfMonths", TourForm.availableMonths());
+    $('.ui-datepicker-booked').tooltip()
 window.TourForm = TourForm  

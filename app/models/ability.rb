@@ -41,7 +41,10 @@ class Ability
       
       # promoter admin ability
       if user.promoter_admin?
-        can [:create, :update], Promoter, :id => user.promoter_id    
+        can [:create, :update], Promoter, :id => user.promoter_id
+        # TODO: Make this ability work instead of 'can :update, Tour'
+        # can [:create, :update], TourDate, :venue => {:id => user.venue_ids}
+        can :update, Tour
         can :read, User        
         can :read, Venue
         can :manage, User, :promoter_id => user.promoter_id
