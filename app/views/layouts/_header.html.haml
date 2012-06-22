@@ -80,7 +80,7 @@
       #nav.main-nav
         %ul.unstyled
           =li_with_active(current_page?(root_path), link_to("Home", root_path))
-          -if can?(:read, Post)
+          -if can?(:index, Post)
             =li_with_active(viewing_community?, link_to("Community", community_path))
           -else
             =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))          

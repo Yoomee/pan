@@ -12,7 +12,7 @@ class Ability
     can :show, Page, :published => true
     can :index, Page
     can :create, User, :promoter_id => nil
-    can [:read, :modal], Post 
+    can :modal, Post
     
     if user.try(:admin?)
       can :manage, :all
