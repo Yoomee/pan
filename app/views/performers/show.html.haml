@@ -10,7 +10,7 @@
         %h4=pluralize(performer.reviews.count, 'Review')
         %div=rating_stars(performer.overall_rating)
         %ul.unstyled
-          %li=link_to 'Read reviews', performer_reviews_path(performer)
+          %li=link_to 'Read reviews', performer_reviews_path(performer) unless performer.reviews.count.zero?
           %li=link_to 'Write a review', new_performer_review_path(performer)              
        
       -if logged_in_as_performer?(performer) || !performer.links.empty?
