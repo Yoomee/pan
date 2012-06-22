@@ -110,17 +110,17 @@ body, p {
 	-moz-box-shadow: 1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);
 	box-shadow:1px 1px 1px rgba(0,0,0,0.09), -1px -1px 1px rgba(0,0,0,0.05), 2px 2px 3px rgba(0,0,0,0.04), 2px 2px 8px rgba(0,0,0,0.03);  
 }
-.mt1 {
+.mt1, .mt-1 {
 	margin-top:20px;
 }
-.mt2 {
+.mt2, .mt-2 {
 	margin-top:40px;
 }
 
-.mb1 {
+.mb1, .mb-1 {
 	margin-bottom:20px;
 }
-.mb2 {
+.mb2, .mb-2 {
 	margin-bottom:40px;
 }
 
@@ -201,7 +201,7 @@ select[multiple='multiple']{
 }
 #header_links {
   float: right;
-  width: 170px;
+  min-width: 170px;
 }
 .header_link {
   font-size: 14px;
@@ -307,7 +307,12 @@ div.span1.mb-1 {
   text-decoration: none;
   color: #000;
 }
-
+.tech-details td {
+	width: 50%;
+}
+.tech-details dd {
+	margin: 0;
+}
 /*========== Performer ==========*/
 
 .performer_tag_lists .span2 {
