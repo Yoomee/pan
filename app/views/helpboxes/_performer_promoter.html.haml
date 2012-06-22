@@ -1,0 +1,19 @@
+%b.icon-info-sign
+  Help
+%p
+  This is a performer's profile page. As a promoter you can:
+%ul
+  %li
+    -if performer.tours
+      =link_to("View all their tours", performer_tours_path(performer)+"#all" )
+  -if performer.current_tour
+    %li
+      =link_to "Book a date", "#", :data => {:scroll => "#calendar"}
+  %li
+    =link_to "Post a message on their wall", "#", :data => {:scroll => "#wall"}
+%p
+  Alternatively you could:   
+%ul
+  %li
+    =link_to "View all other performers", performers_path 
+  

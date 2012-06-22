@@ -76,12 +76,10 @@
           %h4 Past tours
           =link_to("View all past shows", performer_tours_path(performer, :anchor => 'past'))
         
-  .span7
+  .span5
     %h1.mb-1=title(performer)
-  .span2
-    =link_to('&uarr; All performers'.html_safe, performers_path, :class => "back-to-all")
-  .span9=render('organisations/notes', :organisation => performer)
-  .span9
+  .span5=render('organisations/notes', :organisation => performer)
+  .span5
     -if logged_in_as_performer?(performer) || performer.slideshow
       %ul.nav.nav-tabs
         %li.active
@@ -142,21 +140,20 @@
 
         = # TODO: remember to check who should be able to see the calendar and book dates
         = # and which venues they should be able to choose
-        -if current_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).first
+        -if performer.current_tour
         
           .row.mt-2
-            .span12
-              %h4 Current tour - make a booking here:
-              =link_to(current_tour.name_with_dates, current_tour)
+            #calendar.span10
+              %h2 Current tour
+              =link_to(performer.current_tour.name_with_dates, performer.current_tour)
               .span9
-              =render("tours/calendar_form", :tour => current_tour, :bookings_page => false, :remote => true)
+              =render("tours/calendar_form", :tour => performer.current_tour, :bookings_page => false, :remote => true)
 
-          -future_tours = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
-          -unless future_tours.empty?
+          -unless performer.future_tours.empty?
             .row.mt-2
-              .span12
+              .span10
                 %h4 Other future shows:
-                -future_tours.each do |tour|
+                -performer.future_tours.each do |tour|
                   .span9
                     =link_to(tour.name_with_dates, tour)
 
@@ -176,10 +173,11 @@
         -if posts.present? || can?(:create, Post)
           .row.mt-2
             .span9
-              %h4.mb-1 Posting wall
-              -if can?(:create, Post)
-                =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
-              =render("posts/posts", :posts => posts)
+              #wall
+                %h4.mb-1 Posting wall
+                -if can?(:create, Post)
+                  =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
+                =render("posts/posts", :posts => posts)
         
       -if logged_in_as_performer?(performer) || performer.slideshow
         #gallery.tab-pane.fade
@@ -190,6 +188,14 @@
                 =link_to("Click here to add some photos", edit_performer_path(performer, :anchor => "slideshow"))
             -else
               =render("organisations/slideshow", :slideshow => performer.slideshow)
+    
+  .span3.well  
+    -if current_user.promoter
+      =render("helpboxes/performer_promoter")
+    -elsif logged_in_as_site_admin?
+      =render("helpboxes/performer_site_admin") 
+    -elsif logged_in_as_performer?(performer)
+      =render("helpboxes/performer_admin") 
     
 .row.mt-2
   .span12
