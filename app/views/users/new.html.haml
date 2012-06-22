@@ -1,0 +1,9 @@
+-if promoter
+  %h1=title('Invite new user to join your organisation')
+  .alert.mt-3
+    %b.icon-info-sign
+    Use this page to invite a new user to join the page for
+    =promoter.name
+-else
+  %h1=title('New user')  
+=render('form')

@@ -45,6 +45,7 @@ class Ability
         # TODO: Make this ability work instead of 'can :update, Tour'
         # can [:create, :update], TourDate, :venue => {:id => user.venue_ids}
         can :update, Tour
+        can [:update], Promoter, :id => user.promoter_id    
         can :read, User        
         can :read, Venue
         can :manage, User, :promoter_id => user.promoter_id
