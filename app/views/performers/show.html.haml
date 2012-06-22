@@ -150,7 +150,7 @@
         -if current_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now).first
           .row.mt-2
             .span12
-              %h4 Current show:
+              %h4 Current tour - make a booking here:
               .span9
                 =link_to(current_tour.name_with_dates, current_tour)
               =render("tours/calendar_form", :tour => current_tour, :bookings_page => false, :remote => true)
