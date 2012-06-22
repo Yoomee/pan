@@ -38,9 +38,9 @@
                     %icon.icon-music
                     Performers
                 %li
-                  =link_to(promoters_path) do
+                  =link_to(individuals_promoters_path) do
                     %icon.icon-flag
-                    Promoters
+                    Promoters                  
                 %li
                   =link_to(venues_path) do
                     %icon.icon-map-marker
@@ -50,14 +50,19 @@
                     %icon.icon-user
                     Users
                 %li.divider
-                %li
-                  =link_to(tags_path) do
-                    %icon.icon-tags
-                    Manage tags
+                  %li
+                    =link_to(promoter_enquiries_path) do
+                      %icon.icon-comment
+                      Promoter applications                    
                 %li
                   =link_to(feedback_enquiries_path) do
                     %i.icon-bullhorn
                     Beta feedback                    
+                %li
+                  =link_to(tags_path) do
+                    %icon.icon-tags
+                    Manage tags
+
                 %li.divider
               %li
                 =link_to(edit_user_path(current_user)) do
