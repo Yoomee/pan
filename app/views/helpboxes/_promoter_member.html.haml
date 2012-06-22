@@ -1,8 +1,17 @@
 %b.icon-info-sign
   Help
 %p
-  This is your organisation profile page. What can you do from here?
+  This is your organisation profile page. What can you do here?
 %ul
   %li
+    =link_to("Post a message on this page", "#", :data => {:scroll => "#wall"})
+%p
+  Alternatively you can:    
+%ul
+  %li
+    =link_to("Edit your own profile", user_path(current_user))
+  %li
     =link_to("View other organisations", directory_promoters_path)
+  %li
+    =link_to("View useful resources", "/resources")
       
