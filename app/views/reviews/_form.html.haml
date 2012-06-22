@@ -1,0 +1,7 @@
+=semantic_form_for(@review, :url => performer_reviews_path(@performer)) do |form|
+  =form.inputs do
+    =form.input :title
+    =form.input :description
+    =form.input :overall_rating, :collection => (1..5)
+    
+  =form.buttons
