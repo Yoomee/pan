@@ -1,0 +1,19 @@
+%b.icon-info-sign
+  Help
+%p
+  This is your personal profile. What can you do here?
+%ul
+  %li
+    =link_to("Edit your bio and skills", edit_user_path(user))
+  %li
+    =link_to("Change your profile photo", edit_user_path(user))    
+  %li
+    =link_to("Add links to your page", edit_user_path(user)+"#links")    
+
+%p Alternatively you could:   
+%ul   
+  -if user.promoter  
+    %li
+      =link_to("View your organisation", promoter_path(user.promoter))
+  %li
+    =link_to("Find other people", directory_users_path(:letter=>'A'))    

@@ -1,0 +1,18 @@
+%b.icon-info-sign
+  Help
+%p
+  ="This is #{user.first_name}'s profile page. What can you do here?"
+%ul
+  %li
+    =link_to("Post a message on their wall", "#", :data => {:scroll => "#wall"})
+  -if logged_in_as_site_admin?  
+    %li
+      =link_to("Edit their profile", edit_user_path(user))
+
+%p Alternatively you could:   
+%ul   
+  -if user.promoter  
+    %li
+      =link_to("View their organisation", promoter_path(user.promoter))
+  %li
+    =link_to("Find other people", directory_users_path(:letter=>'A'))

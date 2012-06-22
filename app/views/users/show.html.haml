@@ -7,29 +7,54 @@
     .row
       .span3
         =image_for(user, "220x")
-      -if user.promoter
-        .span3.mt-2
-          -if user.job_title
-            %strong=user.job_title
-            at
+      .span3.mt-2.overflow-hidden  
+        -if user.promoter
+          %h4 Organisation
           =link_to_self user.promoter
-      -if !user.links.empty?
-        .span3.mt-2
-          %h4 Links
+        -elsif user.performer
+          %h4 Performer
+          =link_to_self user.performer
+        -else
+          %h4 Organisation
+          ="#{user.first_name} is not linked to an organisation"
+        
+        %h4.mt-2 Role
+        -if !user.job_title.empty?
+          =user.job_title
+        -else
+          .italic Nothing entered yet
+          .action-link
+            =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
+
+        %h4.mt-2 Links
+        -if !user.links.empty?
           %ul.unstyled.links
             -user.links.each do |link|
               %li
                 =image_tag(link.favicon)
                 =link_to(link, link.url, :target => '_blank')
-  .span9
+          -else
+            .italic Nothing entered yet
+            .action-link
+              =link_to("Edit", edit_user_path(user, :anchor => "links")) if can?(:edit, user)     
+  .span5
     %h1.mb-1=title(user)
-    =simple_format(user.bio)
+    %p
+      %h4 Bio
+      -if user.bio.empty?
+        .italic
+          %span Nothing entered yet.
+        .action-link
+          =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
+      -else    
+        =simple_format(user.bio)
     .row
-      .span9
+      .span5
         %h4 My main skill areas are
         -if user.skill_list.empty?
           .italic
             %span Nothing entered yet.
+          .action-link
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
         -else
           =list_tags(user, :skills)
@@ -37,6 +62,7 @@
         -if user.skills_offered_list.empty?
           .italic        
             %span Nothing entered yet.
+          .action-link
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)          
         -else        
           =list_tags(user, :skills_offered)
@@ -44,15 +70,22 @@
         -if user.skills_needed_list.empty?
           .italic        
             %span Nothing entered yet.
+          .action-link
             =link_to("Edit", edit_user_path(user, :anchor => "profile")) if can?(:edit, user)
         -else
           =list_tags(user, :skills_needed)
     =render("organisations/facebook_twitter", :organisation => user)
-    .row.mt-2
-      .span9
-        %h4.mb-1="#{user.first_name}'s posts"
-        -if can?(:create, Post)
-          =render("posts/remote_form", :post => current_user.posts.build(:target => (current_user==user ? nil : user)))
+  .well.span3
+    -if current_user == user
+      =render("helpboxes/profile_viewing_own")
+    -else
+      =render("helpboxes/profile_viewing_other")
+.row.mt-2
+  .span9.offset3
+    #wall
+      %h4.mb-1="#{user.first_name}'s posting wall"
+      -if can?(:create, Post)
+        =render("posts/remote_form", :post => current_user.posts.build(:target => (current_user==user ? nil : user)))
         =render("posts/posts", :posts => wall_posts)
 .row.mt-2
   .span8
