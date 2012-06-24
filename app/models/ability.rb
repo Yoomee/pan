@@ -37,7 +37,8 @@ class Ability
         can :read, Post  
         can :read, User
         can :read, Venue   
-        can [:read, :region], Promoter                
+        can [:read, :region], Promoter
+        can [:create, :read], Review           
       end
       
       # promoter admin ability
