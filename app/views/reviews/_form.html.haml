@@ -1,7 +1,12 @@
 =semantic_form_for(@review, :url => performer_reviews_path(@performer)) do |form|
   =form.inputs do
-    =form.input :title, :input_html => { :class => 'span6' }
-    =form.input :description, :input_html => { :rows => 10, :class => 'span6' }
-    =form.input :overall_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false
+    =form.input :overall_rating, :label => "What is your overall rating?", :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false
+    %p.mt1
+      =form.input :title, :label => "Title of your review - <em>Please use no more than 10 words</em>".html_safe, :input_html => { :class => 'span6' }
     
-  =form.buttons
+    .well
+      We offer the following questions in guidance, but encourage you to write what you feel is useful: Would you work with the company again? Why? How was relationship with the company pre-show and after-show are they producing work suitable for our network? Did the company understand the needs of rural-touring?  Is their pricing structure accessible?   
+    =form.input :description, :label => "Your review - <em>50 characters minimum</em>".html_safe, :input_html => { :rows => 10, :class => 'span6' }
+    
+  =form.buttons do
+    =form.commit_button "Submit your review", :button_html => {:class => 'btn-primary'}
