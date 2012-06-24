@@ -23,7 +23,7 @@ class Ability
       can [:update, :destroy], Post, :user_id => user.id
       can [:show, :update, :edit], User, :id => user.id
       can :search, :all
-      can :read, Performer
+      can [:read, :rating], Performer
       can :read, Tour
       
       # performer ability
@@ -38,7 +38,7 @@ class Ability
         can :read, User
         can :read, Venue   
         can [:read, :region], Promoter
-        can [:create, :read], Review           
+        can [:create, :read], Review   
       end
       
       # promoter admin ability
