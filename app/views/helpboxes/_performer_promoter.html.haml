@@ -5,11 +5,13 @@
 %ul
   %li
     -if performer.tours
-      =link_to("View all their tours", performer_tours_path(performer)+"#all" )
+      =link_to("View all their tours", performer_tours_path(performer)+"#future" )
   -if performer.current_tour
     %li
       =link_to "Book a date", "#", :data => {:scroll => "#calendar"}
   %li
+    =link_to "Add a review", new_performer_review_path(performer)
+  %li  
     =link_to "Post a message on their wall", "#", :data => {:scroll => "#wall"}
 %p
   Alternatively you could:   
