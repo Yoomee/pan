@@ -1,12 +1,35 @@
 =semantic_form_for(@review, :url => performer_reviews_path(@performer)) do |form|
-  =form.inputs do
-    =form.input :overall_rating, :label => "What is your overall rating?", :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false
+  =form.inputs do   
+    .well
+      =form.input :overall_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false
     %p.mt1
       =form.input :title, :label => "Title of your review - <em>Please use no more than 10 words</em>".html_safe, :input_html => { :class => 'span6' }
     
-    .well
+    .alert.mt1
       We offer the following questions in guidance, but encourage you to write what you feel is useful: Would you work with the company again? Why? How was relationship with the company pre-show and after-show are they producing work suitable for our network? Did the company understand the needs of rural-touring?  Is their pricing structure accessible?   
     =form.input :description, :label => "Your review - <em>50 characters minimum</em>".html_safe, :input_html => { :rows => 10, :class => 'span6' }
+    .alert
+      Where relevant, please rate the performer the aspects below:
+    .row
+      .span3.well
+        =form.input :rural_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Understanding of rural touring" 
+      .span3.well
+        =form.input :small_venue_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Ability to produce for small, rural venues"
+      .span3.well
+        =form.input :relationship_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Relationship with promoter"
+    .row
+      .span3.well
+        =form.input :support_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Over-all support to promoters"
+      .span3.well
+        =form.input :value_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Value for money"       
+      .span3.well
+        =form.input :marketing_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Marketing materials"
+    .row    
+      .span3.well
+        =form.input :workshop_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Workshop delivery/appropriateness."
+    
+  
+    
     
   =form.buttons do
     =form.commit_button "Submit your review", :button_html => {:class => 'btn-primary'}

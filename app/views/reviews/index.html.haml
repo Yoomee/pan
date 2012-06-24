@@ -21,10 +21,42 @@
           %b
             =review.title
           %br
-          =rating_stars(review.overall_rating)
           %i
             Reviewed on
             =short_date(review.created_at)
           =simple_format(review.description)
+          %b Ratings
+          %p
+            =rating_stars(review.overall_rating)
+            Overall rating
+            -if review.rural_rating
+              %br
+              =rating_stars(review.rural_rating)
+              Understanding of rural touring
+            -if review.small_venue_rating        
+              %br
+              =rating_stars(review.small_venue_rating) 
+              Ability to produce for small, rural venues
+            -if review.relationship_rating                 
+              %br
+              =rating_stars(review.relationship_rating)            
+              Relationship with promoter
+            -if review.support_rating                  
+              %br
+              =rating_stars(review.support_rating)            
+              Over-all support to promoters
+            -if review.value_rating 
+              %br
+              =rating_stars(review.value_rating)            
+              Value for money
+            -if review.marketing_rating
+              %br
+              =rating_stars(review.marketing_rating)            
+              Marketing materials
+            -if review.workshop_rating
+              %br
+              =rating_stars(review.workshop_rating)            
+              Workshop delivery/appropriateness.
+          
 =options_panel do
   =back_link
