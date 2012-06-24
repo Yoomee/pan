@@ -37,7 +37,8 @@
       -else
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
         =li_with_active(action_name.index? && @tag_context.nil? &&  @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
-      -if controller_name.performers?
+      -if controller_name.performers?  
+        =li_with_active(action_name.rating?, link_to("Rating", {:controller => controller_name, :action => 'rating'}))
         =li_with_active(@tag_context == 'genres' &&  @tag.nil?, link_to('Genres', genres_performers_path))
         =li_with_active(@tag_context == 'art_forms' &&  @tag.nil?, link_to('Art forms', art_forms_performers_path))
       -if action_name.search?
@@ -87,9 +88,15 @@
           %tbody
             -directory_items.each do |directory_item|
               %tr
-                %td.span4
+                %td.span1
                   =image_for(directory_item, "50x50#", :class => "pull-left mr-1")
-                  %h4.pull-left.directory-item=link_to_self(directory_item)
+                %td.span4
+                  %h4.directory-item=link_to_self(directory_item)
+                  -if action_name.rating? && directory_item.reviews.count > 0
+                    %h5
+                      =rating_stars(directory_item.overall_rating)
+                    %h6  
+                      =pluralize(directory_item.reviews.count, "review")
                 %td.span8
                   =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
 .row

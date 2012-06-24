@@ -16,6 +16,7 @@ Pan::Application.routes.draw do
       get 'genres', :action => 'index', :as => 'genres', :tag_context => 'genres'
       get 'art_forms', :action => 'index', :as => 'art_forms', :tag_context => 'art_forms'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'
+      get 'rating'
     end
   end
   

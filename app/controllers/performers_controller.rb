@@ -36,9 +36,6 @@ class PerformersController < ApplicationController
     end
   end
   
-  def edit
-  end
-  
   def index
     if (@tag_context = params[:tag_context]).present?
       if (@tag = params[:tag]).present?
@@ -49,6 +46,12 @@ class PerformersController < ApplicationController
     else
       @performers = Performer.order("created_at DESC").limit(10)
     end
+    render :template => 'organisations/directory'
+  end
+  
+  def rating
+    @performers = Performer.all
+    @performers.sort!{ |a,b| a.overall_rating <=> b.overall_rating }.reverse!
     render :template => 'organisations/directory'
   end
   
