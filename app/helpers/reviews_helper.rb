@@ -8,4 +8,8 @@ module ReviewsHelper
     end.html_safe
   end
   
+  def short_date(date)
+    date.strftime("%d %B %Y")
+  end
+  
 end

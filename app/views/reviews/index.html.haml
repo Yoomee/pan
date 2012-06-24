@@ -1,12 +1,30 @@
-%h1.mb-2=title "Reviews for #{@performer}"
+-title "Reviews for #{@performer}"
+%h1.mb-2
+  Reviews for
+  =link_to(@performer, performer_path(@performer))
+.well.mt1
+  %b.icon-info-sign
+  Your first-hand experiences really help other promoters. 
+  =link_to("Click to add your own review.", new_performer_review_path(@performer))
 %table.table.table-striped
   %tbody
     -@reviews.each do |review|
       %tr
         %td.span3
-          %h4=review.title
-          =rating_stars(review.overall_rating)
+          =image_for(review.user, "80x")
+          %h4=link_to(review.user,user_path(review.user))
+          -if review.user.promoter
+            =review.user.promoter
+            %br
+          =pluralize(review.user.reviews.count, "review")
         %td
+          %b
+            =review.title
+          %br
+          =rating_stars(review.overall_rating)
+          %i
+            Reviewed on
+            =short_date(review.created_at)
           =simple_format(review.description)
 =options_panel do
   =back_link
