@@ -12,25 +12,9 @@
     .alert
       Where relevant, please rate the performer the aspects below:
     .row
-      .span3.well
-        =form.input :rural_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Understanding of rural touring" 
-      .span3.well
-        =form.input :small_venue_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Ability to produce for small, rural venues"
-      .span3.well
-        =form.input :relationship_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Relationship with promoter"
-    .row
-      .span3.well
-        =form.input :support_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Over-all support to promoters"
-      .span3.well
-        =form.input :value_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Value for money"       
-      .span3.well
-        =form.input :marketing_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Marketing materials"
-    .row    
-      .span3.well
-        =form.input :workshop_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => "Workshop delivery/appropriateness."
-    
-  
-    
-    
+      -(@tour ? Review::TOUR_RATINGS : Review::PERFORMER_RATINGS).each do |field_name, label_name|
+        .span3.well.review-rating-box
+          =form.input field_name, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false, :label => label_name
+              
   =form.buttons do
     =form.commit_button "Submit your review", :button_html => {:class => 'btn-primary'}

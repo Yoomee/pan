@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   
   private
   def get_performer
-    @performer = @tour.try(:performer) || Performer.find_by_id(params[:performer_id])
+    @performer = Performer.find_by_id(params[:performer_id])
   end
   
   def get_tour

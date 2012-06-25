@@ -614,3 +614,9 @@ body.controller_venues #technical.tab-pane dt {
 body.controller_venues #technical.tab-pane dd {
   float: left;
 }
+
+/*========== Reviews ==========*/
+
+.review-rating-box {
+  height: 160px;
+}
