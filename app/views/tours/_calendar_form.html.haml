@@ -6,36 +6,9 @@
       TourForm.bookingsPage = #{bookings_page}
       TourForm.init();
     });
-
-%table.table.table-condensed#availability_key.pull-left.mt-2
-  %thead
-    %tr
-      %th{:colspan => 2} Key
-  %tbody
-    %tr
-      %td.key-color.key-color-available
-      %td
-        %b Available
-        %em
-          \- click to add booking
-    %tr
-      %td.key-color.key-color-booked
-      %td
-        %b Booked       
-        %em
-          \- click to edit or remove booking
-    %tr
-      %td.key-color.key-color-unavailable
-      %td
-        %b Unavailable
-        -if bookings_page
-          %em
-            \- edit tour to change availability      
-
-
     
 %legend.booking-visible Click a date to add or edit a booking
-#availability_datepicker.pull-left.mt-2.mr-2
+#availability_datepicker.pull-left.mt-1.mr-2
   #availability_popover.popover.right
     .arrow
     .popover-inner

@@ -125,6 +125,7 @@
       .span12
         .span9
           Book a date
+        =render("tours/calendar_key", :hide_unavailable => true)
         =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
             
 .row.mt-2

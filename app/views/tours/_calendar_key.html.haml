@@ -1,0 +1,26 @@
+-hide_unavailable ||= false
+
+%table.table.table-condensed#availability_key.pull-left.mt-1
+  %thead
+    %tr
+      %th{:colspan => 2} Key
+  %tbody
+    %tr
+      %td.key-color.key-color-available
+      %td
+        %b Available
+        %em
+          \- click to add booking
+    %tr
+      %td.key-color.key-color-booked
+      %td
+        %b Booked       
+        %em
+          \- click to edit or remove booking
+    %tr
+      %td.key-color.key-color-unavailable
+      %td
+        %b Unavailable
+        -unless hide_unavailable
+          %em
+            \- edit tour to change availability

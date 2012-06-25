@@ -1,0 +1,32 @@
+-if logged_in_as_performer?(performer) || performer.genre_list.present?
+  .span2.mb-1
+    %h4 Genres
+    -if performer.genre_list.empty?
+      .italic
+        =link_to("Add some genres", edit_performer_path(performer))
+    -else
+      =list_tags(performer, :genres)
+-if logged_in_as_performer?(performer) || performer.art_form_list.present?
+  .span2.mb-1
+    %h4 Art forms
+    -if performer.art_form_list.empty?
+      .italic
+        =link_to("Add some art forms", edit_performer_path(performer))
+    -else
+      =list_tags(performer, :art_forms)
+-if logged_in_as_performer?(performer) || performer.funder_list.present?
+  .span2.mb-1
+    %h4 Funders
+    -if performer.funder_list.empty?
+      .italic
+        =link_to("Add your funders", edit_performer_path(performer))
+    -else
+      =list_tags(performer, :funders)
+-if logged_in_as_performer?(performer) || performer.work_scale_list.present?
+  .span2.mb-1
+    %h4 Scale of work
+    -if performer.work_scale_list.empty?
+      .italic
+        =link_to("Add info on your scale of work", edit_performer_path(performer))
+    -else
+      =list_tags(performer, :work_scales)
