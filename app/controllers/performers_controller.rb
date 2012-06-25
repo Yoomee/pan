@@ -49,9 +49,8 @@ class PerformersController < ApplicationController
     render :template => 'organisations/directory'
   end
   
-  def rating
-    @performers = Performer.all
-    @performers.sort!{ |a,b| a.overall_rating <=> b.overall_rating }.reverse!
+  def rating  
+    @performers = Performer.joins(:reviews).order("reviews.overall_rating DESC")
     render :template => 'organisations/directory'
   end
   
