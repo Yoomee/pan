@@ -121,10 +121,9 @@
         .span9
           %h4 Fees
           =simple_format(tour.fees)
-          
-      .span12
-        .span9
-          Book a date
+    .row
+      .span9
+        %h3 Book a date
         =render("tours/calendar_key", :hide_unavailable => true)
         =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
             
