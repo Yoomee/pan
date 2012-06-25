@@ -1,11 +1,26 @@
 class Review < ActiveRecord::Base
+
+  include YmCore::Model
+  
   belongs_to :user
   belongs_to :performer
   belongs_to :tour
   
-  validates :title, :description, :overall_rating, :user, :performer, :presence => true
+  validates :title, :description, :overall_rating, :user, :presence => true
+  validates :description, :length => {:minimum => 50, :allow_blank => true, :message => "please use at least 50 characters"}
+  
+  validate :has_tour_or_performer
   
   default_scope order("created_at DESC")
+  
+  private
+  def has_tour_or_performer
+    unless any_present?(:tour, :performer)
+      errors.add(:performer, "can't be blank")
+      errors.add(:tour, "can't be blank")
+    end
+  end
+  
 end
 
 Review::RATING_OPTIONS = [["Terrible", 1], ["Poor", 2], ["Average", 3], ["Very good", 4], ["Excellent", 5]]
