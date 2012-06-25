@@ -1,6 +1,7 @@
 class Tour < ActiveRecord::Base
   
   include YmCore::Model
+  include HasReviews  
   
   image_accessor :image
   

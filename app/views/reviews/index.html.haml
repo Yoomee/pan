@@ -1,11 +1,11 @@
--title "Reviews for #{@performer}"
+-title "Reviews for #{@tour || @performer}"
 %h1.mb-2
   Reviews for
-  =link_to(@performer, performer_path(@performer))
+  =link_to_self(@tour || @performer)
 .well.mt1
   %b.icon-info-sign
-  Your first-hand experiences really help other promoters. 
-  =link_to("Click to add your own review.", new_performer_review_path(@performer))
+  Your first-hand experiences really help other promoters.
+  =link_to("Click to add your own review.", @tour ? new_tour_review_path(@tour) : new_performer_review_path(@performer))
 %table.table.table-striped
   %tbody
     -@reviews.each do |review|

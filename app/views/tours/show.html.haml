@@ -4,24 +4,11 @@
       .span3
         =image_for(tour, "220x")
       .span3.mt-2
-        %h4=pluralize(22, 'Review')
-        %table.unstyled
-          %tr
-            %td Excellent
-            %td
-              -3.times do
-                %i.icon.icon-star
-          %tr
-            %td Very good
-            %td
-              -1.times do
-                %i.icon.icon-star
-          %tr
-            %td Average
-          %tr
-            %td Poor
-          %tr
-            %td Terrible
+        %h4=pluralize(tour.reviews.count, 'Review')
+        %div=rating_stars(tour.overall_rating)
+        %ul.unstyled
+          %li=link_to 'Read reviews', tour_reviews_path(tour) unless tour.reviews.count.zero?
+          %li=link_to 'Write a review', new_tour_review_path(tour)
       -if tour.links_or_performer_links.present?
         .span3.mt-2
           %h4 Links

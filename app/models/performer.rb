@@ -1,6 +1,7 @@
 class Performer < ActiveRecord::Base
   
-  include Organisation  
+  include Organisation
+  include HasReviews
   
   define_index do
     indexes name, :sortable => true
@@ -16,13 +17,10 @@ class Performer < ActiveRecord::Base
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true
   has_many :users, :dependent => :nullify
-  has_many :reviews, :dependent => :destroy
   
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
-  
-  scope :order_by_ratings, joins(:reviews).order("AVG(reviews.overall_rating) DESC").group('performers.id')
   
   def contact1_details
     [contact1_name, contact1_email, contact1_phone].compact
@@ -45,10 +43,6 @@ class Performer < ActiveRecord::Base
       url = send("#{site_name}_url")
       [site_name.humanize, url] if url.present?
     end.compact
-  end
-  
-  def overall_rating
-    reviews.average(:overall_rating)
   end
   
 end

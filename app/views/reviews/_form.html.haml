@@ -1,4 +1,5 @@
-=semantic_form_for(@review, :url => performer_reviews_path(@performer)) do |form|
+-url = @tour ? tour_reviews_path(@tour) : performer_reviews_path(@performer)
+=semantic_form_for(@review, :url => url) do |form|
   =form.inputs do   
     .well
       =form.input :overall_rating, :collection => Review::RATING_OPTIONS.reverse, :as => :radio, :include_blank => false
