@@ -22,6 +22,8 @@ class Performer < ActiveRecord::Base
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
   
+  scope :order_by_ratings, joins(:reviews).order("AVG(reviews.overall_rating) DESC").group('performers.id')
+  
   def contact1_details
     [contact1_name, contact1_email, contact1_phone].compact
   end
@@ -46,8 +48,7 @@ class Performer < ActiveRecord::Base
   end
   
   def overall_rating
-    return 0 if reviews.count.zero?
-    (reviews.sum(:overall_rating).to_f/reviews.count).ceil
+    reviews.average(:overall_rating)
   end
   
 end

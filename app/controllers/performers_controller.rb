@@ -50,7 +50,7 @@ class PerformersController < ApplicationController
   end
   
   def rating  
-    @performers = Performer.joins(:reviews).order("reviews.overall_rating DESC")
+    @performers = Performer.order_by_ratings
     render :template => 'organisations/directory'
   end
   
