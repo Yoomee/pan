@@ -1,0 +1,19 @@
+%b.icon-info-sign
+  Help
+%p
+  This is a page for one of your tours. On this page you can:
+%ul
+  %li
+    =link_to "Manage bookings for this tour", "#", :data => {:scroll => "#calendar"}
+  %li
+    =link_to("Add a new tour", new_performer_tour_path(tour.performer))
+  %li
+    -if tour.performer.tours
+      =link_to("Edit all your tours", performer_tours_path(tour.performer)+"#all" )
+%p
+  Alternatively you could:   
+%ul
+  %li
+    =link_to "Post an update on your wall", performer_path(tour.performer) + "#wall"
+  %li
+    =link_to "View all other performers", performers_path 
