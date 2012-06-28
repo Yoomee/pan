@@ -8,17 +8,17 @@
   .span12
     %ul.nav.nav-tabs
       -if @tag
-        %li=link_to("Upcoming", tours_path(:anchor => 'future'))
-        %li=link_to("Past", tours_path(:anchor => 'past'))
         -if can?(:edit, Tour)
           %li=link_to("All", tours_path(:anchor => 'all'))
+        %li=link_to("Upcoming", tours_path(:anchor => 'future'))
+        %li=link_to("Past", tours_path(:anchor => 'past'))
         %li.active
           =link_to("#{@tag_context.singularize.titleize} &rarr; #{@tag.to_s.titleize.humanize}".html_safe, '#')
       -else
-        %li{:class => "#{@tag.nil? ? 'active' : ''}"}=link_to("Upcoming", '#future', :"data-toggle" => "tab")
-        %li=link_to("Past", '#past', :"data-toggle" => "tab")
         -if can?(:edit, Tour)
           %li=link_to("All", '#all', :"data-toggle" => "tab")
+        %li{:class => "#{@tag.nil? ? 'active' : ''}"}=link_to("Upcoming", '#future', :"data-toggle" => "tab")
+        %li=link_to("Past", '#past', :"data-toggle" => "tab")
     .tab-content
       -if @tag
         .tab-pane.active
