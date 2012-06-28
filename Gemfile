@@ -1,5 +1,4 @@
-require File.expand_path('../lib/ym_gem_loader', __FILE__) 
-
+source 'https://yoomee:wLjuGMTu30AvxVyIrq3datc73LVUkvo@gems.yoomee.com'
 source 'http://rubygems.org'
 
 ### Always used
@@ -16,7 +15,16 @@ gem 'geocoder'
 gem 'cocoon'
 gem 'datetimespan'
 
-load_ym_gems!
+gem 'ym_core', "~> 0.1"
+gem 'ym_videos', "~> 0.1"
+gem 'ym_users', "~> 0.1"
+gem 'ym_posts', "~> 0.1"
+gem 'ym_search', "~> 0.1"
+gem 'ym_tags', "~> 0.1"
+gem 'ym_permalinks', "~> 0.1"
+gem 'ym_docs', "~> 0.1"
+gem 'ym_cms', "~> 0.1"
+gem 'ym_enquiries', "~> 0.1"
 
 ### Groups
 # Gems used only for assets and not required
