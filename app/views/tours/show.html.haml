@@ -48,11 +48,7 @@
       -if !tour.performer.tours.past.empty?
         .span3.mt-2
           %h4 Past tours
-          =link_to("View all past shows", performer_tours_path(tour.performer, :anchor => 'past'))
-      
-      
-      
-        
+          =link_to("View all past shows", performer_tours_path(tour.performer, :anchor => 'past'))      
   .span6
     %h1
       =title(tour)
@@ -73,46 +69,118 @@
         .span5.mb-1
           %h4 Genres
           =list_tags(tour, :genres)
+          
+          
+          
+          
     .row.mt-2
-      .span5
-        %h4 Technical requirements
-        %table
-          -if tour.min_playing_area.present?
-            %tr
-              %td.span3 Minimum playing area required
-              %td.span2="#{tour.min_playing_area} sq m"
-          -tour.technical_details.each do |detail, true_false|
-            %tr
-              %td.span3=detail
-              %td.span2=true_false.yes_or_no.capitalize
       .span4
-        %h4 Venue suitability
-        %table
-          -tour.venue_suitability.each do |venue_type, true_false|
+        %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
+          %thead
             %tr
-              %td.span3=venue_type
-              %td.span1=true_false.yes_or_no.capitalize
-    .row.mt-2
-      -if tour.requirements.present?
+              %th
+                %h3
+                  Technical requirements
+          %tbody
+            -if tour.min_playing_area.present?
+              %tr
+                %td
+                  Minimum playing area required
+                %td
+                  =description_tag("","#{tour.min_playing_area} sq m")
+            %tr
+              %td
+                Do you need a blackout?
+              %td
+                =description_tag("", tour.blackout_needed?.yes_or_no.titleize)
+            %tr
+              %td
+                Do you use lighting?
+              %td
+                =description_tag("", tour.uses_lighting?.yes_or_no.titleize)
+            %tr
+              %td
+                Do you tour your own lighting?
+              %td
+                =description_tag("", tour.uses_own_lighting?.yes_or_no.titleize)
+            %tr
+              %td
+                Do you use sound?
+              %td
+                =description_tag("", tour.uses_sound?.yes_or_no.titleize)          
+
+
+      .span4.offset1
+        %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
+          %thead
+            %tr
+              %th
+                %h3
+                  Venue suitability
+          %tbody
+            %tr
+              %td
+                Arts venue
+              %td
+                =description_tag("", tour.suits_arts_venue?.yes_or_no.titleize)
+            %tr
+              %td
+                Village/community hall
+              %td
+                =description_tag("", tour.suits_village_hall?.yes_or_no.titleize)
+            %tr
+              %td
+                School hall
+              %td
+                =description_tag("", tour.suits_school_hall?.yes_or_no.titleize)
+            %tr
+              %td
+                Outdoors
+              %td
+                =description_tag("", tour.suits_outdoors?.yes_or_no.titleize)
+             
+    
+    -if tour.requirements.present? || tour.target_age.present? || tour.running_time.present? || our.publicity.present? || tour.fees.present?
+      .row
         .span9
-          %h4 Other requirements
-          =simple_format(tour.requirements)
-      -if tour.target_age.present?
-        .span9
-          %h4 Target age range/style
-          =simple_format(tour.target_age)
-      -if tour.running_time.present?
-        .span9
-          %h4 Running time/with and without interval
-          =simple_format(tour.running_time)
-      -if tour.publicity.present?
-        .span9
-          %h4 Will publicity be provided?
-          =simple_format(tour.publicity)
-      -if tour.fees.present?
-        .span9
-          %h4 Fees
-          =simple_format(tour.fees)
+          %table.table.table-bordered.table-striped.tech-details.mb-2
+            %thead
+              %tr
+                %th
+                  %h3
+                    Other
+            %tbody
+              -if tour.requirements.present?
+                %tr
+                  %td
+                    Other requirements
+                  %td
+                    =simple_format(tour.requirements)
+              -if tour.target_age.present?
+                %tr
+                  %td
+                    Target age range/style
+                  %td
+                    =simple_format(tour.target_age)
+              -if tour.running_time.present?
+                %tr
+                  %td
+                    Running time/with and without interval
+                  %td
+                    =simple_format(tour.running_time)
+              -if tour.publicity.present?
+                %tr
+                  %td
+                    Will publicity be provided?
+                  %td
+                    =simple_format(tour.publicity)
+              -if tour.fees.present?
+                %tr
+                  %td
+                    Fees
+                  %td
+                    =simple_format(tour.fees)
+                
     .row
       .span9
         #calendar
