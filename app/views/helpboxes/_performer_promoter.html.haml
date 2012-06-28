@@ -5,7 +5,7 @@
 %ul
   %li
     -if performer.tours
-      =link_to("View all their tours", performer_tours_path(performer)+"#future" )
+      =link_to("View all their tours", performer_tours_path(performer)+"#all" )
   -if performer.current_tour
     %li
       =link_to "Book a date", "#", :data => {:scroll => "#calendar"}
