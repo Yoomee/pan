@@ -27,6 +27,10 @@ class ToursController < ApplicationController
     @tour = @performer.tours.build(:genre_list => @performer.genre_list)
   end
   
+  def rating  
+    @tours = Tour.order_by_ratings
+  end
+  
   def update
     if tour.save
       flash_notice(tour)

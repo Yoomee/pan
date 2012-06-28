@@ -1,0 +1,41 @@
+.row
+  .span12.mb-1
+    %h1.pull-left
+      =title("Tours")
+      -if performer
+        %small=link_to_self(performer)
+.row
+  .span12
+    %ul.nav.nav-tabs
+      -if can?(:edit, Tour)
+        %li=link_to("All", tours_path + '#all')
+      %li=link_to("Upcoming", tours_path + '#future')
+      %li=link_to("Past", tours_path + '#past')
+      %li.active
+        =link_to("Rating", rating_tours_path)
+    .tab-content
+      %table.table.table-bordered.table-striped
+        %tbody
+          -@tours.each do |tour|
+            %tr
+              %td.span1
+                =image_for(tour, "50x50#", :class => "pull-left mr-1")
+              %td.span4
+                %h4.directory-item=link_to_self(tour)
+                -if tour.reviews.count > 0
+                  %h5
+                    =rating_stars(tour.overall_rating)
+                  %h6  
+                    =pluralize(tour.reviews.count, "review")
+              %td.span8
+                =truncate(tour.try(:description).to_s, :length => 255)
+            
+
+
+        
+.row
+  .span12
+    =options_panel do
+      =back_link
+      -if performer && can?(:new, performer.tours.build)
+        =link_to("Add a tour", new_performer_tour_path(performer))
