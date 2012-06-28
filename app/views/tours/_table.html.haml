@@ -24,6 +24,6 @@
                       =link_to_self(tour_date.venue)
                     -elsif tour_date.external_venue_name.present?
                       ="- #{tour_date.external_venue_name}"
-            -if future_past_all == 'all' && can?(:edit, tour)
+            -if future_past_all == 'all' && can?(:edit, tour) && current_user.role != "promoter_admin"
               .options_panel
                 =link_to("Edit tour", edit_tour_path(tour))
