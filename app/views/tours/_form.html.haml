@@ -1,5 +1,7 @@
 =semantic_form_for(@tour || tour, :html => {:multipart => true}) do |form|
+  -if !tour.errors.empty?
+    =debug tour.errors
   =tabs('details', 'organisations/tabs/links', ['requirements', 'Technical requirements'], ['suitability', 'Venue suitability'], 'availability', :form => form) 
   
   =form.buttons do
-    =form.commit_button "Save"
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
