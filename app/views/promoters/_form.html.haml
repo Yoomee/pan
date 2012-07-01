@@ -1,5 +1,6 @@
 %p
   =semantic_form_for(promoter, :html => {:multipart => true}) do |form|
+    =error_alert(promoter)
     =tabs(['details','General details'], 'contact_info', ['resources', 'Skills & Resources'], 'organisations/tabs/links', ["slideshow", "Photo gallery"], :form => form)
     =form.buttons do
       =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
