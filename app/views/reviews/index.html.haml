@@ -34,6 +34,7 @@
                 %br
                 =rating_stars(rating)
                 =label_name
+          %p=link_to("Edit review", @tour ? edit_tour_review_path(@tour, review) : edit_performer_review_path(@performer, review) ) if can? :edit, review
           
 =options_panel do
   =back_link
