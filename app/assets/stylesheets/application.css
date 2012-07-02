@@ -620,3 +620,8 @@ body.controller_venues #technical.tab-pane dd {
 .review-rating-box {
   height: 160px;
 }
+
+/*========== change password form ==========*/
+label em.optional {
+  font-weight:normal;
+}
