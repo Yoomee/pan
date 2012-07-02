@@ -10,6 +10,9 @@
       =form.input :retained_image, :as => :hidden
       =form.input :image, :as => :file, :label => false, :wrapper_html => {:class => "collapse#{post.errors[:image].present? ? ' in' : ''}"}
       =form.input :video_url, :label => false, :wrapper_html => {:class => "collapse#{post.errors[:video_url].present? ? ' in' : ''}"}, :input_html => {:placeholder => "URL from YouTube or Vimeo"}
-      =link_to("Add a photo", "#", :data => {:toggle => "collapse", :target => "#post_image_input"}, :class => "btn btn-small")
-      =link_to("Add a video", "#", :data => {:toggle => "collapse", :target => "#post_video_url_input"}, :class => "btn btn-small")
+      =form.input :retained_file, :as => :hidden
+      =form.input :file, :as => :file, :label => false, :wrapper_html => {:class => "collapse#{post.errors[:file].present? ? ' in' : ''}"}      
+      =link_to("Add a photo", "#", :data => {:toggle => "collapse", :target => "#post_image_input", :parent => ".post_form"}, :class => "btn btn-small")
+      =link_to("Add a video", "#", :data => {:toggle => "collapse", :target => "#post_video_url_input", :parent => ".post_form"}, :class => "btn btn-small")
+      =link_to("Add a file", "#", :data => {:toggle => "collapse", :target => "#post_file_input", :parent => ".post_form"}, :class => "btn btn-small")
       =form.commit_button "Post", :button_html => {:class => "pull-right btn-primary", :"data-loading-text" => "Posting..."}
