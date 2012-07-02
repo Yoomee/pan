@@ -16,8 +16,22 @@ class ReviewsController < ApplicationController
     end   
   end
   
+  def edit
+    @review = Review.find(params[:id])
+  end
+  
   def index
     @reviews = (@tour || @performer).reviews
+  end
+  
+  def update
+    @review = Review.find(params[:id])
+    if @review.update_attributes(params[:review])
+      flash_notice(@review)
+      redirect_to @tour ? tour_reviews_path : performer_reviews_path
+    else
+      render :action => "edit"
+    end      
   end
   
   private

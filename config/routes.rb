@@ -9,7 +9,7 @@ Pan::Application.routes.draw do
   resources :performers, :except => [:show]
   resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    
-    resources :reviews, :only => [:new, :create, :index]    
+    resources :reviews, :except => [:show, :delete]
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
@@ -22,7 +22,7 @@ Pan::Application.routes.draw do
   
   resources :tours, :except => [:new, :show]
   resources :tours, :only => [:show] do
-    resources :reviews, :only => [:new, :create, :index]    
+    resources :reviews, :except => [:show, :delete]
     member do
       get 'bookings', :action => 'bookings'
     end

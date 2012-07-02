@@ -7,15 +7,20 @@ class ToursController < ApplicationController
   expose(:tours) {performer.try(:tours) || Tour.scoped}
   
   def create
-    if tour.save
-      flash_notice(tour)      
-      redirect_to tour
+    @tour = Tour.new(params[:tour])
+    if @tour.save
+      flash_notice(@tour)      
+      redirect_to @tour
     else
       render :action => "new"
     end
   end
   
   def bookings
+  end
+  
+  def edit
+    @tour = Tour.find(params[:id])
   end
   
   def index
@@ -32,9 +37,10 @@ class ToursController < ApplicationController
   end
   
   def update
-    if tour.save
-      flash_notice(tour)
-      redirect_to tour
+    @tour = Tour.find(params[:id])
+    if @tour.update_attributes(params[:tour])
+      flash_notice(@tour)
+      redirect_to @tour
     else
       render :action => request.referrer =~ /\/bookings/ ? 'bookings' : 'edit'
     end
