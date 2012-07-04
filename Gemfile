@@ -14,6 +14,8 @@ gem 'whenever', :require => false
 gem 'geocoder'
 gem 'cocoon'
 gem 'datetimespan'
+gem 'newrelic_rpm'
+gem 'ey_config'
 
 gem 'ym_core', "~> 0.1" #, :path => "~/Rails/Gems/ym_core"
 gem 'ym_videos', "~> 0.1"
