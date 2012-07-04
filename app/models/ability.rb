@@ -19,6 +19,7 @@ class Ability
       # admin ability
     elsif user
       # user ability
+      can [:create], Comment
       can [:create, :show, :file], Post
       can [:update, :destroy], Post, :user_id => user.id
       can [:show, :update, :edit], User, :id => user.id

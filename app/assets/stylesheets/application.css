@@ -625,3 +625,13 @@ body.controller_venues #technical.tab-pane dd {
 label em.optional {
   font-weight:normal;
 }
+
+/*========== Posts ==========*/
+
+.span8 .comment-list div.comment .comment-text, 
+.span8 .comment-form form {
+  width: 515px;
+}
+.span8 .comment-form form textarea {
+  width: 505px;
+}
