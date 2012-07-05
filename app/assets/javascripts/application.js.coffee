@@ -40,6 +40,9 @@ $(document).ready () ->
         text: term
       )
   )
+  
+  YmComments.Form.init({submitOnEnter: true})
+
   $('a[data-scroll]').live 'click', (event) ->
     event.preventDefault()
     $.scrollTo(`$(this)`.data('scroll'), {duration: 1000})
