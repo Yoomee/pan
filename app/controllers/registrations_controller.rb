@@ -21,11 +21,11 @@ class RegistrationsController < ApplicationController
     @user.stepping_back = params[:back_button].present?
     if @user.valid?
       if @user.stepping_back?
-        @user.previous_step
+        @user.previous_step!
       elsif @user.last_step?
         @user.save if @user.all_valid?
       else
-        @user.next_step unless @user.current_step=="organisation_type" && @user.organisation_type.blank?
+        @user.next_step! unless @user.current_step=="organisation_type" && @user.organisation_type.blank?
       end
       session[:user_step] = @user.current_step
     end
