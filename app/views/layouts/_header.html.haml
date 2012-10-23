@@ -1,94 +1,182 @@
-.container#header
-  .row#header_row
-    .span3
-      .row
-        .span3
-          %h1#site_logo
-            %span
-              =link_to "/" do
-                =Settings.site_name
-    .span9
-      #header_links
-        -if user_signed_in?
-          .btn-group
-            =link_to(current_user.performer || current_user, :class => 'btn') do
-              %icon.icon-user
-              =current_user.performer || current_user
-            =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle') do
-              %span.caret
-            %ul.dropdown-menu.pull-right
-              -if current_user.promoter
-                %li
-                  =link_to(current_user) do
-                    %icon.icon-user
-                    My profile
-              -if current_user.promoter
-                %li
-                  =link_to(current_user.promoter) do
-                    %icon.icon-flag
-                    My organisation
-              -elsif current_user.performer     
-                =link_to(current_user.performer) do
-                  %icon.icon-flag
-                  My organisation 
-                %li.divider                    
-              -elsif current_user.admin?
-                %li
-                  =link_to(performers_path) do
-                    %icon.icon-music
-                    Performers
-                %li
-                  =link_to(individuals_promoters_path) do
-                    %icon.icon-flag
-                    Promoters                  
-                %li
-                  =link_to(venues_path) do
-                    %icon.icon-map-marker
-                    Venues
-                %li
-                  =link_to(directory_users_path(:letter => 'A')) do
-                    %icon.icon-user
-                    Users
-                %li.divider
+.container
+.top-bar
+  .container
+    .row
+      .span12
+        %h1#site_logo
+          =link_to "/" do
+            =Settings.site_name
+        .user-links
+          -if user_signed_in?                   
+            .header-btn-group.btn-group
+              =link_to(current_user.performer || current_user, :class => 'btn header-btn') do
+                =current_user.performer || current_user
+              =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle header-btn') do
+                %span.caret
+              %ul.dropdown-menu.pull-right
+                -if current_user.promoter
                   %li
-                    =link_to(promoter_enquiries_path) do
-                      %icon.icon-comment
-                      Promoter applications                    
-                %li
-                  =link_to(feedback_enquiries_path) do
-                    %i.icon-bullhorn
-                    Beta feedback                    
-                %li
-                  =link_to(tags_path) do
-                    %icon.icon-tags
-                    Manage tags
+                    =link_to(current_user) do
+                      %icon.icon-user
+                      My profile
+                -if current_user.promoter
+                  %li
+                    =link_to(current_user.promoter) do
+                      %icon.icon-flag
+                      My organisation
+                -elsif current_user.performer     
+                  =link_to(current_user.performer) do
+                    %icon.icon-flag
+                    My organisation 
+                  %li.divider                    
+                -elsif current_user.admin?
+                  %li
+                    =link_to(performers_path) do
+                      %icon.icon-music
+                      Performers
+                  %li
+                    =link_to(individuals_promoters_path) do
+                      %icon.icon-flag
+                      Promoters                  
+                  %li
+                    =link_to(venues_path) do
+                      %icon.icon-map-marker
+                      Venues
+                  %li
+                    =link_to(directory_users_path(:letter => 'A')) do
+                      %icon.icon-user
+                      Users
+                  %li.divider
+                    %li
+                      =link_to(promoter_enquiries_path) do
+                        %icon.icon-comment
+                        Promoter applications                    
+                  %li
+                    =link_to(feedback_enquiries_path) do
+                      %i.icon-bullhorn
+                      Beta feedback                    
+                  %li
+                    =link_to(tags_path) do
+                      %icon.icon-tags
+                      Manage tags
 
-                %li.divider
-              %li
-                =link_to(edit_user_path(current_user)) do
-                  %icon.icon-cog
-                  Account settings
-                =link_to(change_password_path) do
-                  %icon.icon-key
-                  Change password
-              %li
-                =link_to(sign_out_path, :method => :delete) do
-                  %icon.icon-signout
-                  =t(:logout)
-        -else
-          =link_to "Register", new_registration_path, :class => "header_link btn"
-          =link_to(sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary") do
-            %icon.icon-signin
-            =t(:login)
-      #nav.main-nav
-        %ul.unstyled
-          =li_with_active(current_page?(root_path), link_to("Home", root_path))
-          -if can?(:index, Post)
-            =li_with_active(viewing_community?, link_to("Community", community_path))
+                  %li.divider
+                %li
+                  =link_to(edit_user_path(current_user)) do
+                    %icon.icon-cog
+                    Account settings
+                  =link_to(change_password_path) do
+                    %icon.icon-key
+                    Change password
+                %li
+                  =link_to(sign_out_path, :method => :delete) do
+                    %icon.icon-signout
+                    =t(:logout)
+            .user-link-icons
+              =link_to "#", :class=>"search-icon user-link" do
+                %i.icon-search
+              =link_to "#", :class=>"messages-icon user-link" do
+                %i.icon-envelope-alt                     
+                .counter
+                  4                
+              =link_to "#", :class=>"profile-icon user-link" do
+                %i.icon-user
+                .counter
+                  12                
+                
+        
+-if false      
+  .container#header
+    .row#header_row
+      .span3
+        .row
+          .span3
+            %h1#site_logo
+              %span
+                =link_to "/" do
+                  =Settings.site_name
+      .span9
+        #header_links
+          -if user_signed_in?
+            .btn-group
+              =link_to(current_user.performer || current_user, :class => 'btn') do
+                %icon.icon-user
+                =current_user.performer || current_user
+              =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle') do
+                %span.caret
+              %ul.dropdown-menu.pull-right
+                -if current_user.promoter
+                  %li
+                    =link_to(current_user) do
+                      %icon.icon-user
+                      My profile
+                -if current_user.promoter
+                  %li
+                    =link_to(current_user.promoter) do
+                      %icon.icon-flag
+                      My organisation
+                -elsif current_user.performer     
+                  =link_to(current_user.performer) do
+                    %icon.icon-flag
+                    My organisation 
+                  %li.divider                    
+                -elsif current_user.admin?
+                  %li
+                    =link_to(performers_path) do
+                      %icon.icon-music
+                      Performers
+                  %li
+                    =link_to(individuals_promoters_path) do
+                      %icon.icon-flag
+                      Promoters                  
+                  %li
+                    =link_to(venues_path) do
+                      %icon.icon-map-marker
+                      Venues
+                  %li
+                    =link_to(directory_users_path(:letter => 'A')) do
+                      %icon.icon-user
+                      Users
+                  %li.divider
+                    %li
+                      =link_to(promoter_enquiries_path) do
+                        %icon.icon-comment
+                        Promoter applications                    
+                  %li
+                    =link_to(feedback_enquiries_path) do
+                      %i.icon-bullhorn
+                      Beta feedback                    
+                  %li
+                    =link_to(tags_path) do
+                      %icon.icon-tags
+                      Manage tags
+
+                  %li.divider
+                %li
+                  =link_to(edit_user_path(current_user)) do
+                    %icon.icon-cog
+                    Account settings
+                  =link_to(change_password_path) do
+                    %icon.icon-key
+                    Change password
+                %li
+                  =link_to(sign_out_path, :method => :delete) do
+                    %icon.icon-signout
+                    =t(:logout)
           -else
-            =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))          
-          -if can?(:index, Performer)
-            =li_with_active(controller_name=='performers', link_to("Performers", directory_performers_path(:letter => 'A')))
-          -else
-            =li_with_active(slug_is?('for-artists'), link_to_slug('Performers', 'for-performers'))
+            =link_to "Register", new_registration_path, :class => "header_link btn"
+            =link_to(sign_in_path(:next => request.path == '/' ? nil : request.path), :class => "header_link btn btn-primary") do
+              %icon.icon-signin
+              =t(:login)
+        #nav.main-nav
+          %ul.unstyled
+            =li_with_active(current_page?(root_path), link_to("Home", root_path))
+            -if can?(:index, Post)
+              =li_with_active(viewing_community?, link_to("Community", community_path))
+            -else
+              =li_with_active(slug_is?('about-community'), link_to_slug('Community', 'about-community'))          
+            -if can?(:index, Performer)
+              =li_with_active(controller_name=='performers', link_to("Performers", directory_performers_path(:letter => 'A')))
+            -else
+              =li_with_active(slug_is?('for-artists'), link_to_slug('Performers', 'for-performers'))
 

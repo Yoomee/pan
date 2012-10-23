@@ -1,65 +1,158 @@
-.row.mb-2.fade_in
-  #headline_image.span8.fade_in
-    .homepage-box
-      %h2.homepage-box-title{:style => "margin-top: 110px;text-align: center;"}
-        %small How it works illustration goes here
-  .span4
-    .homepage-box
-      %h2.homepage-box-title
-        =link_to_slug('about-tourbook')
-      .homepage-box-content
-        =summarize(Page.find_by_slug('about-tourbook'), :length => 200)
-      .homepage-box-links
-        =link_to_slug("Find out more", 'about-tourbook')
-.row.mb-2.fade_in
-  .span4
-    .homepage-box
-      %h2.homepage-box-title
-        =link_to_slug('about-pan')
-      .homepage-box-content
-        =summarize(Page.find_by_slug('about-pan'), :length => 200)
-      .homepage-box-links
-        =link_to_slug("Find out more", 'about-pan')
-      .homepage-box-links
-        =link_to("Explore our venues", venues_path)
-  .span4
-    .homepage-box
-      %h2.homepage-box-title
-        =link_to_slug('Promote your company in Scotland', :for_promoters)
-      .homepage-box-content
-        %p If you are performing arts company wanting to promote your events in the Highlands and Islands of Scotland then sign up here.
-      .homepage-box-links
-        =link_to_slug('Sign up for FREE', :for_promoters)
-  .span4
-    .homepage-box
-      %h2.homepage-box-title
-        =link_to_slug('Join the promoter community', :register)
-      .homepage-box-content
-        %p If you are a member of PAN then you can access the community tools here.
-      .homepage-box-links
-        =link_to_slug('Register', :register)
-.row.mb-2.fade_in
-  .span4
-    .homepage-box.homepage-box-short
-      %h2.homepage-box-title
-        =link_to("Twitter", "http://twitter.com/panpromoters", :target => "_blank")
-      .homepage-box-content
-        -if tweet = latest_tweet("panpromoters", :count => 30)
-          %p=auto_link(tweet.text)
-  .span4
-    #social_media_links.homepage-box.homepage-box-short
-      .homepage-box-content
-        %ul.unstyled
-          %li=link_to("Facebook", "http://www.facebook.com/PromotersArtsNetwork", :target => "_blank")
-          %li=link_to("Youtube", "#")
-          %li=link_to("Vimeo", "#")
-          %li=link_to("Flickr", "#")
-  .span4
-    %h2.homepage-box-title
-      Our supporters
-    .row.mb-2
-      -4.times do
-        .span1=image_placeholder("60x60")
+.container
+.welcome-banner
+  .container
     .row
-      -4.times do
-        .span1=image_placeholder("60x60")
+      .span12
+        %h1.welcome-title Welcome, Jane. What would you like to do today?
+        %ul.welcome-subnav.nav
+          %li
+            =link_to "#", :class=>"welcome-item welcome-item-shows" do
+              %i.icon-star
+              %h3.subnav-title Shows
+              %p.subnav-description
+                find shows for your venue
+          %li
+            =link_to "#", :class=>"welcome-item welcome-item-diary" do
+              %i.icon-calendar
+              %h3.subnav-title Diary
+              %p.subnav-description
+                find out what is on around you         
+          %li
+            =link_to "#", :class=>"welcome-item welcome-item-groups" do
+              %i.icon-group
+              %h3.subnav-title Groups
+              %p.subnav-description
+                talk to other promoters and keep up to date                         
+          %li
+            =link_to "#", :class=>"welcome-item welcome-item-resources" do
+              %i.icon-copy
+              %h3.subnav-title Resources
+              %p.subnav-description
+                get help and information on all areas of promoting                         
+          %li
+            =link_to "#", :class=>"welcome-item welcome-item-directory" do
+              %i.icon-list-ul
+              %h3.subnav-title Directory
+              %p.subnav-description
+                find people, venues, shows and organisations
+.container.fade_in
+  .row
+    .span3
+      #profile-info.left-col.well
+        =link_to "#", :class=>"profile-image" do
+          =image_tag "temp-profile.jpg"
+        .clearfix.mb-1  
+        %h2 John Smith
+        %ul.nav.messages-and-notifications
+          %li
+            =link_to "#" do
+              %i.icon-user
+              %strong.red
+                5
+              notifications
+              %span.view.red
+                view
+          %li
+            =link_to "#" do
+              %i.icon-envelope-alt
+              %strong.red
+                5
+              messages
+              %span.view.red
+                view
+        %ul.nav
+          %li
+            %i.icon-group
+            %h3 My organisation
+            =link_to "Seal", "#"
+          %li
+            %i.icon-home
+            %h3 My venue(s)
+            =link_to "Venue link", "#"
+            =link_to "Venue link", "#"
+            =link_to "Venue link", "#"
+          %li
+            %i.icon-comments
+            %h3 My groups
+            =link_to "Group link", "#"
+            =link_to "Another group link", "#"
+            =link_to "group", "#"            
+    .span6
+      .well
+        %h2.underline Latest Shows
+        .latest-show
+          =link_to "#", :class=>"latest-show" do
+            =image_tag ""
+    .span3
+      #noticeboard.well
+        %h2.underline Noticeboard
+        
+          
+          
+-if false
+  .row.mb-2.fade_in
+    #headline_image.span8.fade_in
+      .homepage-box
+        %h2.homepage-box-title{:style => "margin-top: 110px;text-align: center;"}
+          %small How it works illustration goes here
+    .span4
+      .homepage-box
+        %h2.homepage-box-title
+          =link_to_slug('about-tourbook')
+        .homepage-box-content
+          =summarize(Page.find_by_slug('about-tourbook'), :length => 200)
+        .homepage-box-links
+          =link_to_slug("Find out more", 'about-tourbook', :class=>"btn")
+          =link_to_slug("Find out more", 'about-tourbook', :class=>"btn btn-primary")
+  .row.mb-2.fade_in
+    .span4
+      .homepage-box
+        %h2.homepage-box-title
+          =link_to_slug('about-pan')
+        .homepage-box-content
+          =summarize(Page.find_by_slug('about-pan'), :length => 200)
+        .homepage-box-links
+          =link_to_slug("Find out more", 'about-pan')
+        .homepage-box-links
+          =link_to("Explore our venues", venues_path)
+    .span4
+      .homepage-box
+        %h2.homepage-box-title
+          =link_to_slug('Promote your company in Scotland', :for_promoters)
+        .homepage-box-content
+          %p If you are performing arts company wanting to promote your events in the Highlands and Islands of Scotland then sign up here.
+        .homepage-box-links
+          =link_to_slug('Sign up for FREE', :for_promoters)
+    .span4
+      .homepage-box
+        %h2.homepage-box-title
+          =link_to_slug('Join the promoter community', :register)
+        .homepage-box-content
+          %p If you are a member of PAN then you can access the community tools here.
+        .homepage-box-links
+          =link_to_slug('Register', :register)
+  .row.mb-2.fade_in
+    .span4
+      .homepage-box.homepage-box-short
+        %h2.homepage-box-title
+          =link_to("Twitter", "http://twitter.com/panpromoters", :target => "_blank")
+        .homepage-box-content
+          -if tweet = latest_tweet("panpromoters", :count => 30)
+            %p=auto_link(tweet.text)
+    .span4
+      #social_media_links.homepage-box.homepage-box-short
+        .homepage-box-content
+          %ul.unstyled
+            %li=link_to("Facebook", "http://www.facebook.com/PromotersArtsNetwork", :target => "_blank")
+            %li=link_to("Youtube", "#")
+            %li=link_to("Vimeo", "#")
+            %li=link_to("Flickr", "#")
+    .span4
+      %h2.homepage-box-title
+        Our supporters
+      .row.mb-2
+        -4.times do
+          .span1=image_placeholder("60x60")
+      .row
+        -4.times do
+          .span1=image_placeholder("60x60")

@@ -4,19 +4,15 @@
     %title
       =Settings.site_name
       ="- #{@page_title}" if @page_title.present?
-    =stylesheet_link_tag("application")
+    =stylesheet_link_tag("application", "http://f.fontdeck.com/s/css/GzquBrtA5R1IjOjZ9KPx8cFffVQ/localhost/25297.css", "http://f.fontdeck.com/s/css/GzquBrtA5R1IjOjZ9KPx8cFffVQ/www.pan.yoomee.com/25297.css")
     =javascript_include_tag("application")
     =csrf_meta_tags
     =yield :head
     =google_analytics_js
   -body_tag do
     .main-wrapper
-      -if false
-        #beta-bar
-          This website is a work in progress. 
-          =link_to('Click here to read more about the beta.', beta_path)
       -if flash.present?
-        =yield_with_bootstrap(render_flash)
+        =yield_with_bootstrap(render_flash)  
       =render("layouts/header")
       =yield_with_bootstrap(yield)
       .push
