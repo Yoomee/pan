@@ -17,7 +17,7 @@ gem 'datetimespan'
 gem 'newrelic_rpm'
 gem 'ey_config'
 
-gem 'ym_core', "~> 0.1" #, :path => "~/Rails/Gems/ym_core"
+gem 'ym_core', "~> 0.1.33" #, :path => "~/Rails/Gems/ym_core"
 gem 'ym_videos', "~> 0.1"
 gem 'ym_users', "~> 0.1"
 gem 'ym_posts', "~> 0.1" #, :path => "~/Rails/Gems/ym_posts"
