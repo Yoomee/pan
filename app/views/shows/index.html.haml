@@ -1,0 +1,11 @@
+.row
+  .span9
+    %h1 Find shows
+    -@tours.each_slice(3) do |three_tours|
+      .row
+        -three_tours.each do |tour|
+          .span3
+            %h1=tour
+  .span3
+    sidebar here
+=@tours.inspect

@@ -93,5 +93,7 @@ Pan::Application.routes.draw do
       get 'download'
     end
   end
-  
+
+  resources :shows, :only => [:index]
+
 end

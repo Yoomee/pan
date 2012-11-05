@@ -1,0 +1,36 @@
+.container
+#sign-in
+  .container
+    .row
+      .span12.center
+        %h1 Welcome to tourbook
+        %p.sub-title supporting touring performance in your community
+
+    .row
+      .span4.offset4
+        =semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+          #sign-in-box
+            =f.input :email, :prepend => "<i class='icon-user'></i>".html_safe, :label => false, :input_html => {:placeholder => "email"}
+            =f.input :password, :prepend => "<i class='icon-key'></i>".html_safe, :label => false, :input_html => {:placeholder => "password"}
+            =f.hidden_field :remember_me, :value => true
+
+            =#render "devise/shared/links"
+            =link_to "Not a member?", new_user_registration_path, :id => "sign_up_link"
+          =f.submit "Sign in", :class => "btn"
+    .row#sign-in-info
+      .span3
+        =link_to_slug do
+          %h2 About Tourbook
+          %p Tourbook is a tool that brings together etc etc
+      .span3
+        =link_to new_user_registration_path do
+          %h2 Join Up
+          %p Tourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etc
+      .span3
+        %h2 For performers
+        %p Tourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etc
+      .span3
+        %h2 Support
+        %p Tourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etcTourbook is a tool that brings together etc etc
+
+

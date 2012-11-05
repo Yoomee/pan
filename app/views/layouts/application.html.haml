@@ -12,8 +12,9 @@
   -body_tag do
     .main-wrapper
       -if flash.present?
-        =yield_with_bootstrap(render_flash)  
-      =render("layouts/header")
+        =yield_with_bootstrap(render_flash)
+      -if current_user
+        =render("layouts/header")
       =yield_with_bootstrap(yield)
       .push
     .footer-wrapper
