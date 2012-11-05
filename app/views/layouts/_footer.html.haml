@@ -1,7 +1,25 @@
 .container
-  .row
-    .span12
-      %footer.footer
-        =link_to_slug('About', 'about-tourbook', :class => 'subnav_link')
-        =link_to_slug('contact', :class => 'subnav_link')
-        =link_to("Sitemap", pages_path, :class => "subnav_link")
+.footer-wrapper
+  .container
+    .row
+      .span12
+        %footer.footer
+          %ul.unstyled.footer-links
+            %li
+              =link_to "Terms of use", "#"
+            %li
+              =link_to "Feedback", "#"
+            %li
+              =link_to "Terms of use", "#"
+            %li
+              =link_to "Community Standards", "#"
+            %li
+              =link_to "Noticeboard", "#"
+            %li
+              =link_to("Sitemap", pages_path, :class => "")
+            %li
+              =link_to_slug('About Tourbook', 'about-tourbook', :class => '')
+            %li
+              =link_to "#" do
+                %i.icon-question-sign
+                Help

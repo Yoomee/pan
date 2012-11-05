@@ -82,6 +82,21 @@
 	color: #4c4e4c;
   
 }
+.carousel-control {
+  width: 35px;
+  height: 35px;
+  top: 47%;
+}
+.carousel-control i {
+  font-size: 20px;
+	line-height: 1;
+	float: left;
+	margin: 7px 0 0 12px;
+	
+}
+.carousel-control.right i {
+	margin-left: 14px;
+}
 /*========== Bootstrap extensions ==========*/
 .popover-footer {
   padding: 9px 15px;
@@ -136,7 +151,9 @@ h3 {
   
 }
 
-.profile-title {
+.profile-title,
+.news-feed h3
+ {
   font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
   text-transform: uppercase;
   color: #4d4e4d;
@@ -213,6 +230,7 @@ a {
 .well {
   background: #fff;
   border: 1px solid #9a9b98;
+  padding: 15px;
 }
 .underline {
   border-bottom: 2px solid;
@@ -226,9 +244,7 @@ select[multiple='multiple']{
 	font-weight: bold;
 }
 
-.btn-primary {
-	float: right;
-}
+
 
 /*========== Header ==========*/
 .top-bar {
@@ -365,6 +381,9 @@ ul.welcome-subnav li {
   -webkit-box-shadow:none;
   box-shadow:none;
 }
+#profile-info.well {
+  padding: 15px;
+}
 .profile-image img {
   width: 80px;
   float: left;
@@ -409,6 +428,94 @@ ul.messages-and-notifications {
 #noticeboard {
   background:none;
 }
+#noticeboard li p {
+  margin: 0;
+}
+#noticeboard ul li {
+	margin: 0 0 15px;
+}
+.news-feed li {
+	clear: both;
+	margin: 0 0 20px 85px;
+	float: left;
+}
+.news-feed-text {
+  float: left;
+}
+.news-feed-text a {
+  color: #6b6a68;
+}
+.news-feed-text p {
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+.news-feed-image {
+  padding: 0px;
+  float: left;
+  display: block;
+  width: 70px;
+  height: 70px;
+  background: #fbfcfa;
+  overflow: hidden;
+  margin: 0 0px 0 -85px;
+  border: 1px solid #dbdcd6;
+}
+.news-feed-calendar .news-feed-image {
+  border: none;
+  background: none;
+  margin-left: -60px;
+  width: 50px;
+  height: 55px;
+
+}
+.news-feed-calendar li {
+	margin-left: 65px;
+}
+.upcoming-events.news-feed-calendar li {
+	width: 155px;
+  
+}
+.recent-activity li {
+  width: 340px;
+}
+.calendar-icon {
+  display: block;
+  background: #4d4e4d;
+  color: #fff;
+  float: left;
+  width: 45px;
+  margin: 0 0 0 0px;
+  
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+}
+.calendar-icon span {
+  float: left;
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.calendar-icon .calendar-icon-date {
+  font-size: 22px;
+  padding: 6px 0 0;
+}
+
+.news-feed-image img {
+  width: 70px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -544,13 +651,24 @@ html, body {
 .footer-wrapper {
 	clear: both;
 	height: 60px;
+	background: #4c4e4c;
 }
 
 .footer{
-  border-top: 1px solid #EEE;
-  margin-top: 9px;
-  padding-top: 9px;
+  margin-top: 0px;
+  padding-top: 20px;
   color: #BFBFBF;
+}
+.footer-links {
+  float: right;
+}
+.footer-links li {
+  float: right;
+}
+.footer-links a {
+  float: right;
+  display: block;
+  margin: 0 0 0 15px;
 }
 
 /*========== Profiles ==========*/

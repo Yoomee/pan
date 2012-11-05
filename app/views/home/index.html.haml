@@ -79,15 +79,132 @@
             =link_to "group", "#"            
     .span6
       .well
-        %h2.underline Latest Shows
-        .latest-show
-          =link_to "#", :class=>"latest-show" do
-            =image_tag ""
+        %h2.underline.mb-1 Latest Shows
+        .latest-shows
+          #latest-news-carousel.carousel.slide
+            .carousel-inner
+              .item.active
+                =link_to "#", :class=>"carousel-link-image" do
+                  =image_tag "latest-shows.jpg"
+                .carousel-caption
+                  %h4
+                    =link_to "Hitch & Crunch", "#", :class=>"carousel-link-title"
+                  %p Mull Theatre
+              .item
+                =link_to "#", :class=>"carousel-link-image" do
+                  =image_tag "latest-shows.jpg"
+                .carousel-caption
+                  %h4
+                    =link_to "Hitch & Crunch", "#", :class=>"carousel-link-title"
+                  %p Mull Theatre                                  
+            =link_to "#latest-news-carousel", :class=>"carousel-control left", :"data-slide"=> "prev" do
+              %i.icon-chevron-left
+            =link_to "#latest-news-carousel", :class=>"carousel-control right", :"data-slide"=> "next" do
+              %i.icon-chevron-right
+              
+        %h2.underline.mb-1 Recent Activity
+        %ul.recent-activity.news-feed.unstyled
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              =image_tag "news-feed-image.jpg"
+            .news-feed-text  
+              %p
+                =link_to "Mull Theatre", "#"
+                added a new show.
+              %h3
+                =link_to "Hitch & Crunch"
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              =image_tag "news-feed-image.jpg"
+            .news-feed-text  
+              %p
+                =link_to "Mull Theatre", "#"
+                added a new show.
+              %h3
+                =link_to "Hitch & Crunch"
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              =image_tag "news-feed-image.jpg"
+            .news-feed-text  
+              %p
+                =link_to "Mull Theatre", "#"
+                added a new show.
+              %h3
+                =link_to "Hitch & Crunch"
+        .clearfix        
+                      
+              
+              
+              
+        
     .span3
       #noticeboard.well
-        %h2.underline Noticeboard
-        
-          
+        %h2.underline.mb-1 Noticeboard
+        %ul.unstyled
+          %li
+            =link_to "#", :class=>"list-item-title" do
+              %h4 New fund for youth promoting
+            %p
+              Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
+            =link_to "Read more", "#", :class=>"read-more"
+          %li
+            =link_to "#", :class=>"list-item-title" do
+              %h4 New fund for youth promoting
+            %p
+              Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. 
+            =link_to "Read more", "#", :class=>"read-more"
+    .span3
+      #upcoming-events
+        %h2.underline.mb-1 Upcoming Events
+        %ul.upcoming-events.news-feed.news-feed-calendar.unstyled
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              .calendar-icon
+                %span.calendar-icon-date
+                  14
+                %span.calendar-icon-month
+                  Sept
+            .news-feed-text  
+              %h3
+                =link_to "Ornithology"
+              %p.event-list-venue
+                =link_to "#" do
+                  %i.icon-home
+                  The sunart centre
+              %p.event-list-time    
+                7pm
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              .calendar-icon
+                %span.calendar-icon-date
+                  14
+                %span.calendar-icon-month
+                  Sept
+            .news-feed-text  
+              %h3
+                =link_to "Ornithology"
+              %p.event-list-venue
+                =link_to "#" do
+                  %i.icon-home
+                  The sunart centre
+              %p.event-list-time    
+                7pm
+          %li
+            =link_to "#", :class=>"news-feed-image" do
+              .calendar-icon
+                %span.calendar-icon-date
+                  14
+                %span.calendar-icon-month
+                  Sept
+            .news-feed-text  
+              %h3
+                =link_to "Ornithology"
+              %p.event-list-venue
+                =link_to "#" do
+                  %i.icon-home
+                  The sunart centre
+              %p.event-list-time    
+                7pm                                
           
 -if false
   .row.mb-2.fade_in
