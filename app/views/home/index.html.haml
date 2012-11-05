@@ -3,7 +3,7 @@
   .container
     .row
       .span12
-        %h1.welcome-title Welcome, Jane. What would you like to do today?
+        %h1.welcome-title="Welcome, #{current_user.first_name}. What would you like to do today?"
         %ul.welcome-subnav.nav
           %li
             =link_to "#", :class=>"welcome-item welcome-item-shows" do
@@ -39,10 +39,10 @@
   .row
     .span3
       #profile-info.left-col.well
-        =link_to "#", :class=>"profile-image" do
-          =image_tag "temp-profile.jpg"
-        .clearfix.mb-1  
-        %h2 John Smith
+        =link_to user_path(current_user), :class=>"profile-image" do
+          =image_for(current_user, "80x")
+        .clearfix.mb-1
+        %h2=current_user
         %ul.nav.messages-and-notifications
           %li
             =link_to "#" do
@@ -68,9 +68,11 @@
           %li
             %i.icon-home
             %h3 My venue(s)
-            =link_to "Venue link", "#"
-            =link_to "Venue link", "#"
-            =link_to "Venue link", "#"
+            -if current_user.venues.present?
+              -current_user.venues.each do |venue|
+                =link_to venue, venue_path(venue)
+            -else
+              =link_to "None yet - add one", ""
           %li
             %i.icon-comments
             %h3 My groups
