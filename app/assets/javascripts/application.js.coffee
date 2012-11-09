@@ -41,7 +41,7 @@ $(document).ready () ->
       )
   )
   
-  YmComments.Form.init({submitOnEnter: true})
+  # YmComments.Form.init({submitOnEnter: true})
 
   $('a[data-scroll]').live 'click', (event) ->
     event.preventDefault()
