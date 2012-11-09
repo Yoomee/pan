@@ -6,8 +6,8 @@ class ShowsController < ApplicationController
     @start_date = params[:start_date]
     @end_date = params[:end_date]
 
+    @all_tags = Tour.genre_counts.order(:name)
     @tours = Tour.where("end_on > ?", Date.today).order(:start_on)
-    @tour_tags = @tours.genre_counts.order(:name)
 
     if (@tags).present?
       @tours = @tours.tagged_with(@tags)

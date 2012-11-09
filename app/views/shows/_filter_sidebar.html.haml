@@ -1,0 +1,37 @@
+.well
+  %h2.mb-1 Filter by:
+  .show-tags
+    -@tags.each do |tag|
+      -param_tags = original_tags.dup
+      -param_tags.delete(tag)
+      =tag_link(tag, param_tags, @start_date, @end_date, "tag active", true)
+
+  .clearfix
+
+  %h2.mb-1 Dates
+
+  =form_tag 'shows', :method => "get", :class => "form-horizontal", :id => "show-date-filter"
+  .control-group
+    .controls
+      .input-append
+        =text_field_tag :start_date, @start_date, :class => " datepicker"
+        %span.add-on#remove-start-date
+          %i.icon-remove
+    =label_tag :start_date, "From:", :class => "control-label"
+  .control-group
+    .controls
+      .input-append
+        =text_field_tag :end_date, @end_date, :class => "span2 datepicker"
+        %span.add-on#remove-end-date
+          %i.icon-remove
+    =label_tag :end_date, "To:", :class => "control-label"
+
+
+  %h2.mb-1 Genre
+
+  .show-tags
+    -@all_tags.each do |tag|
+      -param_tags = original_tags.dup
+      -param_tags << tag.name unless param_tags.delete(tag.name)
+      =tag_link(tag.name, param_tags, @start_date, @end_date, "tag #{@tags.include?(tag.name) ? 'active' : ''}")
+  .clearfix
