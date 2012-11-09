@@ -6,7 +6,7 @@
         %h1.welcome-title="Welcome, #{current_user.first_name}. What would you like to do today?"
         %ul.welcome-subnav.nav
           %li
-            =link_to "#", :class=>"welcome-item welcome-item-shows" do
+            =link_to shows_path, :class=>"welcome-item welcome-item-shows" do
               %i.icon-star
               %h3.subnav-title Shows
               %p.subnav-description
