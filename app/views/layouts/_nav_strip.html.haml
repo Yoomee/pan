@@ -1,0 +1,48 @@
+.container
+#nav-strip
+  .container
+    .row
+      .span12
+        .row
+          .span2
+            %div{:class => "#{current_page?(root_path) ? 'inner active' : 'inner'}"}
+              =link_to root_path do
+                .header
+                  %i.icon-home
+                  Home
+                What's happening
+          .span2
+            %div{:class => "#{current_page?(shows_path) ? 'inner active' : 'inner'}"}
+              =link_to shows_path do
+                .header
+                  %i.icon-star
+                  Shows
+                Find shows for your venue
+          .span2
+            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+              =link_to "" do
+                .header
+                  %i.icon-calendar
+                  Diary
+                What's going on
+          .span2
+            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+              =link_to "" do
+                .header
+                  %i.icon-comment
+                  Groups
+                Talk to other members and find out more
+          .span2
+            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+              =link_to "" do
+                .header
+                  %i.icon-book
+                  Resources
+                Publications, links and help
+          .span2
+            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+              =link_to "" do
+                .header
+                  %i.icon-list-ul
+                  Directory
+                People, venues, performers and shows

@@ -13,8 +13,10 @@
     .main-wrapper
       -if flash.present?
         =yield_with_bootstrap(render_flash)
-      -if current_user
+      -unless current_page?(sign_in_path)
         =render("layouts/header")
+      -unless current_page?(root_path)
+        =render("layouts/nav_strip")
       =yield_with_bootstrap(yield)
       .push
     .footer-wrapper
