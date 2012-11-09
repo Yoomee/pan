@@ -19,8 +19,8 @@
                   Shows
                 Find shows for your venue
           .span2
-            %div{:class => "#{false ? 'inner active' : 'inner'}"}
-              =link_to "" do
+            %div{:class => "#{current_page?(diary_path) ? 'inner active' : 'inner'}"}
+              =link_to diary_path do
                 .header
                   %i.icon-calendar
                   Diary

@@ -1,0 +1,83 @@
+-content_for :head do
+  :javascript
+    $(document).ready(function() {
+      base_url = 'diary?' + $('#tags_params_for_js').html().replace(/\s/g,'');
+      $('#start_date').change(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
+      });
+      $('#end_date').change(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($('#start_date').val()) + '&end_date=' + encodeURIComponent($(this).val());
+      });
+      $('#remove-start-date').click(function() {
+        location.href = base_url + '&start_date=&end_date=' + encodeURIComponent($('#end_date').val());
+      });
+      $('#remove-end-date').click(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($('#start_date').val()) + '&end_date=';
+      });
+    });
+
+#tags_params_for_js
+  -if @tags.present?
+    ="tags%5B%5D=#{@tags.join('&tags%5B%5D=').gsub(/"/,'')}".html_safe
+-original_tags = @tags || []
+
+.row
+  .span9
+    %h1.mb-2.mt-2 Diary
+
+.row
+  .span9
+    %table#diary
+      %thead
+        %tr
+          %th.span1=link_to_previous_month(@month, @year, @tags, @start_date, @end_date)
+          %th.span7{:colspan => 2}
+            =Date::MONTHNAMES[@month.to_i]
+            =@year
+          %th.span1=link_to_next_month(@month, @year, @tags, @start_date, @end_date)
+
+      %tbody
+        -if @dates.size == 0
+          %tr
+            %td{:colspan => 4}
+              %p.lead No diary dates with these filters!
+        -else
+          -@dates.each do |date|
+            %tr
+              %td=date.date
+              %td
+                =link_to_self date.tour, :class => "tour"
+                %br
+                =link_to_self date.tour.performer, :class => "performer"
+              %td=link_to_self date.venue, :class => "venue"
+              %td
+                .show-tags
+                  -date.tour.genres.each do |tag|
+                    -param_tags = original_tags.dup
+                    -param_tags << tag.name unless param_tags.delete(tag.name)
+
+                    =tag_link(tag.name, param_tags, @start_date, @end_date, "tag #{@tags.include?(tag.name) ? 'active' : ''}")
+            -#
+              .row
+                .span3
+                  =link_to date.tour do
+                    =image_for(date.tour, "200x160#", :class => "list-image")
+                .span6
+                  =link_to date.tour do
+                    %h2=date.tour
+                    %h3=date.tour.performer
+                    %p=date.tour.dates_string
+                    %p
+                      =truncate(date.tour.description, :length => 200, :separator => " ")
+                      =#link_to "read more...", tour_path(date.tour)
+                    .show-tags
+                      -date.tour.genres.each do |tag|
+                        -param_tags = original_tags.dup
+                        -param_tags << tag.name unless param_tags.delete(tag.name)
+                        =link_to(shows_path(:tags => param_tags, :start_date => @start_date, :end_date => @end_date), :class => "tag #{@tags.include?(tag.name) ? 'active' : ''}") do
+                          %span.label.tag-label
+                            =tag
+                .clearfix
+
+  .span3
+    =render 'shows/filter_sidebar', :original_tags => original_tags

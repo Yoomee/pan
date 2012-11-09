@@ -99,4 +99,6 @@ Pan::Application.routes.draw do
   match "shows/view/list" => "shows#set_view", :view => 'list', :as => 'set_list_view'
   match "shows/view/block" => "shows#set_view", :view => 'block', :as => 'set_block_view'
 
+  get 'diary', :to => 'diary#index'
+
 end
