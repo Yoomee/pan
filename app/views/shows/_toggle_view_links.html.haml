@@ -1,0 +1,7 @@
+.block-or-line
+  =link_to(set_list_view_path(:view => 'list', :return_to => current_path), :class => "block-or-line-icon show-line#{view_preference=='list' ? ' active' : ''}", :title => "List view") do
+    -3.times do
+      .sl
+  =link_to(set_block_view_path(:view => 'block', :return_to => current_path), :class => "block-or-line-icon show-block#{view_preference=='block' ? ' active' : ''}", :title => "Block view") do
+    -9.times do
+      .sb

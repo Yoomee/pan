@@ -1,11 +1,82 @@
+-content_for :head do
+  :javascript
+    $(document).ready(function() {
+      base_url = 'shows?' + $('#tags_params_for_js').html().replace(/\s/g,'');
+      console.log(base_url);
+      $('#start_date').change(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
+      });
+      $('#end_date').change(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($('#start_date').val()) + '&end_date=' + encodeURIComponent($(this).val());
+      });
+      $('#remove-start-date').click(function() {
+        location.href = base_url + '&start_date=&end_date=' + encodeURIComponent($('#end_date').val());
+      });
+      $('#remove-end-date').click(function() {
+        location.href = base_url + '&start_date=' + encodeURIComponent($('#start_date').val()) + '&end_date=';
+      });
+    });
+
+#tags_params_for_js
+  -if @tags.present?
+    ="tags%5B%5D=#{@tags.join('&tags%5B%5D=').gsub(/"/,'')}".html_safe
+-original_tags = @tags || []
+
+.row
+  .span8
+    %h1.mb-2.mt-2 Find shows
+  .span1
+    .mt-2
+      =render "shows/toggle_view_links"
+
 .row
   .span9
-    %h1 Find shows
-    -@tours.each_slice(3) do |three_tours|
-      .row
-        -three_tours.each do |tour|
-          .span3
-            %h1=tour
+    -if view_preference == 'block'
+      =render "shows/block_view", :original_tags => original_tags
+    -else
+      =render "shows/list_view", :original_tags => original_tags
+
   .span3
-    sidebar here
-=@tours.inspect
+    .well
+      -#if @tags.present?
+      %h2.mb-1 Filter by:
+      .show-tags
+        -@tags.each do |tag|
+          -param_tags = original_tags.dup
+          -param_tags.delete(tag)
+          =link_to(shows_path(:tags => param_tags, :start_date => @start_date, :end_date => @end_date), :class => "tag active") do
+            %span.label.tag-label
+              =tag
+              &nbsp;
+              %i.icon-remove
+      .clearfix
+
+      %h2.mb-1 Dates
+
+      =form_tag 'shows', :method => "get", :class => "form-horizontal", :id => "show-date-filter"
+      .control-group
+        .controls
+          .input-append
+            =text_field_tag :start_date, @start_date, :class => " datepicker"
+            %span.add-on#remove-start-date
+              %i.icon-remove
+        =label_tag :start_date, "From:", :class => "control-label"
+      .control-group
+        .controls
+          .input-append
+            =text_field_tag :end_date, @end_date, :class => "span2 datepicker"
+            %span.add-on#remove-end-date
+              %i.icon-remove
+        =label_tag :end_date, "To:", :class => "control-label"
+      
+
+      %h2.mb-1 Genre
+
+      .show-tags
+        -@tour_tags.each do |tag|
+          -param_tags = original_tags.dup
+          -param_tags << tag.name unless param_tags.delete(tag.name)
+          =link_to(shows_path(:tags => param_tags, :start_date => @start_date, :end_date => @end_date), :class => "tag #{@tags.include?(tag.name) ? 'active' : ''}") do
+            %span.label.tag-label
+              =tag
+      .clearfix

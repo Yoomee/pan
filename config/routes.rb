@@ -94,6 +94,9 @@ Pan::Application.routes.draw do
     end
   end
 
-  resources :shows, :only => [:index]
+  get 'shows', :to => 'shows#index'
+
+  match "shows/view/list" => "shows#set_view", :view => 'list', :as => 'set_list_view'
+  match "shows/view/block" => "shows#set_view", :view => 'block', :as => 'set_block_view'
 
 end
