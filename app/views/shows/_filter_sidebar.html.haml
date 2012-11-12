@@ -1,10 +1,11 @@
+-month ||= ""; year ||= ""
 .well
   %h2.mb-1 Filter by:
   .show-tags
     -@tags.each do |tag|
       -param_tags = original_tags.dup
       -param_tags.delete(tag)
-      =tag_link(tag, param_tags, @start_date, @end_date, "tag active", true)
+      =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year}, "tag active", true)
 
   .clearfix
 
@@ -33,5 +34,5 @@
     -@all_tags.each do |tag|
       -param_tags = original_tags.dup
       -param_tags << tag.name unless param_tags.delete(tag.name)
-      =tag_link(tag.name, param_tags, @start_date, @end_date, "tag #{@tags.include?(tag.name) ? 'active' : ''}")
+      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
   .clearfix

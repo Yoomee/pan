@@ -1,7 +1,7 @@
 -content_for :head do
   :javascript
     $(document).ready(function() {
-      base_url = 'shows?' + $('#tags_params_for_js').html().replace(/\s/g,'');
+      var base_url = "shows?#{{:tags => @tags.uniq}.to_query}"
       $('#start_date').change(function() {
         location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
       });
@@ -16,9 +16,6 @@
       });
     });
 
-#tags_params_for_js
-  -if @tags.present?
-    ="tags%5B%5D=#{@tags.join('&tags%5B%5D=').gsub(/"/,'')}".html_safe
 -original_tags = @tags || []
 
 .row
