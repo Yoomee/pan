@@ -1148,6 +1148,63 @@ a.block-or-line-icon:hover .sb, a.block-or-line-icon:hover .sl {
   background: #4D4E4D;
 }
 
+/*========== diary page ==========*/
+
+table#diary {
+  background: white;
+  position: relative;
+}
+table#diary a.previous-month,
+table#diary a.next-month {
+  position: absolute;
+  top: 5px;
+  background: #565656;
+  color: white;
+  border-radius: 40px;
+  height: 35px;
+  width: 35px;
+  font-size: 50px;
+  line-height: 23px;
+}
+table#diary thead {
+  border-bottom: 2px #565656 solid; 
+}
+table#diary tbody tr {
+  border-bottom: 1px #565656 solid;
+}
+table#diary tbody tr td {
+  padding: 10px;
+}
+table#diary thead th {
+  text-transform: uppercase;
+  font-size: 30px;
+  padding-bottom: 30px;
+}
+table#diary a.previous-month:hover,
+table#diary a.next-month:hover {
+  background: black;
+  text-decoration: none;
+}
+table#diary a.tour,
+table#diary a.performer {
+  text-transform: uppercase;
+  font-size: 16px;
+}
+table#diary .date {
+  width: 60px;
+}
+table#diary .date,
+table#diary a.tour,
+table#diary a.performer {
+  font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
+  font-weight: bold;
+  color: #4d4e4d;
+}
+table#diary a.venue {
+  font-weight: bold;
+  color: #4d4e4d;
+}
+
 /*========== nav-strip ==========*/
 #nav-strip {
   background: white;
