@@ -152,7 +152,8 @@ h3 {
 }
 
 .profile-title,
-.news-feed h3
+.news-feed h3,
+.show-tour h2
  {
   font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
   text-transform: uppercase;
@@ -1074,12 +1075,14 @@ label em.optional {
   background: #C4C2C0;
 }
 .show-tags .tag span.label.tag-label {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
   margin: 0 10px 10px 0;
-  background: #149eb8;
+  background: #4095b7;
   text-transform: uppercase;
+  font-weight: bold;
 }
 .show-tags .tag.active span.label.tag-label {
-  background: #EE3F5B;
+  background: #bb2550;
   padding: 3px 8px 4px;
   float: left;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
