@@ -13,6 +13,8 @@ class Tour < ActiveRecord::Base
   
   has_many :reviews, :dependent => :nullify
   
+  has_many :posts, :as => :target
+  
   date_accessors :start_on, :end_on
   
   acts_as_taggable_on :genres
@@ -50,10 +52,20 @@ class Tour < ActiveRecord::Base
     dates.where(:booked => true)
   end
   
+  
   def links_or_performer_links
     links.presence || performer.links
   end
+   
+  def links_or_performer_links_only_twitter_and_facebook
+    links = links.presence || performer.links
+    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+  end
   
+  def links_or_performer_links_without_twitter_and_facebook
+    links = links.presence || performer.links
+    links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  end
   
   def sibling_tours
     performer.tours.without(self)

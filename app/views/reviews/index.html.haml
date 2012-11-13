@@ -6,35 +6,6 @@
   %b.icon-info-sign
   Your first-hand experiences really help other promoters.
   =link_to("Click to add your own review.", @tour ? new_tour_review_path(@tour) : new_performer_review_path(@performer))
-%table.table.table-striped
-  %tbody
-    -@reviews.each do |review|
-      %tr
-        %td.span3
-          =image_for(review.user, "80x")
-          %h4=link_to(review.user,user_path(review.user))
-          -if review.user.promoter
-            =review.user.promoter
-            %br
-          =pluralize(review.user.reviews.count, "review")
-        %td
-          %b
-            =review.title
-          %br
-          %i
-            Reviewed on
-            =short_date(review.created_at)
-          =simple_format(review.description)
-          %b Ratings
-          %p
-            =rating_stars(review.overall_rating)
-            Overall rating
-            -(@tour ? Review::TOUR_RATINGS : Review::PERFORMER_RATINGS).each do |field_name, label_name|
-              -if rating = review.send(field_name)
-                %br
-                =rating_stars(rating)
-                =label_name
-          %p=link_to("Edit review", @tour ? edit_tour_review_path(@tour, review) : edit_performer_review_path(@performer, review) ) if can? :edit, review
-          
+=render 'reviews/reviews', :reviews => @reviews
 =options_panel do
   =back_link

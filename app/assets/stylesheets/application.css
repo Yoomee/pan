@@ -153,7 +153,8 @@ h3 {
 
 .profile-title,
 .news-feed h3,
-.show-tour h2
+.show-tour h2,
+h1.tour
  {
   font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
   text-transform: uppercase;
@@ -802,6 +803,7 @@ ul.links li img {
 }
 ul.links li a {
   color:#333;
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
 }
 
 /*========== Slideshow ==========*/
@@ -1203,6 +1205,107 @@ table#diary a.performer {
 table#diary a.venue {
   font-weight: bold;
   color: #4d4e4d;
+}
+
+/*========== tours#show ==========*/
+h1.tour {
+  padding: 20px 0;
+}
+h1.tour i {
+  color: #b9c626;
+  margin-right: 20px;
+}
+.profile-left-col {
+  margin-top: 37px;
+}
+.profile-left-col .performer {
+  text-align: center;
+  font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
+  margin-top: 5px;
+}
+.profile-left-col .performer a {
+  text-decoration: none;
+  color: #4D4E4D;
+}
+.profile-left-col .performer a:hover {
+  text-decoration: underline;
+}
+.profile-left-col .well {
+  background: #F6F6F2;
+}
+a i.icon-twitter,
+a i.icon-facebook {
+  color: white;
+  height: 24px;
+  border-radius: 40px;
+  margin-top: 5px;
+  font-size: 16px;
+  padding-top: 3px;
+}
+a i.icon-twitter {
+  background: #3daced;
+  width: 20px;
+  padding-left: 6px;
+}
+a i.icon-facebook {
+  background: #465d98;
+  width: 16px;
+  padding-left: 10px;
+}
+a i.icon-twitter:hover,
+a i.icon-facebook:hover {
+  text-decoration: none;
+  background: #005580;
+}
+.date-and-genres {
+  margin: 20px 0;
+  padding: 20px 0;
+  border-top: 1px #919191 solid;
+  border-bottom: 1px #919191 solid;
+}
+.date-and-genres h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.date-and-genres .genres a {
+  color:  #4095b7;
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+}
+.black-block-links {
+  margin-top: 20px;
+}
+.black-block-links a {
+  width: 180px;
+  color: white;
+  background: black;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.black-block-links a i {
+  margin-right: 10px
+}
+#tour-tabs {
+  padding: 0 5px;
+  margin-bottom: 0;
+  padding-bottom: 1px;
+  border-bottom: none;
+}
+#tour-tabs li a {
+  border: none;
+}
+#tour-tabs li.active a,
+#tour-tabs li a:hover {
+  border: none;
+  background: #F6F6F2;
+  border-bottom: 3px #b9c626 solid;
+}
+#about p:first-child {
+  color: #565656;
+  font-size: 16px;
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+}
+#comments.tab-pane .row .span9 .well {
+  padding-left: 40px;
 }
 
 /*========== nav-strip ==========*/

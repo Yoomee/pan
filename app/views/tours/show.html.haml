@@ -1,8 +1,227 @@
 .row
+  .span12
+    %h1.tour
+      %i.icon-star
+      =tour.name
+.row
   .span3
     .row.profile-left-col
+      .well
+        =image_for(tour, "220x150#")
+        .performer
+          =link_to_self tour.performer
+        .date-and-genres
+          %h4=tour.dates_string
+          -if tour.genre_list.present?
+            .genres
+              =comma_list_tags(tour, :genres)
+        -if tour.links_or_performer_links.present?
+          -if tour.links_or_performer_links_without_twitter_and_facebook.present?
+            %ul.unstyled.links
+              -tour.links_or_performer_links_without_twitter_and_facebook.each do |link|
+                %li
+                  =link_to(link, link.url, :target => '_blank')
+          -if tour.links_or_performer_links_only_twitter_and_facebook.present?
+            -tour.links_or_performer_links_only_twitter_and_facebook.each do |link|
+              =facebook_twitter_link(link)
+          .black-block-links
+            =link_to "", :class => "btn" do
+              %i.icon-envelope
+              Send a message
+            =link_to "", :class => "btn" do
+              %i.icon-heart
+              I'm interested
+            =link_to "", :class => "btn" do
+              %i.icon-pencil
+              Post a comment
+            =link_to "", :class => "btn" do
+              %i.icon-comment
+              Provide feedback
+
+  .span9
+    %ul.nav.nav-tabs#tour-tabs
+      %li.active
+        =link_to  "About", "#about", :'data-toggle' => 'tab'
+      %li
+        =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'
+      %li
+        =link_to "Media", "#media", :'data-toggle' => 'tab'
+      %li
+        =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
+      %li
+        =link_to "Diary", "#diary", :'data-toggle' => 'tab'
+      %li
+        =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
+      %li
+        =link_to "Updates", "#updates", :'data-toggle' => 'tab'
+      %li
+        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+    .tab-content
+      #about.tab-pane.fade.in.active
+        .well
+          =simple_format(tour.description)
+
+      #spec.tab-pane.fade.in
+        .well
+          .row
+            .span4
+              %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
+                %thead
+                  %tr
+                    %th
+                      %h3
+                        Technical requirements
+                %tbody
+                  -if tour.min_playing_area.present?
+                    %tr
+                      %td
+                        Minimum playing area required
+                      %td
+                        =description_tag("","#{tour.min_playing_area} sq m")
+                  %tr
+                    %td
+                      Do you need a blackout?
+                    %td
+                      =description_tag("", tour.blackout_needed?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      Do you use lighting?
+                    %td
+                      =description_tag("", tour.uses_lighting?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      Do you tour your own lighting?
+                    %td
+                      =description_tag("", tour.uses_own_lighting?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      Do you use sound?
+                    %td
+                      =description_tag("", tour.uses_sound?.yes_or_no.titleize)          
+
+
+            .span4
+              %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
+                %thead
+                  %tr
+                    %th
+                      %h3
+                        Venue suitability
+                %tbody
+                  %tr
+                    %td
+                      Arts venue
+                    %td
+                      =description_tag("", tour.suits_arts_venue?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      Village/community hall
+                    %td
+                      =description_tag("", tour.suits_village_hall?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      School hall
+                    %td
+                      =description_tag("", tour.suits_school_hall?.yes_or_no.titleize)
+                  %tr
+                    %td
+                      Outdoors
+                    %td
+                      =description_tag("", tour.suits_outdoors?.yes_or_no.titleize)
+                   
+          
+          -if tour.requirements.present? || tour.target_age.present? || tour.running_time.present? || tour.publicity.present? || tour.fees.present?
+            .row
+              .span8
+                %table.table.table-bordered.table-striped.tech-details.mb-2
+                  %thead
+                    %tr
+                      %th
+                        %h3
+                          Other
+                  %tbody
+                    -if tour.requirements.present?
+                      %tr
+                        %td
+                          Other requirements
+                        %td
+                          =simple_format(tour.requirements)
+                    -if tour.target_age.present?
+                      %tr
+                        %td
+                          Target age range/style
+                        %td
+                          =simple_format(tour.target_age)
+                    -if tour.running_time.present?
+                      %tr
+                        %td
+                          Running time/with and without interval
+                        %td
+                          =simple_format(tour.running_time)
+                    -if tour.publicity.present?
+                      %tr
+                        %td
+                          Will publicity be provided?
+                        %td
+                          =simple_format(tour.publicity)
+                    -if tour.fees.present?
+                      %tr
+                        %td
+                          Fees
+                        %td
+                          =simple_format(tour.fees)
+
+      #media.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #reviews.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              =render 'reviews/reviews', :reviews => tour.reviews
+      
+      #diary.tab-pane.fade.in 
+        .row
+          .span9
+            .well
+              #calendar
+                %h3 Book a date
+                =render("tours/calendar_key", :hide_unavailable => true)
+                =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
+      
+      #pricing.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #updates.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #comments.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              .row
+                .span8
+                  -if can?(:create, Post)
+                    =render("posts/remote_form", :post => current_user.posts.build(:target => tour))
+                  =render("posts/posts", :posts => tour.posts.page(params[:page]))
+            
+    -#                        
       .span3
-        =image_for(tour, "220x")
+        .well
+          -if current_user.promoter
+            =render("helpboxes/tour_promoter")
+          -elsif logged_in_as_site_admin?
+            =render("helpboxes/tour_site_admin")
+          -elsif logged_in_as_performer?(performer)
+            =render("helpboxes/performer_tour_admin")
+            
+      
       .span3.mt-2
         %h4=pluralize(tour.reviews.count, 'Review')
         %div=rating_stars(tour.overall_rating)
@@ -25,8 +244,7 @@
         .span3.mt-2
           %h4 Secondary contact
           =auto_link(tour.contact2_details.join("<br />").html_safe)
-      
-          
+                
       -future_tour = tour.performer.tours.order(:end_on).where("end_on > :now", now: Time.now)
       -if logged_in_as_performer?(performer) || future_tour.present?
         .span3.mt-2
@@ -49,146 +267,10 @@
         .span3.mt-2
           %h4 Past tours
           =link_to("View all past shows", performer_tours_path(tour.performer, :anchor => 'past'))      
-  .span6
-    %h1
-      =title(tour)
-      %small=link_to_self(tour.performer)
-    %h3.mb-1=tour.dates_string
-    =simple_format(tour.description)
-  .span3
-    .well
-      -if current_user.promoter
-        =render("helpboxes/tour_promoter")
-      -elsif logged_in_as_site_admin?
-        =render("helpboxes/tour_site_admin")
-      -elsif logged_in_as_performer?(performer)
-        =render("helpboxes/performer_tour_admin")
-  .span9
-    -if tour.genre_list.present?
-      .row.mt-2
-        .span5.mb-1
-          %h4 Genres
-          =list_tags(tour, :genres)
-          
-          
-          
-          
-    .row.mt-2
-      .span4
-        %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
-          %thead
-            %tr
-              %th
-                %h3
-                  Technical requirements
-          %tbody
-            -if tour.min_playing_area.present?
-              %tr
-                %td
-                  Minimum playing area required
-                %td
-                  =description_tag("","#{tour.min_playing_area} sq m")
-            %tr
-              %td
-                Do you need a blackout?
-              %td
-                =description_tag("", tour.blackout_needed?.yes_or_no.titleize)
-            %tr
-              %td
-                Do you use lighting?
-              %td
-                =description_tag("", tour.uses_lighting?.yes_or_no.titleize)
-            %tr
-              %td
-                Do you tour your own lighting?
-              %td
-                =description_tag("", tour.uses_own_lighting?.yes_or_no.titleize)
-            %tr
-              %td
-                Do you use sound?
-              %td
-                =description_tag("", tour.uses_sound?.yes_or_no.titleize)          
 
-
-      .span4.offset1
-        %table.table.table-bordered.table-striped.tech-details.mb-2.mt-1
-          %thead
-            %tr
-              %th
-                %h3
-                  Venue suitability
-          %tbody
-            %tr
-              %td
-                Arts venue
-              %td
-                =description_tag("", tour.suits_arts_venue?.yes_or_no.titleize)
-            %tr
-              %td
-                Village/community hall
-              %td
-                =description_tag("", tour.suits_village_hall?.yes_or_no.titleize)
-            %tr
-              %td
-                School hall
-              %td
-                =description_tag("", tour.suits_school_hall?.yes_or_no.titleize)
-            %tr
-              %td
-                Outdoors
-              %td
-                =description_tag("", tour.suits_outdoors?.yes_or_no.titleize)
-             
-    
-    -if tour.requirements.present? || tour.target_age.present? || tour.running_time.present? || tour.publicity.present? || tour.fees.present?
-      .row
-        .span9
-          %table.table.table-bordered.table-striped.tech-details.mb-2
-            %thead
-              %tr
-                %th
-                  %h3
-                    Other
-            %tbody
-              -if tour.requirements.present?
-                %tr
-                  %td
-                    Other requirements
-                  %td
-                    =simple_format(tour.requirements)
-              -if tour.target_age.present?
-                %tr
-                  %td
-                    Target age range/style
-                  %td
-                    =simple_format(tour.target_age)
-              -if tour.running_time.present?
-                %tr
-                  %td
-                    Running time/with and without interval
-                  %td
-                    =simple_format(tour.running_time)
-              -if tour.publicity.present?
-                %tr
-                  %td
-                    Will publicity be provided?
-                  %td
-                    =simple_format(tour.publicity)
-              -if tour.fees.present?
-                %tr
-                  %td
-                    Fees
-                  %td
-                    =simple_format(tour.fees)
                 
-    .row
-      .span9
-        #calendar
-          %h3 Book a date
-          =render("tours/calendar_key", :hide_unavailable => true)
-          =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
             
-.row.mt-2
+.row
   .span9
     =options_panel do
       =back_link
