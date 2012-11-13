@@ -1219,13 +1219,12 @@ h1.tour i {
   margin-top: 37px;
 }
 .profile-left-col .performer {
-  text-align: center;
-  font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
-  margin-top: 5px;
+  padding: 20px 0 0 0;
 }
 .profile-left-col .performer a {
   text-decoration: none;
   color: #4D4E4D;
+  font-size: 18px;
 }
 .profile-left-col .performer a:hover {
   text-decoration: underline;
@@ -1265,11 +1264,16 @@ a i.icon-facebook:hover {
 }
 .date-and-genres h4 {
   font-size: 16px;
-  margin-bottom: 10px;
 }
 .date-and-genres .genres a {
   color:  #4095b7;
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+}
+.date-and-genres a.tour-diary-link {
+  color: #4D4E4D;
+}
+.genres {
+  margin-top: 10px;
 }
 .black-block-links {
   margin-top: 20px;

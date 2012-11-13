@@ -12,7 +12,7 @@
                   Home
                 What's happening
           .span2
-            %div{:class => "#{(current_page?(shows_path) || current_page?(tour_path)) ? 'inner active' : 'inner'}"}
+            %div{:class => "#{current_page?(shows_path) || (current_page?(:controller => "/tours")) ? 'inner active' : 'inner'}"}
               =link_to shows_path do
                 .header
                   %i.icon-star

@@ -9,9 +9,15 @@
       .well
         =image_for(tour, "220x150#")
         .performer
-          =link_to_self tour.performer
+          %h4
+            =link_to tour.performer do
+              %i.icon-user
+              =tour.performer
         .date-and-genres
           %h4=tour.dates_string
+          =link_to diary_path(:tour_id => tour.id), :class => "tour-diary-link" do
+            %i.icon-calendar
+            Diary
           -if tour.genre_list.present?
             .genres
               =comma_list_tags(tour, :genres)
@@ -44,12 +50,11 @@
         =link_to  "About", "#about", :'data-toggle' => 'tab'
       %li
         =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'
-      %li
-        =link_to "Media", "#media", :'data-toggle' => 'tab'
+      -#
+        %li
+          =link_to "Media", "#media", :'data-toggle' => 'tab'
       %li
         =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
-      %li
-        =link_to "Diary", "#diary", :'data-toggle' => 'tab'
       %li
         =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
       %li
@@ -181,15 +186,6 @@
           .span9
             .well
               =render 'reviews/reviews', :reviews => tour.reviews
-      
-      #diary.tab-pane.fade.in 
-        .row
-          .span9
-            .well
-              #calendar
-                %h3 Book a date
-                =render("tours/calendar_key", :hide_unavailable => true)
-                =render("calendar_form", :tour => tour, :bookings_page => false, :remote => true)
       
       #pricing.tab-pane.fade.in
         .row
