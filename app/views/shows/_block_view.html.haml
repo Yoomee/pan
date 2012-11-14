@@ -3,7 +3,7 @@
     -three_tours.each do |tour|
       .span3
         .show-tour
-          =link_to tour do
+          =link_to show_path(tour) do
             =image_for(tour, "200x150#")
             %h2=tour
             %h3=tour.performer

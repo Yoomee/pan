@@ -18,7 +18,6 @@ class ShowsController < ApplicationController
     if @end_date.present?
       @tours = @tours.where("start_on < ?", Date.parse(@end_date))
     end
-
   end
 
   def set_view
