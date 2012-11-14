@@ -1,0 +1,15 @@
+-content_for(:head) do
+  :javascript
+    $(document).ready(function() {
+      console.log('document ready');
+      Redactor.init();
+      $('#external_reviews').on('cocoon:after-insert', function() {
+        console.log('in callback');
+        Redactor.init();
+     });
+    });
+
+#external_reviews
+  =form.semantic_fields_for :external_reviews do |review_form|
+    =render("external_reviews/review_fields", :f => review_form)
+  =link_to_add_association "+ Add a review", form, :external_reviews, :partial => "external_reviews/review_fields", :"data-association-insertion-node" => '#external_reviews .add_fields'

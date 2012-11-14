@@ -1,0 +1,5 @@
+.nested-fields
+  =f.inputs :class => "form-inline" do
+    =f.input :review, :as => :redactor, :wrapper_html => {:class => "pull-left mr-1"}
+    =link_to_remove_association "x Remove review", f, :class => "pull-left"
+  %hr

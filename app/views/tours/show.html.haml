@@ -169,12 +169,7 @@
                           Will publicity be provided?
                         %td
                           =simple_format(tour.publicity)
-                    -if tour.fees.present?
-                      %tr
-                        %td
-                          Fees
-                        %td
-                          =simple_format(tour.fees)
+                    
 
       #media.tab-pane.fade.in
         .row
@@ -185,12 +180,17 @@
         .row
           .span9
             .well
-              =render 'reviews/reviews', :reviews => tour.reviews
+              -tour.external_reviews.each do |review|
+                =simple_format(review.review)
       
       #pricing.tab-pane.fade.in
         .row
           .span9
             .well
+              -if tour.fees.present?
+                =simple_format(tour.fees)
+              -else
+                No pricing information has been added.
             
       #updates.tab-pane.fade.in
         .row

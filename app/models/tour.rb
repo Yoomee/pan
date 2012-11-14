@@ -13,6 +13,9 @@ class Tour < ActiveRecord::Base
   
   has_many :reviews, :dependent => :nullify
   
+  has_many :external_reviews, :as => :reviewable, :dependent => :destroy
+  accepts_nested_attributes_for :external_reviews, :reject_if => :all_blank, :allow_destroy => true
+  
   has_many :posts, :as => :target
   
   date_accessors :start_on, :end_on
