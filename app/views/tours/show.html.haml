@@ -1,3 +1,16 @@
+=content_for :head do
+  :javascript
+    function scrollToCommentInput() {
+      YmCore.scrollTo($('#new_post'));
+    }
+    $(document).ready(function() {
+      $('#go-to-comment').click(function(event) {
+        event.preventDefault();
+        $('#tour-tabs a[href="#comments"]').tab('show');
+        window.setTimeout(scrollToCommentInput, 200);
+      });
+    });
+
 .row
   .span12
     %h1.tour
@@ -37,7 +50,7 @@
             =link_to "", :class => "btn" do
               %i.icon-heart
               I'm interested
-            =link_to "#comments", :'data-toggle' => 'tab', :class => "btn" do
+            =link_to "", :class => "btn", :id => "go-to-comment" do
               %i.icon-pencil
               Post a comment
             =link_to "", :class => "btn" do
