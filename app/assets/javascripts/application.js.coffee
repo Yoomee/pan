@@ -7,6 +7,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require ym_core
+#= require redactor
 #= require ym_cms
 #= require ym_tags
 #= require ym_posts
