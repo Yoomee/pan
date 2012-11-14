@@ -709,6 +709,24 @@ div.span1.mb-1 {
 .performer_tag_lists .span2 {
   min-height: 65px;
 }
+.performer-tours {
+  margin: 20px 0;
+  font-size: 16px;
+}
+.performer-tours h4 {
+  border-bottom: 1px #919191 solid;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.performer-tours a {
+  color: #4D4E4D;
+}
+.current-tours {
+  margin-top: 20px;
+}
+.past-tours {
+  margin: 20px 0;
+}
 
 /*========== Directory ==========*/
 
@@ -1271,7 +1289,7 @@ a i.icon-facebook:hover {
 .date-and-genres h4 {
   font-size: 16px;
 }
-.date-and-genres .genres a {
+ .genres a {
   color:  #4095b7;
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
 }

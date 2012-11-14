@@ -17,6 +17,9 @@ class Performer < ActiveRecord::Base
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true
   has_many :users, :dependent => :nullify
+
+  has_many :external_reviews, :as => :reviewable, :dependent => :destroy
+  accepts_nested_attributes_for :external_reviews, :reject_if => :all_blank, :allow_destroy => true
   
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
@@ -44,5 +47,12 @@ class Performer < ActiveRecord::Base
       [site_name.humanize, url] if url.present?
     end.compact
   end
+
+  def links_only_twitter_and_facebook
+    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+  end
   
+  def links_without_twitter_and_facebook
+    links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  end
 end

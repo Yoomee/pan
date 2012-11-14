@@ -1,5 +1,5 @@
 =semantic_form_for(performer, :html => {:multipart => true}) do |form|
   =error_alert(performer)
-  =tabs('details', 'organisations/tabs/links', 'contact_info', ["slideshow", "Photo gallery"], :form => form)
+  =tabs('details', 'organisations/tabs/links', 'contact_info', ["slideshow", "Photo gallery"], 'external_reviews/tabs/reviews', :form => form)
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary'}

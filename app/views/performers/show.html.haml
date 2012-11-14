@@ -1,161 +1,122 @@
+=content_for :head do
+  :javascript
+    function scrollToCommentInput() {
+      YmCore.scrollTo($('#new_post'));
+    }
+    $(document).ready(function() {
+      $('#go-to-comment').click(function(event) {
+        event.preventDefault();
+        $('#tour-tabs a[href="#comments"]').tab('show');
+        window.setTimeout(scrollToCommentInput, 200);
+      });
+    });
+
+.row
+  .span12
+    %h1.tour
+      %i.icon-user
+      =performer.name
 .row
   .span3
     .row.profile-left-col
-      .span3
-        -if performer.image
-          =image_for(performer, "220x")
-        -elsif logged_in_as_performer?(performer)
-          =link_to(image_placeholder("220x", :text => "Add an image"), edit_performer_path(performer))
-      .span3.mt-2
-        %h4=pluralize(performer.reviews.count, 'Review')
-        %div=rating_stars(performer.overall_rating)
-        %ul.unstyled
-          %li=link_to 'Read reviews', performer_reviews_path(performer) unless performer.reviews.count.zero?
-          %li=link_to 'Write a review', new_performer_review_path(performer)
-      -if logged_in_as_performer?(performer) || !performer.links.empty?
-        .span3.mt-2
-          %h4 Links
-          -if performer.links.empty?
-            .italic
-              =link_to("Click here", edit_performer_path(performer, :anchor => "links"))
-              to add links to your profile e.g. Facebook, Twitter.
-          -else
+      .well
+        =image_for(performer, "220x150#")
+        -if performer.genre_list.present?
+          .genres
+            =comma_list_tags(performer, :genres)
+        -if performer.tours.present?
+          .performer-tours
+            -if performer.tours.where("end_on < ?", Date.today).present?
+              .current-tours
+                %h4
+                  %i.icon-star
+                  Current shows
+                -performer.tours.where("end_on < ?", Date.today).each do |tour|
+                  =link_to_self tour
+            -if performer.tours.where("end_on < ?", Date.today).present?
+              .past-tours
+                %h4
+                  %i.icon-star
+                  Past shows
+                -performer.tours.where("end_on > ?", Date.today).each do |tour|
+                  =link_to_self tour
+        -if performer.links.present?
+          -if performer.links_without_twitter_and_facebook.present?
             %ul.unstyled.links
-              -performer.links.each do |link|
+              -performer.links_without_twitter_and_facebook.each do |link|
                 %li
-                  =image_tag(link.favicon)
                   =link_to(link, link.url, :target => '_blank')
-      -if logged_in_as_performer?(performer) && !performer.any_present?(:contact1_details, :contact2_details)
-        .span3.mt-2
-          %h4 Contact details
-          .italic
-            =link_to("Click here", edit_performer_path(performer, :anchor => "contact_info"))
-            to add your contact details.
-      -else
-        -if performer.contact1_details.present?
-          .span3.mt-2
-            %h4 Primary contact
-            =auto_link(performer.contact1_details.join("<br />").html_safe)
-        -if performer.contact2_details.present?
-          .span3.mt-2
-            %h4 Secondary contact
-            =auto_link(performer.contact2_details.join("<br />").html_safe)
-      -future_tour = performer.tours.order(:end_on).where("end_on > :now", now: Time.now)
-      -if logged_in_as_performer?(performer) || future_tour.present?
-        .span3.mt-2
-          %h4
-            ="Upcoming #{future_tour.count > 1 ? "tours" : "tour"}"
-          -if future_tour.nil?
-            .italic
-              =link_to("Click here", new_performer_tour_path(performer))
-              to enter information about your next tour.
-          -elsif future_tour.empty?
-            .italic
-              =link_to("Click here", performer_tours_path(performer, :anchor => 'all'))
-              to manage all your tours and dates.
-          -else
-            %ul.unstyled
-              -future_tour.each do |tour|
-                %li
-                  =link_to(tour.name_with_dates, tour)
-      -if !performer.tours.past.empty?
-        .span3.mt-2
-          %h4 Past tours
-          =link_to("View all past shows", performer_tours_path(performer, :anchor => 'past'))          
+          -if performer.links_only_twitter_and_facebook.present?
+            -performer.links_only_twitter_and_facebook.each do |link|
+              =facebook_twitter_link(link)
+          .black-block-links
+            =link_to "", :class => "btn" do
+              %i.icon-envelope
+              Send a message
+            =link_to "", :class => "btn" do
+              %i.icon-heart
+              Add to favourites
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
+
   .span9
-    %h1.mb-1=title(performer)
-    =render('organisations/notes', :organisation => performer)
-    -if logged_in_as_performer?(performer) || performer.slideshow
-      %ul.nav.nav-tabs
-        %li.active
-          =link_to("Profile", "#profile", :data => {:toggle => "tab"})
-        %li
-          =link_to("Photo gallery", "#gallery", :data => {:toggle => "tab"})
+    %ul.nav.nav-tabs#tour-tabs
+      %li.active
+        =link_to  "About", "#about", :'data-toggle' => 'tab'
+      %li
+        =link_to "Media", "#media", :'data-toggle' => 'tab'
+      %li
+        =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
+      %li
+        =link_to "Updates", "#updates", :'data-toggle' => 'tab'
+      %li
+        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
     .tab-content
-      #profile.tab-pane.fade.in.active
+      #about.tab-pane.fade.in.active
+        .well
+          =simple_format(performer.description)
+
+      #spec.tab-pane.fade.in
+        .well
+
+      #media.tab-pane.fade.in
+        .well
+          =render("organisations/slideshow", :slideshow => performer.slideshow)
+          .clearfix
+            
+      #reviews.tab-pane.fade.in
         .row
-          .span6        
-            -if performer.description.blank? && logged_in_as_performer?(performer)
-              .italic.mb-2
-                The description of the performer will be displayed here.
-                %br
-                =link_to("Click here to edit it", edit_performer_path(performer))
-            -else
-              =simple_format(performer.description)
-            -if logged_in_as_performer?(performer) || performer.any_present?(:genre_list, :art_form_list, :funder_list, :work_scale_list)
-              .row.company_tag_lists
-                =render("performers/company_tag_lists", :performer => performer)
-            -if (media_posts = performer.posts.where("image_uid LIKE '%'").limit(8)).present?
-              .row
-                .span4
-                  %h4 Photos/videos
-                  .row.mt-1
-                    -media_posts.each do |media_post|
-                      .span1.mb-1
-                        =link_to("#", :data => {:toggle => "modal", :backdrop => false, :"modal-url" => modal_post_path(media_post), :"modal-id" => "post_modal"}) do
-                          =image_for(media_post, '60x60#', :class => "#{media_post.has_video? ? 'video-image' : ''}")              
-            -if performer.venues.present?
-              .row.mt-2
-                .span4{:class => "#{media_posts.present? ? 'offset1' : ''}"}
-                  %h4 Venues regularly visited
-                  .row.mt-1
-                    -performer.venues.each do |venue|
-                      .span1.mb-1
-                        =link_to(image_for(venue, "60x60#"), venue)
-                        =link_to_self(venue, :class => "small-info-text")
-            -if performer.current_tour
-              #calendar
-                %h2 Current tour
-                =link_to(performer.current_tour.name_with_dates, performer.current_tour)
-                =render("tours/calendar_key", :hide_unavailable => true)
-          .span3
+          .span9
             .well
-              -if current_user.promoter
-                =render("helpboxes/performer_promoter")
-              -elsif logged_in_as_site_admin?
-                =render("helpboxes/performer_site_admin") 
-              -elsif logged_in_as_performer?(performer)
-                =render("helpboxes/performer_admin")
-        -if performer.current_tour
-          = # TODO: remember to check who should be able to see the calendar and book dates
-          = # and which venues they should be able to choose
-          .row
-            .span9
-              =render("tours/calendar_form", :tour => performer.current_tour, :bookings_page => false, :remote => true)
-          -unless performer.future_tours.empty?
-            %h4.mt-1 Other future shows:
-            .row
-              -performer.future_tours.each do |tour|
-                .span9
-                  =link_to(tour.name_with_dates, tour)
-        -if performer.any_present?(:twitter_url, :facebook_url)
-          .row
-            .span9
-              =render("organisations/facebook_twitter", :organisation => performer)
-        -if posts.present? || can?(:create, Post)
-          .row.mt-2
-            .span9
-              #wall
-                %h4.mb-1 Posting wall
-                -if can?(:create, Post)
-                  =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
-                =render("posts/posts", :posts => posts)
-      -if logged_in_as_performer?(performer) || performer.slideshow
-        #gallery.tab-pane.fade
-          -if performer.slideshow.nil?
-            %p.italic
-              A slideshow of all the photos in your gallery will be displayed here.
-              =link_to("Click here to add some photos", edit_performer_path(performer, :anchor => "slideshow"))
-          -else
-            =render("organisations/slideshow", :slideshow => performer.slideshow)
-.row.mt-2
-  .span12
+              -performer.external_reviews.each do |review|
+                =simple_format(review.review)
+      
+      #pricing.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #updates.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #comments.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              .row
+                .span8
+                  -if can?(:create, Post)
+                    =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
+                  =render("posts/posts", :posts => performer.posts.page(params[:page]))
+            
+                
+            
+.row
+  .span9
     =options_panel do
       =back_link
-      =link_if_can("Edit performer", [:edit, performer])
-      -if can?(:new, performer.tours.build)
-        =link_to("Manage tours", performer_tours_path(performer, :anchor => 'all'))
-        =link_to("Add tour", new_performer_tour_path(performer))
+      =link_to("Edit performer", edit_performer_path(performer)) if can?(:edit,performer)
       =link_if_can("Delete performer", [:destroy, performer], :confirm => "Are you sure?")
-    -if params[:modal] == "welcome" && logged_in_as_performer?(performer)
-      =render("welcome_modal", :performer => performer)

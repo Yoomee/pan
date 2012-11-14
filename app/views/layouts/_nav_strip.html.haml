@@ -40,7 +40,7 @@
                   Resources
                 Publications, links and help
           .span2
-            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+            %div{:class => "#{current_page?(performer_path) || current_page?(venue_path) ? 'inner active' : 'inner'}"}
               =link_to "" do
                 .header
                   %i.icon-list-ul
