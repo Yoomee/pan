@@ -82,8 +82,11 @@
 
       #media.tab-pane.fade.in
         .well
-          =render("organisations/slideshow", :slideshow => performer.slideshow)
-          .clearfix
+          -if performer.slideshow.present? 
+            =render("organisations/slideshow", :slideshow => performer.slideshow)
+            .clearfix
+          -else
+            No media present
             
       #reviews.tab-pane.fade.in
         .row
