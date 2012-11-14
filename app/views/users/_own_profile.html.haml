@@ -1,0 +1,71 @@
+.row
+  .span3
+    .row.profile-left-col
+      .well
+        =image_for(user, "220x150#")
+        .notifications
+          %i.icon-group
+          %span.number 5 
+          notifications
+          =link_to "view", ""
+        .messages
+          %i.icon-envelope
+          %span.number 2
+          messages
+          =link_to "view", ""
+        -if user.promoter
+          .promoter
+            %h4
+              %i.icon-group
+              My Group
+            =link_to_self user.promoter
+        -if user.venues.present?
+          .venues
+            %h4
+              %i.icon-home
+              My Venues
+            -user.venues.each do |venue|
+              =link_to_self venue
+        -if user.links.present?
+          -if user.links_without_twitter_and_facebook.present?
+            %ul.unstyled.links
+              -user.links_without_twitter_and_facebook.each do |link|
+                %li
+                  =link_to(link, link.url, :target => '_blank')
+          -if user.links_only_twitter_and_facebook.present?
+            -user.links_only_twitter_and_facebook.each do |link|
+              =facebook_twitter_link(link)
+
+  .span9
+    %ul.nav.nav-tabs#tour-tabs
+      %li.active
+        =link_to  "About", "#about", :'data-toggle' => 'tab'
+      %li
+        =link_to "My Notifications", "#notifications", :'data-toggle' => 'tab'
+      %li
+        =link_to "My Messages", "#messages", :'data-toggle' => 'tab'
+      %li
+        =link_to "My Activity", "#activity", :'data-toggle' => 'tab'
+      %li
+        =link_to "My Groups", "#groups", :'data-toggle' => 'tab'
+      %li
+        =link_to "My Preferences", "#preferences", :'data-toggle' => 'tab'
+    .tab-content
+      #about.tab-pane.fade.in.active
+        .well
+          =simple_format(user.description)
+
+      #notifications.tab-pane.fade.in
+        .well
+
+      #messages.tab-pane.fade.in
+        .well
+            
+      #activity.tab-pane.fade.in
+        .well
+             
+      #groups.tab-pane.fade.in
+        .well
+            
+      #preferences.tab-pane.fade.in
+        .well

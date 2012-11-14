@@ -824,6 +824,47 @@ ul.links li a {
   color:#333;
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
 }
+.notifications {
+  margin-top: 20px;
+}
+.notifications,
+.messages {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  font-size: 16px;
+  color: #4D4E4D;
+}
+.notifications i,
+.messages i {
+  margin-right: 10px;
+}
+.notifications span.number,
+.messages span.number {
+  color: #BB2550;
+}
+.notifications a,
+.messages a {
+  color: #BB2550;
+  float: right;
+}
+.promoter {
+  border-top: 1px #919191 solid;
+  margin-top: 20px;
+}
+.promoter,
+.venues {
+  padding-top: 20px;
+}
+.venues {
+  padding-bottom: 20px;
+}
+.promoter h4,
+.venues h4 {
+  font-size: 16px;
+}
+.promoter a,
+.venues a {
+  color: #4D4E4D;
+}
 
 /*========== Slideshow ==========*/
 
