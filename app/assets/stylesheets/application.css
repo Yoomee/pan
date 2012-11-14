@@ -1182,6 +1182,11 @@ table#diary thead th {
   font-size: 30px;
   padding-bottom: 30px;
 }
+table#diary thead th a {
+  text-transform: none;
+  color: #6B6A68;
+  font-size: 12px;
+}
 table#diary a.previous-month:hover,
 table#diary a.next-month:hover {
   background: black;

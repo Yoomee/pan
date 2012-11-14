@@ -6,24 +6,37 @@ class DiaryController < ApplicationController
     @tags = [*params[:tags]]
     @start_date = params[:start_date]
     @end_date = params[:end_date]
-    @month = params[:month] || Date.today.month
-    @year = params[:year] || Date.today.year
+    @tour_id = params[:tour_id]
+    
+    if @tour_id.present?
+      @month = params[:month]
+      @year = params[:year]
+    else
+      @month = params[:month] || Date.today.month
+      @year = params[:year] || Date.today.year
+    end
 
     @all_tags = Tour.genre_counts.order(:name)
 
-    @dates =  TourDate.where(:booked => true).where('MONTH(date) = :month AND YEAR(date) = :year', :month => @month, :year => @year)
+    @dates =  TourDate.where(:booked => true)
 
-    if (@tags).present?
+    if @month.present? && @year.present?
+      @dates = @dates.where('MONTH(date) = :month AND YEAR(date) = :year', :month => @month, :year => @year)
+    end
+    if @tags.present?
       tour_ids = Tour.tagged_with(@tags).collect(&:id)
       @dates = @dates.where(:tour_id => tour_ids)
     end
     if @start_date.present?
-      tour_ids = Tour.where("end_on > ?", Date.parse(@start_date))
-      @dates = @dates.where(:tour_id => tour_ids)
+      @dates = @dates.where("date > ?", Date.parse(@start_date))
     end
     if @end_date.present?
-      @dates = @dates.where("start_on < ?", Date.parse(@end_date))
+      @dates = @dates.where("date < ?", Date.parse(@end_date))
     end
+    if @tour_id.present?
+      @dates = @dates.where(:tour_id => @tour_id)
+    end
+
   end
 
 end
