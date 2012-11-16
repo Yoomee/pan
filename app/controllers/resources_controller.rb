@@ -17,6 +17,7 @@ class ResourcesController < ApplicationController
   
   def index
     @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped
+    @recent_resources = Resource.order("updated_at DESC").first(3)
   end
 
   def destroy
@@ -37,6 +38,10 @@ class ResourcesController < ApplicationController
       @resources = []
     end
     render :action => "index"
+  end
+  
+  def show
+    @recent_resources = Resource.order("updated_at DESC").first(3)
   end
   
   def update

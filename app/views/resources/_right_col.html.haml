@@ -1,0 +1,22 @@
+.well.resources-right-col
+  %h4 Search Resources
+  %form.form-search{:action => search_resources_path, :method => 'get'}
+    .input-append
+      =text_field_tag 'q', params[:q], :class => "span2", :placeholder => "Keywords"
+      %span.add-on
+        %i.icon-search
+        
+  %ul.tag-list
+    -top_tags.each do |tag|
+      %li=link_to(tag_label(tag, :active => tag==current_tag), resources_path(:tag => tag.to_s), :class => "tag")
+  .clearfix
+ 
+.recent-resources
+  %h4 Recent Resources
+  -@recent_resources.each do |resource|
+    .recent-resource
+      =link_to resource do
+        =image_for(resource, "40x50#")
+        %h4=resource
+        =summarize(resource, :length => 70)
+    .clearfix

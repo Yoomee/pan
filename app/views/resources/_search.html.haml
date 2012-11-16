@@ -1,0 +1,6 @@
+.row
+  .span9
+    %h4 What would you like to find out?
+    %form.form-search{:action => search_resources_path, :method => 'get'}
+      =text_field_tag 'q', params[:q], :class => "span6", :placeholder => "type your question or topic"
+      %input.btn{:type => 'submit', :value => "Search"}

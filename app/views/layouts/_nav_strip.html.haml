@@ -5,42 +5,42 @@
       .span12
         .row
           .span2
-            %div{:class => "#{current_page?(root_path) ? 'inner active' : 'inner'}"}
+            =content_tag_with_active(:div, current_page?(root_path), :class => "inner") do
               =link_to root_path do
                 .header
                   %i.icon-home
                   Home
                 What's happening
           .span2
-            %div{:class => "#{current_page?(shows_path) || (current_page?(:controller => "/tours")) ? 'inner active' : 'inner'}"}
+            =content_tag_with_active(:div, (current_page?(shows_path) || current_page?(:controller => "/tours")), :class => "inner") do
               =link_to shows_path do
                 .header
                   %i.icon-star
                   Shows
                 Find shows for your venue
           .span2
-            %div{:class => "#{current_page?(diary_path) ? 'inner active' : 'inner'}"}
+            =content_tag_with_active(:div, current_page?(diary_path), :class => "inner") do
               =link_to diary_path do
                 .header
                   %i.icon-calendar
                   Diary
                 What's going on
           .span2
-            %div{:class => "#{false ? 'inner active' : 'inner'}"}
+            =content_tag_with_active(:div, false, :class => "inner") do
               =link_to "" do
                 .header
                   %i.icon-comment
                   Groups
                 Talk to other members and find out more
           .span2
-            %div{:class => "#{false ? 'inner active' : 'inner'}"}
-              =link_to "" do
+            =content_tag_with_active(:div, current_page?(:controller => "/resources"), :class => "inner") do
+              =link_to resources_path do
                 .header
                   %i.icon-book
                   Resources
                 Publications, links and help
           .span2
-            %div{:class => "#{current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || current_page?(:controller => "/shows") ? 'inner active' : 'inner'}"}
+            =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour)), :class => "inner") do
               =link_to "" do
                 .header
                   %i.icon-list-ul

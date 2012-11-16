@@ -1,14 +1,9 @@
-.row.mb-2
-  .span12
-    =render("community/nav")
-.row.mb-2
+.row.mt-2.mb-2
   .span10
     %h1 Resources
   .span2
     =link_to('&uarr; All resources'.html_safe, resources_path, :class => "back-to-all")
 .row
-  .span3
-    =render("resources/left_col")
   .span9
     .row
       .span3
@@ -34,6 +29,9 @@
           -if can?(:create, Post)
             =render("posts/remote_form", :post => current_user.posts.build(:target => resource))
           =render("posts/posts", :posts => posts)
+
+  .span3
+    =render("resources/right_col")
 .row
   .span12
     =options_panel do
