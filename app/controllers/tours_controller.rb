@@ -36,6 +36,10 @@ class ToursController < ApplicationController
     @tours = Tour.order_by_ratings
   end
   
+  def show
+    @available_dates = tour.dates.where(booked: false)
+  end
+  
   def update
     @tour = Tour.find(params[:id])
     if @tour.update_attributes(params[:tour])
