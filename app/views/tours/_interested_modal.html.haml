@@ -1,0 +1,36 @@
+-content_for(:head) do
+  :javascript
+    $(document).ready(function() {
+      InterestedModal.start_on = $.datepicker.parseDate('dd/mm/yy', $('#start_on').html());
+      InterestedModal.end_on = $.datepicker.parseDate('dd/mm/yy', $('#end_on').html());
+      InterestedModal.available = #{tour.dates.where(booked: false).collect{ |date| date.date.to_s(:date)}}
+      InterestedModal.init();
+    });
+
+
+
+#interested.modal.hide.fade
+  =semantic_form_for(Enquiry.new(:form_name => "interested"), :url => enquiries_path(:id => "interested"), :html => {:class => "form-horizontal"}) do |form|
+    =form.input :form_name, :as => "hidden"
+    =form.input :message, :as => "hidden", :value => "#{current_user.full_name} (#{user_url(current_user)}) has said they are interested in booking #{tour} by #{tour.performer} - #{show_url(tour)}. \n\n "
+    =form.input :dates_interested_in, :as => "hidden"
+    
+    .modal-header
+      %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
+      %h3 I'm interested
+    .modal-body
+      #dates.hide
+        #start_on=tour.start_on.to_s(:date)
+        #end_on=tour.end_on.to_s(:date)
+        
+      %h4 Which dates would you like to book this show for?
+      please select all dates for which you have availability
+      .mt-1.mb-1#availability_datepicker
+      .control-group
+        =label_tag "not_sure_yet", "I'm not sure yet - keep me updated", :class => "control-label"
+        .controls
+          =check_box_tag "not_sure_yet"
+        
+    .modal-footer
+      =link_to("Cancel", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')
+      =form.commit_button "Submit", :button_html => {:data => {}, :class => "btn btn-primary", :id => "interest-form-submit"}

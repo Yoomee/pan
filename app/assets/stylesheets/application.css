@@ -1172,6 +1172,27 @@ label em.optional {
 .span9.show-tour .row .span3 img {
   padding: 10px 0 10px 10px;
 }
+#interested {
+  width: 500px;
+}
+#interested .modal-body {
+  padding: 15px 80px;
+}
+#interested .modal-body #availability_datepicker {
+  padding-left: 50px;
+}
+#interested form#new_enquiry {
+  margin: 0;
+}
+#interested form#new_enquiry label[for=not_sure_yet] {
+  font-family: "Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  width: auto;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  color: #4D4E4D;
+}
 
 /*========== block or list view ==========*/
 .block-or-line {
