@@ -8720,7 +8720,12 @@ div.resource .resource-image {
 }
 div.resource .resource-info {
   float: left;
-  width: 200px;
+  margin-right: 20px;
+  width: 430px
+}
+div.resource .resource-download {
+  float: left;
+  width: 100px
 }
 div.resource .resource-info p {
 	font-size: 13px;
@@ -8737,16 +8742,63 @@ h6.resource-publication-date {
   margin-bottom:12px;
 }
 div.resource .resource-title-summary {
-  max-height: 102px;
-  overflow: hidden;
   margin-bottom: 3px;
 }
 div.resource .resource-title-summary p {
-  font-size: 12px;
-  margin: 0;
+  font-size: 14px;
+  margin: 20px 0 0 0;
 }
 div.resource .tag-list {
   margin: 0;
+  margin-top: 20px;
+}
+.controller_resources h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.resource a i,
+.resource a {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  color: #4D4E4D;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.well.resources-right-col {
+  background: #F6F6F2;
+}
+.well.resources-right-col .add-on {
+margin-left: -6px;
+}
+.recent-resources {
+  padding: 15px;
+}
+.recent-resources h4 {
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+  border-bottom: 2px #919191 solid;
+}
+.recent-resources .recent-resource {
+  
+}
+.recent-resources a img {
+  margin-right: 5px;
+  float: left;
+}
+.recent-resources a h4 {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.recent-resources a {
+  color: #4D4E4D;
+  float: left;
+  padding: 15px 0;
+  margin-bottom: 5px;
+  border-bottom: 1px #919191 solid;
+}
+.recent-resources p {
+  font-size: 11px;
 }
 
 /*========== User ==========*/
