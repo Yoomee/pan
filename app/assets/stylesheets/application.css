@@ -1117,7 +1117,7 @@ body.controller_venues #technical.tab-pane dt {
 body.controller_venues #technical.tab-pane dd {
   float: left;
 }
-.well .venue {
+.profile-left-col .well .venue {
   border-bottom: 1px #919191 solid;
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -1222,9 +1222,6 @@ label em.optional {
 #remove-start-date,
 #remove-end-date {
   cursor: pointer;
-}
-#tags_params_for_js {
-  display: none;
 }
 .span9.show-tour .row .span3 img {
   padding: 10px 0 10px 10px;
@@ -1345,10 +1342,13 @@ table#diary a.performer {
   font-weight: bold;
   color: #4d4e4d;
 }
-table#diary a.venue {
+table#diary a.venue,
+.well a.venue {
   font-weight: bold;
   color: #4d4e4d;
   border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /*========== tours#show ==========*/
