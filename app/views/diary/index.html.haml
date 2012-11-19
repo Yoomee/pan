@@ -1,7 +1,7 @@
 -content_for :head do
   :javascript
     $(document).ready(function() {
-      var base_url = "diary?#{{:tags => @tags.uniq, :month => @month, :year => @year, :tour_id => @tour_id}.to_query}"
+      var base_url = "diary?#{{:tags => @tags.uniq, :month => @month, :year => @year, :tour_id => @tour_id, :organisation_id => @organisation_id}.to_query}"
       $('#start_date').change(function() {
         location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
       });
@@ -37,7 +37,11 @@
             -elsif @tour_id.present?
               %th.span9{:colspan => 4}
                 =Tour.find(@tour_id)
-                =link_to "all shows", diary_path(:tags => original_tags, :start_date => @start_date,:end_date => @end_date), :class => "clear-tour-filter"
+                =link_to "all shows", diary_path, :class => "clear-tour-filter"
+            -elsif @organisation_id.present?
+              %th.span9{:colspan => 4}
+                =Promoter.find(@organisation_id)
+                =link_to "all shows", diary_path, :class => "clear-tour-filter"
 
         %tbody
           -if @dates.size == 0
@@ -66,7 +70,7 @@
                       -param_tags = original_tags.dup
                       -param_tags << tag.name unless param_tags.delete(tag.name)
 
-                      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => @month, :year => @year }, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
+                      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => @month, :year => @year, :tour_id => @tour_id, :organisation_id => @organisation_id }, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
                   .clearfix
 
   .span3

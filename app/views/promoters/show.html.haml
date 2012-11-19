@@ -43,7 +43,7 @@
           %span.label.tag-label=promoter.region
         .clearfix
         .mt-1
-        =link_to diary_path(:promoter_id => promoter.id), :class => "promoter-diary-link" do
+        =link_to diary_path(:organisation_id => promoter.id), :class => "promoter-diary-link" do
           %i.icon-calendar
           Diary
         -if promoter.venues.present?
