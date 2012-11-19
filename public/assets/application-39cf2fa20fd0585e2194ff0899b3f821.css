@@ -7300,6 +7300,11 @@ a.tag:hover, a.tag:hover .tag-label  {
   clear: left;
   margin: 0 0 5px;
 }
+.tag-list-horizontal {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 20px;
+}
 .tag-list-horizontal li {
   float: left;
   clear: none;
@@ -7311,7 +7316,6 @@ a.tag .tag-label {
 	float: left;
 	text-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 }
-
 form.post_form {
   width: 100%;
 }
@@ -8849,7 +8853,7 @@ ul.links li a {
 .venues {
   padding-top: 20px;
 }
-.venues {
+controller_users .venues {
   padding-bottom: 20px;
 }
 .promoter h4,
@@ -9060,6 +9064,11 @@ body.controller_venues #technical.tab-pane dt {
 body.controller_venues #technical.tab-pane dd {
   float: left;
 }
+.profile-left-col .well .venue {
+  border-bottom: 1px #919191 solid;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
 
 /*========== Reviews ==========*/
 
@@ -9160,9 +9169,6 @@ label em.optional {
 #remove-start-date,
 #remove-end-date {
   cursor: pointer;
-}
-#tags_params_for_js {
-  display: none;
 }
 .span9.show-tour .row .span3 img {
   padding: 10px 0 10px 10px;
@@ -9283,9 +9289,13 @@ table#diary a.performer {
   font-weight: bold;
   color: #4d4e4d;
 }
-table#diary a.venue {
+table#diary a.venue,
+.well a.venue {
   font-weight: bold;
   color: #4d4e4d;
+  border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /*========== tours#show ==========*/
@@ -9432,3 +9442,30 @@ a i.icon-facebook:hover {
   color: #4D4E4D;
 }
 
+/*========== promoters / organisations ==========*/
+h1.promoter {
+  border-top: none;
+}
+.promoter.genres a.tag span.tag-label {
+  margin-bottom: 4px;
+  background: #4095B7;
+  text-transform: uppercase;
+}
+.promoter-location,
+a.promoter-location {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+  color: #4D4E4D;
+  font-size: 16px;
+}
+a.promoter.venues {
+  color: #4D4E4D;
+  padding-bottom: 0;
+}
+#region {
+  margin-bottom: 4px;
+  background: #4095B7;
+}
+.promoter-diary-link,
+.venue-diary-link {
+  color: #4D4E4D;
+}
