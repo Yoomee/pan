@@ -27,6 +27,14 @@ class Promoter < ActiveRecord::Base
     "UK"
   end
   
+  def links_only_twitter_and_facebook
+    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+  end
+  
+  def links_without_twitter_and_facebook
+    links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  end
+  
   def resources_present?
     [:marketing_resource_list, :pr_resource_list, :equipment_list, :hireable_resource_list].any?{|list| !send(list).empty?}
   end

@@ -1,56 +1,207 @@
--if !promoter.venues.with_lat_lng.empty?
+-if promoter.venues.with_lat_lng.present?
   =google_maps_javascript_include_tag
   =content_for :head do
     :javascript
       $(document).ready(function() {
         VenuesMap.venues = #{promoter.venues.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
-        VenuesMap.init();
+        $('#promoter-map').on('shown', function () {
+          VenuesMap.init();
+        });
       });
-.row.mb-2
+
+=content_for :head do
+  :javascript
+    function scrollToCommentInput() {
+      YmCore.scrollTo($('#new_post'));
+    }
+    $(document).ready(function() {
+      $('#go-to-comment').click(function(event) {
+        event.preventDefault();
+        $('#tour-tabs a[href="#comments"]').tab('show');
+        window.setTimeout(scrollToCommentInput, 200);
+      });
+    });
+.row
   .span12
-    =render("community/nav")
+    %h1.promoter
+      %i.icon-group
+      =promoter.name
 .row
   .span3
     .row.profile-left-col
-      .span3
-        =image_for(promoter, "220x") if promoter.image
-      -if !promoter.venues.with_lat_lng.empty?
-        .span3.mt-2
-          #map-canvas{:style => "height:220px;width:100%"}
-      .span3.mt-2
-        %h4 Region
-        %p=promoter.region
-      -if promoter.any_present?(:address, :phone, :email)
-        .span3.mt-2
-          %h4 Contact details
-          %ul.unstyled
-            -if promoter.address(:country=>false).present?
-              %li
-                =promoter
-                =render_address(promoter)
-            -elsif logged_in_as_admin_of_this_promoter?(promoter)
-              No contact details entered yet.  
-              =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info", :class=>'action-link')
-            -else
-              No contact details entered yet.  
-            -if promoter.phone.present?
-              %li
-                Tel:
-                =internationalize_phone_number(promoter.phone)
-            -if promoter.email.present?
-              %li
-                Email:
-                =link_to promoter.email, "mailto:#{promoter.email}"
-      -if !promoter.links.empty?
-        .span3.mt-2
-          %h4 Links
-          %ul.unstyled.links
-            -promoter.links.each do |link|
-              %li
-                =image_tag(link.favicon)
-                =link_to(link, link.url, :target => '_blank')
+      .well
+        -if promoter.venues.with_lat_lng.present?
+          =link_to "#promoter-map", :'data-toggle' => "modal", :class => "promoter-location" do
+            %i.icon-map-marker
+            =promoter.city.presence || promoter.name
+        -else
+          .promoter-location
+            %i.icon-map-marker
+            =promoter.city.presence || promoter.name
+        %br
+        =link_to "#", :class => "tag", :id => "region" do
+          %span.label.tag-label=promoter.region
+        .clearfix
+        .mt-1
+        =link_to diary_path(:promoter_id => promoter.id), :class => "promoter-diary-link" do
+          %i.icon-calendar
+          Diary
+        -if promoter.venues.present?
+          .promoter.venues
+            -promoter.venues.each do |venue|
+              =link_to venue do
+                %i.icon-home
+                =venue
+        -if promoter.users.present?
+          .promoter.users
+            -promoter.users.each do |user|
+              =link_to user do
+                %i.icon-user
+                =user
+        -if promoter.genres.present?
+          .promoter.genres
+            =render "tags/horizontal_list", :tags => promoter.genres
+          .clearfix
+        -if promoter.links.present?
+          -if promoter.links_without_twitter_and_facebook.present?
+            %ul.unstyled.links
+              -promoter.links_without_twitter_and_facebook.each do |link|
+                %li
+                  =link_to(link, link.url, :target => '_blank')
+          -if promoter.links_only_twitter_and_facebook.present?
+            -promoter.links_only_twitter_and_facebook.each do |link|
+              =facebook_twitter_link(link)
+          .black-block-links
+            =link_to "", :class => "btn" do
+              %i.icon-envelope
+              Send a message
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
 
-    
+  .span9
+    %ul.nav.nav-tabs#tour-tabs
+      %li.active
+        =link_to  "About", "#about", :'data-toggle' => 'tab'
+      %li
+        =link_to "Media", "#media", :'data-toggle' => 'tab'
+      %li
+        =link_to "Updates", "#updates", :'data-toggle' => 'tab'
+      %li
+        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+    .tab-content
+      #about.tab-pane.fade.in.active
+        .well
+          =simple_format(promoter.description)
+
+      #media.tab-pane.fade.in
+        .well
+          -if promoter.slideshow.present? 
+            =render("organisations/slideshow", :slideshow => promoter.slideshow)
+            .clearfix
+          -else
+            No media present
+      
+      #updates.tab-pane.fade.in
+        .row
+          .span9
+            .well
+            
+      #comments.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              .row
+                .span8
+                  -if can?(:create, Post)
+                    =render("posts/remote_form", :post => current_user.posts.build(:target => promoter))
+                  =render("posts/posts", :posts => promoter.posts.page(params[:page]))
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      -#   
+        -if !promoter.venues.with_lat_lng.empty?
+          .span3.mt-2
+            #map-canvas{:style => "height:220px;width:100%"}
+        .span3.mt-2
+          %h4 Region
+          %p=promoter.region
+        -if promoter.any_present?(:address, :phone, :email)
+          .span3.mt-2
+            %h4 Contact details
+            %ul.unstyled
+              -if promoter.address(:country=>false).present?
+                %li
+                  =promoter
+                  =render_address(promoter)
+              -elsif logged_in_as_admin_of_this_promoter?(promoter)
+                No contact details entered yet.  
+                =link_to("Click to update", edit_promoter_path(promoter) + "#contact_info", :class=>'action-link')
+              -else
+                No contact details entered yet.  
+              -if promoter.phone.present?
+                %li
+                  Tel:
+                  =internationalize_phone_number(promoter.phone)
+              -if promoter.email.present?
+                %li
+                  Email:
+                  =link_to promoter.email, "mailto:#{promoter.email}"
+        -if !promoter.links.empty?
+          .span3.mt-2
+            %h4 Links
+            %ul.unstyled.links
+              -promoter.links.each do |link|
+                %li
+                  =image_tag(link.favicon)
+                  =link_to(link, link.url, :target => '_blank')
+
+-#  
   .span6
     %h1.mb-1.profile-title=title(promoter)
   -if false  
@@ -220,6 +371,19 @@
       =render("helpboxes/promoter_site_admin")
     -else
       =render("helpboxes/promoter_viewing")
+      
+
+-if promoter.venues.with_lat_lng.present?
+  #promoter-map.modal.hide.fade
+    .modal-header
+      %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
+      %h3=promoter.name
+    .modal-body
+      .span4
+      #map-canvas{:style => "height:220px;width:530px"}
+    .modal-footer
+      =link_to("Close", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')
+
     
 .row.mt-2
   .span9

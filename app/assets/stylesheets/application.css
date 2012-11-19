@@ -906,7 +906,7 @@ ul.links li a {
 .venues {
   padding-top: 20px;
 }
-.venues {
+controller_users .venues {
   padding-bottom: 20px;
 }
 .promoter h4,
@@ -1489,3 +1489,26 @@ a i.icon-facebook:hover {
   color: #4D4E4D;
 }
 
+/*========== promoters / organisations ==========*/
+.promoter.genres a.tag span.tag-label {
+  margin-bottom: 4px;
+  background: #4095B7;
+  text-transform: uppercase;
+}
+.promoter-location,
+a.promoter-location {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+  color: #4D4E4D;
+  font-size: 16px;
+}
+a.promoter.venues {
+  color: #4D4E4D;
+  padding-bottom: 0;
+}
+#region {
+  margin-bottom: 4px;
+  background: #4095B7;
+}
+.promoter-diary-link {
+  color: #4D4E4D;
+}

@@ -33,7 +33,7 @@ Pan::Application.routes.draw do
   end
   
   resources :promoters, :except => [:show]
-  resources :promoters, :only => [:show] do
+  resources :promoters, :only => [:show], :path => "organisations",  do
     resources :users, :only => [:new, :create]
     resources :venues
     collection do
@@ -101,5 +101,8 @@ Pan::Application.routes.draw do
   match "shows/view/block" => "shows#set_view", :view => 'block', :as => 'set_block_view'
 
   get 'diary', :to => 'diary#index'
+  
+  get 'directory(/:letter)', :to => 'directory#directory', :as => 'directory'
+  get 'directory/search', :to => 'directory#search', :as => 'directory_search'
 
 end

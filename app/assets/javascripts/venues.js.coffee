@@ -127,7 +127,7 @@ VenuesMap =
     mapOptions.zoom = if large then 6 else 8
     
     VenuesMap.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    VenuesMap.infowindow = new google.maps.InfoWindow({maxWidth: 400})
+    VenuesMap.infowindow = new google.maps.InfoWindow({maxWidth: 530})
 
     bounds = new google.maps.LatLngBounds
     for venue in VenuesMap.venues
