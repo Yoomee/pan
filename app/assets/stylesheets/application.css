@@ -1117,6 +1117,11 @@ body.controller_venues #technical.tab-pane dt {
 body.controller_venues #technical.tab-pane dd {
   float: left;
 }
+.well .venue {
+  border-bottom: 1px #919191 solid;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
 
 /*========== Reviews ==========*/
 
@@ -1343,6 +1348,7 @@ table#diary a.performer {
 table#diary a.venue {
   font-weight: bold;
   color: #4d4e4d;
+  border: none;
 }
 
 /*========== tours#show ==========*/
@@ -1490,6 +1496,9 @@ a i.icon-facebook:hover {
 }
 
 /*========== promoters / organisations ==========*/
+h1.promoter {
+  border-top: none;
+}
 .promoter.genres a.tag span.tag-label {
   margin-bottom: 4px;
   background: #4095B7;
@@ -1509,6 +1518,7 @@ a.promoter.venues {
   margin-bottom: 4px;
   background: #4095B7;
 }
-.promoter-diary-link {
+.promoter-diary-link,
+.venue-diary-link {
   color: #4D4E4D;
 }

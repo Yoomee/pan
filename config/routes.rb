@@ -32,8 +32,8 @@ Pan::Application.routes.draw do
     end
   end
   
-  resources :promoters, :except => [:show]
-  resources :promoters, :only => [:show], :path => "organisations",  do
+  resources :promoters, :except => [:show], :path => "organisations"
+  resources :promoters, :only => [:show], :path => "organisations", do
     resources :users, :only => [:new, :create]
     resources :venues
     collection do

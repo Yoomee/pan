@@ -6,70 +6,121 @@
         VenuesMap.venues = [#{venue.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])}];
         VenuesMap.init()
       });
-.row.mb-2
+=content_for :head do
+  :javascript
+    function scrollToCommentInput() {
+      YmCore.scrollTo($('#new_post'));
+    }
+    $(document).ready(function() {
+      $('#go-to-comment').click(function(event) {
+        event.preventDefault();
+        $('#tour-tabs a[href="#comments"]').tab('show');
+        window.setTimeout(scrollToCommentInput, 200);
+      });
+    });
+
+
+.row
   .span12
-    =render("community/nav")
+    %h1.venue
+      %i.icon-home
+      =venue.name
+
 .row
   .span3
     .row.profile-left-col
-      .span3
-        =image_for(venue, "220x") if venue.image
-      -if venue.has_lat_lng?
-        .span3.mt-2
+      .well
+        -if venue.has_lat_lng?
           #map-canvas{:style => "height:220px;width:100%"}
           =link_if_can("Edit marker location", [:edit_location, venue])
-      -elsif can?(:edit_location,venue)
-        .span3.mt-2
-          .alert.alert-error
-            %strong LOCATION MISSING 
-            %p We couldn't work out the location of this venue from its address.
-            =link_to("Click here to set it", edit_location_venue_path(venue))
-      .span3.mt-2
-        %h4 Region
-        %p=venue.region
-      -if venue.address.present?
-        .span3.mt-2
-          %h4 Address
-          %ul.unstyled
-            %li
-              =venue
-              %br
-              =render_address(venue)
-      -if venue.user
-        .span3.mt-2
-          %h4 Booking contact
-          =link_to_self(venue.user)
-          %ul.unstyled          
-            -if venue.user.phone.present?
-              %li
-                Tel:
-                =internationalize_phone_number(venue.user.phone)
-            -if venue.user.email.present?
-              %li
-                Email:
-                =mail_to venue.user.email, venue.user.email
-      -if venue.any_present?(:keyholder_name, :keyholder_email, :keyholder_phone)
-        .span3.mt-2
-          %h4 Keyholder contact
-          =venue.keyholder_name
-          %ul.unstyled          
-            -if venue.keyholder_phone.present?
-              %li
-                Tel:
-                =internationalize_phone_number(venue.keyholder_phone)
-            -if venue.keyholder_email.present?
-              %li
-                Email:
-                =mail_to venue.keyholder_email, venue.keyholder_email
-      -if !venue.links.empty?
-        .span3.mt-2
-          %h4 Links
-          %ul.unstyled.links
-            -venue.links.each do |link|
-              %li
-                =image_tag(link.favicon)
-                =link_to(link, link.url, :target => '_blank')
+        -elsif can?(:edit_location,venue)
+          .span3.mt-2
+            .alert.alert-error
+              %strong LOCATION MISSING 
+              %p We couldn't work out the location of this venue from its address.
+              =link_to("Click here to set it", edit_location_venue_path(venue))
+        
 
+        .clearfix
+        =link_to diary_path(:venue_id => venue.id), :class => "venue-diary-link" do
+          %i.icon-calendar
+          Diary
+        .mt-1
+        -if venue.address.present?
+          =venue.address_without_country
+        -if venue.promoter.present?
+          .venue.promoter
+            =link_to venue.promoter do
+              %i.icon-group
+              =venue.promoter
+          
+        -if venue.links.present?
+          -if venue.links_without_twitter_and_facebook.present?
+            %ul.unstyled.links
+              -venue.links_without_twitter_and_facebook.each do |link|
+                %li
+                  =link_to(link, link.url, :target => '_blank')
+          -if venue.links_only_twitter_and_facebook.present?
+            -venue.links_only_twitter_and_facebook.each do |link|
+              =facebook_twitter_link(link)
+        .black-block-links
+          =link_to "", :class => "btn" do
+            %i.icon-envelope
+            Send a message
+          =link_to "", :class => "btn", :id => "go-to-comment" do
+            %i.icon-pencil
+            Post a comment
+
+  .span9
+    %ul.nav.nav-tabs#tour-tabs
+      %li.active
+        =link_to  "About", "#about", :'data-toggle' => 'tab'
+      %li
+        =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'
+      %li
+        =link_to "Media", "#media", :'data-toggle' => 'tab'
+      %li
+        =link_to "Updates", "#updates", :'data-toggle' => 'tab'
+      %li
+        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+    .tab-content
+      #about.tab-pane.fade.in.active
+        .well
+          =simple_format(venue.description)
+
+      #spec.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              =render("venues/technical", :venue => venue)
+
+      #media.tab-pane.fade.in
+        .well
+          -if venue.slideshow.present? 
+            =render("organisations/slideshow", :slideshow => venue.slideshow)
+            .clearfix
+          -else
+            No media present
+      
+      #updates.tab-pane.fade.in
+        .row
+          .span9
+            .well
+
+            
+      #comments.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              .row
+                .span8
+                  -if can?(:create, Post)
+                    =render("posts/remote_form", :post => current_user.posts.build(:target => venue))
+                  =render("posts/posts", :posts => venue.posts.page(params[:page]))
+
+
+
+-#
   .span7
     %h1.mb-1
       =venue

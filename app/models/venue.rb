@@ -29,11 +29,15 @@ class Venue < ActiveRecord::Base
   validates :region, :presence => true
   
   def address
-    %w{address1 address2 city postcode country}.map {|fld| send(fld)}.select(&:present?).join(', ')
+    [address1, address2, city, postcode, country].select(&:present?).join(', ')
   end
   
   def address_changed?
     address1_changed? || address2_changed? || city_changed? || postcode_changed?
+  end
+  
+  def address_without_country
+    [address1, address2, city, postcode].select(&:present?).join(', ')
   end
   
   def keyholder_details
@@ -55,6 +59,14 @@ class Venue < ActiveRecord::Base
   
   def lat_lng_or_default
     has_lat_lng? ? [lat,lng] : Venue::DEFAULT_LOCATION
+  end
+  
+  def links_only_twitter_and_facebook
+    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+  end
+  
+  def links_without_twitter_and_facebook
+    links.where("host != 'facebook.com' AND host != 'twitter.com'")
   end
   
   def promoter=(promoter)
