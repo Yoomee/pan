@@ -192,7 +192,7 @@ GEM
       activesupport (= 3.1.0)
       bundler (~> 1.0)
       railties (= 3.1.0)
-    rails3-jquery-autocomplete (1.0.7)
+    rails3-jquery-autocomplete (1.0.10)
       rails (~> 3.0)
     rails_config (0.2.7)
       activesupport (>= 3.0)
@@ -329,7 +329,7 @@ GEM
       rails (~> 3.1.0)
       thinking-sphinx (~> 2.0.10)
       ym_core
-    ym_tags (0.1.1)
+    ym_tags (0.1.7)
       acts-as-taggable-on (~> 2.2.2)
       rails (~> 3.1.0)
       rails3-jquery-autocomplete
