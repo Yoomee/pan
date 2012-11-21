@@ -20,8 +20,8 @@
       %h3 I'm interested
     .modal-body
       #dates.hide
-        #start_on=tour.start_on.to_s(:date)
-        #end_on=tour.end_on.to_s(:date)
+        #start_on=tour.start_on.present? ? tour.start_on.to_s(:date) : ""
+        #end_on=tour.end_on.present? ? tour.end_on.to_s(:date) : ""
 
       -if @available_dates.present?
         %h4 Which dates would you like to book this show for?
