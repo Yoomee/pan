@@ -31,18 +31,19 @@
                 .header
                   %i.icon-comment
                   Groups
-                Talk to other members and find out more
+                Talk to other members & find out more
           .span2
             =content_tag_with_active(:div, current_page?(:controller => "/resources"), :class => "inner") do
               =link_to resources_path do
                 .header
                   %i.icon-book
                   Resources
-                Publications, links and help
+                Publications, links 
+                %br & help
           .span2
             =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour) || controller_name.directory?), :class => "inner") do
               =link_to directory_path do
                 .header
                   %i.icon-list-ul
                   Directory
-                People, venues, performers and shows
+                People, venues, performers & shows
