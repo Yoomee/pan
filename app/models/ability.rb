@@ -35,6 +35,8 @@ class Ability
       
       # promoter ability      
       if user.promoter
+        can :read, :show
+        can :read, :diary
         can :read, Post  
         can :read, User
         can :read, Venue   
