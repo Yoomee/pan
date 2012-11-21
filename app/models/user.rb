@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   define_index do
     indexes first_name, :sortable => true
-    indexes last_name, :sortable => true
+    indexes last_name, :as => :name, :sortable => true
     indexes bio
     has role, created_at, updated_at
   end
@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
   
   def links_without_twitter_and_facebook
     links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  end
+  
+  def name
+    [first_name, last_name].join(' ')
   end
   
   def organisation_name

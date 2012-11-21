@@ -2,9 +2,11 @@ class Promoter < ActiveRecord::Base
   
   include Organisation
 
+  
   define_index do
     indexes name, :sortable => true
     indexes description
+    indexes taggings.tag.name, :as => :genres
     has created_at, updated_at
   end
 

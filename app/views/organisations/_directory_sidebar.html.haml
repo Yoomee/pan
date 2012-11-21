@@ -1,0 +1,24 @@
+#directory-sidebar
+  .well
+    %h4 Search
+    %form.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
+      =text_field_tag 'q', params[:q], :class => "span1"
+      %input.btn{:type => 'submit', :value => "Search"}
+    .clearfix
+  .well
+    %h4 Type
+    %ul.unstyled
+      =type_filter_link("show")
+      =type_filter_link("performer")
+      =type_filter_link("venue")
+      =type_filter_link("promoter")
+      =type_filter_link("user")
+  .well
+    %h4 Genre
+    render "tags/horizontal_list", :tags => directory_item.genres
+  .well
+    %h4 Locations
+    %ul.unstyled
+      -Pan::REGIONS.values.each do |region|
+        %li{ :class => "#{region == @region ? 'active' : ''}"}
+        =link_to(region, "#") #{:controller => controller_name, :action => 'region', :region_url => region.to_url})

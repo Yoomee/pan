@@ -1,7 +1,14 @@
 class Tour < ActiveRecord::Base
   
   include YmCore::Model
-  include HasReviews  
+  include HasReviews
+  
+  define_index do
+    indexes name, :sortable => true
+    indexes description
+    indexes taggings.tag.name, :as => :genres
+    has created_at, updated_at
+  end
   
   image_accessor :image
   
@@ -33,6 +40,10 @@ class Tour < ActiveRecord::Base
   
   scope :past, joins(:dates).where("booked = 1 && tour_dates.date < ?", Date.today).group("tours.id")
   scope :future, joins(:dates).where("booked = 1 && tour_dates.date >= ?", Date.today).group("tours.id")
+  
+  def self.present_directory_letters
+    order(:name).select("UCASE(SUBSTR(name,1,1)) AS letter").group("SUBSTR(name,1,1)").collect(&:letter) #reject{|let| let.blank?}
+  end
   
   def name_with_performer
     "#{performer} - #{name}"
@@ -74,6 +85,10 @@ class Tour < ActiveRecord::Base
     performer.tours.without(self)
   end
   
+  def summary
+    
+  end
+  
   def technical_details
     [
       ["Do you need a blackout?", blackout_needed?],
@@ -81,6 +96,14 @@ class Tour < ActiveRecord::Base
       ["Do you tour your own lighting?", uses_own_lighting?],
       ["Do you use sound?", uses_sound?]
     ]
+  end
+  
+  def venues
+    dates.joins(:venue).collect(&:venue).uniq
+  end
+  
+  def venue_names
+    venues.collect(&:name)
   end
   
   def venue_suitability

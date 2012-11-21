@@ -102,7 +102,7 @@ Pan::Application.routes.draw do
 
   get 'diary', :to => 'diary#index'
   
-  get 'directory(/:letter)', :to => 'directory#directory', :as => 'directory'
   get 'directory/search', :to => 'directory#search', :as => 'directory_search'
+  get 'directory(/:letter)', :to => 'directory#directory', :as => 'directory'
 
 end

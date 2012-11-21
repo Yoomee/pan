@@ -13,7 +13,6 @@
 .row
   .span12
     %h2.pull-left
-      =title(directory_title)
     %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
       =text_field_tag 'q', params[:q], :class => "input-medium search-query"
       %input.btn{:type => 'submit', :value => "Search"}
@@ -34,6 +33,8 @@
         =li_with_active(@tag_context == 'art_forms' &&  @tag.nil?, link_to('Art forms', art_forms_promoters_path))
         =li_with_active(@tag_context == 'funders' &&  @tag.nil?, link_to('Funders', funders_promoters_path))
         =li_with_active(@tag_context == 'work_scales' &&  @tag.nil?, link_to('Scale of work', scale_of_work_promoters_path))
+      -elsif controller_name.directory?
+        =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
       -else
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
         =li_with_active(action_name.index? && @tag_context.nil? &&  @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
@@ -46,9 +47,9 @@
       -if @tag
         =li_with_active(true, link_to(@tag.to_s.titleize.humanize, '#'))
       
--if action_name.directory?
+-if action_name.directory? || controller_name.directory?
   .row
-    .span12
+    .span10
       %ul#directorynav.nav.nav-pills
         -('A'..'Z').each do |letter|
           %li{:class => "#{'active' if @letter == letter}#{' disabled' unless present_directory_letters.include?(letter)}"}
@@ -74,36 +75,49 @@
               %td No organisation has entered information for this yet.
                 
   -else
-    .span12    
+    .span10
       -if directory_items.empty?
         %p
           There are no 
-          =controller_name
+          =controller_name.directory? ? "items" : contr
           -if @query
             ="that match \"#{@query}\""
           -elsif @letter
             ="beginning with \"#{@letter}\""
       -else
         %table.table.table-bordered.table-striped
-          %tbody
-            -directory_items.each do |directory_item|
-              %tr
-                %td.span1
-                  =image_for(directory_item, "50x50#", :class => "pull-left mr-1")
-                %td.span4
-                  %h4.directory-item=link_to_self(directory_item)
-                  -if action_name.rating? && directory_item.reviews.count > 0
-                    %h5
-                      =rating_stars(directory_item.overall_rating)
-                    %h6  
-                      =pluralize(directory_item.reviews.count, "review")
-                %td.span8
-                  =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
+          -if controller_name.directory?
+            %tbody
+              -directory_items.each do |directory_item|
+                %tr
+                  %td.span4
+                    %h4.directory-item=directory_item_link(directory_item)
+                  %td.span6
+                    %h4=directory_item_extra(directory_item)
+                  %td.span6
+                    %h4=directory_item_tags(directory_item)
+          -else
+            %tbody
+              -directory_items.each do |directory_item|
+                %tr
+                  %td.span1
+                    =image_for(directory_item, "50x50#", :class => "pull-left mr-1")
+                  %td.span4
+                    %h4.directory-item=link_to_self(directory_item)
+                    -if action_name.rating? && directory_item.reviews.count > 0
+                      %h5
+                        =rating_stars(directory_item.overall_rating)
+                      %h6  
+                        =pluralize(directory_item.reviews.count, "review")
+                  %td.span8
+                    =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
+    .span2
+      =render "organisations/directory_sidebar"
 .row
   .span12
     =options_panel do
       =back_link
-      =link_if_can("New #{controller_name.singularize}", [:new, controller_name.classify.constantize]) unless controller_name.venues?
+      =link_if_can("New #{controller_name.singularize}", [:new, controller_name.classify.constantize]) unless controller_name.venues? || controller_name.directory?
       -if controller_name.promoters?
         =link_to("Manage individuals", individuals_promoters_path) if can?(:individuals, Promoter)
         =link_to("List applications to join", promoter_enquiries_path) if can?(:read, Enquiry)

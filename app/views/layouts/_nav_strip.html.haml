@@ -40,8 +40,8 @@
                   Resources
                 Publications, links and help
           .span2
-            =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour)), :class => "inner") do
-              =link_to "" do
+            =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour) || controller_name.directory?), :class => "inner") do
+              =link_to directory_path do
                 .header
                   %i.icon-list-ul
                   Directory
