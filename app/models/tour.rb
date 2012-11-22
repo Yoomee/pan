@@ -6,7 +6,8 @@ class Tour < ActiveRecord::Base
   define_index do
     indexes name, :sortable => true
     indexes description
-    indexes taggings.tag.name, :as => :genres
+    indexes genre_tags(:name), :as => :genres
+    indexes regions, :as => :region 
     has created_at, updated_at
   end
   
@@ -28,6 +29,8 @@ class Tour < ActiveRecord::Base
   date_accessors :start_on, :end_on
   
   acts_as_taggable_on :genres
+  has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
+          :conditions => "taggings.context = 'genres'"
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
@@ -79,6 +82,10 @@ class Tour < ActiveRecord::Base
   def links_or_performer_links_without_twitter_and_facebook
     links = links.presence || performer.links
     links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  end
+  
+  def regions
+    dates.where("booked = true AND venue_id != 0").collect{|date| date.venue.region}.uniq.join(" ")
   end
   
   def sibling_tours

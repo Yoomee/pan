@@ -10,6 +10,9 @@
       $(document).ready(function() {
         VenuesMap.init(true);
       });
+
+-original_tags = @tags || []
+
 .row
   .span12
     %h2.pull-left
@@ -49,7 +52,7 @@
       
 -if action_name.directory? || controller_name.directory?
   .row
-    .span10
+    .span12
       %ul#directorynav.nav.nav-pills
         -('A'..'Z').each do |letter|
           %li{:class => "#{'active' if @letter == letter}#{' disabled' unless present_directory_letters.include?(letter)}"}
@@ -80,6 +83,8 @@
         %p
           There are no 
           =controller_name.directory? ? "items" : contr
+          -if @tags
+            with these tags
           -if @query
             ="that match \"#{@query}\""
           -elsif @letter
@@ -95,7 +100,11 @@
                   %td.span6
                     %h4=directory_item_extra(directory_item)
                   %td.span6
-                    %h4=directory_item_tags(directory_item)
+                    %h4
+                      -if directory_item.class.to_s == "Venue"
+                        =link_to "#{content_tag(:i, nil, :class => "icon-map-marker")} #{directory_item}".html_safe, directory_item
+                      -if directory_item.try(:genres)
+                        =render 'organisations/tags_for_directory_view', :tags => directory_item.genres, :original_tags => original_tags
           -else
             %tbody
               -directory_items.each do |directory_item|

@@ -6,12 +6,14 @@ class Performer < ActiveRecord::Base
   define_index do
     indexes name, :sortable => true
     indexes description
-    indexes taggings.tag.name, :as => :genres
+    indexes genre_tags(:name), :as => :genres
     has created_at, updated_at
   end
   
   image_accessor :image
   acts_as_taggable_on :genres, :art_forms, :funders, :work_scales
+  has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
+          :conditions => "taggings.context = 'genres'"
   
   has_many :posts, :as => :target
   has_many :tours, :dependent => :destroy

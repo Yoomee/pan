@@ -1,3 +1,6 @@
+-original_tags = @tags || []
+
+
 #directory-sidebar
   .well
     %h4 Search
@@ -15,10 +18,11 @@
       =type_filter_link("user")
   .well
     %h4 Genre
-    render "tags/horizontal_list", :tags => directory_item.genres
+    .directory-tags
+      =render 'organisations/tags_for_directory_view', :tags => Tag.genres, :original_tags => original_tags
+      
   .well
     %h4 Locations
     %ul.unstyled
-      -Pan::REGIONS.values.each do |region|
-        %li{ :class => "#{region == @region ? 'active' : ''}"}
-        =link_to(region, "#") #{:controller => controller_name, :action => 'region', :region_url => region.to_url})
+      -Pan::REGIONS.values.sort.each do |region|
+        =region_filter_link(region)

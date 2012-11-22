@@ -6,11 +6,14 @@ class Promoter < ActiveRecord::Base
   define_index do
     indexes name, :sortable => true
     indexes description
-    indexes taggings.tag.name, :as => :genres
+    indexes genre_tags(:name), :as => :genres
+    indexes region
     has created_at, updated_at
   end
 
   acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources, :skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered
+  has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
+          :conditions => "taggings.context = 'genres'"
   
   has_many :users, :dependent => :nullify
   has_many :venues, :dependent => :destroy

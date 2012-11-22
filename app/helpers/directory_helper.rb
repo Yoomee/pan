@@ -48,15 +48,6 @@ module DirectoryHelper
     end.html_safe
   end
   
-  def directory_item_tags(directory_item)
-    case 
-    when directory_item.try(:genres)
-      render "tags/horizontal_list", :tags => directory_item.genres
-    when directory_item.class.to_s == "Venue"
-      link_to "#{content_tag(:i, nil, :class => "icon-map-marker")} #{directory_item}".html_safe, directory_item
-    end
-  end
-
   def directory_items
     case controller_name
     when 'performers' then @performers
@@ -66,6 +57,22 @@ module DirectoryHelper
     when 'directory' then @everything
     else []
     end
+  end
+
+  def directory_item_tag(tag, original_tags)
+    
+  param_tags = original_tags.dup
+  active_tag = param_tags.delete(tag.name)
+  param_tags << tag.name unless active_tag
+
+  param_options = {}.tap do |hash|
+    hash[:tags] = param_tags if param_tags.present?
+    hash[:letter] = params[:letter] if params[:letter].present?
+    hash[:q] = params[:q] if params[:q].present?
+    hash[:region] = params[:region] if params[:region].present?
+    hash[:type] = params[:type] if params[:type].present?
+  end
+  link_to(tag_label(tag, :active => active_tag), action_name.search? ? directory_search_path(param_options) : directory_path(param_options))
   end
   
   def present_directory_letters
@@ -88,29 +95,43 @@ module DirectoryHelper
     end.html_safe
   end
   
+  def region_filter_link(region)
+    link_path = action_name.search? ? directory_search_path : directory_path
+    param_options = {}.tap do |hash|
+      hash[:letter] = params[:letter] if params[:letter].present?
+      hash[:q] = params[:q] if params[:q].present?
+      hash[:tags] = params[:tags] if params[:tags].present?
+      hash[:type] = params[:type] if params[:type].present?
+    end
+    param_options.merge!({:region => region})
+    li_with_active(params[:region] == region, (link_to region, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+  end
+  
   def type_filter_link(type)
     link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
       hash[:letter] = params[:letter] if params[:letter].present?
       hash[:q] = params[:q] if params[:q].present?
+      hash[:region] = params[:region] if params[:region].present?
+      hash[:tags] = params[:tags] if params[:tags].present?
     end
     case type
     when "show"
       param_options.merge!({:type => "tour"})
-      li_with_active(params[:type] == "tour", (link_to "Show", action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "tour", (link_to "#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "performer"
       param_options.merge!({:type => "performer"})
-      li_with_active(params[:type] == "performer", (link_to "Performer", action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "performer", (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "promoter"
       param_options.merge!({:type => "promoter"})
-      li_with_active(params[:type] == "promoter", (link_to "Organisation", action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "promoter", (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "venue"
       param_options.merge!({:type => "venue"})
       puts param_options
-      li_with_active(params[:type] == "venue", (link_to "Venue", action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "venue", (link_to "#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "user"
       param_options.merge!({:type => "user"})
-      li_with_active(params[:type] == "user", (link_to "Person", action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "user", (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
 
     end
   end
