@@ -30,5 +30,10 @@
 
   %h2.mb-1 Genre
 
-  .show-tags
-    =render 'organisations/tags_for_directory_view', :tags => @all_tags, :original_tags => original_tags
+  .show-tags.show-tags
+    -@all_tags.each do |tag|
+      -param_tags = original_tags.dup
+      -param_tags << tag.name unless param_tags.delete(tag.name)
+      
+      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
+  .clearfix
