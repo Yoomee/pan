@@ -8706,7 +8706,9 @@ h4.directory-item-extra,
 #directory-sidebar .well li.active a {
   color: #bb2550;  
 }
-.controller_directory a {
+.controller_directory a,
+.controller_groups a,
+.controller_posts a {
  color: #4d4e4d;
 }
 .show-tags .tag span.label.tag-label {
@@ -9510,4 +9512,12 @@ a.promoter.venues {
 .promoter-diary-link,
 .venue-diary-link {
   color: #4D4E4D;
+}
+
+/*========== groups ==========*/
+
+.well.group h4 {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 30px;
 }

@@ -26438,6 +26438,8 @@ var RLANG = {
     }
   };
 
+  window.YmComments = YmComments;
+
   $(document).ready(function() {
     return YmPosts.init();
   });
@@ -30066,6 +30068,9 @@ Copyright (c) 2011 by Harvest
           text: term
         });
       }
+    });
+    YmComments.Form.init({
+      submitOnEnter: true
     });
     $('a[data-scroll]').live('click', function(event) {
       event.preventDefault();
