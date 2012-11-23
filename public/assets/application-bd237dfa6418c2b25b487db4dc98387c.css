@@ -8736,6 +8736,7 @@ form#directory-search input.btn {
 }
 #directory-sidebar .well li {
   font-size: 16px;
+  margin-bottom: 5px;
 }
 
 /*========== Venues map ==========*/
