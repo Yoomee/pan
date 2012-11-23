@@ -3,9 +3,9 @@ module DirectoryHelper
   def directory_item_class(directory_item)
     case directory_item.class.to_s
     when "Performer"
-      "icon-user"
-    when "Promoter"
       "icon-group"
+    when "Promoter"
+      "icon-briefcase"
     when "Tour"
       "icon-star"
     when "Venue"
@@ -32,7 +32,7 @@ module DirectoryHelper
     when "Tour"
       "#{link_to_self(directory_item.performer)}<br>#{directory_item.dates_string}".html_safe
     when "Venue"
-      directory_item.region
+      link_to "#{content_tag(:i, nil, :class => directory_item_class(directory_item.promoter))} #{directory_item.promoter}".html_safe, directory_item.promoter
     when "User"
       if directory_item.promoter
         link_to_self(directory_item.promoter)
@@ -72,7 +72,7 @@ module DirectoryHelper
     hash[:region] = params[:region] if params[:region].present?
     hash[:type] = params[:type] if params[:type].present?
   end
-  link_to(tag_label(tag, :active => active_tag), action_name.search? ? directory_search_path(param_options) : directory_path(param_options))
+  link_to(tag_label(tag, :active => active_tag), action_name.search? ? directory_search_path(param_options) : directory_path(param_options), :class => "tag")
   end
   
   def present_directory_letters
@@ -95,7 +95,7 @@ module DirectoryHelper
     end.html_safe
   end
   
-  def region_filter_link(region)
+  def region_filter_link(content_tag, region)
     link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
       hash[:letter] = params[:letter] if params[:letter].present?
@@ -104,7 +104,7 @@ module DirectoryHelper
       hash[:type] = params[:type] if params[:type].present?
     end
     param_options.merge!({:region => region})
-    li_with_active(params[:region] == region, (link_to region, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+    content_tag_with_active(content_tag, params[:region] == region, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
   end
   
   def type_filter_link(type)
@@ -121,10 +121,10 @@ module DirectoryHelper
       li_with_active(params[:type] == "tour", (link_to "#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "performer"
       param_options.merge!({:type => "performer"})
-      li_with_active(params[:type] == "performer", (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "performer", (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "promoter"
       param_options.merge!({:type => "promoter"})
-      li_with_active(params[:type] == "promoter", (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(params[:type] == "promoter", (link_to "#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "venue"
       param_options.merge!({:type => "venue"})
       puts param_options

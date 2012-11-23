@@ -13,14 +13,15 @@
 
 -original_tags = @tags || []
 
+-unless controller_name.directory?
+  .row
+    .span12
+      %h2.pull-left
+      %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
+        =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+        %input.btn{:type => 'submit', :value => "Search"}
 .row
-  .span12
-    %h2.pull-left
-    %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
-      =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-      %input.btn{:type => 'submit', :value => "Search"}
-.row
-  .span12
+  .span12.mt-2
     %ul.nav.nav-tabs
       -if controller_name.venues?
         =li_with_active(action_name.index?, link_to("Map",venues_path))
@@ -37,7 +38,8 @@
         =li_with_active(@tag_context == 'funders' &&  @tag.nil?, link_to('Funders', funders_promoters_path))
         =li_with_active(@tag_context == 'work_scales' &&  @tag.nil?, link_to('Scale of work', scale_of_work_promoters_path))
       -elsif controller_name.directory?
-        =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+        =li_with_active((action_name.directory? && @letter == "+"), link_to("All", directory_path(:letter => "+")))
+        =li_with_active((action_name.directory? && @letter != "+"), link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
       -else
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
         =li_with_active(action_name.index? && @tag_context.nil? &&  @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
@@ -78,7 +80,7 @@
               %td No organisation has entered information for this yet.
                 
   -else
-    .span10
+    .span9
       -if directory_items.empty?
         %p
           There are no 
@@ -98,12 +100,12 @@
                   %td.span4
                     %h4.directory-item=directory_item_link(directory_item)
                   %td.span6
-                    %h4=directory_item_extra(directory_item)
+                    %h4.directory-item-extra=directory_item_extra(directory_item)
                   %td.span6
-                    %h4
-                      -if directory_item.class.to_s == "Venue"
-                        =link_to "#{content_tag(:i, nil, :class => "icon-map-marker")} #{directory_item}".html_safe, directory_item
-                      -if directory_item.try(:genres)
+                    -if directory_item.class.to_s == "Venue"
+                      .directory-item-region=region_filter_link(:h4, directory_item.region)
+                    -elsif directory_item.try(:genres)
+                      .show-tags
                         =render 'organisations/tags_for_directory_view', :tags => directory_item.genres, :original_tags => original_tags
           -else
             %tbody
@@ -120,7 +122,7 @@
                         =pluralize(directory_item.reviews.count, "review")
                   %td.span8
                     =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
-    .span2
+    .span3
       =render "organisations/directory_sidebar"
 .row
   .span12

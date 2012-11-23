@@ -14,6 +14,12 @@ class DirectoryController < ApplicationController
         else
           @everything = ThinkingSphinx.search("@name ^?", @letter, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
         end
+      elsif @letter = "+"
+        if @conditions.present?
+          @everything = ThinkingSphinx.search(:conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+        else
+          @everything = ThinkingSphinx.search(:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+        end
       else
         @letter = '#'
         if @conditions.present?

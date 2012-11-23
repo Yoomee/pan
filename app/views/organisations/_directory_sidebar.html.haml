@@ -4,8 +4,8 @@
 #directory-sidebar
   .well
     %h4 Search
-    %form.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
-      =text_field_tag 'q', params[:q], :class => "span1"
+    %form.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get', :id => "directory-search"}
+      =text_field_tag 'q', params[:q]
       %input.btn{:type => 'submit', :value => "Search"}
     .clearfix
   .well
@@ -18,11 +18,12 @@
       =type_filter_link("user")
   .well
     %h4 Genre
-    .directory-tags
+    .show-tags
       =render 'organisations/tags_for_directory_view', :tags => Tag.genres, :original_tags => original_tags
-      
+    .clearfix
+    
   .well
     %h4 Locations
     %ul.unstyled
       -Pan::REGIONS.values.sort.each do |region|
-        =region_filter_link(region)
+        =region_filter_link(:li, region)

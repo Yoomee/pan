@@ -742,13 +742,54 @@ div.span1.mb-1 {
 #directorynav li.disabled a:hover{
   background:#fff;
 }
-
-
 h4.directory-item {
-  max-width:220px;
+  font-family: "Adelle Regular", Georgia, serif;
+  font-size-adjust: 0.516;
+  font-weight: normal;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 16px;
 }
-
-
+h4.directory-item-extra,
+.directory-item-region h4 {
+  font-size: 16px;
+}
+.directory-item-region h4.active a,
+#directory-sidebar .well li.active a {
+  color: #bb2550;  
+}
+.controller_directory a {
+ color: #4d4e4d;
+}
+.show-tags .tag span.label.tag-label {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  margin: 0 10px 10px 0;
+  background: #4095b7;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.show-tags .tag.active span.label.tag-label,
+.show-tags .tag span.label.tag-label.label-success {
+  background: #bb2550;
+  padding: 3px 8px 4px;
+  float: left;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+form#directory-search input {
+  width: 178px;
+}
+form#directory-search input.btn {
+  width: 100%;
+}
+#directory-sidebar .well h4 {
+  text-transform: uppercase;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+#directory-sidebar .well li {
+  font-size: 16px;
+}
 
 /*========== Venues map ==========*/
 .venue-infowindow img{
