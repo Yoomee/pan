@@ -7,7 +7,7 @@ class Tour < ActiveRecord::Base
     indexes name, :sortable => true
     indexes description
     indexes genre_tags(:name), :as => :genres
-    indexes regions, :as => :region 
+    indexes booked_venues(:region), :as => :region 
     has created_at, updated_at
   end
   
@@ -15,6 +15,8 @@ class Tour < ActiveRecord::Base
   
   belongs_to :performer
   has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
+  
+  has_many :booked_venues, :class_name => "Venue", :source => :venue, :through => :dates, :conditions => "tour_dates.booked = 1 AND tour_dates.venue_id != 0"
   
   has_many :links, :as => :attachable, :dependent => :destroy
   accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true
@@ -84,9 +86,9 @@ class Tour < ActiveRecord::Base
     links.where("host != 'facebook.com' AND host != 'twitter.com'")
   end
   
-  def regions
-    dates.where("booked = true AND venue_id != 0").collect{|date| date.venue.region}.uniq.join(" ")
-  end
+  # def regions
+  #   dates.where("booked = true AND venue_id != 0").collect{|date| date.venue.region}.uniq.join(" ")
+  # end
   
   def sibling_tours
     performer.tours.without(self)

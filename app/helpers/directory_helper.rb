@@ -96,15 +96,17 @@ module DirectoryHelper
   end
   
   def region_filter_link(content_tag, region)
+    active = params[:region] == region
     link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
       hash[:letter] = params[:letter] if params[:letter].present?
       hash[:q] = params[:q] if params[:q].present?
       hash[:tags] = params[:tags] if params[:tags].present?
       hash[:type] = params[:type] if params[:type].present?
+      hash[:region] = region unless active
     end
-    param_options.merge!({:region => region})
-    content_tag_with_active(content_tag, params[:region] == region, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+
+    content_tag_with_active(content_tag, active, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
   end
   
   def type_filter_link(type)
@@ -117,21 +119,26 @@ module DirectoryHelper
     end
     case type
     when "show"
-      param_options.merge!({:type => "tour"})
-      li_with_active(params[:type] == "tour", (link_to "#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      active = params[:type] == "tour"
+      param_options.merge!({:type => "tour"}) unless active
+      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "performer"
-      param_options.merge!({:type => "performer"})
-      li_with_active(params[:type] == "performer", (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      active = params[:type] == "performer"
+      param_options.merge!({:type => "performer"}) unless active
+      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "promoter"
-      param_options.merge!({:type => "promoter"})
-      li_with_active(params[:type] == "promoter", (link_to "#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      active = params[:type] == "promoter"
+      param_options.merge!({:type => "promoter"}) unless active
+      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "venue"
-      param_options.merge!({:type => "venue"})
+      active = params[:type] == "venue"
+      param_options.merge!({:type => "venue"}) unless active
       puts param_options
-      li_with_active(params[:type] == "venue", (link_to "#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
     when "user"
-      param_options.merge!({:type => "user"})
-      li_with_active(params[:type] == "user", (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+      active = params[:type] == "user"
+      param_options.merge!({:type => "user"}) unless active
+      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
 
     end
   end
