@@ -26,8 +26,8 @@
                   Diary
                 What's going on
           .span2
-            =content_tag_with_active(:div, false, :class => "inner") do
-              =link_to "" do
+            =content_tag_with_active(:div, (controller_name.groups? || controller_name.posts?), :class => "inner") do
+              =link_to groups_path do
                 .header
                   %i.icon-comment
                   Groups

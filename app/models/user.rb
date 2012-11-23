@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
   
   has_many :reviews, :dependent => :nullify
+  
+  has_many :group_members
+  has_many :groups, :through => :group_members
 
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   

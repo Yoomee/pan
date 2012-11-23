@@ -104,5 +104,14 @@ Pan::Application.routes.draw do
   
   get 'directory/search', :to => 'directory#search', :as => 'directory_search'
   get 'directory(/:letter)', :to => 'directory#directory', :as => 'directory'
+  
+  resources :groups do
+    collection do
+      get 'search'
+    end
+    member do
+      resources :posts, :only => :show, :as => 'group_post'
+    end
+  end
 
 end
