@@ -5,8 +5,8 @@
         .show-tour
           =link_to show_path(tour) do
             =image_for(tour, "200x150#")
-            %h2=tour
-            %h3=tour.performer
+            %h2=truncate(tour.name, :length => 30, :separator => " ")
+            %h3=truncate(tour.performer.name, :length => 30, :separator => " ")
             %p=tour.dates_string
             %p
               =truncate(tour.description, :length => 200, :separator => " ")
