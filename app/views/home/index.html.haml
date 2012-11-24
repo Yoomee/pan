@@ -42,7 +42,7 @@
         =link_to user_path(current_user), :class=>"profile-image" do
           =image_for(current_user, "80x")
         .clearfix.mb-1
-        %h2=current_user
+        %h2=link_to(current_user, user_path(current_user))
         %ul.nav.messages-and-notifications
           %li
             =link_to "#" do
