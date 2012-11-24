@@ -28,9 +28,10 @@
               =tour.performer
         .date-and-genres
           %h4=tour.dates_string
-          =link_to diary_path(:tour_id => tour.id), :class => "tour-diary-link" do
-            %i.icon-calendar
-            Diary
+          -if false
+            =link_to diary_path(:tour_id => tour.id), :class => "tour-diary-link" do
+              %i.icon-calendar
+              Diary
           -if tour.genre_list.present?
             .genres
               =comma_list_tags(tour, :genres)
@@ -63,11 +64,12 @@
         =link_to  "About", "#about", :'data-toggle' => 'tab'
       %li
         =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'
-      -#
-        %li
-          =link_to "Media", "#media", :'data-toggle' => 'tab'
+      %li
+        =link_to "Media", "#media", :'data-toggle' => 'tab'
       %li
         =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
+      %li
+        =link_to "Diary", "#diary", :'data-toggle' => 'tab'        
       %li
         =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
       %li
@@ -193,9 +195,19 @@
         .row
           .span9
             .well
-              -tour.external_reviews.each do |review|
-                =simple_format(review.review)
-      
+              -if tour.external_reviews.count == 0
+                There are no press reviews yet.
+              -else  
+                -tour.external_reviews.each do |review|
+                  =simple_format(review.review)
+
+      #diary.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              =render("diary", :tour => tour)      
+
+
       #pricing.tab-pane.fade.in
         .row
           .span9

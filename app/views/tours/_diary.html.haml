@@ -1,0 +1,22 @@
+-if tour.booked_dates.count == 0
+  There are no booked dates for this show yet.
+-else  
+
+  .span
+    %table#diary
+      %thead
+      %tbody
+        -tour.booked_dates.each do |date|
+          %tr
+            %td.date
+              -if @month.present? && @year.present?
+                =date.date.to_s(:day_and_date)
+              -else
+                =date.date.to_s(:date)
+            %td
+              -if date.venue_id > 0
+                =link_to_self date.venue, :class => "venue"
+              -else
+                .venue=date.external_venue_name
+  .clearfix
+              
