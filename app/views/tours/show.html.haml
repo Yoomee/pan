@@ -39,7 +39,7 @@
           -if tour.links_or_performer_links_without_twitter_and_facebook.present?
             %ul.unstyled.links
               -tour.links_or_performer_links_without_twitter_and_facebook.each do |link|
-                %li
+                %li.icon-link
                   =link_to(link, link.url, :target => '_blank')
           -if tour.links_or_performer_links_only_twitter_and_facebook.present?
             -tour.links_or_performer_links_only_twitter_and_facebook.each do |link|

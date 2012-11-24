@@ -83,7 +83,7 @@
       #media.tab-pane.fade.in
         .well
           -if performer.slideshow.present? 
-            =render("organisations/slideshow", :slideshow => performer.slideshow)
+            =render("organisations/media", :slideshow => performer.slideshow)
             .clearfix
           -else
             No media present
