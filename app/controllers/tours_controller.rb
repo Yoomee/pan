@@ -9,7 +9,7 @@ class ToursController < ApplicationController
   def create
     @tour = Tour.new(params[:tour])
     if @tour.save
-      flash_notice(@tour)      
+      flash[:notice] = "Created a new show"      
       redirect_to @tour
     else
       render :action => "new"
@@ -43,7 +43,7 @@ class ToursController < ApplicationController
   def update
     @tour = Tour.find(params[:id])
     if @tour.update_attributes(params[:tour])
-      flash_notice(@tour)
+      flash[:notice] = "Updated show details"
       redirect_to @tour
     else
       render :action => request.referrer =~ /\/bookings/ ? 'bookings' : 'edit'
