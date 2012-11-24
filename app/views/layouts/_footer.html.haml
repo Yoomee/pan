@@ -6,20 +6,16 @@
         %footer.footer
           %ul.unstyled.footer-links
             %li
-              =link_to "Terms of use", "#"
+              =link_to_slug("Terms of use",  :terms)
             %li
-              =link_to "Feedback", "#"
+              =link_to "Feedback", "/beta"
             %li
-              =link_to "Terms of use", "#"
+              =link_to_slug("Community Standards", :community_standards)
             %li
-              =link_to "Community Standards", "#"
-            %li
-              =link_to "Noticeboard", "#"
-            %li
-              =link_to("Sitemap", pages_path, :class => "")
+              =link_to_slug("Noticeboard",  :noticeboard)
             %li
               =link_to_slug('About Tourbook', 'about-tourbook', :class => '')
             %li
-              =link_to "#" do
+              =link_to_slug :help do
                 %i.icon-question-sign
                 Help
