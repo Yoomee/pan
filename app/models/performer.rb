@@ -11,7 +11,7 @@ class Performer < ActiveRecord::Base
   end
   
   image_accessor :image
-  acts_as_taggable_on :genres, :art_forms, :funders, :work_scales
+  acts_as_taggable_on :genres, :art_forms, :funders, :work_scales, :categories, :tags
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
   

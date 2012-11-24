@@ -11,6 +11,10 @@ class Tag < ActsAsTaggableOn::Tag
   scope :skills, context_begins_with('skills')
   scope :work_scales, contexts('work_scales')
   
+  scope :tags, contexts('tags')
+  scope :categories, contexts('categories')
+  
+  
   scope :most_talked_about, most_used.where("taggings.taggable_type = 'Post'") 
   
 end
