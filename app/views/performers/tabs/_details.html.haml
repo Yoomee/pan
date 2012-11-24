@@ -3,7 +3,7 @@
   =form.input :summary, :label => "Summary - <em>Maximum 255 characters</em>".html_safe, :as => :text, :input_html => {:rows => 3, :maxlength => 255, :class => "span8"}
   =form.input :description, :input_html => {:rows => 8, :class => "span8"}
   =form.input :notes, :label => "Notes - <em>Only visible to Administrators</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
-  =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, performer, Tag.genres)
+  =form.input :genre_list, :label => "Category", :as => :select, :multiple => true, :collection => tag_list_options(:genres, performer, Tag.genres)
   =form.input :art_form_list, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:art_forms, performer, Tag.art_forms)
   =form.input :retained_image, :as => :hidden
   -if performer.image && performer.errors[:image].empty?
