@@ -7,7 +7,7 @@
     =form.input :remove_image, :as => :boolean, :label => "No image"
   -else
     =image_for(performer, "220x150")
-  =form.input :image, :as => :file, :label => "&nbsp;"
+  =form.input :image, :as => :file, :label => "Select a file to upload",  :input_html => {:class => "mb-3"}
   =form.input :summary, :label => "Summary - <em>Maximum 255 characters</em>".html_safe, :as => :text, :input_html => {:rows => 3, :maxlength => 255, :class => "span8"}
   =form.input :description, :input_html => {:rows => 8, :class => "span8"}
   =form.input :notes, :label => "Notes - <em>Only visible to Administrators</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
