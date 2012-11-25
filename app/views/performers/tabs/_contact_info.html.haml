@@ -1,11 +1,21 @@
-=form.inputs do
+=form.inputs do 
+  
+  %legend Main postal address
+  =form.input :address1
+  =form.input :address2
+  =form.input :city
+  =form.input :postcode
+  =form.country_select(:country, ["United Kingdom"], :include_blank => true)
+  
   %legend Primary contact
   =form.input :contact1_name, :label => 'Name'
   =form.input :contact1_email, :label => 'Email'
   =form.input :contact1_phone, :label => 'Phone'
-=form.inputs do
+
   %legend Secondary contact
   =form.input :contact2_name, :label => 'Name'
   =form.input :contact2_email, :label => 'Email'
   =form.input :contact2_phone, :label => 'Phone'
+  
+
   

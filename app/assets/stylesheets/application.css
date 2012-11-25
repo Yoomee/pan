@@ -98,6 +98,11 @@
 .carousel-control.right i {
 	margin-left: 14px;
 }
+
+legend {
+	margin-bottom: 0px;
+}
+
 /*========== Bootstrap extensions ==========*/
 .popover-footer {
   padding: 9px 15px;

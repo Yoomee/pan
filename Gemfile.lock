@@ -81,6 +81,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     columnize (0.3.6)
+    country-select (1.1.1)
     daemons (1.1.9)
     datetimespan (0.1.0)
     devise (2.1.2)
@@ -350,6 +351,7 @@ DEPENDENCIES
   capybara
   cocoon
   coffee-rails (~> 3.1.0)
+  country-select
   datetimespan
   exception_notification
   ey_config
