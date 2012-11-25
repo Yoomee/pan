@@ -19,5 +19,6 @@
         =yield_with_bootstrap(render_flash)    
       =yield_with_bootstrap(yield)
       .push
-    .footer-wrapper
-      =render("layouts/footer")
+    -if current_user  
+      .footer-wrapper
+        =render("layouts/footer")
