@@ -143,18 +143,17 @@
       #noticeboard.well
         %h2.underline.mb-1 Noticeboard
         %ul.unstyled
-          %li
-            =link_to "#", :class=>"list-item-title" do
-              %h4 New fund for youth promoting
-            %p
-              Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
-            =link_to "Read more", "#", :class=>"read-more"
-          %li
-            =link_to "#", :class=>"list-item-title" do
-              %h4 New fund for youth promoting
-            %p
-              Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. 
-            =link_to "Read more", "#", :class=>"read-more"
+          -@pages.each do |page|
+            %li
+              =link_to page, :class=>"list-item-title" do
+                %h4=page.title
+              %p
+                -if page.summary
+                  =truncate(page.summary, :length => 200)
+                -else
+                  =truncate(page.text, :length => 200).html_safe  
+                =link_to "Read more", page, :class=>"read-more"
+
     .span3
       #upcoming-events
         %h2.underline.mb-1 Upcoming Events

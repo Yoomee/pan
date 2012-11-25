@@ -1,30 +1,36 @@
--if page.root.children.present?
-  .span4
-    .well
-      =render("pages/subnav")
-.span8
-  %h1
-    %span#page_title.mercury-region{:"data-type" => "editable"}
-      =raw(page.title)
-  -if page.image
-    .row.mt-2
-      .span8
+-if page.parent
+  .row
+    .span8
+      %h2.mb-2.mt-2=page.parent.title
+
+.row   
+  .span7
+    %h3.mb-1
+      %span#page_title.mercury-region{:"data-type" => "editable"}
+        =raw(page.title)
+    -if page.image      
+      .mb-3
         .gallery_slideshow.fade_in
           .gallery_slideshow.fade_in
-            =image_for(page, "770x446>")
-  .row.mt-2
-    .span8
-      .gallery_description
-        -if page.text.blank? && !viewing_mercury_edit? && can?(:edit, page)
-          #page_text
-            =mercury_edit_link("Click here to add some page content", mercury_update_page_path(page))
-        -else
-          #page_text.mercury-region{:"data-type" => "editable"}
-            =raw(page.text)
-    .span8
-      =options_panel do
-        -if can?(:mercury_update, page)
-          =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
-        =link_if_can("Edit page details", [:edit, page])
-        =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
-        =link_to("New page", new_child_page_path(:parent_id => page.id)) if can?(:new, Page)
+            =image_for(page, "620x446>")                                                          
+    .gallery_description
+      -if page.text.blank? && !viewing_mercury_edit? && can?(:edit, page)
+        #page_text
+          =mercury_edit_link("Click here to add some page content", mercury_update_page_path(page))
+      -else
+        #page_text.mercury-region{:"data-type" => "editable"}
+          =raw(page.text)
+          
+  -if page.root.children.present?
+    .span4.offset1
+      .well
+        =render("pages/subnav")   
+    
+.row               
+  .span7
+    =options_panel do
+      -if can?(:mercury_update, page)
+        =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
+      =link_if_can("Edit page details", [:edit, page])
+      =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
+      =link_to("New page", new_child_page_path(:parent_id => page.id)) if can?(:new, Page)
