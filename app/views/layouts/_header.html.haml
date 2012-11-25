@@ -31,36 +31,11 @@
                   %li.divider                    
                 -elsif current_user.admin?
                   %li
-                    =link_to(performers_path) do
-                      %icon.icon-music
-                      Performers
-                  %li
-                    =link_to(individuals_promoters_path) do
-                      %icon.icon-flag
-                      Promoters                  
-                  %li
-                    =link_to(venues_path) do
-                      %icon.icon-map-marker
-                      Venues
-                  %li
-                    =link_to(directory_users_path(:letter => 'A')) do
-                      %icon.icon-user
-                      Users
-                  %li.divider
-                    %li
-                      =link_to(promoter_enquiries_path) do
-                        %icon.icon-comment
-                        Promoter applications                    
-                  %li
-                    =link_to(feedback_enquiries_path) do
-                      %i.icon-bullhorn
-                      Beta feedback                    
-                  %li
-                    =link_to(tags_path) do
-                      %icon.icon-tags
-                      Manage tags
+                    =link_to("/admin") do
+                      %icon.icon-cogs
+                      Admin
+                  %li.divider 
 
-                  %li.divider
                 %li
                   =link_to(edit_user_path(current_user)) do
                     %icon.icon-cog

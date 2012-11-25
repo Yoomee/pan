@@ -1,0 +1,53 @@
+.row
+  .span12
+    %h1.mb-2.mt-2
+      Admin links
+.row      
+  .span12
+    -if user_signed_in?                   
+      %p
+        %div
+          -if current_user.promoter
+            %div
+              =link_to(current_user) do
+                %icon.icon-user
+                My profile
+          -if current_user.promoter
+            %div
+              =link_to(current_user.promoter) do
+                %icon.icon-flag
+                My organisation
+          -elsif current_user.performer     
+            =link_to(current_user.performer) do
+              %icon.icon-flag
+              My organisation 
+          -elsif current_user.admin?
+            %div
+              =link_to(performers_path) do
+                %icon.icon-music
+                Performers
+            %div
+              =link_to(individuals_promoters_path) do
+                %icon.icon-flag
+                Promoters                  
+            %div
+              =link_to(venues_path) do
+                %icon.icon-map-marker
+                Venues
+            %div
+              =link_to(directory_users_path(:letter => 'A')) do
+                %icon.icon-user
+                Users
+              %div
+                =link_to(promoter_enquiries_path) do
+                  %icon.icon-comment
+                  Promoter applications                    
+            %div
+              =link_to(feedback_enquiries_path) do
+                %i.icon-bullhorn
+                Beta feedback                    
+            %div
+              =link_to(tags_path) do
+                %icon.icon-tags
+                Manage tags
+        
