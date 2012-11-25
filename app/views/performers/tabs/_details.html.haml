@@ -1,12 +1,16 @@
 =form.inputs do
   =form.input :name
+  %label.control-label
+    Profile image
+  -if performer.image && performer.errors[:image].empty?
+    =image_for(performer, "220x150")
+    =form.input :remove_image, :as => :boolean, :label => "No image"
+  -else
+    =image_for(performer, "220x150")
+  =form.input :image, :as => :file, :label => "&nbsp;"
   =form.input :summary, :label => "Summary - <em>Maximum 255 characters</em>".html_safe, :as => :text, :input_html => {:rows => 3, :maxlength => 255, :class => "span8"}
   =form.input :description, :input_html => {:rows => 8, :class => "span8"}
   =form.input :notes, :label => "Notes - <em>Only visible to Administrators</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
   =form.input :categories, :label => "Category", :as => :select, :multiple => true, :collection => tag_list_options(:categories, performer, Tag.categories)
   =form.input :tags, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:tags, performer, Tag.tags)
   =form.input :retained_image, :as => :hidden
-  -if performer.image && performer.errors[:image].empty?
-    =image_for(performer, "100x")
-    =form.input :remove_image, :as => :boolean
-  =form.input :image, :as => :file
