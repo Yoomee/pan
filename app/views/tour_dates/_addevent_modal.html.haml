@@ -1,18 +1,18 @@
 #addevent.modal.hide
-    
-  .modal-header
-    %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
-    %h3 Add an event
-  .modal-body
   =semantic_form_for(TourDate.new) do |form|
-    =form.inputs do
-      =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
-      =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
-      =form.input :date, :as => :string
-    =form.buttons do
-      =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
+    
+    .modal-header
+      %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
+      %h3 Add an event
+    .modal-body
+      =form.inputs do
+        =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
+        =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
+        =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}  
         
       
-  .modal-footer
-    =link_to("Cancel", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')
+    .modal-footer
+      =link_to("Cancel", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')
+      =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
+    
 
