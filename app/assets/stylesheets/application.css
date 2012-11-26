@@ -55,12 +55,18 @@
 .fade_in.fade_six, {-webkit-animation-delay: 0, 1.5s;}
 
 .main-nav a,
-.welcome-item i {
+.welcome-item i,
+.show-tour {
 	    
      -webkit-transition: .2s ease-in;
      -moz-transition: .2s ease-in;
      transition: .2s ease-in;
   
+}
+.show-tour {
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;  
+  border-radius:3px;
 }
 
 /*========== Bootstrap overrides ==========*/
@@ -139,7 +145,8 @@ h6,
 strong,
 .header-btn,
 .counter,
-.left-col .nav li 
+.left-col .nav li,
+p.tour-dates 
 {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
   color: #4d4e4d;
@@ -185,6 +192,9 @@ body {
 a {
   color: #aac544;
 }
+a:hover {
+  color: #aac544;
+}
 .shadow {
   -webkit-box-shadow: 1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);
 	-moz-box-shadow: 1px 2px 1px rgba(0,0,0,0.09), 2px 2px 5px rgba(0,0,0,0.05), 2px 2px 10px rgba(0,0,0,0.04);
@@ -217,8 +227,10 @@ a {
   -moz-box-shadow:none;  
   box-shadow:none;
   text-transform: uppercase;
+
   
   border: none;
+  position: relative;
   
   background: #565656;
   
@@ -230,6 +242,11 @@ a {
   background: #000;
   color: #fff;
   text-shadow: none;
+}
+.btn i {
+  position: absolute;
+  top: 8px;
+  left: 10px;
 }
 .btn-primary {
   background:#acc543;
@@ -1202,16 +1219,29 @@ label em.optional {
 }
 #sign-in form#user_new {
   padding-top: 50px;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 1;
+}
+#sign-in-box .add-on {
+  width: 30px;
+  margin: 0;
+}
+#sign-in-box input {
+  margin: 0;
 }
 #sign-in form#user_new .controls {
   /*height: 35px;*/
 }
-#sign-in form#user_new input,
-#sign-in form#user_new .input-prepend,
-#sign-in form#user_new .input-prepend span.add-on {
-  /*height: 30px;*/
+#sign-in form#user_new input {
+  font-size: 16px;
+  padding: 10px;
+}
+#sign-in form#user_new .input-prepend span.add-on {	
+	padding: 10px;
+	margin: 0 -6px 0 0;
+}
+#sign-in form#user_new .input-prepend {
+  margin-bottom: 15px;
 }
 #sign-in form#user_new input[name='commit'] {
   background: #AAC544;
@@ -1229,13 +1259,18 @@ label em.optional {
 .show-tour {
   padding: 10px 10px 0; 
   margin-bottom: 20px;
-  -webkit-box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4), 2px 3px 8px rgba(0, 0, 0, 0.2), 2px 3px 15px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4), 2px 3px 8px rgba(0, 0, 0, 0.2), 2px 3px 15px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.4), 2px 3px 8px rgba(0, 0, 0, 0.2), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  
+  background: #fff;
+  
+  
+  -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
 .show-tour.block {
-	height: 500px;
+	height: 440px;
 }
 
 .span9.show-tour {
@@ -1251,7 +1286,26 @@ label em.optional {
 }
 .show-tour:hover {
   color: #525150;
-  background: #C4C2C0;
+  
+    -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tour-box-title {
+  float: left;
+  width: 100%;
+  line-height: 1.1;
+  margin: 10px 0 0px ;
+}
+.tour-performer-name {
+  float: left;
+  width: 100%;
+  line-height: 1.5;
+  margin: 0px 0 0px;
+}
+p.tour-dates {
+
 }
 .show-tags .tag span.label.tag-label {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
@@ -1308,17 +1362,21 @@ label em.optional {
   color: #4D4E4D;
 }
 
+.show-list-view-text {
+  margin: 8px 0 0 8px;
+}
+
+
 /*========== block or list view ==========*/
 .block-or-line {
   float: right;
-  margin: 10px 0 0;
+  margin: 15px 0 0;
 }
 a.block-or-line-icon {
   display: block;
   text-indent: -9000em;
   float: right;
-  clear: both;
-  margin: 0px 0 8px 0;
+  margin: 0px 0 8px 10px;
   width: 24px;
   height: 18px;
 }
@@ -1363,6 +1421,9 @@ table#diary a.next-month {
   font-size: 50px;
   line-height: 23px;
 }
+table#diary a.next-month {
+  right: 0;
+}
 table#diary thead {
   border-bottom: 2px #565656 solid; 
 }
@@ -1371,6 +1432,9 @@ table#diary tbody tr {
 }
 table#diary tbody tr td {
   padding: 10px;
+}
+table#diary tbody tr td .tag-label {
+	margin: 3px 0;
 }
 table#diary thead th {
   text-transform: uppercase;
@@ -1399,7 +1463,7 @@ table#diary .date,
 table#diary a.tour,
 table#diary a.performer {
   font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
-  font-weight: bold;
+
   color: #4d4e4d;
 }
 table#diary a.venue,
@@ -1486,7 +1550,7 @@ a i.icon-facebook:hover {
   width: 180px;
   color: white;
   background: black;
-  font-size: 16px;
+
   margin-bottom: 10px;
 }
 .black-block-links a i {
@@ -1523,7 +1587,7 @@ a i.icon-facebook:hover {
 #nav-strip .span2 .inner {
   background: white;
   height: 61px;
-  padding: 20px 0 5px;
+  padding: 18px 0 13px;
   margin-top: 10px;
   text-align: center;
 }
@@ -1537,18 +1601,33 @@ a i.icon-facebook:hover {
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
 }
-#nav-strip a {
+.nav-link {
   color: #4D4E4D;
+  float: left;
+  padding: 28px 25px 0;
   text-decoration: none;
+  display: block;
+  height: 70px;
 }
 
+.nav-link:hover {
+  text-decoration: none;
+}
+#nav-strip a .nav-smallprint {
+  font-size: 12px;
+  line-height: 14px;
+  margin: 2px 0 0;
+  display: block;
+  
+}
 #nav-strip a .header  {
   font-size: 18px;
+  line-height: 18px;
   text-transform: uppercase;
   font-weight: bold;
 }
 #nav-strip a:hover,
-#nav-strip a.active,
+#nav-strip .active a,
 #nav-strip a .header:hover,
 #nav-strip a .header.active {
   background: #f6f6f2;
@@ -1590,3 +1669,28 @@ a.promoter.venues {
   font-size: 16px;
   margin-bottom: 30px;
 }
+
+
+
+
+/*========== noticeboard/block view  ==========*/
+.gallery_box {
+
+}
+.gallery-box-inner {
+  padding: 10px;
+  display: block;
+  float: left;
+  background: #fff;
+}
+.gallery-box-inner:hover {
+  text-decoration: none;
+  
+    -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+  
+}
+
+
+

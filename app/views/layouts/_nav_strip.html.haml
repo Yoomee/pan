@@ -2,48 +2,53 @@
 #nav-strip
   .container
     .row
-      .span12
-        .row
-          .span2
-            =content_tag_with_active(:div, current_page?(root_path), :class => "inner") do
-              =link_to root_path do
-                .header
-                  %i.icon-home
-                  Home
-                What's happening
-          .span2
-            =content_tag_with_active(:div, (current_page?(shows_path) || current_page?(:controller => "/tours")), :class => "inner") do
-              =link_to shows_path do
-                .header
-                  %i.icon-star
-                  Shows
-                Find shows for your venue
-          .span2
-            =content_tag_with_active(:div, current_page?(diary_path), :class => "inner") do
-              =link_to diary_path do
-                .header
-                  %i.icon-calendar
-                  Diary
-                What's going on
-          .span2
-            =content_tag_with_active(:div, (controller_name.groups? || controller_name.posts?), :class => "inner") do
-              =link_to groups_path do
-                .header
-                  %i.icon-comment
-                  Groups
-                Talk to other members & find out more
-          .span2
-            =content_tag_with_active(:div, current_page?(:controller => "/resources"), :class => "inner") do
-              =link_to resources_path do
-                .header
-                  %i.icon-book
-                  Resources
-                Publications, links 
-                %br & help
-          .span2
-            =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour) || controller_name.directory?), :class => "inner") do
-              =link_to directory_path do
-                .header
-                  %i.icon-list-ul
-                  Directory
-                People, venues, performers & shows
+      .span12        
+        =content_tag_with_active(:div, current_page?(root_path), :class => "inner") do
+          =link_to root_path, :class=>"nav-link nav-link-home" do
+            .header
+              %i.icon-home
+              Home
+            %span.nav-smallprint    
+              What's happening
+        =content_tag_with_active(:div, (current_page?(shows_path) || current_page?(:controller => "/tours")), :class => "inner") do
+          =link_to shows_path, :class=>"nav-link nav-link-shows"  do
+            .header
+              %i.icon-star
+              Shows
+            %span.nav-smallprint      
+              Find shows for
+              %br
+              your venue
+        =content_tag_with_active(:div, current_page?(diary_path), :class => "inner") do
+          =link_to diary_path, :class=>"nav-link nav-link-diary"  do
+            .header
+              %i.icon-calendar
+              Diary
+            %span.nav-smallprint      
+              What's going on
+        =content_tag_with_active(:div, (controller_name.groups? || controller_name.posts?), :class => "inner") do
+          =link_to groups_path, :class=>"nav-link nav-link-groups"  do
+            .header
+              %i.icon-comment
+              Groups
+            %span.nav-smallprint      
+              Talk to other members
+              %br
+              &amp; find out more
+        =content_tag_with_active(:div, current_page?(:controller => "/resources"), :class => "inner") do
+          =link_to resources_path, :class=>"nav-link nav-link-resources"  do
+            .header
+              %i.icon-book
+              Resources
+            %span.nav-smallprint      
+              Publications, 
+              %br links & help
+        =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour) || controller_name.directory?), :class => "inner") do
+          =link_to directory_path, :class=>"nav-link nav-link-directory"  do
+            .header
+              %i.icon-list-ul
+              Directory
+            %span.nav-smallprint
+              People, venues,
+              %br
+              performers & shows
