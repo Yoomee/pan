@@ -251,6 +251,11 @@ a {
 .clearfix {
   clear: both;
 }
+.delete_slide_link {
+	background: none;
+	color: #666;
+}
+
 /*========== Forms ==========*/
 select[multiple='multiple']{
   width:620px;
