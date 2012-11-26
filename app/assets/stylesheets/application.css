@@ -769,8 +769,10 @@ h4.directory-item-extra,
 #directory-sidebar .well li.active a {
   color: #bb2550;  
 }
-.controller_directory a,
-.controller_groups a,
+.controller_directory table a,
+.controller_directory #directory-sidebar a,
+.controller_groups .group a,
+.controller_groups #groups-sidebar a,
 .controller_posts a {
  color: #4d4e4d;
 }
