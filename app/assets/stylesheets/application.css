@@ -254,6 +254,10 @@ a:hover {
 .btn-primary:hover {
   background:#97AD3B;
 }
+
+.side-btn {
+	width: 190px;
+}
 .red {
   color: #d33958;
 }

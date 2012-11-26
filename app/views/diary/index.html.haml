@@ -21,6 +21,10 @@
 .row
   .span9
     %h1.mb-2.mt-2 Diary
+  .span3.mt-3  
+    =link_to "#addevent", :'data-toggle' => "modal", :class => "btn side-btn" do
+      %i.icon-pencil
+      Add an event
 
 .row
   .span9
@@ -79,3 +83,20 @@
 
   .span3
     =render 'shows/filter_sidebar', :original_tags => original_tags, :month => @month, :year => @year
+    
+
+=render 'tour_dates/addevent_modal'
+
+.row
+  .span12
+    %h1 Add event    
+    =semantic_form_for(TourDate.new) do |form|
+      =form.inputs do
+        =form.input :tour
+        =form.input :venue
+        =form.input :date, :as => :string
+      =form.buttons do
+        =form.commit_button "Save", :button_html => {:class => 'btn-primary'}    
+    
+    
+   

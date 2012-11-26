@@ -22,13 +22,7 @@
       %h4 Search Groups
       %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
       =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-      %input.btn{:type => 'submit', :value => "Search"}
-      
-    .well
-      %h4 Popular conversation tags
-      =render("tags/list", :tags => @top_tags)
-      .clearfix
-      
+      %input.btn{:type => 'submit', :value => "Search"}    
       
     .well
       %h4 Members

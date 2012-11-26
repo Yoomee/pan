@@ -6,6 +6,7 @@ Pan::Application.routes.draw do
   match '/promoters/applications' => 'enquiries#index', :form_name => 'promoter', :as => 'promoter_enquiries'
   match '/beta/feedback' => 'enquiries#index', :form_name => 'feedback', :as => 'feedback_enquiries'
 
+  resources :tour_dates
   resources :performers, :except => [:show]
   resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    
@@ -31,6 +32,8 @@ Pan::Application.routes.draw do
       get ':tag_context/:tag', :action => 'index', :as => 'tag'
     end
   end
+
+
   
   resources :promoters, :except => [:show], :path => "organisations"
   resources :promoters, :only => [:show], :path => "organisations" do

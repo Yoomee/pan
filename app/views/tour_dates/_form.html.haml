@@ -1,0 +1,7 @@
+=semantic_form_for(tour_date) do |form|
+  =form.inputs do
+    =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
+    =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
+    =form.input :date, :as => :string
+  =form.buttons do
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
