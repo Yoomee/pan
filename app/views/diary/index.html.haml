@@ -87,16 +87,6 @@
 
 =render 'tour_dates/addevent_modal'
 
-.row
-  .span12
-    %h1 Add event    
-    =semantic_form_for(TourDate.new) do |form|
-      =form.inputs do
-        =form.input :tour
-        =form.input :venue
-        =form.input :date, :as => :string
-      =form.buttons do
-        =form.commit_button "Save", :button_html => {:class => 'btn-primary'}    
     
     
    
