@@ -1,0 +1,12 @@
+.row
+  .span12
+    %h4
+
+    %ul.unstyled
+      -@thread.messages.each do |message|
+        %li
+          .pull-left
+            =link_to message.user do
+              =image_for(message.user, "80x80#")
+          =message.text
+          .clearfix

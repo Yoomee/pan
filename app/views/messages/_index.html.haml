@@ -1,0 +1,7 @@
+.row
+  .span12
+    %h4 All messages
+
+    %ul.unstyled
+      -@threads.each do |thread|
+        %li=link_to thread.messages.first.text, message_path(thread)

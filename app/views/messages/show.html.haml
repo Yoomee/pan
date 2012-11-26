@@ -1,0 +1,12 @@
+.row
+  .span12
+    %h1.tour
+      %i.icon-user
+      =@user.full_name
+
+.row
+  .span3
+    =render "users/user_sidebar", :user => @user
+
+  .span9
+    =render "messages/show"

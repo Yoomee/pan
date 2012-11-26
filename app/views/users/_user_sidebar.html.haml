@@ -1,0 +1,35 @@
+.row.profile-left-col
+  .well
+    =image_for(user, "220x150#")
+    .notifications
+      %i.icon-group
+      %span.numberr=user.group_notifications.count
+      notifications
+      =link_to "view", ""
+    .messages
+      %i.icon-envelope
+      %span.numberr=user.message_notifications.count
+      messages
+      =link_to "view", messages_path
+    -if user.promoter
+      .promoter
+        %h4
+          %i.icon-briefcase
+          My Organisation
+        =link_to_self user.promoter
+    -if user.venues.present?
+      .venues
+        %h4
+          %i.icon-home
+          My Venues
+        -user.venues.each do |venue|
+          =link_to_self venue
+    -if user.links.present?
+      -if user.links_without_twitter_and_facebook.present?
+        %ul.unstyled.links
+          -user.links_without_twitter_and_facebook.each do |link|
+            %li
+              =link_to(link, link.url, :target => '_blank')
+      -if user.links_only_twitter_and_facebook.present?
+        -user.links_only_twitter_and_facebook.each do |link|
+          =facebook_twitter_link(link)

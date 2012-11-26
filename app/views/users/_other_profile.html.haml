@@ -30,7 +30,7 @@
             -user.links_only_twitter_and_facebook.each do |link|
               =facebook_twitter_link(link)
         .black-block-links
-          =link_to "", :class => "btn" do
+          =link_to "#new-message", :'data-toggle' => "modal", :class => "btn" do
             %i.icon-envelope
             Send a message
 
@@ -48,5 +48,8 @@
                 =user.description
               -else
                 No details added yet.
+
+
+=render 'messages/new_message_modal', :recipient => user
             
           
