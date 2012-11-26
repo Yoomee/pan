@@ -114,4 +114,6 @@ Pan::Application.routes.draw do
     end
   end
 
+  get '/inbox', :to => 'messages#index', :as => 'inbox'
+  
 end

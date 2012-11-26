@@ -1,5 +1,5 @@
 development:
-  bin_path: /usr/local/bin
+  bin_path: /usr/bin
   min_prefix_len: 1
 production:
   min_prefix_len: 1
