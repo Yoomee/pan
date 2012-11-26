@@ -1,14 +1,17 @@
 #addevent.modal.hide
-  =semantic_form_for(TourDate.new) do |form|
+  =semantic_form_for(TourDate.new(:needs_approval => true, :user_id => current_user.id)) do |form|
     
     .modal-header
       %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
       %h3 Add an event
     .modal-body
       =form.inputs do
+        =form.input :needs_approval, :as => "hidden"
+        =form.input :user_id, :as => "hidden"
         =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
         =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
         =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}  
+        =form.input :time, :as => :string 
         
       
     .modal-footer

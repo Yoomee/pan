@@ -6,10 +6,10 @@ class TourDatesController < ApplicationController
   
   def create
     if tour_date.save
-      flash[:notice] = "Date added to diary"
-      redirect_to(diary_path)
+      flash[:notice] = "Thanks for adding a date. This will be reviewed shortly by the website administrator before appearing in the diary."
+      redirect_to diary_path( tour_date, {:month => tour_date.date.month, :year => tour_date.date.year})
     else
-      flash[:notice] = "Something went wrong"
+      flash_notice = tour_date
       redirect_to(diary_path)
     end
   end
