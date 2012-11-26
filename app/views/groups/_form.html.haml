@@ -1,0 +1,12 @@
+-content_for :head do
+  :javascript
+    $(document).ready(function() {
+      Redactor.init();
+    });
+=semantic_form_for @group do |form|
+  =error_alert(@group)
+  =form.inputs do
+    =form.input :name
+    =form.input :description, :as => :redactor
+  =form.buttons do
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
