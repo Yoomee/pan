@@ -42,4 +42,10 @@
       %ul.unstyled
         -@groups.last(4).each do |group|
           %li=link_to_self(group)
+
+
+.row
+  .span8
+    =options_panel do
+      =link_if_can("New group", [:new, Group])
           

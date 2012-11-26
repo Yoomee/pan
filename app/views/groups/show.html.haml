@@ -1,6 +1,6 @@
 .row
   .span9
-    %h1.mb-2.mt-2=@group
+    %h1.mb-2.mt-2=link_to_self @group
 
 .row
   .span9
@@ -43,3 +43,12 @@
       %ul.unstyled
         -Group.without(@group).last(4).each do |group|
           %li=link_to_self(group)
+
+
+
+.row
+  .span8
+    =options_panel do
+      =link_if_can("Edit group", [:edit, @group])
+      =link_if_can("Delete group", [:destroy, @group], :confirm => "Are you sure?")
+      =link_if_can("New group", [:new, Group])

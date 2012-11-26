@@ -1,0 +1,30 @@
+.span8
+  %h1.block-page-title.mt-2.mb-2
+    %span#page_title.mercury-region{:"data-type" => "editable"}
+      =raw(page.title)
+  .row
+    .span8
+      #page_text.mercury-region{:"data-type" => "editable"}
+        =raw(page.text)
+  .row
+    -page_children.each_with_index do |page, index|
+      .gallery_box.fade_in.span4{:class => "fade_#{((index/2)+1).to_word}"}
+        =link_to page, :class=>"gallery-box-inner" do
+          .gallery_text
+            %h3=page.title
+            %p=truncate(strip_tags(page.text), :length => 300)
+          -if page.image  
+            =image_for(page, "370x200#", :class => "gallery_image")
+    -if can?(:new, Page)
+      .span4.mt-2.fade_in.new-page-box{:class => "fade_#{(page_children.size/2.0).ceil.to_word}"}
+        =link_to("+ Add a subpage", new_child_page_path(:parent_id => page.id), :class=>"btn")
+  .row
+    .span8
+      =options_panel do
+        =back_link
+        -if can?(:edit, page)
+          =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
+        =link_if_can("Edit page details", [:edit, page])
+        =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
+        =link_if_can("New page", new_child_page_path(:parent_id => page.id)) if can?(:new,Page)
+        =link_if_can("Set order", [:order, page])
