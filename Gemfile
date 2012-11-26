@@ -30,6 +30,7 @@ gem 'ym_permalinks', "~> 0.1"
 gem 'ym_docs', "~> 0.1"
 gem 'ym_cms', "~> 0.1"
 gem 'ym_enquiries', "~> 0.1"
+gem 'ym_notifications', "~> 0.1"
 
 ### Groups
 # Gems used only for assets and not required

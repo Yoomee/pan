@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :group_members
   has_many :groups, :through => :group_members
 
+  has_many :group_notifications, :class_name => "Notification", :conditions => {:context => "my_groups"}
+
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   
   before_create :create_organisation, :set_role
