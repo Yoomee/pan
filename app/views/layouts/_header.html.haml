@@ -50,14 +50,14 @@
             .user-link-icons
               =link_to "#", :class=>"search-icon user-link" do
                 %i.icon-search
-              =link_to "#", :class=>"messages-icon user-link" do
-                %i.icon-envelope-alt                     
+              =link_to "#{user_path(current_user)}/#messages", :class=>"messages-icon user-link" do
+                %i.icon-envelope-alt
                 .counter
-                  4                
-              =link_to "#", :class=>"profile-icon user-link" do
+                  =current_user.message_notifications.count
+              =link_to "#{user_path(current_user)}/#notifications", :class=>"profile-icon user-link" do
                 %i.icon-user
                 .counter
-                  12                
+                  =current_user.group_notifications.count
                 
         
 -if false      

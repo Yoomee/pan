@@ -55,6 +55,10 @@ class UsersController < ApplicationController
   end
   
   def show
+    if user == current_user
+      user.set_group_notifications_as_read
+      user.set_message_notifications_as_read
+    end
     if user.performer
       redirect_to(user.performer)
     end

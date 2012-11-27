@@ -23,10 +23,12 @@
 
       #notifications.tab-pane.fade.in
         .well
+          notifications
 
       #messages.tab-pane.fade.in
         .well
-            
+          =render "messages/index", :threads => current_user.threads
+
       #activity.tab-pane.fade.in
         .well
              

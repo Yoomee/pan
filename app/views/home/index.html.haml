@@ -48,23 +48,24 @@
             =link_to "#" do
               %i.icon-user
               %strong.red
-                5
+                =current_user.group_notifications.count
               notifications
               %span.view.red
                 view
           %li
-            =link_to "#" do
+            =link_to messages_path(current_user) do
               %i.icon-envelope-alt
               %strong.red
-                5
+                =current_user.message_notifications.count
               messages
               %span.view.red
                 view
         %ul.nav
-          %li
-            %i.icon-briefcase
-            %h3 My organisation
-            =link_to "Seal", "#"
+          -if current_user.promoter
+            %li
+              %i.icon-briefcase
+              %h3 My organisation
+              =link_to_self current_user.promoter
           %li
             %i.icon-home
             %h3 My venue(s)
@@ -76,9 +77,8 @@
           %li
             %i.icon-comments
             %h3 My groups
-            =link_to "Group link", "#"
-            =link_to "Another group link", "#"
-            =link_to "group", "#"            
+            -current_user.groups.each do |group|
+              =link_to_self group          
     .span6
       .well
         %h2.underline.mb-1 Latest Shows

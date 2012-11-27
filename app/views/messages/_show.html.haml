@@ -1,12 +1,20 @@
-.row
-  .span12
-    %h4
+%h4=link_to "View all messages", "#", :class => "show-all-threads"
 
-    %ul.unstyled
-      -@thread.messages.each do |message|
-        %li
-          .pull-left
-            =link_to message.user do
-              =image_for(message.user, "80x80#")
-          =message.text
-          .clearfix
+%ul.unstyled
+  -thread.messages.each do |message|
+    %li
+      .message_user.pull-left.clear.mb-1.mt-1
+        =link_to(image_for(message.user, "37x37#"), message.user, :class => "pull-left")
+        .pull-left
+          =link_to_self(message.user)
+          %i.icon-chevron-right
+          =thread.participants.where("participant_id != ?", message.user.id).collect{|participant| (link_to "#{image_for(participant, '20x20#')} #{participant}".html_safe, participant)}.join(", ").html_safe
+          %br
+          %span.small-info-text
+            =time_ago_in_words(message.created_at)
+            ago
+      .message_content.clear
+        -if message.text.present?
+          =simple_format(auto_link(message.text))
+
+=render "messages/new_message_form", :thread => thread

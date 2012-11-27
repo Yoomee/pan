@@ -3,20 +3,27 @@
     =image_for(user, "220x150#")
     .notifications
       %i.icon-group
-      %span.numberr=user.group_notifications.count
+      %span.number=user.group_notifications.count
       notifications
-      =link_to "view", ""
+      =link_to "view", "#notifications", :'data-toggle' => 'tab'
     .messages
       %i.icon-envelope
-      %span.numberr=user.message_notifications.count
+      %span.number=user.message_notifications.count
       messages
-      =link_to "view", messages_path
+      =link_to "view", "#messages", :'data-toggle' => 'tab'
     -if user.promoter
       .promoter
         %h4
           %i.icon-briefcase
           My Organisation
         =link_to_self user.promoter
+    -if user.performer
+      .promoter
+        %h4
+          %i.icon-group
+          My Performer
+        =link_to_self user.performer
+
     -if user.venues.present?
       .venues
         %h4
