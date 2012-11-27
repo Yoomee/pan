@@ -5,6 +5,7 @@ class Tag < ActsAsTaggableOn::Tag
   scope :context_begins_with, lambda {|prefix| joins(:taggings).where(["taggings.context LIKE ?", "#{prefix}%"]).group('tags.id')}
   
   scope :art_forms, context_begins_with('art_form')
+  scope :collections, contexts('collections')
   scope :funders, contexts('funders')
   scope :genres, context_begins_with('genre')
   scope :resource_tags, contexts('resource_tags')
