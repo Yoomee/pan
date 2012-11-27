@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   load_and_authorize_resource
+
+  after_filter :set_notifications_to_read, :only => :show
   
   def create
     @goup = Group.new(params[:group])
@@ -38,7 +40,11 @@ class GroupsController < ApplicationController
       flash.error = "Something's gone wrong - please try again"
       render :new
     end
-    
   end
-  
+
+  private
+  def set_notifications_to_read
+    @group.set_notifications_to_read!(current_user) if current_user
+  end
+
 end
