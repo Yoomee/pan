@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   include YmUsers::UsersController
   load_and_authorize_resource
 
+
+  after_filter :set_notifications_to_read, :only => :show
+  
+
   expose(:wall_posts) {user.wall_posts.page(params[:page])}
   expose(:promoter) {Promoter.find_by_id(params[:promoter_id])}
   
@@ -55,10 +59,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    if user == current_user
-      user.set_group_notifications_as_read
-      user.set_message_notifications_as_read
-    end
     if user.performer
       redirect_to(user.performer)
     end
@@ -76,6 +76,13 @@ class UsersController < ApplicationController
     else
       redirect_to users_path
     end
-  end  
+  end
+
+  private
+  def set_notifications_to_read
+    if user == current_user
+      user.set_message_notifications_as_read!
+    end
+  end
   
 end
