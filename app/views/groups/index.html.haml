@@ -1,51 +1,56 @@
 .row
   .span9
     %h1.mb-2.mt-2 Groups
-
-.row
-  .span9
-    %h2.mb-2 My Groups
     
-    -if current_user.groups.present?
-      .row
-        -current_user.groups.each do |group|
-          .span3
-            .well.group
-              %h4=link_to_self group
-              =group.posts.count
-              Posts,
-              =group.members.count
-              Members
-              .group-member-pics.border-bottom.mb-1.mt-1
-                -group.members.last(5).each do |member|
-                  =link_to image_for(member, "35x35#"), user_path(member)
-              =link_to group_post_path(group.posts.first) do
-                %strong=group.posts.first.text
-                %br
-                %strong By
-                =group.posts.first.user
-                %br
-                =group.posts.first.created_at.strftime('%e %b %Y')
+-if current_user.performer
+  .well
+    Groups/Resources are currently available to Promoters only. We will be adding more functionality for Performers in the future.
+-else    
+
+  .row
+    .span9
+      %h2.mb-2 My Groups
+    
+      -if current_user.groups.present?
+        .row
+          -current_user.groups.each do |group|
+            .span3
+              .well.group
+                %h4=link_to_self group
+                =group.posts.count
+                Posts,
+                =group.members.count
+                Members
+                .group-member-pics.border-bottom.mb-1.mt-1
+                  -group.members.last(5).each do |member|
+                    =link_to image_for(member, "35x35#"), user_path(member)
+                =link_to group_post_path(group.posts.first) do
+                  %strong=group.posts.first.text
+                  %br
+                  %strong By
+                  =group.posts.first.user
+                  %br
+                  =group.posts.first.created_at.strftime('%e %b %Y')
                 
-    -else
-      You haven't joined any groups yet.
+      -else
+        You haven't joined any groups yet.
       
-  .span3#groups-sidebar
-    .well
-      %h4 Search Groups
-      %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
-      =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-      %input.btn{:type => 'submit', :value => "Search"}
+    .span3#groups-sidebar
+      .well
+        %h4 Search Groups
+        %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
+        =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+        %input.btn{:type => 'submit', :value => "Search"}
       
-    .well
-      %h4 Popular Groups
-      %ul.unstyled
-        -@groups.last(4).each do |group|
-          %li=link_to_self(group)
+      .well
+        %h4 Popular Groups
+        %ul.unstyled
+          -@groups.last(4).each do |group|
+            %li=link_to_self(group)
 
 
-.row
-  .span8
-    =options_panel do
-      =link_if_can("New group", [:new, Group])
+  .row
+    .span8
+      =options_panel do
+        =link_if_can("New group", [:new, Group])
           
