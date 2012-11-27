@@ -31,6 +31,8 @@ class Ability
       if user.try(:performer_id)
         can :update, Performer, :id => user.performer_id
         can [:create, :update], Tour, :performer_id => user.performer_id
+        can :index, Group
+        can :index, Resource
       end
       
       # promoter ability      
@@ -44,6 +46,7 @@ class Ability
         can [:create, :read], Review
         can :update, Review, :user_id => user.id
         can :create, TourDate
+        can [:index, :show], Group
       end
       
       # promoter admin ability
