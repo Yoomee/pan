@@ -4,6 +4,7 @@ class TourDate < ActiveRecord::Base
   
   belongs_to :tour
   belongs_to :venue
+  belongs_to :user
   
   date_accessor :date
   
@@ -22,6 +23,10 @@ class TourDate < ActiveRecord::Base
   
   def venue_name
     (venue || external_venue_name).to_s
+  end
+  
+  def confirm_booking
+    update_attributes(:needs_approval => 0, :booked => 1)
   end
   
 end

@@ -43,6 +43,7 @@ class Ability
         can [:read, :region], Promoter
         can [:create, :read], Review
         can :update, Review, :user_id => user.id
+        can :create, TourDate
       end
       
       # promoter admin ability

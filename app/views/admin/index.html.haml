@@ -23,6 +23,10 @@
               My organisation 
           -elsif current_user.admin?
             %div
+              =link_to(needs_approval_tour_dates_path) do
+                %icon.icon-calendar
+                Events pending approval          
+            %div
               =link_to(performers_path) do
                 %icon.icon-music
                 Performers

@@ -1,0 +1,26 @@
+.row.mt-2.mb-2
+  .span12
+    %h1=title("Diary dates needing approval")
+    
+.row
+  .span9
+    -if @pending_dates.empty?
+      %p
+        No dates need approval at the moment.
+    -else
+      =form_tag(approve_dates_tour_dates_path) do
+        %table.table
+          -@pending_dates.each do |date|
+            %tr.striped
+              %td
+                =check_box_tag "date_id[]", date.id
+              %td
+                =date.date
+              %td
+                =date.tour.name
+              %td
+                =date.venue_name
+              %td
+                Added by
+                =link_to(date.user.full_name, user_path(date.user))
+        =button_tag "Approve", :class => 'btn-primary'    
