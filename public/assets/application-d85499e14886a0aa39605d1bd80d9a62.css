@@ -9621,15 +9621,11 @@ a.promoter.venues {
 }
 
 /*========== groups ==========*/
-
 .well.group h4 {
   text-transform: uppercase;
   font-size: 16px;
   margin-bottom: 30px;
 }
-
-
-
 
 /*========== noticeboard/block view  ==========*/
 .gallery_box {
@@ -9646,9 +9642,49 @@ a.promoter.venues {
   
     -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
-  
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);  
 }
 
+/*========== messages  ==========*/
 
 
+.ym_messages a {
+  color: #4D4E4D;
+}
+.ym_messages li {
+  font-size: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dbdcd6;
+}
+.ym_messages h4 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.ym_messages li .thread-participants {
+  font-size: 14px;
+  margin-top: 10px;
+}
+.ym_messages li .message_user{
+  width: 100%;
+  font-size: 14px;
+}
+.ym_messages li .message_user a img {
+  margin-right: 5px;
+}
+.ym_messages li .message_content p {
+  font-size: 16px;
+  color: #4D4E4D;
+}
+.ym_messages form,
+#new-message.modal form {
+  margin: 0 10px 0 0;
+}
+.ym_messages form .control-group,
+#new-message.modal form .control-group {
+  margin: 0;
+}
+.ym_messages form textarea,
+#new-message.modal form textarea {
+  width: 100%;
+}
