@@ -7,7 +7,7 @@ class Tour < ActiveRecord::Base
     indexes name, :sortable => true
     indexes description
     indexes genre_tags(:name), :as => :genres
-    indexes collection_tags(:name), :as => :collections
+    indexes collection_tags(:name), :as => :collection
     indexes booked_venues(:region), :as => :region 
     has created_at, updated_at
   end
