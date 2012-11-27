@@ -18,7 +18,7 @@
 
   =form.input :description, :as => :redactor, :input_html => {:rows => 5, :class => "span8"}
   =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres)
-  =form.input :collection_list, :label => "Collections", :as => :check_boxes, :multiple => true, :collection => tag_list_options(:collections, tour, Tag.collections)
+  =form.input :collection_list, :label => "Collections <br /><em>Is your show part of a Touring Network Scheme?</em>".html_safe, :as => :check_boxes, :multiple => true, :collection => tag_list_options(:collections, tour, Tag.collections)
   =form.input :target_age, :label => "Target age range", :as => :text, :input_html => {:rows => 2, :class => "span8"}
   =form.input :running_time, :label => "Running time/with and without interval", :as => :text, :input_html => {:rows => 2, :class => "span8"}
   =form.input :publicity, :label => "Will you provide publicity?", :as => :text, :input_html => {:rows => 2, :class => "span8"}
