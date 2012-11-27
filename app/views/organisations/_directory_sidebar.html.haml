@@ -17,6 +17,12 @@
       =type_filter_link("promoter")
       =type_filter_link("user")
   .well
+    %h4 Collection
+    %ul.unstyled
+      =collection_filter_link("Network Supported")
+      =collection_filter_link("Go See")
+      =collection_filter_link("Young Promoters")
+  .well
     %h4 Genre
     .show-tags
       =render 'organisations/tags_for_directory_view', :tags => Tag.genres, :original_tags => original_tags
