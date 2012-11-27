@@ -9646,8 +9646,6 @@ a.promoter.venues {
 }
 
 /*========== messages  ==========*/
-
-
 .ym_messages a {
   color: #4D4E4D;
 }
@@ -9687,4 +9685,18 @@ a.promoter.venues {
 .ym_messages form textarea,
 #new-message.modal form textarea {
   width: 100%;
+}
+
+/*========== notifications  ==========*/
+#notifications a {
+  color: #4D4E4D;
+}
+#notifications li {
+  font-size: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dbdcd6;
+}
+#notifications img {
+  margin-right: 5px;
 }
