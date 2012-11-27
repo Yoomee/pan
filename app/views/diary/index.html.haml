@@ -21,10 +21,11 @@
 .row
   .span9
     %h1.mb-2.mt-2 Diary
-  .span3.mt-3  
-    =link_to "#addevent", :'data-toggle' => "modal", :class => "btn side-btn" do
-      %i.icon-pencil
-      Add an event
+  -if current_user.promoter || current_user.admin?
+    .span3.mt-3  
+      =link_to "#addevent", :'data-toggle' => "modal", :class => "btn side-btn" do
+        %i.icon-pencil
+        Add an event
 
 .row
   .span9
@@ -71,6 +72,7 @@
                     =link_to_self date.venue, :class => "venue"
                   -else
                     .venue=date.external_venue_name
+                  =date.time  
                 %td
                   .clearfix
                   .show-tags

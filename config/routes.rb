@@ -6,7 +6,12 @@ Pan::Application.routes.draw do
   match '/promoters/applications' => 'enquiries#index', :form_name => 'promoter', :as => 'promoter_enquiries'
   match '/beta/feedback' => 'enquiries#index', :form_name => 'feedback', :as => 'feedback_enquiries'
 
-  resources :tour_dates
+  resources :tour_dates do
+    collection do
+      get 'needs_approval'
+      post 'approve_dates'
+    end  
+  end
   resources :performers, :except => [:show]
   resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    
