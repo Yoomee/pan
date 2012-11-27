@@ -52,12 +52,14 @@
                 %i.icon-search
               =link_to "#{user_path(current_user)}/#messages", :class=>"messages-icon user-link" do
                 %i.icon-envelope-alt
-                .counter
-                  =current_user.message_notifications.count
+                -if current_user.message_notifications.size > 0
+                  .counter
+                    =current_user.message_notifications.size
               =link_to "#{user_path(current_user)}/#notifications", :class=>"profile-icon user-link" do
                 %i.icon-user
-                .counter
-                  =current_user.group_notifications.count
+                -if current_user.group_notifications.size > 0
+                  .counter
+                    =current_user.group_notifications.size
                 
         
 -if false      
