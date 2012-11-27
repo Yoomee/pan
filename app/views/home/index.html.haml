@@ -73,12 +73,15 @@
               -current_user.venues.each do |venue|
                 =link_to venue, venue_path(venue)
             -else
-              =link_to "None yet - add one", ""
+              None yet - add one
           %li
             %i.icon-comments
             %h3 My groups
-            -current_user.groups.each do |group|
-              =link_to_self group          
+            -if current_user.groups.present?
+              -current_user.groups.each do |group|
+                =link_to_self group  
+            -else    
+              =link_to "None yet - find one", groups_path          
     .span6
       .well
         %h2.underline.mb-1 Latest Shows
