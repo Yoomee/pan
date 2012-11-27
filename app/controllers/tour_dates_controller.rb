@@ -5,6 +5,8 @@ class TourDatesController < ApplicationController
   expose(:tour_date)
   
   def create
+    tour_date.needs_approval = true
+    tour_date.user_id = current_user.id
     if tour_date.save
       flash[:notice] = "Thanks for adding a date. This will be reviewed shortly by the website administrator before appearing in the diary."
       redirect_to diary_path
