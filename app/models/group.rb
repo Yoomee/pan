@@ -15,6 +15,14 @@ class Group < ActiveRecord::Base
     end
   end
   
+  def set_notifications_to_read!(user)
+    notification_ids = Notification.where(:context => 'my_groups', :resource_type => 'Post', :user_id => user.id)
+                                   .collect{|n| n.id if n.resource.target == self}
+    notification_ids << Notification.where(:context => 'my_groups', :resource_type => 'Comment', :user_id => user.id)
+                                    .collect{|n| n.id if n.resource.post.target == self}
+     Notification.where(:id => notification_ids).update_all(:read => true)
+  end
+
   def to_s
     name
   end

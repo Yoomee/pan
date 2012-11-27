@@ -85,11 +85,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def set_group_notifications_as_read
-    notifications.where(["context = 'my_groups' AND notifications.user_id = ?", self.id]).update_all(:read => true)
-  end
-
-  def set_message_notifications_as_read
+  def set_message_notifications_as_read!
     notifications.where(["context = 'messages' AND notifications.user_id = ?", self.id]).update_all(:read => true)
   end
   
