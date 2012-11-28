@@ -11,10 +11,19 @@
     =google_analytics_js
   -body_tag do
     .main-wrapper
-      -unless current_page?(sign_in_path)
+      -if logged_in?
         =render("layouts/header")
-        -unless current_page?(root_path)
+        -if !current_page?(root_path)
           =render("layouts/nav_strip")
+      -elsif !current_page?(sign_in_path)
+        .container
+        .top-bar
+          .container
+            .row
+              .span12
+                %h1#site_logo
+                  =link_to "/" do
+                    =Settings.site_name    
       -if flash.present? && !(logged_in? && controller_name == 'home')
         =yield_with_bootstrap(render_flash)    
       =yield_with_bootstrap(yield)
