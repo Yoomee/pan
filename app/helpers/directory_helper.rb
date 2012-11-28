@@ -9,17 +9,10 @@ module DirectoryHelper
       hash[:tags] = params[:tags] if params[:tags].present?
       hash[:type] = params[:type] if params[:type].present?
     end
-    case collection
-    when "Network Supported"
-      active = params[:collection] == "network-supported"
-      param_options.merge!({:collection => "network-supported"}) unless active
-    when "Go See"
-      active = params[:collection] == "go-see"
-      param_options.merge!({:collection => "go-see"}) unless active
-    when "Young Promoters"
-      active = params[:collection] == "young-promoters"
-      param_options.merge!({:collection => "young-promoters"}) unless active
-    end
+
+    active = params[:collection] == collection.to_s.parameterize
+    param_options.merge!({:collection => collection.to_s.parameterize}) unless active
+
     li_with_active(active, (link_to collection, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
   end
 
