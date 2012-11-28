@@ -127,7 +127,8 @@ a.back-to-all{
 }
 
 /*========== Font stuff ==========*/
-body, p {
+body, p,
+.ym_messages li .thread-participants {
   font-size: 13px;
   line-height: 20px;
   font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -146,7 +147,9 @@ strong,
 .header-btn,
 .counter,
 .left-col .nav li,
-p.tour-dates 
+p.tour-dates,
+.thread-link,
+a.show-all-threads
 {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
   color: #4d4e4d;
@@ -1697,22 +1700,120 @@ a.promoter.venues {
 }
 
 /*========== messages  ==========*/
+.messages-header {
+  width: 668px;
+  float: left;
+  margin:  -15px 0 0px -15px;
+  padding: 15px;
+
+  
+       -moz-border-radius-topleft:4px;
+    -moz-border-radius-topright:4px;
+    -webkit-border-top-right-radius:4px;
+    -webkit-border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    border-top-left-radius:4px;
+    
+    
+    background: #eeeeee; /* Old browsers */
+background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+
+
+box-shadow:0px 1px 5px rgba(0,0,0,0.1), 0px 1px 0px rgba(0,0,0,0.3), inset 0px 1px 0px rgba(255,255,255,0.3);
+
+
+  
+}
 .ym_messages a {
   color: #4D4E4D;
+
 }
+
 .ym_messages li {
-  font-size: 20px;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+float: left;
+clear: left;
+margin: 0;
+width: 100%;
+}
+.thread li {
+  border-top: 1px solid #ccc;
+  padding: 10px;
+}
+
+.show-all-threads {
+	float: left;
+	margin: 15px 0 16px;
+	font-size: 16px;
+}
+.show-all-threads i {
+  margin: 0 4px 0 0;
+}
+.show-all-threads:hover {
+  background: none;
+  text-decoration: none;
+}
+ym_messages span.small-info-text {
+  float: left;
+  clear: left;
+}
+
+.ym_messages li .badge {
+  float: left;
+  background: #bb2550;
+
+}
+
+span.small-info-text {
+  margin-left:15px;
+  
+}
+
+.message-count {
+  float: left;
+  width: 40px;
+  height: 25px;
+  margin: 3px 0 0;
+}
+.thread-link {
+  font-size: 16px;
+  float: left;
+  width: 640px;
+     padding: 15px;
+
   border-bottom: 1px solid #dbdcd6;
+
+
+}
+.thread-link:hover {
+    background: #f5f5f5;
+  text-decoration: none;
 }
 .ym_messages h4 {
   font-size: 20px;
   margin-bottom: 20px;
 }
 .ym_messages li .thread-participants {
-  font-size: 14px;
-  margin-top: 10px;
+  font-size: 13px;
+  line-height: 15px;
+  margin: 5px 0 0 0px;
+  float: left;
+}
+.thread-participant {
+  margin: 0 15px 0 0;
+  float: left;
+}
+.thread-participant img {
+  float: left;
+  margin: 0 5px 0 0 ;
+}
+.thread-participant-name {
+  float: left;
 }
 .ym_messages li .message_user{
   width: 100%;
