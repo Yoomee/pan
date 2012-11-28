@@ -1,7 +1,7 @@
 -content_for :head do
   :javascript
     $(document).ready(function() {
-      var base_url = "shows?#{{:tags => @tags.uniq}.to_query}"
+      var base_url = "shows?#{{:tags => @tags.uniq, :region => @region, :collection => @collection}.to_query}"
       $('#start_date').change(function() {
         location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
       });

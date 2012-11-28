@@ -12,7 +12,7 @@ module FilterHelper
       hash[:year] = params[:year] if params[:year].present?
     end
 
-    param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year})
+    param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year}) if controller_name.diary?
 
     li_with_active(active, (link_to collection, controller_name.diary? ? diary_path(param_options) : shows_path(param_options)))
   end
@@ -29,7 +29,7 @@ module FilterHelper
       hash[:year] = params[:year] if params[:year].present?
     end
     
-    param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year})
+    param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year}) if controller_name.diary?
 
     content_tag_with_active(content_tag, active, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, controller_name.diary? ? diary_path(param_options) : shows_path(param_options)))
   end
@@ -43,7 +43,7 @@ module FilterHelper
       param_options[:organisation_id] = ""
       param_options[:venue_id] = ""
     end  
-    if param_options[:month].blank?
+    if param_options[:month].blank? && controller_name.diary?
       param_options[:month] = Date.today.month
       param_options[:year] = Date.today.year
     end
