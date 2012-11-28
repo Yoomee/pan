@@ -7,6 +7,7 @@ class Tour < ActiveRecord::Base
     indexes name, :sortable => true
     indexes description
     indexes genre_tags(:name), :as => :genres
+    indexes collection_tags(:name), :as => :collection
     indexes booked_venues(:region), :as => :region 
     has created_at, updated_at
   end
@@ -33,6 +34,10 @@ class Tour < ActiveRecord::Base
   acts_as_taggable_on :genres
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
+
+  acts_as_taggable_on :collections
+  has_many :collection_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
+          :conditions => "taggings.context = 'collections'"
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   

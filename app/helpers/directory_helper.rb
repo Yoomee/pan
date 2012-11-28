@@ -1,5 +1,28 @@
 module DirectoryHelper
 
+  def collection_filter_link(collection)
+    link_path = action_name.search? ? directory_search_path : directory_path
+    param_options = {}.tap do |hash|
+      hash[:letter] = params[:letter] if params[:letter].present?
+      hash[:q] = params[:q] if params[:q].present?
+      hash[:region] = params[:region] if params[:region].present?
+      hash[:tags] = params[:tags] if params[:tags].present?
+      hash[:type] = params[:type] if params[:type].present?
+    end
+    case collection
+    when "Network Supported"
+      active = params[:collection] == "network-supported"
+      param_options.merge!({:collection => "network-supported"}) unless active
+    when "Go See"
+      active = params[:collection] == "go-see"
+      param_options.merge!({:collection => "go-see"}) unless active
+    when "Young Promoters"
+      active = params[:collection] == "young-promoters"
+      param_options.merge!({:collection => "young-promoters"}) unless active
+    end
+    li_with_active(active, (link_to collection, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+  end
+
   def directory_item_class(directory_item)
     case directory_item.class.to_s
     when "Performer"
@@ -66,10 +89,11 @@ module DirectoryHelper
   param_tags << tag.name unless active_tag
 
   param_options = {}.tap do |hash|
-    hash[:tags] = param_tags if param_tags.present?
+    hash[:collection] = params[:collection] if params[:collection].present?
     hash[:letter] = params[:letter] if params[:letter].present?
     hash[:q] = params[:q] if params[:q].present?
     hash[:region] = params[:region] if params[:region].present?
+    hash[:tags] = param_tags if param_tags.present?
     hash[:type] = params[:type] if params[:type].present?
   end
   link_to(tag_label(tag, :active => active_tag), action_name.search? ? directory_search_path(param_options) : directory_path(param_options), :class => "tag")
@@ -99,6 +123,7 @@ module DirectoryHelper
     active = params[:region] == region
     link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
+      hash[:collection] = params[:collection] if params[:collection].present?
       hash[:letter] = params[:letter] if params[:letter].present?
       hash[:q] = params[:q] if params[:q].present?
       hash[:tags] = params[:tags] if params[:tags].present?
@@ -112,6 +137,7 @@ module DirectoryHelper
   def type_filter_link(type)
     link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
+      hash[:collection] = params[:collection] if params[:collection].present?
       hash[:letter] = params[:letter] if params[:letter].present?
       hash[:q] = params[:q] if params[:q].present?
       hash[:region] = params[:region] if params[:region].present?
@@ -139,7 +165,6 @@ module DirectoryHelper
       active = params[:type] == "user"
       param_options.merge!({:type => "user"}) unless active
       li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
-
     end
   end
 

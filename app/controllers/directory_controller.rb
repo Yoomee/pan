@@ -50,28 +50,24 @@ class DirectoryController < ApplicationController
 
   private
   def set_up_queries_and_classes
+    @collection = params[:collection]
     @region = params[:region]
     @tags = [*params[:tags]]
     @type = params[:type]
 
     @search_classes = [Performer, Promoter, Tour, Venue, User]
-    @search_classes = [Promoter, Tour, Venue] if @region.present?
+    @search_classes &&= [Tour] if @collection.present?
+    @search_classes &&= [Promoter, Tour, Venue] if @region.present?
     @search_classes &&= [Performer, Promoter, Tour] if @tags.present?
     @search_classes &&= [params[:type].to_s.capitalize.constantize] if @type.present?
     
     @search_tags = @tags.join(" & ").gsub(/-/, ' ')
     
     @conditions = {}.tap do |hash|
+      hash[:collection] = @collection if @collection.present?
       hash[:genres] = @search_tags if @search_tags.present?
       hash[:region] = @region if @region.present?
     end
-    
-    @conditions_and_classes = {}.tap do |hash|
-      hash[:conditions] = @conditions if @conditions.present?
-      hash[:classes] = @search_classes
-    end
-    
-    # puts "@conditions_and_classes - #{@conditions_and_classes}\n\n\n\n\n\n"
   end
 
 end
