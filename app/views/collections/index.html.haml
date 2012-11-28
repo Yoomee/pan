@@ -1,0 +1,17 @@
+.row
+  .span8
+    %h1.mb-1.mt-1=title('Collections')
+
+    %table.table
+      -@collections.each do |collection|
+        %tr
+          %td=collection
+          %td=link_if_can("Edit", [:edit, collection])
+          %td=link_if_can("Delete", [:destroy, collection], :confirm => "Are you sure?")
+
+
+
+.row
+  .span8
+    =options_panel do
+      =link_if_can("New collection", [:new, Collection])

@@ -19,9 +19,8 @@
   .well
     %h4 Collection
     %ul.unstyled
-      =collection_filter_link("Network Supported")
-      =collection_filter_link("Go See")
-      =collection_filter_link("Young Promoters")
+      -Collection.all.each do |collection|
+        =collection_filter_link(collection)
   .well
     %h4 Genre
     .show-tags
