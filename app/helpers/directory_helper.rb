@@ -1,7 +1,6 @@
 module DirectoryHelper
 
   def collection_filter_link(collection)
-    link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
       hash[:letter] = params[:letter] if params[:letter].present?
       hash[:q] = params[:q] if params[:q].present?
@@ -114,7 +113,7 @@ module DirectoryHelper
   
   def region_filter_link(content_tag, region)
     active = params[:region] == region
-    link_path = action_name.search? ? directory_search_path : directory_path
+
     param_options = {}.tap do |hash|
       hash[:collection] = params[:collection] if params[:collection].present?
       hash[:letter] = params[:letter] if params[:letter].present?
@@ -128,7 +127,6 @@ module DirectoryHelper
   end
   
   def type_filter_link(type)
-    link_path = action_name.search? ? directory_search_path : directory_path
     param_options = {}.tap do |hash|
       hash[:collection] = params[:collection] if params[:collection].present?
       hash[:letter] = params[:letter] if params[:letter].present?

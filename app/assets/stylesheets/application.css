@@ -1446,7 +1446,7 @@ table#diary tbody tr td {
   padding: 10px;
 }
 table#diary tbody tr td .tag-label {
-	margin: 3px 0;
+	margin: 3px 3px 3px 0;
 }
 table#diary thead th {
   text-transform: uppercase;
@@ -1485,6 +1485,16 @@ table#diary a.venue,
   border: none;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+.filter-sidebar li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.filter-sidebar li.active a {
+  color: #BB2550;
+}
+.filter-sidebar a {
+  color: #4d4e4d;
 }
 
 /*========== tours#show ==========*/
