@@ -5,6 +5,8 @@ class ShowsController < ApplicationController
     @tags = [*params[:tags]]
     @start_date = params[:start_date]
     @end_date = params[:end_date]
+    @collection = params[:collection]
+    @region = params[:region]
 
     @all_tags = Tour.genre_counts.order(:name)
     @tours = Tour.where("end_on > ?", Date.today).order(:start_on)
@@ -17,6 +19,16 @@ class ShowsController < ApplicationController
     end
     if @end_date.present?
       @tours = @tours.where("start_on < ?", Date.parse(@end_date))
+    end
+    if @region.present?
+      @tours = @tours.where('tours.id IN (SELECT tour_dates.tour_id FROM tour_dates WHERE (tour_dates.id IN (SELECT id FROM venues WHERE venues.region = ?)))', @region)
+    end
+    if @collection.present?
+      Collection.all.each do |collection|
+        if collection.name.parameterize == @collection
+          @tours = @tours.joins(:collections).collect{ |tour| tour if tour.collections.include?(collection) }.compact
+        end
+      end
     end
   end
 
