@@ -1,5 +1,5 @@
 -month ||= ""; year ||= ""
-.well
+.well.filter-sidebar
   %h2.mb-1 Filter by:
   .show-tags
     -@tags.each do |tag|
@@ -26,6 +26,17 @@
           %span.add-on#remove-end-date
             %i.icon-remove
       =label_tag :end_date, "To:", :class => "control-label"
+
+
+  %h2.mb-1 Collections
+  %ul.unstyled
+    -Collection.all.each do |collection|
+      =show_collection_filter_link(collection)
+
+  %h2.mb-1 Locations
+  %ul.unstyled
+    -Pan::REGIONS.values.sort.each do |region|
+      =show_region_filter_link(:li, region)
 
 
   %h2.mb-1 Genre

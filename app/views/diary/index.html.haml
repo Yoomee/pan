@@ -1,7 +1,7 @@
 -content_for :head do
   :javascript
     $(document).ready(function() {
-      var base_url = "diary?#{{:tags => @tags.uniq, :month => @month, :year => @year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id}.to_query}"
+      var base_url = "diary?#{{:tags => @tags.uniq, :month => @month, :year => @year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id, :collection => @collection, :region => @region}.to_query}"
       $('#start_date').change(function() {
         location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
       });
@@ -34,11 +34,11 @@
         %thead
           %tr
             -if @month.present? && @year.present?
-              %th.span1=link_to_previous_month(@month, @year, @tags, @start_date, @end_date)
+              %th.span1=link_to_previous_month(@month, @year)
               %th.month.span7{:colspan => 2}
                 =Date::MONTHNAMES[@month.to_i]
                 =@year
-              %th.span1=link_to_next_month(@month, @year, @tags, @start_date, @end_date)
+              %th.span1=link_to_next_month(@month, @year)
             -elsif @tour_id.present?
               %th.span9{:colspan => 4}
                 =Tour.find(@tour_id)
