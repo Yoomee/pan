@@ -127,6 +127,7 @@ a.back-to-all{
 }
 
 /*========== Font stuff ==========*/
+
 body, p,
 .ym_messages li .thread-participants {
   font-size: 13px;
@@ -306,6 +307,11 @@ select[multiple='multiple']{
   -webkit-box-shadow:0 2px 4px rgba(0,0,0,0.3);  
   box-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
+
+.top-bar.logged-out {
+	margin-bottom: 38px;
+}
+
 #site_logo {
   font-size: 40px;
   line-height: 40px;
@@ -322,6 +328,10 @@ select[multiple='multiple']{
   float: left;
   width: 100%;
   height: 30px;
+}
+
+h1.logged_out {
+
 }
 
 .user-links {
@@ -688,6 +698,8 @@ html, body {
   height: auto !important;
   height: 100%;
   margin: 0 auto -60px; /* the bottom margin is the negative value of the footer's height */
+  border-top: 5px solid #acc543;
+
 }
 .push {
   clear: both;
@@ -1219,7 +1231,6 @@ label em.optional {
 
 /*========== Sign in page ==========*/
 #sign-in {
-  border-top: 5px solid #acc543;
   padding-top: 150px;
 }
 #sign-in h1 {

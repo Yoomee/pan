@@ -241,3 +241,4 @@
       =link_to("Edit show", edit_tour_path(tour)) if can?(:edit,tour)
       =link_if_can("Delete show", [:destroy, tour], :confirm => "Are you sure?")
       =link_to("Manage bookings", bookings_tour_path(tour)) if can?(:bookings, tour)
+      =link_to("Add new show", new_performer_tour_path(tour.performer)) if can?(:create,tour)

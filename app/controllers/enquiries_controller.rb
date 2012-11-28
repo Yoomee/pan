@@ -3,6 +3,21 @@ class EnquiriesController < ApplicationController
   include YmEnquiries::EnquiriesController
   load_and_authorize_resource
   
+  def create
+    @enquiry = Enquiry.new(params[:enquiry].merge(:form_name => params[:id]))
+    if @enquiry.save
+      YmEnquiries::EnquiryMailer.new_enquiry(@enquiry).deliver
+      flash[:notice] = "#{@enquiry.response_message}"
+      if current_user
+        redirect_to root_url
+      else
+        redirect_to sign_in_path
+      end
+    else
+      render :action => 'new'
+    end
+  end
+  
   #  No longer needed since we are ditching the complicating promoter signup
   # 
   # def new
