@@ -1,39 +1,5 @@
--content_for(:head) do
-  :javascript
-    $(document).ready(function() {
-      TourForm.dates = #{{}.tap{|hash| form.object.dates.each{|date| hash[date.date_s] = date}}.to_json};
-      TourForm.init();
-    });
-
 =form.inputs 'Set the start and end dates of the tour' do
-  =form.input :start_on_s, :as => :string, :label => "Start date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
-  =form.input :end_on_s, :as => :string, :label => "End date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mt-2'}
-=form.inputs do
-  %legend Click a date to toggle its availability
-  #availability_datepicker.pull-left.mt-2.mr-2
-  %table.table.table-condensed#availability_key.pull-left.mt-2
-    %thead
-      %tr
-        %th{:colspan => 2} Key
-    %tbody
-      %tr
-        %td.key-color.key-color-available
-        %td
-          %b Available
-          %em
-            \- click to make unavailable 
-      %tr
-        %td.key-color.key-color-unavailable
-        %td
-          %b Unavailable
-          %em
-            \- click to make available       
-      %tr
-        %td.key-color.key-color-booked
-        %td
-          %b Booked
-.hide
-  =form.inputs do
-    =form.semantic_fields_for :dates do |date_form|
-      =render("tours/date_fields", :f => date_form)
-    =link_to_add_association "+ Add a date", form, :dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"
+  .span
+    =form.input :start_on_s, :as => :string, :label => "Start date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
+  .span
+    =form.input :end_on_s, :as => :string, :label => "End date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mt-2'}
