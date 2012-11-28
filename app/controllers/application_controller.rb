@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(user)
     if user.promoter
-      promoter_path(user.promoter)
+      root_path
     elsif user.performer
-      performer_path(user.performer)
+      root_path
     else
       params.delete(:next) || super
     end

@@ -33,12 +33,16 @@ class Ability
         can [:create, :update], Tour, :performer_id => user.performer_id
         can :index, Group
         can :index, Resource
+        can :read, :show
+        can :read, :diary
+        can :read, :directory
       end
       
       # promoter ability      
       if user.promoter
         can :read, :show
         can :read, :diary
+        can :read, :directory  
         can :read, Post  
         can :read, User
         can :read, Venue   
