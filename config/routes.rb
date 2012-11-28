@@ -3,6 +3,8 @@ Pan::Application.routes.draw do
   root :to => 'home#index'
 
   match 'beta' => 'enquiries#new', :id => 'feedback', :as => 'beta'
+  match 'invite' => 'enquiries#new', :id => 'invite', :as => 'invite'
+  
   match '/promoters/applications' => 'enquiries#index', :form_name => 'promoter', :as => 'promoter_enquiries'
   match '/beta/feedback' => 'enquiries#index', :form_name => 'feedback', :as => 'feedback_enquiries'
 
