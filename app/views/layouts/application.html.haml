@@ -15,15 +15,17 @@
         =render("layouts/header")
         -if !current_page?(root_path)
           =render("layouts/nav_strip")
-      -elsif !current_page?(sign_in_path)
+      -elsif current_page?(invite_path)
         .container
-        .top-bar
+        .top-bar.logged-out
           .container
             .row
               .span12
                 %h1#site_logo
                   =link_to "/" do
-                    =Settings.site_name    
+                    =Settings.site_name 
+    
+                  
       -if flash.present? && !(logged_in? && controller_name == 'home')
         =yield_with_bootstrap(render_flash)    
       =yield_with_bootstrap(yield)

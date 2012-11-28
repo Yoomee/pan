@@ -307,6 +307,11 @@ select[multiple='multiple']{
   -webkit-box-shadow:0 2px 4px rgba(0,0,0,0.3);  
   box-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
+
+.top-bar.logged-out {
+	margin-bottom: 38px;
+}
+
 #site_logo {
   font-size: 40px;
   line-height: 40px;
@@ -323,6 +328,10 @@ select[multiple='multiple']{
   float: left;
   width: 100%;
   height: 30px;
+}
+
+h1.logged_out {
+
 }
 
 .user-links {
