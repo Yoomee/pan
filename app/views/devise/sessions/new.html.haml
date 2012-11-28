@@ -15,7 +15,7 @@
             =f.hidden_field :remember_me, :value => true
 
             =#render "devise/shared/links"
-            =link_to "Not a member?", new_user_registration_path, :id => "sign_up_link"
+            =link_to "Not a member?", invite_path, :id => "sign_up_link"
           =f.submit "Sign in", :class => "btn mt-1"
     .row#sign-in-info
       .span3
