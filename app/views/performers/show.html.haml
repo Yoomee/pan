@@ -123,3 +123,4 @@
       =back_link
       =link_to("Edit performer", edit_performer_path(performer)) if can?(:edit,performer)
       =link_if_can("Delete performer", [:destroy, performer], :confirm => "Are you sure?")
+      =link_to("Add new show", new_performer_tour_path(performer)) if can?(:edit,performer)
