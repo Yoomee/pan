@@ -27,7 +27,7 @@
 
 .row
   .span9
-    -if @tours.size == 0
+    -if @tours
       %p.lead No shows with these filters!
     -elsif view_preference == 'block'
       =render "shows/block_view", :original_tags => original_tags
