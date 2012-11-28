@@ -14,21 +14,35 @@
     });
 
 .ym_messages
+  .messages-header
+    %h3.message-title
+      Messages
+  .clearfix
   -if threads.size == 0
-    %p You have no messages
+    %p You have no messages.
+    %p To write a message, go to someone's profile and click the 'Send Message' button.
   -else
     #all-threads
       %ul.unstyled.threads
         -threads.each do |thread|
           %li
-            %span.badge=thread.messages.count
-            =link_to thread.messages.first.text, "#", :class => "thread-link", :id => "#{thread.id}"
-            .thread-participants=thread.participants.collect{|participant| (link_to "#{image_for(participant, '20x20#')} #{participant}".html_safe, participant)}.join(", ").html_safe
-            %span.small-info-text
-              Last message
-              =time_ago_in_words(thread.messages.last.created_at)
-              ago
+            =link_to "#", :class => "thread-link", :id => "#{thread.id}" do
+              .message-count
+                %span.badge=thread.messages.count
+              =thread.messages.first.text.truncate(65)
+              %span.small-info-text
+                =time_ago_in_words(thread.messages.last.created_at)
+                ago
+              .thread-participants
+                -thread.participants.each do |participant|
+                  .thread-participant
+                    =image_for(participant, '18x18#')
+                    .thread-participant-name
+                      =participant
+            
+      .clearfix      
 
     -threads.each do |thread|
       %div{:id => "thread-#{thread.id}", :class => "thread hide"}
         =render "messages/show", :thread => thread
+        
