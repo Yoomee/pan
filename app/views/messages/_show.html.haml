@@ -1,4 +1,7 @@
-%h4=link_to "View all messages", "#", :class => "show-all-threads"
+=link_to "#", :class => "show-all-threads" do
+  %i.icon-arrow-left
+  %span
+    View all messages
 
 %ul.unstyled
   -thread.messages.each do |message|

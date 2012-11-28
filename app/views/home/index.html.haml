@@ -45,7 +45,7 @@
         %h2=link_to(current_user, user_path(current_user))
         %ul.nav.messages-and-notifications
           %li
-            =link_to "#" do
+            =link_to "#{user_path(current_user)}/#notifications" do
               %i.icon-user
               %strong.red
                 =current_user.group_notifications.count
@@ -53,7 +53,7 @@
               %span.view.red
                 view
           %li
-            =link_to messages_path(current_user) do
+            =link_to "#{user_path(current_user)}/#messages" do
               %i.icon-envelope-alt
               %strong.red
                 =current_user.message_notifications.count

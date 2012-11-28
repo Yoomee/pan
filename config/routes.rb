@@ -125,5 +125,6 @@ Pan::Application.routes.draw do
   end
 
   resources :messages, :only => :create
+  resources :collections, :except => :show
   
 end

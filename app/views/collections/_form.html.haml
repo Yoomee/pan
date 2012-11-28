@@ -1,0 +1,7 @@
+=semantic_form_for @collection, :html => {:class => "form-horizontal"} do |form|
+  =form.semantic_errors
+  =form.inputs do
+    =form.input :name
+
+  =form.buttons do
+    =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
