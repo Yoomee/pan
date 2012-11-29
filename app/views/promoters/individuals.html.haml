@@ -12,7 +12,7 @@
             %tr
               %td
                 =image_for(promoter, "50x50#", :class => "pull-left mr-1")
-                %h4.directory-item.pull-left=link_to_self(promoter)
+                %h4=link_to_self(promoter)
               %td
                 %table.table.table-bordered
                   %tbody
@@ -24,18 +24,19 @@
                             %span.label Admin
                           .pull-right
                             -if user.promoter_admin?
-                              =link_to(update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?", :class => "btn") do
+                              =link_to(update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?", :class => "admin-btn") do
                                 %i.icon.icon-minus
                                 Undo admin
                             -else
-                              =link_to(update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.", :class => "btn") do
+                              =link_to(update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.", :class => "admin-btn") do
                                 %i.icon.icon-plus
                                 Make admin                            
                             -if can?(:destroy, user)
-                              =link_to(user_path(user, :return_to => individuals_promoters_path), :method => :delete, :confirm => "Are you sure?", :class => "btn btn-danger") do
+                              =link_to(user_path(user, :return_to => individuals_promoters_path), :method => :delete, :confirm => "Are you sure?", :class => "admin-btn") do
                                 %i.icon.icon-trash
                                 Delete user
 .row
-  .span12
+  .span8
     =options_panel do
       =back_link
+      =link_if_can("Add new promoter", [:new, Promoter])      

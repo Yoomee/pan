@@ -1,6 +1,10 @@
 .row.profile-left-col
   .well
     =image_for(user, "220x150#")
+    .black-block-links
+      =link_to edit_user_path(user), :class => "btn" do
+        %i.icon-pencil
+        Edit profile
     .notifications
       %i.icon-group
       %span.number=user.group_notifications.count
