@@ -64,7 +64,7 @@ class DirectoryController < ApplicationController
     @search_tags = @tags.join(" & ").gsub(/-/, ' ')
     
     @conditions = {}.tap do |hash|
-      hash[:collection] = @collection if @collection.present?
+      hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
       hash[:genres] = @search_tags if @search_tags.present?
       hash[:region] = @region if @region.present?
     end
