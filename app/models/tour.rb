@@ -31,6 +31,8 @@ class Tour < ActiveRecord::Base
 
   has_and_belongs_to_many :collections
   
+  has_slideshow
+  
   date_accessors :start_on, :end_on
   
   acts_as_taggable_on :genres
