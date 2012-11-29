@@ -38,8 +38,8 @@
         =li_with_active(@tag_context == 'funders' &&  @tag.nil?, link_to('Funders', funders_promoters_path))
         =li_with_active(@tag_context == 'work_scales' &&  @tag.nil?, link_to('Scale of work', scale_of_work_promoters_path))
       -elsif controller_name.directory?
-        =li_with_active((action_name.directory? && @letter == "+"), link_to("All", directory_path(:letter => "+")))
-        =li_with_active((action_name.directory? && @letter != "+"), link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
+        =li_with_active((action_name.directory? && @letter == "+"), all_link)
+        =li_with_active((action_name.directory? && @letter != "+"), a_z_link)
       -else
         =li_with_active(action_name.directory?, link_to("A &ndash; Z".html_safe, {:controller => controller_name, :action => 'directory', :letter => present_directory_letters.first}))
         =li_with_active(action_name.index? && @tag_context.nil? &&  @tag.nil?, link_to("Latest", {:controller => controller_name, :action => 'index'}))
@@ -51,8 +51,15 @@
         =li_with_active(true, link_to('Search', '#'))
       -if @tag
         =li_with_active(true, link_to(@tag.to_s.titleize.humanize, '#'))
-      
--if action_name.directory? || controller_name.directory?
+
+-if controller_name.directory? && action_name.directory?
+  .row
+    .span12
+      %ul#directorynav.nav.nav-pills
+        -('A'..'Z').each do |letter|
+          =letter_link(letter)
+        =number_link
+-if action_name.directory? && !controller_name.directory?
   .row
     .span12
       %ul#directorynav.nav.nav-pills
