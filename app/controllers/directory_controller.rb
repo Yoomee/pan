@@ -56,10 +56,10 @@ class DirectoryController < ApplicationController
     @type = params[:type]
 
     @search_classes = [Performer, Promoter, Tour, Venue, User]
-    @search_classes &&= [Tour] if @collection.present?
-    @search_classes &&= [Promoter, Tour, Venue] if @region.present?
-    @search_classes &&= [Performer, Promoter, Tour] if @tags.present?
-    @search_classes &&= [params[:type].to_s.capitalize.constantize] if @type.present?
+    @search_classes &= [Tour] if @collection.present?
+    @search_classes &= [Promoter, Tour, Venue] if @region.present?
+    @search_classes &= [Performer, Promoter, Tour] if @tags.present?
+    @search_classes &= [params[:type].to_s.capitalize.constantize] if @type.present?
     
     @search_tags = @tags.join(" & ").gsub(/-/, ' ')
     
