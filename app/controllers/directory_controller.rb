@@ -14,9 +14,11 @@ class DirectoryController < ApplicationController
         @search_classes = [Performer, Promoter, Tour, Venue, User] if @search_classes.empty?
         if @letter =~ /^[a-zA-Z]/
           if @conditions.present?
-            @everything = ThinkingSphinx.search("@name[1] ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+            # If we had a newer version of sphinx we could do this for first letter of first word
+            # @everything = ThinkingSphinx.search("@name[1] ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+            @everything = ThinkingSphinx.search("@name ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
           else
-            @everything = ThinkingSphinx.search("@name[1] ^?", @letter, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+            @everything = ThinkingSphinx.search("@name ^?", @letter, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
           end
         elsif @letter == "+"
           if @conditions.present?
@@ -27,9 +29,9 @@ class DirectoryController < ApplicationController
         else
           @letter = '#'
           if @conditions.present?
-            @everything = ThinkingSphinx.search("@name[1] ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :conditions => @conditions, :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+            @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :conditions => @conditions, :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
           else
-            @everything = ThinkingSphinx.search("@name[1] ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+            @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
           end
         end
       end
