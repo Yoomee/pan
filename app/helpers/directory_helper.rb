@@ -15,7 +15,7 @@ module DirectoryHelper
     param_options = get_params
     param_options.delete(:letter)
       if param_options.present?
-        link_to("Clear all filters", action_name.search? ? directory_search_path : directory_path, :class => "btn", :id => "clear-all-filters")
+        link_to("View all", action_name.search? ? directory_search_path(:letter => "0") : directory_path(:letter => "0"), :class => "btn", :id => "clear-all-filters")
       else
         link_to("No filters", "#", :class => "btn", :id => "no-filters")
       end

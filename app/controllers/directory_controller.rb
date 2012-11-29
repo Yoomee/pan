@@ -8,9 +8,10 @@ class DirectoryController < ApplicationController
     if @letter != params[:letter]
       redirect_to directory_path(:letter => @letter)
     else
-      if @search_classes.empty?
+      if @search_classes.empty? && @conditions.present?
         @everything = []
       else
+        @search_classes = [Performer, Promoter, Tour, Venue, User] if @search_classes.empty?
         if @letter =~ /^[a-zA-Z]/
           if @conditions.present?
             @everything = ThinkingSphinx.search("@name[1] ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
