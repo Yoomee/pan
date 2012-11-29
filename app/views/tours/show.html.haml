@@ -80,6 +80,14 @@
       #about.tab-pane.fade.in.active
         .well
           =simple_format(tour.description)
+          
+      #media.tab-pane.fade.in
+        .well
+          -if tour.slideshow.present? 
+            =render("organisations/media", :slideshow => tour.slideshow)
+            .clearfix
+          -else
+            No media present          
 
       #spec.tab-pane.fade.in
         .well
