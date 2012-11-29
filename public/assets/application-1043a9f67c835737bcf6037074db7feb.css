@@ -8209,6 +8209,27 @@ a:hover {
 .side-btn {
 	width: 190px;
 }
+
+.admin-btn {
+  -moz-border-radius:3px;	
+  -webkit-border-radius:3px;
+  border-radius:3px;
+
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;  
+  box-shadow:none;
+  border: none;
+  position: relative;
+ 
+  background: #efefef;
+  text-shadow: none;
+  padding: 7px 14px;
+  color: #000000;	
+	width: 110px;
+	margin-left: 10px;
+}
+
+
 .red {
   color: #d33958;
 }
@@ -8792,6 +8813,18 @@ form#directory-search input.btn {
   font-size: 16px;
   margin-bottom: 5px;
 }
+#clear-all-filters,
+#no-filters {
+  width: 160px;
+}
+.controller_directory #directory-sidebar a#clear-all-filters,
+.controller_directory #directory-sidebar a#no-filters {
+  color: white;
+}
+.controller_directory #directory-sidebar a#no-filters:hover {
+  background: #565656;
+  cursor: default;
+}
 
 /*========== Venues map ==========*/
 .venue-infowindow img{
@@ -9180,13 +9213,29 @@ label em.optional {
 /*========== Sign in page ==========*/
 #sign-in {
   padding-top: 150px;
+  background: url(/assets/home-illustration.png) no-repeat center 340px;
 }
 #sign-in h1 {
   font-size: 60px;
   line-height: 1.2;
+  float: left;
+  clear: both;
 }
+.welcome-to {
+  float: left;
+ 
+}
+span.welcome-to-tourbook {
+  display: block;
+  float: left;
+  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 11px;
+  text-indent: -9000em;
+  margin: 0 0 0 15px;
+}
+
 #sign-in p.sub-title {
   font-size: 24px;
+   clear: left;
 }
 #sign-in form#user_new {
   padding-top: 50px;
@@ -9379,6 +9428,7 @@ a.block-or-line-icon:hover .sb, a.block-or-line-icon:hover .sl {
 table#diary {
   background: white;
   position: relative;
+  width: 100%
 }
 table#diary a.previous-month,
 table#diary a.next-month {

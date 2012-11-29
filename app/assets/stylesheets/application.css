@@ -866,6 +866,18 @@ form#directory-search input.btn {
   font-size: 16px;
   margin-bottom: 5px;
 }
+#clear-all-filters,
+#no-filters {
+  width: 160px;
+}
+.controller_directory #directory-sidebar a#clear-all-filters,
+.controller_directory #directory-sidebar a#no-filters {
+  color: white;
+}
+.controller_directory #directory-sidebar a#no-filters:hover {
+  background: #565656;
+  cursor: default;
+}
 
 /*========== Venues map ==========*/
 .venue-infowindow img{
@@ -1469,6 +1481,7 @@ a.block-or-line-icon:hover .sb, a.block-or-line-icon:hover .sl {
 table#diary {
   background: white;
   position: relative;
+  width: 100%
 }
 table#diary a.previous-month,
 table#diary a.next-month {

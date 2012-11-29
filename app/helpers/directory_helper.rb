@@ -1,5 +1,54 @@
 module DirectoryHelper
 
+  def get_params
+    {}.tap do |hash|
+      hash[:collection] = params[:collection] if params[:collection].present?
+      hash[:letter] = params[:letter] if params[:letter].present?
+      hash[:q] = params[:q] if params[:q].present?
+      hash[:region] = params[:region] if params[:region].present?
+      hash[:tags] = params[:tags] if params[:tags].present?
+      hash[:type] = params[:type] if params[:type].present?
+    end
+  end
+
+  def clear_all_filters_link
+    param_options = get_params
+    param_options.delete(:letter)
+      if param_options.present?
+        link_to("Clear all filters", action_name.search? ? directory_search_path : directory_path, :class => "btn", :id => "clear-all-filters")
+      else
+        link_to("No filters", "#", :class => "btn", :id => "no-filters")
+      end
+  end
+
+  def letter_link(letter)
+    param_options = get_params
+    param_options.merge!({:letter => letter})
+
+    content_tag(:li, link_to(letter, directory_path(param_options)).html_safe, :class => "#{'active' if params[:letter] == letter}#{' disabled' unless present_directory_letters.include?(letter)}")
+  end
+
+  def number_link
+    param_options = get_params
+    param_options.merge!({:letter => "0"})
+
+    content_tag(:li, link_to('#', directory_path(param_options)).html_safe, :class => "#{'active' if params[:letter] == "#"}#{' disabled' unless present_directory_letters.join('').match(/[^A-Z]/)}")
+  end
+
+  def all_link
+    param_options = get_params
+    param_options.merge!({:letter => "+"})
+
+    link_to("All".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options))
+  end
+
+  def a_z_link
+    param_options = get_params
+    param_options.merge!({:letter => present_directory_letters.first})
+
+    link_to("A &ndash; Z".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options))
+  end
+
   def collection_filter_link(collection)
     param_options = {}.tap do |hash|
       hash[:letter] = params[:letter] if params[:letter].present?

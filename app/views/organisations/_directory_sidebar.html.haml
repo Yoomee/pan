@@ -3,6 +3,8 @@
 
 #directory-sidebar
   .well
+    =clear_all_filters_link
+  .well
     %h4 Search
     %form.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get', :id => "directory-search"}
       =text_field_tag 'q', params[:q]
