@@ -8,24 +8,28 @@ class DirectoryController < ApplicationController
     if @letter != params[:letter]
       redirect_to directory_path(:letter => @letter)
     else
-      if @letter =~ /^[a-zA-Z]/
-        if @conditions.present?
-          @everything = ThinkingSphinx.search("@name ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
-        else
-          @everything = ThinkingSphinx.search("@name ^?", @letter, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
-        end
-      elsif @letter = "+"
-        if @conditions.present?
-          @everything = ThinkingSphinx.search(:conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
-        else
-          @everything = ThinkingSphinx.search(:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
-        end
+      if @search_classes.empty?
+        @everything = []
       else
-        @letter = '#'
-        if @conditions.present?
-          @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :conditions => @conditions, :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+        if @letter =~ /^[a-zA-Z]/
+          if @conditions.present?
+            @everything = ThinkingSphinx.search("@name ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          else
+            @everything = ThinkingSphinx.search("@name ^?", @letter, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          end
+        elsif @letter == "+"
+          if @conditions.present?
+            @everything = ThinkingSphinx.search(:conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          else
+            @everything = ThinkingSphinx.search(:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          end
         else
-          @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          @letter = '#'
+          if @conditions.present?
+            @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :conditions => @conditions, :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          else
+            @everything = ThinkingSphinx.search("@name ^1 | ^2 | ^3 | ^4 | ^5 | ^6 | ^7 | ^8 | ^9 | ^0", :match_mode => :extended, :classes  => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 200)
+          end
         end
       end
       render :template => 'organisations/directory'
@@ -56,15 +60,15 @@ class DirectoryController < ApplicationController
     @type = params[:type]
 
     @search_classes = [Performer, Promoter, Tour, Venue, User]
-    @search_classes &&= [Tour] if @collection.present?
-    @search_classes &&= [Promoter, Tour, Venue] if @region.present?
-    @search_classes &&= [Performer, Promoter, Tour] if @tags.present?
-    @search_classes &&= [params[:type].to_s.capitalize.constantize] if @type.present?
+    @search_classes &= [Tour] if @collection.present?
+    @search_classes &= [Promoter, Tour, Venue] if @region.present?
+    @search_classes &= [Performer, Promoter, Tour] if @tags.present?
+    @search_classes &= [params[:type].to_s.capitalize.constantize] if @type.present?
     
     @search_tags = @tags.join(" & ").gsub(/-/, ' ')
     
     @conditions = {}.tap do |hash|
-      hash[:collection] = @collection if @collection.present?
+      hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
       hash[:genres] = @search_tags if @search_tags.present?
       hash[:region] = @region if @region.present?
     end
