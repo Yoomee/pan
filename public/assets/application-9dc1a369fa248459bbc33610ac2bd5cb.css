@@ -9424,7 +9424,9 @@ a.block-or-line-icon:hover .sb, a.block-or-line-icon:hover .sl {
 }
 
 /*========== diary page ==========*/
-
+.well.diary {
+  padding-top: 0;
+}
 table#diary {
   background: white;
   position: relative;
@@ -9446,7 +9448,19 @@ table#diary a.next-month {
   right: 0;
 }
 table#diary thead {
-  border-bottom: 2px #565656 solid; 
+  border-bottom: 2px #565656 solid;
+}
+table#diary tr.paginate {
+  border-top: 2px #565656 solid;
+  text-align: center;
+}
+table#diary tr.paginate a {
+  color: #4D4E4D;
+}
+table#diary tr:last-child {
+  /*border-top: none;*/
+  border-bottom: 2px #565656 solid;
+  /*background: red;*/
 }
 table#diary tbody tr {
   border-bottom: 1px #565656 solid;
@@ -9460,7 +9474,7 @@ table#diary tbody tr td .tag-label {
 table#diary thead th {
   text-transform: uppercase;
   font-size: 30px;
-  padding-bottom: 30px;
+  padding: 30px 0;
 }
 table#diary thead th a {
   text-transform: none;
