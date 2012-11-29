@@ -23,6 +23,10 @@
         =image_for(performer, "220x150#")
         
         -if current_user.performer_id == performer.id
+          .black-block-links
+            =link_to edit_performer_path(current_user.performer_id), :class => "btn" do
+              %i.icon-pencil
+              Edit profile
           .notifications
             %i.icon-group
             %span.number=current_user.group_notifications.count
