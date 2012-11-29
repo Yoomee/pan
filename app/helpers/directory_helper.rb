@@ -17,7 +17,7 @@ module DirectoryHelper
       if param_options.present?
         link_to("View all", action_name.search? ? directory_search_path(:letter => "0") : directory_path(:letter => "0"), :class => "btn", :id => "clear-all-filters")
       else
-        link_to("No filters", "#", :class => "btn", :id => "no-filters")
+        link_to("Viewing all", "#", :class => "btn", :id => "no-filters")
       end
   end
 
