@@ -16,7 +16,7 @@
 
             =#render "devise/shared/links"
             =link_to "Not a member?", invite_path, :id => "sign_up_link"
-          =f.submit "Sign in", :class => "btn mt-1"
+          =f.submit "Sign in", :class => "btn mt-1", :'data-loading-text' => 'Signing in...'
     .row#sign-in-info
       .span3
         =link_to_slug do

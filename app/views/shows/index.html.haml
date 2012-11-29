@@ -30,7 +30,7 @@
     -if @tours.size == 0
       %p.lead No shows with these filters!
     -elsif view_preference == 'block'
-        =render "shows/block_view", :original_tags => original_tags
+      =render "shows/block_view", :original_tags => original_tags
     -elsif view_preference == 'list'
       =render "shows/list_view", :original_tags => original_tags
 
