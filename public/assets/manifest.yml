@@ -9,6 +9,7 @@ dragonfly/defaults/user.jpg: dragonfly/defaults/user-1099c5436409c389d9f1811ce60
 glyphicons-halflings-white.png: glyphicons-halflings-white-7c7d58f49a27b0102155d67e12e739bc.png
 glyphicons-halflings.png: glyphicons-halflings-808f4fc368fe50b25065afec2ff88954.png
 headline_image.jpg: headline_image-379959a9dfb2408a62814d2bd2af97d1.jpg
+home-illustration.png: home-illustration-0b2de14c9ab5200afc98e042561e7872.png
 jquery-ui-bootstrap/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui-bootstrap/ui-bg_flat_0_aaaaaa_40x100-d754cf4c1da4effc33659cbe94a9575d.png
 jquery-ui-bootstrap/ui-bg_glass_55_fbf9ee_1x400.png: jquery-ui-bootstrap/ui-bg_glass_55_fbf9ee_1x400-14b9f0f8bd99c6a21e79336d8f8cdf0f.png
 jquery-ui-bootstrap/ui-bg_glass_65_ffffff_1x400.png: jquery-ui-bootstrap/ui-bg_glass_65_ffffff_1x400-c2e4698d7ae271499f1c74d91e68162b.png
@@ -32,6 +33,7 @@ site-logo.png: site-logo-06a319c570d24cc8d6b25a14f2a99b88.png
 slideshow_arrow_l.png: slideshow_arrow_l-b969ae6e8d518dd1a00d560b906cb501.png
 slideshow_arrow_r.png: slideshow_arrow_r-c95536981523bb75eedd2218f0a594f5.png
 temp-profile.jpg: temp-profile-cbd31225cef161f9942c872af879ddfa.jpg
+welcome-to-tourbook.png: welcome-to-tourbook-53671ed499a5d02b552657b074ab7fb5.png
 bootstrap.custom.js: bootstrap.custom-539dae4cb8c38699019fd8a414db54ac.js
 chosen.koenpunt.jquery.js: chosen.koenpunt.jquery-f119ffb6aa2145d8a3aa080501b38af0.js
 jquery.cycle.js: jquery.cycle-63a19476a2fe9dd3a5a537bf4241422f.js
@@ -126,7 +128,7 @@ redactor_image_upload_error.png: redactor_image_upload_error-c3c03fd6d59dc5f620c
 jquery-ui-1.8.23.js: jquery-ui-1.8.23-0ae27eb91f4e87746065493de4743275.js
 jquery-ui-1.8.18.css: jquery-ui-1.8.18-6cc95c1e9990c28f0962af9c38b93237.css
 application.js: application-39f2474d8bb89bcc6566a4636b56fe69.js
-application.css: application-0080891f3540ee7d27d225f8402008c4.css
+application.css: application-1043a9f67c835737bcf6037074db7feb.css
 mercury.js: mercury-1af73136439f1861562f0633750690ee.js
 mercury.css: mercury-d38eb57ddc84ee77606839a8b57b72eb.css
 mercury_overrides.css: mercury_overrides-2e3ca64f45dc4f6c3f0b4cf2c3974755.css
