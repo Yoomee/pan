@@ -1233,13 +1233,29 @@ label em.optional {
 /*========== Sign in page ==========*/
 #sign-in {
   padding-top: 150px;
+  background: url(/assets/home-illustration.png) no-repeat center 340px;
 }
 #sign-in h1 {
   font-size: 60px;
   line-height: 1.2;
+  float: left;
+  clear: both;
 }
+.welcome-to {
+  float: left;
+ 
+}
+span.welcome-to-tourbook {
+  display: block;
+  float: left;
+  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 11px;
+  text-indent: -9000em;
+  margin: 0 0 0 15px;
+}
+
 #sign-in p.sub-title {
   font-size: 24px;
+   clear: left;
 }
 #sign-in form#user_new {
   padding-top: 50px;
