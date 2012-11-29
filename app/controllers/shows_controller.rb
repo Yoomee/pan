@@ -26,7 +26,7 @@ class ShowsController < ApplicationController
     if @collection.present?
       Collection.all.each do |collection|
         if collection.name.parameterize == @collection
-          @tours = @tours.joins(:collections).collect{ |tour| tour if tour.collections.include?(collection) }.compact
+          @tours = @tours.joins(:collections).collect{ |tour| tour if tour.collections.include?(collection) }.compact.uniq
         end
       end
     end
