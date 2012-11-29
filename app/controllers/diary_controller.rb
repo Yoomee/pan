@@ -11,22 +11,11 @@ class DiaryController < ApplicationController
     @tags = [*params[:tags]]
     @tour_id = params[:tour_id]
     @venue_id = params[:venue_id]
-    
-    if @tour_id.present? || @organisation_id.present? || @venue_id.present?
-      @month = params[:month]
-      @year = params[:year]
-    else
-      @month = params[:month] || Date.today.month
-      @year = params[:year] || Date.today.year
-    end
 
     @all_tags = Tour.genre_counts.order(:name)
 
-    @dates =  TourDate.where(:booked => true).order(:date)
+    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)
 
-    if @month.present? && @year.present?
-      @dates = @dates.where('MONTH(date) = :month AND YEAR(date) = :year', :month => @month, :year => @year)
-    end
     if @tags.present?
       tour_ids = Tour.tagged_with(@tags).collect(&:id)
       @dates = @dates.where(:tour_id => tour_ids)
@@ -40,12 +29,10 @@ class DiaryController < ApplicationController
       end
     end
     if @region.present?
-      venue_ids = Venue.where(:region => @region).collect(&:id)
-      @dates = @dates.where(:venue_id => venue_ids)
+      @dates = @dates.where('venue_id IN (SELECT id FROM venues WHERE venues.region = ?)', @region)
     end
     if @start_date.present?
       @dates = @dates.where("date > ?", Date.parse(@start_date))
-      @month = Date.parse(@start_date).month.to_s if Date.parse("#{@month}/#{@year}") < Date.parse(@start_date)
     end
     if @end_date.present?
       @dates = @dates.where("date < ?", Date.parse(@end_date))
@@ -59,6 +46,8 @@ class DiaryController < ApplicationController
     if @venue_id.present?
       @dates = @dates.where(:venue_id => @venue_id)
     end
+
+    @dates = @dates.order(:date).paginate(:page => params[:page], :per_page => 25)
 
   end
 

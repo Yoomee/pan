@@ -29,25 +29,24 @@
 
 .row
   .span9
-    .well
+    .well.diary
       %table#diary
-        %thead
-          %tr
-            -if @month.present? && @year.present?
-              %th.span1=link_to_previous_month(@month, @year)
-              %th.month.span7{:colspan => 2}
-                =Date::MONTHNAMES[@month.to_i]
-                =@year
-              %th.span1=link_to_next_month(@month, @year)
-            -elsif @tour_id.present?
+
+        -if @tour_id.present?
+          %thead
+            %tr
               %th.span9{:colspan => 4}
                 =Tour.find(@tour_id)
                 =link_to "all shows", diary_path, :class => "clear-tour-filter"
-            -elsif @organisation_id.present?
+        -elsif @organisation_id.present?
+          %thead
+            %tr
               %th.span9{:colspan => 4}
                 =Promoter.find(@organisation_id)
                 =link_to "all shows", diary_path, :class => "clear-tour-filter"
-            -elsif @venue_id.present?
+        -elsif @venue_id.present?
+          %thead
+            %tr
               %th.span9{:colspan => 4}
                 =Venue.find(@venue_id)
                 =link_to "all shows", diary_path, :class => "clear-tour-filter"
@@ -58,30 +57,36 @@
               %td.span9{:colspan => 4}
                 %p.lead No diary dates with these filters!
           -else
-            -@dates.each do |date|
-              %tr
-                %td.date
-                  -if @month.present? && @year.present?
-                    =date.date.to_s(:day_and_date)
-                  -else
-                    =date.date.to_s(:date)
-                %td
-                  =link_to_self date.tour, :class => "tour"
-                %td
-                  -if date.venue_id > 0
-                    =link_to_self date.venue, :class => "venue"
-                  -else
-                    .venue=date.external_venue_name
-                  =date.time  
-                %td
-                  .clearfix
-                  .show-tags
-                    -date.tour.genres.each do |tag|
-                      -param_tags = original_tags.dup
-                      -param_tags << tag.name unless param_tags.delete(tag.name)
+            -@dates.group_by{|date| date.date.strftime("%B %Y")}.each do |month, dates|
+              %thead
+                %tr
+                  %th.span9{:colspan => 4}
+                    =month
+              -dates.each do |date|
+                %tr
+                  %td.date
+                    =date.date.strftime("%e")
+                  %td
+                    =link_to_self date.tour, :class => "tour"
+                  %td
+                    -if date.venue_id > 0
+                      =link_to_self date.venue, :class => "venue"
+                    -else
+                      .venue=date.external_venue_name
+                    =date.time  
+                  %td
+                    .clearfix
+                    .show-tags
+                      -date.tour.genres.each do |tag|
+                        -param_tags = original_tags.dup
+                        -param_tags << tag.name unless param_tags.delete(tag.name)
 
-                      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => @month, :year => @year, :tour_id => @tour_id, :organisation_id => @organisation_id , :venue_id => @venue_id }, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
-                  .clearfix
+                        =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :tour_id => @tour_id, :organisation_id => @organisation_id , :venue_id => @venue_id }, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
+                    .clearfix
+            -if @dates.total_pages > 2
+              %tr.paginate
+                %td{:colspan => 4}
+                  =will_paginate @dates
 
   .span3
     =render 'shows/filter_sidebar', :original_tags => original_tags, :month => @month, :year => @year
