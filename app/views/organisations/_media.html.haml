@@ -1,15 +1,18 @@
--slideshow.slides.each do |photo|
+-slideshow.slides.each do |media|
   .span2.mb-3
-    =link_to "#photo_#{photo.id}", :'data-toggle' => "modal", :class => "" do
-      =image_for(photo, "170x170>")
-    =photo.caption
+    =link_to "#photo_#{media.id}", :'data-toggle' => "modal", :class => "" do
+      =image_for(media, "170x170>")
+    =media.caption
     
     
--slideshow.slides.each do |photo|   
-  #photo.modal.hide{:id => "#{photo.id}"}
+-slideshow.slides.each do |media|   
+  #photo.modal.hide{:id => "#{media.id}"}
     .modal-header
       %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
-      %h3=photo.caption
+      %h3=media.caption
     .modal-body
-      =image_for(photo, "530x400>")
+      -if media.has_video?
+        %iframe{:width => 520, :height => 320, :src => media.video_embed_url, :frameborder => 0, :allowfullscreen => true}
+      -else
+        =image_for(media, "530x400>")
     

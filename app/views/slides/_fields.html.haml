@@ -1,11 +1,26 @@
-=slideshow_form.semantic_fields_for(:slides, slide) do |slide_form|
-  =slide_form.inputs(:class => "inputs slide_inputs") do
-    -if !slide.new_record? && slide.image
-      .control-group
-        =image_for(slide, "340x200#")
-    =slide_form.input :retained_image, :as => :hidden
-    =slide_form.input :media_type, :as => :hidden
-    =slide_form.input :image, :as => :file
-    =slide_form.input :_destroy, :as => :hidden, :input_html => {:class => "destroy_input"}
-    =slide_form.input :caption, :as => :text, :input_html => {:rows => 4, :class => 'span6'}
-    =link_to("x Delete photo", "#", :class => "delete_slide_link btn btn-danger")
+.row
+  .well
+
+    =slideshow_form.semantic_fields_for(:slides, slide) do |slide_form|
+      =slide_form.inputs(:class => "inputs slide_inputs") do
+
+        .span6
+          %h3.mb-1
+            Item (can be a video or a photo)
+          -# TODO: allow editing of position (maybe drag drop)
+          =#slide_form.input :position, :as => :string, :input_html => {:class => "span1"}
+          =slide_form.input :caption, :as => :text, :input_html => {:rows => 3, :class => 'span6'}
+        .span6
+          %label.control-label
+          -if !slide.new_record? && slide.image
+            .control-group
+              =image_for(slide, "340x200#")
+          =slide_form.input :retained_image, :as => :hidden
+          =slide_form.input :media_type, :label => "Select type of media", :as => :radio, :collection => Slide::MEDIA_TYPES, :input_html => {:class => 'media_type_choice'}, :wrapper_html => {:class => 'no-padding'}
+          =slide_form.input :image, :as => :file, :wrapper_html => {:class => 'image_field'}
+          =slide_form.input :video_url, :input_html => {:placeholder => "URL from YouTube or Vimeo"}, :wrapper_html => {:class => 'video_field'}
+          =slide_form.input :_destroy, :as => :hidden, :input_html => {:class => "destroy_input"}
+          =link_to("x Delete this item", "#", :class => "delete_slide_link btn btn-danger")
+      
+      
+    .clearfix
