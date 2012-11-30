@@ -8056,6 +8056,10 @@ legend {
 	margin-bottom: 0px;
 }
 
+.form-actions {
+	padding: 17px 20px 18px 0px;
+}
+
 /*========== Bootstrap extensions ==========*/
 .popover-footer {
   padding: 9px 15px;
@@ -8245,7 +8249,7 @@ a:hover {
   clear: both;
 }
 .delete_slide_link {
-	background: none;
+	background: #efefef;
 	color: #666;
 }
 
