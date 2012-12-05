@@ -14,7 +14,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '9f8b6f902259b74912ed1348f2a88cedf6648fb4'
+  license_key: '<%= EY::Config.get("New Relic", 'license_key') %>'
   
   # Agent Enabled (Ruby/Rails Only)
   # Use this setting to force the agent to run or not run.
@@ -33,7 +33,7 @@ common: &default_settings
   # "All UI" then specify a semicolon-separated list of up to three
   # distinct names.  If you comment this out, it defaults to the 
   # capitalized RAILS_ENV (i.e., Production, Staging, etc)
-  app_name: PAN
+  app_name: '<%= Rails.application.class.parent_name %>'
 
   # When "true", the agent collects performance data about your 
   # application and reports this data to the New Relic service at
