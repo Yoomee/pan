@@ -7,6 +7,9 @@
     .row
       .span9
         =simple_format(@group.description)
+        %p
+          %strong
+            Join this group by asking a question below:
     .row
       .span9
         -if @posts
@@ -22,7 +25,7 @@
       %h4 Search Groups
       %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
       =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-      %input.btn{:type => 'submit', :value => "Search"}    
+      %input.btn.mt-1{:type => 'submit', :value => "Search"}    
       
     .well
       %h4 Members

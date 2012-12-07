@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
 
   def index
     @top_tags = Group.top_tags
+    @groups = Group.all
   end
   
   def show

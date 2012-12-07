@@ -1,19 +1,18 @@
 .row
   .span9
-    %h1.mb-2.mt-2 Groups
+    %h2.mb-2.mt-2 Groups
     
 -if current_user.performer
   .well
     Groups/Resources are currently available to Promoters only. We will be adding more functionality for Performers in the future.
--else    
+-else  
 
   .row
     .span9
-      %h2.mb-2 My Groups
-    
-      -if current_user.groups.present?
+
+      -if true
         .row
-          -current_user.groups.each do |group|
+          -@groups.each do |group|
             .span3
               .well.group
                 %h4=link_to_self group
@@ -24,23 +23,25 @@
                 .group-member-pics.border-bottom.mb-1.mt-1
                   -group.members.last(5).each do |member|
                     =link_to image_for(member, "35x35#"), user_path(member)
-                =link_to group_post_path(group.posts.first) do
-                  %strong=group.posts.first.text
-                  %br
-                  %strong By
-                  =group.posts.first.user
-                  %br
-                  =group.posts.first.created_at.strftime('%e %b %Y')
-                
+                -if group.posts.count > 0 
+                  =link_to group_post_path(group.posts.first) do
+                    %strong
+                      Last post by
+                      =group.posts.first.user
+                      %br
+                      =group.posts.first.created_at.strftime('%e %b %Y')
+              
       -else
         You haven't joined any groups yet.
+
+
       
     .span3#groups-sidebar
       .well
         %h4 Search Groups
         %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
         =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-        %input.btn{:type => 'submit', :value => "Search"}
+        %input.btn.mt-1{:type => 'submit', :value => "Search"}
       
       .well
         %h4 Popular Groups
