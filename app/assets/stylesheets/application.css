@@ -1060,8 +1060,11 @@ margin-left: -6px;
   margin-bottom: 5px;
   border-bottom: 1px #919191 solid;
 }
-.recent-resources p {
+.recent-resources p, .recent-resources h4 {
   font-size: 11px;
+  line-height: 16px;
+}
+.recent-resources {
 }
 .download-text {
 	float: left;
@@ -1092,7 +1095,7 @@ a.resource-link-icon i{
 a.resource-link-icon:hover {
   text-decoration: none;
 }
-a.resource-link {
+a.resource-link-text {
   text-transform: none;
 }
 /*========== User ==========*/
@@ -1377,14 +1380,15 @@ label em.optional {
   background: url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
-  font-size: 60px;
+  font-size: 53px;
   line-height: 1.2;
   float: left;
   clear: both;
 }
 .welcome-to {
   float: left;
-  margin: 0 0 0 25px;
+  margin: 0 0 0 45px;
+
  
 }
 span.welcome-to-tourbook {
@@ -1393,6 +1397,7 @@ span.welcome-to-tourbook {
   background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 11px;
   text-indent: -9000em;
   margin: 0 0 0 15px;
+  width: 240px;
 }
 
 #sign-in p.sub-title {
