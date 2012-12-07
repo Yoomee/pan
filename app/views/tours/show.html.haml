@@ -28,10 +28,6 @@
               =tour.performer
         .date-and-genres
           %h4=tour.dates_string
-          -if false
-            =link_to diary_path(:tour_id => tour.id), :class => "tour-diary-link" do
-              %i.icon-calendar
-              Diary
           -if tour.genre_list.present?
             .genres
               =comma_list_tags(tour, :genres)
