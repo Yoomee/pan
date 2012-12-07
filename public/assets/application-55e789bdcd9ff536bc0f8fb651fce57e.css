@@ -8501,11 +8501,22 @@ input.resources-submit {
   float: left;
 }
 div.resource {
-  height: 160px;
+  min-height: 150px;
+  clear: both;
+}
+div.resource-link {
+  min-height: 100px;
+}
+.resource-image-link {
+  float: left;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 div.resource .resource-image {
   float: left;
-  margin-right: 10px;
+  margin-right: 20px;
+  width: 92px;
+  
 }
 div.resource .resource-info {
   float: left;
@@ -8514,7 +8525,7 @@ div.resource .resource-info {
 }
 div.resource .resource-download {
   float: left;
-  width: 100px;
+  width: 140px;
 }
 div.resource .resource-info p {
 	font-size: 13px;
@@ -8552,6 +8563,7 @@ div.resource .tag-list {
   text-transform: uppercase;
   font-size: 18px;
 }
+
 .well.resources-right-col {
   background: #F6F6F2;
 }
@@ -8566,9 +8578,25 @@ margin-left: -6px;
   margin-bottom: 5px;
   border-bottom: 2px #919191 solid;
 }
-.recent-resources .recent-resource {
+.recent-resource-link {
+  float: left;
+  width: 100%;
+  clear: left;
+}
+.recent-resource-link:hover {
+  text-decoration: none;
+}
+
+.recent-resource-image {
+	float: left;
+	margin: 0 0px 0 0;
   
 }
+.recent-resource-text {
+  float: right;
+  width: 136px;
+}
+
 .recent-resources a img {
   margin-right: 5px;
   float: left;
@@ -8586,8 +8614,48 @@ margin-left: -6px;
   margin-bottom: 5px;
   border-bottom: 1px #919191 solid;
 }
-.recent-resources p {
+.recent-resources p, .recent-resources h4 {
   font-size: 11px;
+  line-height: 16px;
+}
+.recent-resources {
+}
+.download-text {
+	float: left;
+}
+.resource-download-link {
+  display: block;
+  width: 100%;
+  float: left;
+}
+.resource-download-link:hover {
+  text-decoration: none;
+  color: #acc543;
+}
+.resource-download-link i {
+  float: right;
+}
+.download-type {
+  font-size: 13px;
+  float: left;
+  clear: left;
+}
+a.resource-link-icon i{
+  font-size: 40px;
+  line-height: 1;
+  margin: 20px 0 0 35px;
+  float: left;
+}
+a.resource-link-icon:hover {
+  text-decoration: none;
+}
+a.resource-link-text {
+  text-transform: none;
+}
+
+.resource a.edit-link {
+	font-size: 10px;
+	font-weight: normal;
 }
 
 /*========== User ==========*/
@@ -8872,14 +8940,15 @@ label em.optional {
   background: url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
-  font-size: 60px;
+  font-size: 53px;
   line-height: 1.2;
   float: left;
   clear: both;
 }
 .welcome-to {
   float: left;
-  margin: 0 0 0 25px;
+  margin: 0 0 0 45px;
+
  
 }
 span.welcome-to-tourbook {
@@ -8888,6 +8957,7 @@ span.welcome-to-tourbook {
   background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 11px;
   text-indent: -9000em;
   margin: 0 0 0 15px;
+  width: 240px;
 }
 
 #sign-in p.sub-title {
