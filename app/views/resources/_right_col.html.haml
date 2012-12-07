@@ -15,8 +15,10 @@
   %h4 Recent Resources
   -@recent_resources.each do |resource|
     .recent-resource
-      =link_to resource do
-        =image_for(resource, "40x50#")
-        %h4=resource
-        =summarize(resource, :length => 70)
+      =link_to resource, :class=>'recent-resource-link' do
+        .recent-resource-image
+          =image_for(resource, "40x50#")
+        .recent-resource-text  
+          %h4=resource
+          =summarize(resource, :length => 70)
     .clearfix

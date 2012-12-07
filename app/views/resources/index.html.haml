@@ -40,7 +40,7 @@
             .row
               .span9.resource.mb-2
                 .resource-image
-                  =link_to(image_for(resource, "90x150"), resource, :class => "resource-image shadow")
+                  =link_to(image_for(resource, "90x150"), resource, :class => "resource-image-link shadow")
                 .resource-info
                   .resource-title-summary
                     =link_to_self(resource, :class => "resource-title")
@@ -51,7 +51,8 @@
                       %span.download-text
                         Download
                       %i.icon-download-alt
-                      =resource.file_ext
+                      %span.download-type
+                        =resource.file_ext
                   -elsif resource.url
                     =link_to(prepend_http(resource.url), :target => '_new') do
                       Open
@@ -59,7 +60,28 @@
                       Link                     
           .resources-header
             %h4 Links
+          .resource.resource-link
+            .resource-image
+              =link_to "http://yoomee.com", :class=>"resource-link-icon", :target=>"_blank" do
+                %i.icon-link.resource-link-icon
+            .resource-info
+              .resource-title-summary
+                %p
+                  Touring Rural Theatre, Federation of Scottish Theatre
+                =link_to "http://yoomee.com", "http://yoomee.com", :class=>"resource-link-text"
+              
             
+
+          .resource.resource-link
+            .resource-image
+              =link_to "http://yoomee.com", :class=>"resource-link-icon", :target=>"_blank" do
+                %i.icon-link.resource-link-icon
+            .resource-info
+              .resource-title-summary
+                %p
+                  Touring Rural Theatre, Federation of Scottish Theatre
+                =link_to "http://yoomee.com", "http://yoomee.com", :class=>"resource-link-text"
+              
             
             
           .clearfix  
