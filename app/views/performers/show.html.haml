@@ -43,12 +43,12 @@
             =comma_list_tags(performer, :genres)
         -if performer.tours.present?
           .performer-tours
-            -if performer.tours.where("end_on < ?", Date.today).present?
+            -if performer.tours.where("end_on > ?", Date.today).present?
               .current-tours
                 %h4
                   %i.icon-star
                   Current shows
-                -performer.tours.where("end_on < ?", Date.today).each do |tour|
+                -performer.tours.where("end_on > ?", Date.today).each do |tour|
                   =link_to_self tour
             -if performer.tours.where("end_on < ?", Date.today).present?
               .past-tours
