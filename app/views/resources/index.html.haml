@@ -18,6 +18,24 @@
       -else
         =render "resources/search"
         .well
+          .resources-header
+            %h4 Publications
+            .header-btn-group.btn-group
+              =link_to "#", :class => 'btn header-btn' do
+                Sort by
+              =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle header-btn') do
+                %span.caret
+              %ul.dropdown-menu.pull-right
+                %li
+                  =link_to "#" do
+                    %icon.icon-user
+                    Option
+                %li.divider                    
+                %li  
+                  =link_to "#" do
+                    %icon.icon-user
+                    Option
+                  
           -@resources.each do |resource|
             .row
               .span9.resource.mb-2
@@ -29,8 +47,9 @@
                     =summarize(resource, :length => 200)
                 .resource-download
                   -if resource.file_name
-                    =link_if_can [:download, resource] do
-                      Download
+                    =link_if_can [:download, resource], :class=>"resource-download-link" do
+                      %span.download-text
+                        Download
                       %i.icon-download-alt
                       =resource.file_ext
                   -elsif resource.url
@@ -38,6 +57,13 @@
                       Open
                       %i.icon-globe
                       Link                     
+          .resources-header
+            %h4 Links
+            
+            
+            
+          .clearfix  
+                      
     .span3
       =render("resources/right_col")
           

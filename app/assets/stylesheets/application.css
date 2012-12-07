@@ -63,7 +63,8 @@
      transition: .2s ease-in;
   
 }
-.show-tour {
+.show-tour,
+.resources-header .header-btn-group {
   -webkit-border-radius:3px;
   -moz-border-radius:3px;  
   border-radius:3px;
@@ -920,6 +921,31 @@ form#directory-search input.btn {
 
 /*========== Resources ==========*/
 
+input.resources-search {
+  padding: 10px 15px;
+  border: 1px solid #9a9b98;
+}
+
+input.resources-submit {
+  padding: 11px 25px;
+  margin: 0 0 0 4px;
+}
+.form-search {
+  margin-bottom: 40px;
+}
+.resources-header {
+  border-bottom: 2px #919191 solid;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.resources-header .header-btn-group {
+  border: 1px solid #ccc;
+
+}
+.resources-header h4 {
+  float: left;
+}
 div.resource {
   height: 160px;
 }
@@ -929,12 +955,12 @@ div.resource .resource-image {
 }
 div.resource .resource-info {
   float: left;
-  margin-right: 20px;
-  width: 430px
+  margin-right: 30px;
+  width: 380px;
 }
 div.resource .resource-download {
   float: left;
-  width: 100px
+  width: 100px;
 }
 div.resource .resource-info p {
 	font-size: 13px;
@@ -1288,8 +1314,8 @@ label em.optional {
 
 /*========== Sign in page ==========*/
 #sign-in {
-  padding-top: 150px;
-  background: url(/assets/home-illustration.png) no-repeat center 340px;
+  padding-top: 130px;
+  background: url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
   font-size: 60px;
@@ -1299,6 +1325,7 @@ label em.optional {
 }
 .welcome-to {
   float: left;
+  margin: 0 0 0 25px;
  
 }
 span.welcome-to-tourbook {
@@ -1312,6 +1339,7 @@ span.welcome-to-tourbook {
 #sign-in p.sub-title {
   font-size: 24px;
    clear: left;
+   text-align: center;
 }
 #sign-in form#user_new {
   padding-top: 50px;
@@ -1321,6 +1349,7 @@ span.welcome-to-tourbook {
 #sign-in-box .add-on {
   width: 30px;
   margin: 0;
+  font-size: 20px;
 }
 #sign-in-box input {
   margin: 0;
@@ -1330,25 +1359,82 @@ span.welcome-to-tourbook {
 }
 #sign-in form#user_new input {
   font-size: 16px;
-  padding: 10px;
+  float: right;
+  border: none;
+  padding: 10px 10px 10px 0;
+  box-shadow:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  width: 235px;
+}
+#sign-in form#user_new input.sign-in-btn {
+  padding: 10px 20px;
+  width: auto;
 }
 #sign-in form#user_new .input-prepend span.add-on {	
 	padding: 10px;
-	margin: 0 -6px 0 0;
+	background: none;
+	border: none;
+	margin: 0 00px 0 0;
 }
 #sign-in form#user_new .input-prepend {
-  margin-bottom: 15px;
+  margin: 0px;
+  padding: 0px 0;
 }
 #sign-in form#user_new input[name='commit'] {
   background: #AAC544;
 }
 #sign-in .row#sign-in-info {
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 50px;
+  color: #ffffff;
+}
+#sign-in-info h2 {
+  color: #f6f6f2;
+}
+#sign-in-info p, #sign-in-info a {
+  color: #f6f6f2;
 }
 #sign-in a#sign_up_link {
   font-size: 14px;
   font-style: italic;
+  color: #f6f6f2;
+  
+    margin: 15px 0 0;
+  float: left;
+
+}
+.sign-in-white-box {
+  background: #fff;
+  padding: 10px 0 0;
+  border: 1px solid #e3e3e3;
+  border-radius:4px;
+  -webkit-border-radius:4px;
+}
+.sign-in-white-box hr {
+  margin: 0 0 8px;
+}
+.sign-in-intro {
+  margin-left: 180px;
+}
+.logged_out .push {
+  background: #4d4e4d;
+}
+.the-touring-network {
+  display: block;
+  background: url(/assets/the-touring-network.png) no-repeat 20px 0;
+  width: 100%;
+  height: 90px;
+  margin: 20px 0 0;
+  text-indent: -9000em;
+}
+.creative-scotland {
+  display: block;
+  background: url(/assets/creative-scotland.png) no-repeat 10px 0;
+  width: 100%;
+  height: 90px;
+  margin: 10px 0 0;
+  text-indent: -9000em;
 }
 /*========== Shows page ==========*/
 
