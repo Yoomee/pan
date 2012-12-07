@@ -1,8 +1,16 @@
+-content_for(:head) do
+  :javascript
+    $(document).ready(function() {
+      Redactor.init();
+    });
+    
 =semantic_form_for(resource, :multipart => true) do |form|
   =form.inputs do
     =form.input :name
+    =form.input :summary, :input_html => {:rows => 3, :class => "span8"}, :label => "Summary - <em>A few sentences to summarise what this resource is about.</em>".html_safe   
+    =form.input :text, :as => :redactor, :input_html => {:rows => 10, :class => "span8"}
+    =form.input :url, :label => "Website address - <em>Optional</em>".html_safe
     =form.input :publication_date, :placeholder => "e.g. \"January 2010\" or \"2004\""
-    =form.input :summary, :input_html => {:rows => 5, :class => "span8"}
     =form.input :resource_tag_list, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:resource_tags, resource)
     =form.input :retained_file, :as => :hidden
     =form.input :file, :as => :file, :label => false

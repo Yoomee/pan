@@ -7,7 +7,7 @@ class Resource < ActiveRecord::Base
   acts_as_taggable_on :resource_tags
   has_doc
   
-  validates :name, :file, :presence => true
+  validates :name, :summary, :presence => true
   
   define_index do
     indexes name, :sortable => true

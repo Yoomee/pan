@@ -7,7 +7,8 @@
   .span9
     .row
       .span3
-        =image_for(resource, "220x", :class => "shadow")
+        -if resource.file_name
+          =image_for(resource, "220x", :class => "shadow") 
       .span6
         %h2.resource-title
           =title(resource)
@@ -15,14 +16,22 @@
           %h6.resource-publication-date 
             Published
             =resource.publication_date
-        
-        =summarize(resource, :length => 200)
+        -if resource.text.present?
+          =resource.text.html_safe
+        -else    
+          =summarize(resource, :length => 200)
         %ul.tag-list.tag-list-horizontal
           -resource.resource_tags.each do |tag|
             %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
         %br
-        %hr
-        =link_if_can("Click here to download", [:download, resource], :class => "download-doc download-doc-#{resource.file_ext}")
+        -if resource.url.present?
+          %hr
+          %i.icon-globe
+          =link_to(prepend_http(resource.url), :target => '_new') do
+            =resource.url
+        -if resource.file_name    
+          %hr
+          =link_if_can("Click here to download", [:download, resource], :class => "download-doc download-doc-#{resource.file_ext}")
       -if posts.present? || can?(:create, Post)
         .span9.mt-2
           %h4.mb-1 Comments

@@ -26,13 +26,18 @@
                 .resource-info
                   .resource-title-summary
                     =link_to_self(resource, :class => "resource-title")
-                    =summarize(resource, :length => 100)
+                    =summarize(resource, :length => 200)
                 .resource-download
-                  =link_if_can [:download, resource] do
-                    Download
-                    %i.icon-download
-                  =resource.file_ext
-                      
+                  -if resource.file_name
+                    =link_if_can [:download, resource] do
+                      Download
+                      %i.icon-download-alt
+                      =resource.file_ext
+                  -elsif resource.url
+                    =link_to(prepend_http(resource.url), :target => '_new') do
+                      Open
+                      %i.icon-globe
+                      Link                     
     .span3
       =render("resources/right_col")
           
