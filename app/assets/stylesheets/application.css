@@ -1098,6 +1098,12 @@ a.resource-link-icon:hover {
 a.resource-link-text {
   text-transform: none;
 }
+
+.resource a.edit-link {
+	font-size: 10px;
+	font-weight: normal;
+}
+
 /*========== User ==========*/
 #links .nested-fields .remove_fields,
 #resources .nested-fields .remove_fields {

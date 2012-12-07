@@ -6,8 +6,8 @@
 .row
   .span9
     .row
-      .span3
-        -if resource.file_name
+      -if resource.file_name
+        .span3
           =image_for(resource, "220x", :class => "shadow") 
       .span6
         %h2.resource-title

@@ -9,10 +9,12 @@
     =form.input :name
     =form.input :summary, :input_html => {:rows => 3, :class => "span8"}, :label => "Summary - <em>A few sentences to summarise what this resource is about.</em>".html_safe   
     =form.input :text, :as => :redactor, :input_html => {:rows => 10, :class => "span8"}
-    =form.input :url, :label => "Website address - <em>Optional</em>".html_safe
+    %label.control-label
+      Attach a file
+    =form.input :file, :as => :file, :label => false
+    =form.input :url, :label => "Website address"
     =form.input :publication_date, :placeholder => "e.g. \"January 2010\" or \"2004\""
     =form.input :resource_tag_list, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:resource_tags, resource)
     =form.input :retained_file, :as => :hidden
-    =form.input :file, :as => :file, :label => false
   =form.buttons do
     =form.commit_button "Save"

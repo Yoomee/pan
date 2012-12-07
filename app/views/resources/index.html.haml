@@ -28,13 +28,11 @@
               %ul.dropdown-menu.pull-right
                 %li
                   =link_to "#" do
-                    %icon.icon-user
-                    Option
+                    Date
                 %li.divider                    
                 %li  
                   =link_to "#" do
-                    %icon.icon-user
-                    Option
+                    Name
                   
           -@resources.each do |resource|
             .row
@@ -60,30 +58,33 @@
                       Link                     
           .resources-header
             %h4 Links
-          .resource.resource-link
-            .resource-image
-              =link_to "http://yoomee.com", :class=>"resource-link-icon", :target=>"_blank" do
-                %i.icon-link.resource-link-icon
-            .resource-info
-              .resource-title-summary
-                %p
-                  Touring Rural Theatre, Federation of Scottish Theatre
-                =link_to "http://yoomee.com", "http://yoomee.com", :class=>"resource-link-text"
-              
-            
-
-          .resource.resource-link
-            .resource-image
-              =link_to "http://yoomee.com", :class=>"resource-link-icon", :target=>"_blank" do
-                %i.icon-link.resource-link-icon
-            .resource-info
-              .resource-title-summary
-                %p
-                  Touring Rural Theatre, Federation of Scottish Theatre
-                =link_to "http://yoomee.com", "http://yoomee.com", :class=>"resource-link-text"
-              
-            
-            
+          -@resource_links.each do |resource|  
+            .resource.resource-link
+              .resource-image
+                =link_to prepend_http(resource.url), :class=>"resource-link-icon", :target=>"_blank" do
+                  %i.icon-link.resource-link-icon
+              .resource-info
+                .resource-title-summary
+                  %p
+                    =strip_tags(summarize(resource, :length => 200))
+                    =link_if_can("Edit", [:edit, resource], :class => "edit-link")  
+                  =link_to resource.url, prepend_http(resource.url), :class=>"resource-link-text", :target=>"_blank" 
+                  
+          .resources-header
+            %h4 Other
+          -@resource_other.each do |resource|  
+            .resource.resource-link
+              .resource-image
+                =link_to resource, :class=>"resource-link-icon" do
+                  %i.icon-align-left.resource-link-icon
+              .resource-info
+                .resource-title-summary
+                  %p
+                    =link_to resource.name, resource, :class=>"resource-link-text"   
+                    %br                     
+                    =strip_tags(summarize(resource, :length => 200))
+                          
+                        
           .clearfix  
                       
     .span3

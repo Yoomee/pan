@@ -16,8 +16,11 @@ class ResourcesController < ApplicationController
   end
   
   def index
-    @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped
+    @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped.where("file_name IS NOT NULL")
     @recent_resources = Resource.order("updated_at DESC").first(3)
+    @resource_links = Resource.where("url IS NOT NULL AND file_name IS NULL and text <> ''")
+    @resource_other = Resource.where("text <> ''")
+    
   end
 
   def destroy
