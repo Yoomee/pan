@@ -61,14 +61,14 @@
           -@resource_links.each do |resource|  
             .resource.resource-link
               .resource-image
-                =link_to prepend_http(resource.url), :class=>"resource-link-icon", :target=>"_blank" do
+                =link_to resource, :class=>"resource-link-icon" do
                   %i.icon-link.resource-link-icon
               .resource-info
                 .resource-title-summary
                   %p
                     =strip_tags(summarize(resource, :length => 200))
                     =link_if_can("Edit", [:edit, resource], :class => "edit-link")  
-                  =link_to resource.url, prepend_http(resource.url), :class=>"resource-link-text", :target=>"_blank" 
+                  =link_to host_name(resource.url), prepend_http(resource.url), :class=>"resource-link-text", :target=>"_blank" 
                   
           .resources-header
             %h4 Other

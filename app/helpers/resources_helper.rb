@@ -8,4 +8,8 @@ module ResourcesHelper
     end
   end
   
+  def host_name(url)
+    URI.parse(url).host
+  end
+  
 end

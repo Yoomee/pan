@@ -25,10 +25,10 @@
             %li=link_to(tag_label(tag), resources_path(:tag => tag.to_s), :class => "tag")
         %br
         -if resource.url.present?
-          %hr
-          %i.icon-globe
-          =link_to(prepend_http(resource.url), :target => '_new') do
-            =resource.url
+          %h4
+            %i.icon-globe
+            =link_to(prepend_http(resource.url), :target => '_new') do
+              =host_name(resource.url)
         -if resource.file_name    
           %hr
           =link_if_can("Click here to download", [:download, resource], :class => "download-doc download-doc-#{resource.file_ext}")
