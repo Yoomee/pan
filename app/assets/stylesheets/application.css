@@ -267,6 +267,25 @@ a:hover {
 	width: 190px;
 }
 
+.new-message-btn i {
+	font-size: 20px;
+	color: #4D4E4D;
+	position: relative;
+	float: left;
+	left: 0;
+	top: 0;
+	margin: 0 14px 0 0;
+}
+
+.new-message-btn {
+	width: 166px;
+	margin: 22px 0 0 0;
+	background: silver;
+	color: #4D4E4D;
+	font-weight: bold;
+	text-align: left;
+}
+
 .admin-btn {
   -moz-border-radius:3px;	
   -webkit-border-radius:3px;

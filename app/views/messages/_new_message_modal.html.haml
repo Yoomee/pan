@@ -1,11 +1,18 @@
 #new-message.modal.hide
   =semantic_form_for(Message.new) do |form|
-    =form.input :recipient_id, :as => :hidden, :value => recipient.id
     .modal-header
       %button.close{:type => 'button', :'data-dismiss' => 'modal'} x
-      %h3="Send a message to #{recipient}"
+      -if recipient==current_user
+        %h3="Send a message"
+      -else
+        %h3="Send a message to #{recipient}"
     .modal-body
-      =form.input :text, :label => false, :input_html => {:rows => 6, :placeholder => "Send a message..."}
+      -if recipient==current_user
+        =form.input :recipient_id, :as => :select, :collection => User.all, :input_html => { :class => "chosen recipient", :style => "width: 200px;"}, :label => "To"
+        %br
+      -else
+        =form.input :recipient_id, :as => :hidden, :value => recipient.id
+      =form.input :text, :label => false, :input_html => {:rows => 5, :placeholder => "Send a message..."}
     .modal-footer
       =link_to("Cancel", "#", :class => "btn", :'data-dismiss' => 'modal')
       =form.commit_button "Send", :button_html => {:data => {}, :class => "btn btn-primary", :id => "new-message-form-submit"}

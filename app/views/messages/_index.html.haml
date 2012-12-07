@@ -19,8 +19,7 @@
       Messages
   .clearfix
   -if threads.size == 0
-    %p.mt-2 You have no messages.
-    %p To write a message, go to someone's profile and click the 'Send Message' button.
+    %p.mt-1 You have no messages.
   -else
     #all-threads
       %ul.unstyled.threads
@@ -45,4 +44,8 @@
     -threads.each do |thread|
       %div{:id => "thread-#{thread.id}", :class => "thread hide"}
         =render "messages/show", :thread => thread
+        
+=link_to "#new-message", :'data-toggle' => "modal", :class => "btn new-message-btn" do
+  %i.icon-envelope
+  Send a message    
         
