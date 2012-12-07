@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
   
   has_many :group_members
   has_many :members, :through => :group_members, :class_name => "User", :source => :user
+  belongs_to :promoter
   
   scope :without, lambda {|groups| where("id NOT IN (?)", groups)}
   
@@ -13,6 +14,10 @@ class Group < ActiveRecord::Base
     def top_tags
       Tag.most_used.joins(:taggings).joins("JOIN posts ON posts.id = taggings.taggable_id AND taggings.taggable_type = 'Post'").joins("JOIN groups ON groups.id = posts.target_id AND posts.target_type = 'Group'") 
     end
+  end
+  
+  def can_be_seen_by?(user)
+    user.try(:is_admin?) || promoter.nil? || user.promoter == promoter
   end
   
   def set_notifications_to_read!(user)

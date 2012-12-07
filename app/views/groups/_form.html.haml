@@ -8,5 +8,6 @@
   =form.inputs do
     =form.input :name
     =form.input :description, :as => :redactor
+    =form.input :promoter_id, :as => :select, :collection => Promoter.find(:all, :order => "name"), :include_blank => true, :input_html => { :class => "", :style => "width: 500px;"}, :label => "Make this group private and only visible to:"
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
