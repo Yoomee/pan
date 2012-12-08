@@ -2,6 +2,7 @@ class Promoter < ActiveRecord::Base
   
   include Organisation
 
+  after_create :create_private_group
   
   define_index do
     indexes name, :sortable => true
@@ -27,6 +28,11 @@ class Promoter < ActiveRecord::Base
     fields << "country" if options[:country]
     fields.map {|fld| send(fld)}.select(&:present?).join(', ')
   end  
+  
+  def create_private_group
+    group = Group.new(:name => name, :promoter => self, :description => "This is a private group for members of #{name.strip}.")
+    group.save
+  end
   
   def country
     "UK"
