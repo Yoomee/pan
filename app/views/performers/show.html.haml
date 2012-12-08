@@ -50,6 +50,7 @@
                   Current shows
                 -performer.tours.where("end_on > ?", Date.today).each do |tour|
                   =link_to_self tour
+                  %br
             -if performer.tours.where("end_on < ?", Date.today).present?
               .past-tours
                 %h4
@@ -57,6 +58,7 @@
                   Past shows
                 -performer.tours.where("end_on > ?", Date.today).each do |tour|
                   =link_to_self tour
+                  %br
         -if performer.links.present?
           -if performer.links_without_twitter_and_facebook.present?
             %ul.unstyled.links
