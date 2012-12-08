@@ -1,51 +1,60 @@
-.row.group
-  .span9
-    %h1.mb-2.mt-2=link_to_self @group
+-if !@group.can_be_seen_by?(current_user)
+  
+  .row.group
+    .span9
+      %h3.mb-2.mt-2
+        You are not allowed to view this group
+  
+-else
 
-.row.group
-  .span9
-    .row
-      .span9
-        =simple_format(@group.description)
-        %p
-          %strong
-            Join this group by asking a question below:
-    .row
-      .span9
-        -if @posts
-          -if can?(:create, Post)
-            =render("groups/remote_form", :post => current_user.posts.build(:target => @group))
-          =render("groups/posts", :posts => @posts)
-        -elsif @post
-          %h4.mb-1=link_to "See all conversations", group_path(@group)
-          =render "posts/post", :post => @post
+  .row.group
+    .span9
+      %h1.mb-2.mt-2=link_to_self @group
 
-  .span3#groups-sidebar
-    .well
-      %h4 Search Groups
-      %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
-      =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-      %input.btn.mt-1{:type => 'submit', :value => "Search"}    
+  .row.group
+    .span9
+      .row
+        .span9
+          =simple_format(@group.description)
+          %p
+            %strong
+              Join this group by asking a question below:
+      .row
+        .span9
+          -if @posts
+            -if can?(:create, Post)
+              =render("groups/remote_form", :post => current_user.posts.build(:target => @group))
+            =render("groups/posts", :posts => @posts)
+          -elsif @post
+            %h4.mb-1=link_to "See all conversations", group_path(@group)
+            =render "posts/post", :post => @post
+
+    .span3#groups-sidebar
+      .well
+        %h4 Search Groups
+        %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
+        =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+        %input.btn.mt-1{:type => 'submit', :value => "Search"}    
       
-    .well
-      %h4 Members
-      -@group.members.last(6).each do |member|
-        .group-member-link
-          =link_to member do
-            =image_for(member, "50x50#")
-      .clearfix
+      .well
+        %h4 Members
+        -@group.members.last(6).each do |member|
+          .group-member-link
+            =link_to member do
+              =image_for(member, "50x50#")
+        .clearfix
       
-    .well
-      %h4 Other groups
-      %ul.unstyled
-        -Group.without(@group).last(4).each do |group|
-          %li=link_to_self(group)
+      .well
+        %h4 Other groups
+        %ul.unstyled
+          -Group.without(@group).last(4).each do |group|
+            %li=link_to_self(group)
 
 
 
-.row
-  .span8
-    =options_panel do
-      =link_if_can("Edit group", [:edit, @group])
-      =link_if_can("Delete group", [:destroy, @group], :confirm => "Are you sure?")
-      =link_if_can("New group", [:new, Group])
+  .row
+    .span8
+      =options_panel do
+        =link_if_can("Edit group", [:edit, @group])
+        =link_if_can("Delete group", [:destroy, @group], :confirm => "Are you sure?")
+        =link_if_can("New group", [:new, Group])
