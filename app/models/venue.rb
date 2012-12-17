@@ -15,6 +15,9 @@ class Venue < ActiveRecord::Base
   has_many :booked_dates, :class_name => "TourDate", :dependent => :nullify
   accepts_nested_attributes_for :booked_dates, :reject_if => :all_blank, :allow_destroy => true
   
+  has_many :posts, :as => :target, :conditions => {:is_update => false}
+  has_many :updates, :class_name => "Post", :as => :target, :conditions => {:is_update => true}
+  
   has_many :resources, :as => :target
   accepts_nested_attributes_for :resources, :reject_if => :all_blank, :allow_destroy => true
   

@@ -110,6 +110,11 @@
         .row
           .span9
             .well
+              .row
+                .span8
+                  -if can?(:create, Post) && (venue.promoter.users.include?(current_user) || current_user.admin?)
+                    =render("posts/remote_form", :post => current_user.updates.build(:target => venue))
+                  =render("posts/posts", :posts => venue.updates.page(params[:page]))
 
             
       #comments.tab-pane.fade.in
@@ -171,9 +176,6 @@
           .row.mt-2
             .span9
               %h4.mb-1 Updates
-              -if can?(:create, Post)
-                =render("posts/remote_form", :post => current_user.posts.build(:target => venue))
-              =render("posts/posts", :posts => posts)
       #technical.tab-pane.fade
         =render("venues/technical", :venue => venue)
       -if venue.slideshow
