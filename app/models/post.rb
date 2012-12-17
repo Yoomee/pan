@@ -19,6 +19,15 @@ class Post < ActiveRecord::Base
       Group.find(target_id).members.each do |member|
         notifications.create(:user => member, :context => "my_groups") unless member == user
       end
+    elsif target_type == "Tour" && is_update?
+      target.performer.likers.each do |liker|
+        target.notifications.create(:user => liker, :context => "tour_update_created")
+      end
+    elsif target_type == "Performer" && is_update?
+      puts "here \n\n\n\n\n\n\n\n"
+      target.likers.each do |liker|
+        target.notifications.create(:user => liker, :context => "performer_update_created")
+      end
     end
   end
   

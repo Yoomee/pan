@@ -3,6 +3,7 @@
     =form.inputs do
       =form.input :target_type, :as => :hidden
       =form.input :target_id, :as => :hidden
+      =form.input :is_update, :as => :hidden
       .fake-textarea
         =form.input :text, :label => false, :input_html => {:rows => 3, :placeholder => "Write something here..."}
         =form.input :tag_list, :label => "<i class='icon icon-tag'></i>".html_safe, :input_html => {:placeholder => "Tags", :'data-autocomplete' => autocomplete_tags_path, :'data-delimiter' => ', '}, :wrapper_html => {:class => "post_tag_list_input"}

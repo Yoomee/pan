@@ -225,6 +225,11 @@
         .row
           .span9
             .well
+              .row
+                .span8
+                  -if can?(:create, Post) && (tour.performer.users.include?(current_user) || current_user.admin?)
+                    =render("posts/remote_form", :post => current_user.updates.build(:target => tour))
+                  =render("posts/posts", :posts => tour.updates.page(params[:page]))
             
       #comments.tab-pane.fade.in
         .row

@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   
   has_many :reviews, :dependent => :nullify
   
+  
+  has_many :posts, :order => "created_at DESC", :conditions => {:is_update => false}, :dependent => :destroy
+  has_many :updates, :class_name => "Post", :conditions => {:is_update => true}, :dependent => :destroy
+  
   has_many :group_members
   has_many :groups, :through => :group_members
 

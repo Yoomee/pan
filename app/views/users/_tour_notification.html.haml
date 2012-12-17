@@ -1,0 +1,17 @@
+%li
+  .notification_user.pull-left.clear.mb-1.mt-1
+    =link_to(image_for(notification.resource.performer, "37x37#"), notification.resource.performer, :class => "pull-left")
+    .pull-left
+      =link_to_self(notification.resource.performer)
+      %i.icon-chevron-right
+      -if notification.context == 'tour_created'
+        =link_to "has a new show - #{notification.resource}", notification.resource
+      -if notification.context == 'tour_updated'
+        =link_to "added an update to their show - #{notification.resource}", notification.resource
+      -if notification.context == 'tour_update_created'
+        =link_to "added an update to their show - #{notification.resource}", notification.resource
+      %br
+      %span.small-info-text
+        =time_ago_in_words(notification.created_at)
+        ago
+  .notification_content.clear

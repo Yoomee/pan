@@ -28,7 +28,7 @@
           -else
             %ul.unstyled
               -current_user.other_notifications.where(:read => false).reverse_order.each do |notification|
-                =render 'users/notification', :notification => notification
+                =render "users/#{notification.resource.class.to_s.downcase}_notification", :notification => notification
 
       #messages.tab-pane.fade.in
         .well

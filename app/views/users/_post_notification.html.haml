@@ -1,0 +1,14 @@
+-notification_group = notification.resource.target
+-notification_user = notification.resource.user
+%li
+  .notification_user.pull-left.clear.mb-1.mt-1
+    =link_to(image_for(notification_user, "37x37#"), notification_user, :class => "pull-left")
+    .pull-left
+      =link_to_self(notification_user)
+      %i.icon-chevron-right
+        =link_to_self(notification_group)
+      %br
+      %span.small-info-text
+        =time_ago_in_words(notification.created_at)
+        ago
+  .notification_content.clear

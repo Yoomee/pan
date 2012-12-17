@@ -27,8 +27,11 @@ class Tour < ActiveRecord::Base
   has_many :external_reviews, :as => :reviewable, :dependent => :destroy
   accepts_nested_attributes_for :external_reviews, :reject_if => :all_blank, :allow_destroy => true
   
-  has_many :posts, :as => :target
+  has_many :posts, :as => :target, :conditions => {:is_update => false}
+  has_many :updates, :class_name => "Post", :as => :target, :conditions => {:is_update => true}
 
+  has_many :notifications, :as => :resource, :dependent => :destroy
+  
   has_and_belongs_to_many :collections
   
   has_slideshow
@@ -135,11 +138,10 @@ class Tour < ActiveRecord::Base
   def create_notifications_if_favourite
     performer.likers.each do |liker|
       if created_at > 5.minutes.ago
-        performer.notifications.create(:user => liker, :context => "tour_created")
+        notifications.create(:user => liker, :context => "tour_created")
       else
-        performer.notifications.create(:user => liker, :context => "tour_updated")
+        notifications.create(:user => liker, :context => "tour_updated")
       end
-      
     end
   end
   

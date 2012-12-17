@@ -16,7 +16,9 @@ class Performer < ActiveRecord::Base
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
   
-  has_many :posts, :as => :target
+  
+  has_many :posts, :as => :target, :conditions => {:is_update => false}
+  has_many :updates, :class_name => "Post", :as => :target, :conditions => {:is_update => true}
   has_many :tours, :dependent => :destroy
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true

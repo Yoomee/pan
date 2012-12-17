@@ -1,0 +1,15 @@
+%li
+  .notification_user.pull-left.clear.mb-1.mt-1
+    =link_to(image_for(notification.resource, "37x37#"), notification.resource, :class => "pull-left")
+    .pull-left
+      =link_to_self(notification.resource)
+      %i.icon-chevron-right
+      -if notification.context == 'favourite_updated'
+        updated their profile
+      -if notification.context == 'performer_update_created'
+        added an update
+      %br
+      %span.small-info-text
+        =time_ago_in_words(notification.created_at)
+        ago
+  .notification_content.clear

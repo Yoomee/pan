@@ -1,12 +1,5 @@
--if notification.resource.is_a?(Post)
-  -notification_group = notification.resource.target
-  -notification_user = notification.resource.user
--elsif notification.resource.is_a?(Comment)
-  -notification_group = notification.resource.post.target
-  -notification_user = notification.resource.post.user
--elsif notification.resource.is_a?(Performer)
-  -notification_group = notification.resource
-  -notification_user = notification.resource
+-notification_group = notification.resource.post.target
+-notification_user = notification.resource.post.user
 %li
   .notification_user.pull-left.clear.mb-1.mt-1
     =link_to(image_for(notification_user, "37x37#"), notification_user, :class => "pull-left")

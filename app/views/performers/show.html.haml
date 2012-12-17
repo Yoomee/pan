@@ -161,6 +161,11 @@
         .row
           .span9
             .well
+              .row
+                .span8
+                  -if can?(:create, Post) && (performer.users.include?(current_user) || current_user.admin?)
+                    =render("posts/remote_form", :post => current_user.updates.build(:target => performer))
+                  =render("posts/posts", :posts => performer.updates.page(params[:page]))
             
       #comments.tab-pane.fade.in
         .row
