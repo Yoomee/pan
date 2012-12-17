@@ -29,7 +29,7 @@
               Edit profile
           .notifications
             %i.icon-group
-            %span.number=current_user.group_notifications.count
+            %span.number=current_user.other_notifications.count
             notifications
             =link_to "view", "#notifications", :'data-toggle' => 'tab'
           .messages
@@ -104,11 +104,11 @@
       -if current_user.performer_id == performer.id
         #notifications.tab-pane.fade.in
           .well
-            -if current_user.group_notifications.where(:read => false).size == 0
+            -if current_user.other_notifications.where(:read => false).size == 0
               %p You have no notifications
             -else
               %ul.unstyled
-                -current_user.group_notifications.where(:read => false).reverse_order.each do |notification|
+                -current_user.other_notifications.where(:read => false).reverse_order.each do |notification|
                   -if notification.resource.is_a?(Post)
                     -notification_group = notification.resource.target
                     -notification_user = notification.resource.user

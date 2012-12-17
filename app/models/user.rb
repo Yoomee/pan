@@ -23,13 +23,12 @@ class User < ActiveRecord::Base
   has_many :group_members
   has_many :groups, :through => :group_members
 
-  has_many :group_notifications, :class_name => "Notification", :conditions => {:context => "my_groups", :read => false}
-
   has_many :thread_participants, :foreign_key => :participant_id, :dependent => :destroy
   has_many :threads, :through => :thread_participants, :source => :message_thread
   has_many :messages, :dependent => :destroy
 
   has_many :message_notifications, :class_name => "Notification", :conditions => {:context => "messages", :read => false}
+  has_many :other_notifications, :class_name => "Notification", :conditions => ['notifications.context != "messages" AND notifications.read = false']
 
   acts_as_taggable_on :skills, :skills_offered, :skills_needed
   

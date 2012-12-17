@@ -21,6 +21,8 @@ class Performer < ActiveRecord::Base
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true
   has_many :users, :dependent => :nullify
+  
+  has_many :notifications, :as => :resource, :dependent => :destroy
 
   has_many :external_reviews, :as => :reviewable, :dependent => :destroy
   accepts_nested_attributes_for :external_reviews, :reject_if => :all_blank, :allow_destroy => true
@@ -28,6 +30,8 @@ class Performer < ActiveRecord::Base
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
+  
+  after_update :create_notifications_if_favourite
   
   def contact1_details
     [contact1_name, contact1_email, contact1_phone].compact
@@ -59,4 +63,12 @@ class Performer < ActiveRecord::Base
   def links_without_twitter_and_facebook
     links.where("host != 'facebook.com' AND host != 'twitter.com'")
   end
+  
+  private
+  def create_notifications_if_favourite
+    likers.each do |liker|
+      notifications.create(:user => liker, :context => "favourite_updated")
+    end
+  end
+  
 end

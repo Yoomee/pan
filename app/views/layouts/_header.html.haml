@@ -61,9 +61,9 @@
                     =current_user.message_notifications.size
               =link_to "#{user_path(current_user)}/#notifications", :class=>"profile-icon user-link" do
                 %i.icon-user
-                -if current_user.group_notifications.size > 0
+                -if current_user.other_notifications.size > 0
                   .counter
-                    =current_user.group_notifications.size
+                    =current_user.other_notifications.size
                 
         
 -if false      
