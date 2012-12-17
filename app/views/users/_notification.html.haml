@@ -16,6 +16,10 @@
       -if notification.resource.is_a?(Performer)
         -if notification.context == 'favourite_updated'
           updated their profile
+        -if notification.context == 'tour_created'
+          has a new show
+        -if notification.context == 'tour_updated'
+          updated a show
       -else
         =link_to_self(notification_group)
       %br

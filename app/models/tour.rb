@@ -38,6 +38,9 @@ class Tour < ActiveRecord::Base
   acts_as_taggable_on :genres
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
+          
+  
+  after_save :create_notifications_if_favourite
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
@@ -127,6 +130,17 @@ class Tour < ActiveRecord::Base
       ["School hall", suits_school_hall?],
       ["Outdoors", suits_outdoors?]
     ]
+  end
+  
+  def create_notifications_if_favourite
+    performer.likers.each do |liker|
+      if created_at > 5.minutes.ago
+        performer.notifications.create(:user => liker, :context => "tour_created")
+      else
+        performer.notifications.create(:user => liker, :context => "tour_updated")
+      end
+      
+    end
   end
   
 end
