@@ -1,5 +1,6 @@
 class Performer < ActiveRecord::Base
   
+  include YmLikes::Likeable
   include Organisation
   include HasReviews
   

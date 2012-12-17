@@ -72,9 +72,8 @@
             =link_to "", :class => "btn" do
               %i.icon-envelope
               Send a message
-            =link_to "", :class => "btn" do
-              %i.icon-heart
-              Add to favourites
+            
+            =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Remove", :class => "btn")
             =link_to "", :class => "btn", :id => "go-to-comment" do
               %i.icon-pencil
               Post a comment

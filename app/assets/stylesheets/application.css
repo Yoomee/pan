@@ -1840,11 +1840,12 @@ a i.icon-facebook:hover {
 .black-block-links {
   margin-top: 20px;
 }
-.black-block-links a {
+.black-block-links a,
+.black-block-links a.like-link,
+.black-block-links a.like-link.active {
   width: 180px;
   color: white;
   background: black;
-
   margin-bottom: 10px;
 }
 .black-block-links a i {
