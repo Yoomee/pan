@@ -84,8 +84,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def set_message_notifications_as_read!
-    notifications.where(["context = 'messages' AND notifications.user_id = ?", self.id]).update_all(:read => true)
+  def set_notifications_as_read!
+    notifications.where("notifications.user_id = ?", self.id).update_all(:read => true)
   end
   
   def steps

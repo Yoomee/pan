@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   private
   def set_notifications_to_read
     if user == current_user
-      user.set_message_notifications_as_read!
+      user.set_notifications_as_read!
     end
   end
   
