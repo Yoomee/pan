@@ -40,7 +40,9 @@ $(document).ready () ->
         value: term,
         text: term
       )
-  )
+    )
+  $('#reveal-search').click ->
+    $('#search-box').toggle()
   
   YmComments.Form.init({submitOnEnter: true})
 

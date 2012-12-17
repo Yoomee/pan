@@ -362,7 +362,7 @@ select[multiple='multiple']{
   line-height: 40px;
   margin:0px;
   background: url(/assets/site-logo.png) no-repeat 0 0;
-  width: 200px;
+  width: 160px;
   float: left;
   height: 30px;
 }
@@ -428,10 +428,27 @@ h1.logged_out {
   border-radius:14px;
   
 }
-
 .search-icon {
 	border-right: 1px solid #868884;  
 	padding-right: 20px;
+}
+#search-box,
+#search-box form {
+  float: left;
+  clear: none;
+  margin: 0;
+  padding: 0;
+}
+#search-box input {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  background: white;
+  color: #3B3D3B;
+  margin: 0;
+  padding: 6px 10px;
+}
+#search-box input#q {
+  margin: 0;
+  padding: 5px;
 }
 
 /*========== Homepage logged in ==========*/

@@ -6,6 +6,10 @@
         %h1#site_logo
           =link_to "/" do
             =Settings.site_name
+        #search-box.hide
+          %form{:action => directory_search_path}
+            =text_field_tag 'q', params[:q]
+            %input.btn{:type => 'submit', :value => "Search"}
         .user-links
           -if user_signed_in?                   
             .header-btn-group.btn-group
@@ -48,7 +52,7 @@
                     %icon.icon-signout
                     =t(:logout)
             .user-link-icons
-              =link_to "#", :class=>"search-icon user-link" do
+              =link_to "#", :class=>"search-icon user-link", :id => "reveal-search" do
                 %i.icon-search
               =link_to "#{user_path(current_user)}/#messages", :class=>"messages-icon user-link" do
                 %i.icon-envelope-alt
