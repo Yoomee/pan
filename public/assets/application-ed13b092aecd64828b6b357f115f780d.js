@@ -30069,6 +30069,9 @@ Copyright (c) 2011 by Harvest
         });
       }
     });
+    $('#reveal-search').click(function() {
+      return $('#search-box').toggle();
+    });
     YmComments.Form.init({
       submitOnEnter: true
     });
