@@ -1524,24 +1524,18 @@ span.welcome-to-tourbook {
   text-indent: -9000em;
 }
 /*========== Shows page ==========*/
-
 .show-tour {
   padding: 10px 10px 0; 
   margin-bottom: 20px;
   overflow: hidden;
-  
   background: #fff;
-  
-  
   -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
 }
-
 .show-tour.block {
 	height: 440px;
 }
-
 .span9.show-tour {
   /*padding: 10px 10px 0; */
   padding: 0;
@@ -1555,12 +1549,11 @@ span.welcome-to-tourbook {
 }
 .show-tour:hover {
   color: #525150;
-  
-    -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
+
+  -webkit-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 10px rgba(0, 0, 0, 0.1);
 }
-
 .tour-box-title {
   float: left;
   width: 100%;
@@ -1572,9 +1565,6 @@ span.welcome-to-tourbook {
   width: 100%;
   line-height: 1.5;
   margin: 0px 0 0px;
-}
-p.tour-dates {
-
 }
 .show-tags .tag span.label.tag-label {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
@@ -1630,11 +1620,22 @@ p.tour-dates {
   font-style: normal;
   color: #4D4E4D;
 }
-
 .show-list-view-text {
   margin: 8px 0 0 8px;
 }
-
+#sort-shows-btn-group {
+  margin-top: 9px;
+  margin-left: 20px;
+}
+#sort-shows-btn,
+#sort-shows-btn span,
+#sort-shows-btn-group .btn.dropdown-toggle {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal; 
+  background: white;
+  color: #3C3D3C;
+  font-size: 10px;
+  padding: 2px 6px;
+}
 
 /*========== block or list view ==========*/
 .block-or-line {

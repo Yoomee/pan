@@ -7,6 +7,7 @@ module FilterHelper
       hash[:collection] = collection.name.parameterize unless active
       hash[:month] = params[:month] if params[:month].present?
       hash[:region] = params[:region] if params[:region].present?
+      hash[:sort] = params[:sort] if params[:sort].present?
       hash[:tags] = params[:tags] if params[:tags].present?
       hash[:type] = params[:type] if params[:type].present?
       hash[:year] = params[:year] if params[:year].present?
@@ -24,6 +25,7 @@ module FilterHelper
       hash[:collection] = params[:collection] if params[:collection].present?
       hash[:month] = params[:month] if params[:month].present?
       hash[:region] = region unless active
+      hash[:sort] = params[:sort] if params[:sort].present?
       hash[:tags] = params[:tags] if params[:tags].present?
       hash[:type] = params[:type] if params[:type].present?
       hash[:year] = params[:year] if params[:year].present?

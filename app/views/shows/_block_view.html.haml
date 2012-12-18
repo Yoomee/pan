@@ -17,5 +17,5 @@
               -tour.genres.first(2).each do |tag|
                 -param_tags = original_tags.dup
                 -param_tags << tag.name unless param_tags.delete(tag.name)
-                =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :collection => @collection, :region => @region}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
+                =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :collection => @collection, :region => @region, :sort => @sort}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
           .clearfix
