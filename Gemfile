@@ -19,6 +19,7 @@ gem 'newrelic_rpm'
 gem 'ey_config'
   
 gem 'mailcatcher'
+gem 'stamp'
 
 gem 'ym_core', "~> 0.1.33" #, :path => "~/Rails/Gems/ym_core"
 gem 'ym_videos', "~> 0.1"
