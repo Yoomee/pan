@@ -7,6 +7,7 @@ class PerformersController < ApplicationController
 
   def create
     if performer.save
+      current_user.record_activity!(performer)
       flash_notice(performer)
       redirect_to(performer)
     else

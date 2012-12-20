@@ -11,6 +11,7 @@ class VenuesController < ApplicationController
   
   def create
     if venue.save
+      current_user.record_activity!(venue)
       flash_notice(venue)
       redirect_to(venue)
     else

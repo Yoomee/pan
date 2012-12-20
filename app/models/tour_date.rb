@@ -1,6 +1,7 @@
 class TourDate < ActiveRecord::Base
   
   include YmCore::Model
+  include YmActivity::Recordable
   
   belongs_to :tour
   belongs_to :venue
@@ -13,6 +14,7 @@ class TourDate < ActiveRecord::Base
   
   scope :past, where(:booked => true).where("date < ?", Date.today)
   scope :future, where(:booked => true).where("date >= ?", Date.today)
+  scope :in_pan_venue, where('venue_id != 0 AND venue_id IS NOT NULL')
   
   def to_hash
     {

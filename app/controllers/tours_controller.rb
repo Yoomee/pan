@@ -9,7 +9,8 @@ class ToursController < ApplicationController
   def create
     @tour = Tour.new(params[:tour])
     if @tour.save
-      flash[:notice] = "Created a new show"      
+      current_user.record_activity!(@tour)
+      flash[:notice] = "Created a new show"
       redirect_to @tour
     else
       render :action => "new"

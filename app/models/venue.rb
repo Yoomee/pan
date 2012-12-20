@@ -1,6 +1,7 @@
 class Venue < ActiveRecord::Base
   
   include Organisation
+  include YmActivity::Recordable
   
   define_index do
     indexes name, :sortable => true

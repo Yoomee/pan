@@ -1,6 +1,7 @@
 class Tour < ActiveRecord::Base
   
   include YmCore::Model
+  include YmActivity::Recordable
   include HasReviews
   
   define_index do
@@ -135,6 +136,7 @@ class Tour < ActiveRecord::Base
     ]
   end
   
+  private
   def create_notifications_if_favourite
     performer.likers.each do |liker|
       if created_at > 5.minutes.ago
@@ -144,5 +146,5 @@ class Tour < ActiveRecord::Base
       end
     end
   end
-  
+
 end
