@@ -88,56 +88,30 @@
         .latest-shows
           #latest-news-carousel.carousel.slide
             .carousel-inner
-              .item.active
-                =link_to "#", :class=>"carousel-link-image" do
-                  =image_tag "latest-shows.jpg"
-                .carousel-caption
-                  %h4
-                    =link_to "Hitch & Crunch", "#", :class=>"carousel-link-title"
-                  %p Mull Theatre
-              .item
-                =link_to "#", :class=>"carousel-link-image" do
-                  =image_tag "latest-shows.jpg"
-                .carousel-caption
-                  %h4
-                    =link_to "Hitch & Crunch", "#", :class=>"carousel-link-title"
-                  %p Mull Theatre                                  
+              -@latest_shows.each_with_index do |show, index|
+                %div{:class => "item #{index == 1 ? 'active' : ''}"}
+                  =link_to show, :class=>"carousel-link-image" do
+                    =image_for(show, '428x289#')
+                  .carousel-caption
+                    %h4
+                      =link_to_self show, :class=>"carousel-link-title"
             =link_to "#latest-news-carousel", :class=>"carousel-control left", :"data-slide"=> "prev" do
               %i.icon-chevron-left
             =link_to "#latest-news-carousel", :class=>"carousel-control right", :"data-slide"=> "next" do
               %i.icon-chevron-right
               
         %h2.underline.mb-1 Recent Activity
-        %ul.recent-activity.news-feed.unstyled
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              =image_tag "news-feed-image.jpg"
-            .news-feed-text  
-              %p
-                =link_to "Mull Theatre", "#"
-                added a new show.
-              %h3
-                =link_to "Hitch & Crunch"
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              =image_tag "news-feed-image.jpg"
-            .news-feed-text  
-              %p
-                =link_to "Mull Theatre", "#"
-                added a new show.
-              %h3
-                =link_to "Hitch & Crunch"
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              =image_tag "news-feed-image.jpg"
-            .news-feed-text  
-              %p
-                =link_to "Mull Theatre", "#"
-                added a new show.
-              %h3
-                =link_to "Hitch & Crunch"
-        .clearfix        
-                      
+        -if @recent_activity.size == 0
+          %h4 No activity
+        -else
+          %ul.news-feed.unstyled
+            #recent-activity
+              =render 'home/recent_activity_items', :recent_activity => @recent_activity
+          .clearfix
+          -if @recent_activity.next_page
+            .center
+              =link_to "More activity", root_path(:page => @recent_activity.next_page), :remote => true, :id => "more-activity-btn"
+
               
               
               
@@ -162,55 +136,27 @@
     .span3
       #upcoming-events
         %h2.underline.mb-1 Upcoming Events
-        %ul.upcoming-events.news-feed.news-feed-calendar.unstyled
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              .calendar-icon
-                %span.calendar-icon-date
-                  14
-                %span.calendar-icon-month
-                  Sept
-            .news-feed-text  
-              %h3
-                =link_to "Ornithology"
-              %p.event-list-venue
-                =link_to "#" do
-                  %i.icon-home
-                  The sunart centre
-              %p.event-list-time    
-                7pm
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              .calendar-icon
-                %span.calendar-icon-date
-                  14
-                %span.calendar-icon-month
-                  Sept
-            .news-feed-text  
-              %h3
-                =link_to "Ornithology"
-              %p.event-list-venue
-                =link_to "#" do
-                  %i.icon-home
-                  The sunart centre
-              %p.event-list-time    
-                7pm
-          %li
-            =link_to "#", :class=>"news-feed-image" do
-              .calendar-icon
-                %span.calendar-icon-date
-                  14
-                %span.calendar-icon-month
-                  Sept
-            .news-feed-text  
-              %h3
-                =link_to "Ornithology"
-              %p.event-list-venue
-                =link_to "#" do
-                  %i.icon-home
-                  The sunart centre
-              %p.event-list-time    
-                7pm                                
+        -if @upcoming_events.size == 0
+          %h3 None
+        -else
+          %ul.upcoming-events.news-feed.news-feed-calendar.unstyled
+            -@upcoming_events.each do |event|
+              %li
+                .news-feed-image
+                  .calendar-icon
+                    %span.calendar-icon-date
+                      =event.date.stamp('31')
+                    %span.calendar-icon-month
+                      =event.date.stamp('Sep')
+                .news-feed-text  
+                  %h3
+                    =link_to_self event.tour
+                  %p.event-list-venue
+                    =link_to event.venue do
+                      %i.icon-home
+                      =event.venue
+                  %p.event-list-time    
+                    =event.time
           
 -if false
   .row.mb-2.fade_in

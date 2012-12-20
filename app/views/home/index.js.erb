@@ -1,0 +1,6 @@
+$('#recent-activity').append('<%=escape_javascript(render('home/recent_activity_items', :recent_activity => @recent_activity))%>');
+<%if @recent_activity.next_page%>
+  $('#more-activity-btn').attr('href','<%=root_path(:page => @recent_activity.next_page)%>');
+<%else%>
+  $('#more-activity-btn').hide();
+<%end%>
