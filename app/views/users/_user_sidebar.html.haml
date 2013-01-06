@@ -21,6 +21,7 @@
           %i.icon-briefcase
           My Organisation
         =link_to_self user.promoter
+        =user.job_title
     -if user.performer
       .promoter
         %h4
@@ -35,9 +36,33 @@
           My Venues
         -user.venues.each do |venue|
           =link_to_self venue
+          %br
+          
+    -if user.groups.present?
+      .venues
+        %h4
+          %i.icon-comment
+          My groups
+        -user.groups.each do |group|
+          =link_to_self group   
+          %br   
+          
+    .bt      
+      -if user.skills.present?
+        .genres
+          =comma_list_tags(user, :skills) 
+          
+          
+    -if user.promoter
+      %h5
+        %i.icon-map-marker
+        =user.promoter.region     
+      
+    %br
+    %br      
     -if user.links.present?
       -if user.links_without_twitter_and_facebook.present?
-        %ul.unstyled.links
+        %ul.unstyled.links.mt-3
           -user.links_without_twitter_and_facebook.each do |link|
             %li
               =link_to(link, link.url, :target => '_blank')

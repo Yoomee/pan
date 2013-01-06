@@ -1963,6 +1963,11 @@ a.promoter.venues {
   color: #4D4E4D;
 }
 
+.bt {
+	border-top: 1px #919191 solid;
+	margin: 20px 0 20px 0;
+}
+
 /*========== groups ==========*/
 .well.group {
 	height: 230px;

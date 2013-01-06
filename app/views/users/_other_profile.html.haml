@@ -6,19 +6,41 @@
         -if user.promoter
           .promoter
             =link_to user.promoter do
-              %i.icon-briefcase
-              =user.promoter
-            =user.job_title
+              %h5
+                %i.icon-briefcase
+                =user.promoter
+                %br
+              =user.job_title
           -if user.venues.present?
-            .venues
+            .venues.bt
               -user.venues.each do |venue|
                 =link_to venue do
-                  %i.icon-home
-                  =venue
+                  %h5
+                    %i.icon-home
+                    =venue
         -elsif user.performer
           =link_to user.performer do
             %i.icon-user
             =user.performer
+            
+        -if user.groups.present?
+          .venues.bt
+            %h
+              %i.icon-comment
+              -user.groups.each do |group|
+                =link_to_self group   
+                %br    
+
+        .bt      
+          -if user.skills.present?
+            .genres
+              =comma_list_tags(user, :skills)
+              
+        -if user.promoter
+          %h5
+            %i.icon-map-marker
+            =user.promoter.region      
+
     
         -if user.links.present?
           -if user.links_without_twitter_and_facebook.present?
