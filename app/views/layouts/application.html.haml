@@ -26,7 +26,7 @@
                     =Settings.site_name 
     
                   
-      -if flash.present? && !(logged_in? && controller_name == 'home')
+      -if flash.present?
         =yield_with_bootstrap(render_flash)    
       =yield_with_bootstrap(yield)
       .push
