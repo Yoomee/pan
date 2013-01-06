@@ -124,7 +124,7 @@
         
     .span3
       #noticeboard.well
-        %h2.underline.mb-1 Noticeboard
+        %h2.underline.mb-1=link_to_slug("Noticeboard", :noticeboard)
         %ul.unstyled
           -if @pages.count ==0 
             There is nothing on the noticeboard at the moment.
