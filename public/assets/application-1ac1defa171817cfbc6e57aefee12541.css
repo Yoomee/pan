@@ -7879,6 +7879,9 @@ a:hover {
 	background: #efefef;
 	color: #666;
 }
+.center {
+  text-align: center;
+}
 
 /*========== Forms ==========*/
 select[multiple='multiple']{
@@ -8137,16 +8140,17 @@ ul.messages-and-notifications {
   margin-left: -60px;
   width: 50px;
   height: 55px;
-
 }
 .news-feed-calendar li {
 	margin-left: 65px;
 }
 .upcoming-events.news-feed-calendar li {
 	width: 155px;
-  
 }
-.recent-activity li {
+.upcoming-events.news-feed-calendar li h3 {
+  margin-top: 0;
+}
+#recent-activity li {
   width: 340px;
 }
 .calendar-icon {
@@ -8155,8 +8159,7 @@ ul.messages-and-notifications {
   color: #fff;
   float: left;
   width: 45px;
-  margin: 0 0 0 0px;
-  
+  margin: 0 0 0 0px; 
   border-radius:5px;
   -moz-border-radius:5px;
   -webkit-border-radius:5px;
@@ -8169,16 +8172,18 @@ ul.messages-and-notifications {
   text-align: center;
   text-transform: uppercase;
 }
-
 .calendar-icon .calendar-icon-date {
   font-size: 22px;
   padding: 6px 0 0;
 }
-
 .news-feed-image img {
   width: 70px;
 }
-
+#more-activity-btn {
+  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  color: #6B6A68;
+  text-decoration: none;
+}
 
 
 
@@ -9454,7 +9459,7 @@ a i.icon-facebook:hover {
 .nav-link {
   color: #4D4E4D;
   float: left;
-  padding: 28px 24px 0;
+  padding: 28px 21px 0;
   text-decoration: none;
   display: block;
   height: 70px;
@@ -9510,6 +9515,11 @@ a.promoter.venues {
 .promoter-diary-link,
 .venue-diary-link {
   color: #4D4E4D;
+}
+
+.bt {
+	border-top: 1px #919191 solid;
+	margin: 20px 0 20px 0;
 }
 
 /*========== groups ==========*/
