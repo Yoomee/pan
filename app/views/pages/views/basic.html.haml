@@ -1,7 +1,7 @@
 -if page.parent
   .row
-    .span8
-      %h2.mb-2.mt-2=page.parent.title
+    .span
+      %h2.mb-2.mt-2=page.parent.title 
 
 .row   
   .span7
@@ -23,6 +23,10 @@
           
   -if page.root.children.present?
     .span4.offset1
+      -if page.parent
+        =link_to "view all", page.parent
+        %br
+        %br
       .well
         =render("pages/subnav")   
     
