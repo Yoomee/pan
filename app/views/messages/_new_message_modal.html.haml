@@ -8,11 +8,11 @@
         %h3="Send a message to #{recipient}"
     .modal-body
       -if recipient==current_user
-        =form.input :recipient_id, :as => :select, :collection => User.all, :input_html => { :class => "chosen recipient", :style => "width: 200px;"}, :label => "To"
+        =form.input :recipient_id, :as => :select, :multiple => true, :collection => User.all.reject{|u| u==current_user}, :input_html => { :style => "width:480px;", :'data-placeholder' => "To"}, :label => false, :placeholder => "To"
         %br
       -else
         =form.input :recipient_id, :as => :hidden, :value => recipient.id
-      =form.input :text, :label => false, :input_html => {:rows => 5, :placeholder => "Send a message..."}
+      =form.input :text, :label => false, :input_html => {:rows => 4, :placeholder => "Send a message...", :style => "width:480px;"}
     .modal-footer
       =link_to("Cancel", "#", :class => "btn", :'data-dismiss' => 'modal')
       =form.commit_button "Send", :button_html => {:data => {}, :class => "btn btn-primary", :id => "new-message-form-submit"}
