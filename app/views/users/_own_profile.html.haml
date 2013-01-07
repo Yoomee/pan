@@ -39,6 +39,12 @@
              
       #groups.tab-pane.fade.in
         .well
+          %h4
+            %i.icon-comment
+            My groups
+          -user.groups.each do |group|
+            =link_to_self group   
+            %br
             
       #preferences.tab-pane.fade.in
         .well
