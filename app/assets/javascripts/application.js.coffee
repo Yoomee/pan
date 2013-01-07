@@ -32,6 +32,9 @@ window.Link = Link
 
 $(document).ready () ->
   $("select.chosen:not([multiple='multiple'])").chosen()
+  $('#message_recipient_id').chosen(
+    max_selected_options: 1
+  )
   $("select[multiple='multiple']").chosen(
     persistent_create_option: false,
     create_option_text: "Add",
