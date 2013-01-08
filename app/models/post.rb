@@ -5,7 +5,8 @@ class Post < ActiveRecord::Base
   has_many :notifications, :as => :resource, :dependent => :destroy
   
   after_create :add_user_to_group
-  after_create :create_notifications
+  after_create :create_notifications  
+  after_create :update_activity
 
   private
   def add_user_to_group
@@ -24,11 +25,17 @@ class Post < ActiveRecord::Base
         target.notifications.create(:user => liker, :context => "tour_update_created")
       end
     elsif target_type == "Performer" && is_update?
-      puts "here \n\n\n\n\n\n\n\n"
       target.likers.each do |liker|
         target.notifications.create(:user => liker, :context => "performer_update_created")
       end
+    else
+      logger.debug   
     end
+  end
+  
+  def update_activity
+      user = User.find(self.user_id)
+      user.record_activity!(self)  
   end
   
 end

@@ -1,0 +1,13 @@
+=link_to item, :class=>"news-feed-image" do
+  =image_for(item.user, '70x70#')
+.news-feed-text  
+  %p
+    =link_to_self item.user.name
+    added a comment about
+  %h3
+    -if item.target_type == "Tour"
+      =link_to item.target.name, tour_path(item.target.id, :anchor => 'comments')
+    -elsif item.target_type == "Performer"
+      =link_to item.target.name, performer_path(item.target.id, :anchor => 'comments')
+    -else
+      =link_to_self item.target
