@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
         flash.error = "Something went wrong - your message has not been sent"
       end      
     end
-    redirect_to current_user
+    redirect_to user_path(current_user, :anchor => "messages")
   end
 
 end
