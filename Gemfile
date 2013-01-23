@@ -45,6 +45,7 @@ group :assets do
 end
 
 group :development do
+ gem 'letter_opener' 
  gem 'growl'
  gem 'ruby-debug19', :require => 'ruby-debug'
  gem 'yoomee', :git => "git://git.yoomee.com:4321/gems/yoomee.git", :branch => "rails3"
