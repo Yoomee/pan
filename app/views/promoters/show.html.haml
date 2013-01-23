@@ -30,6 +30,8 @@
   .span3
     .row.profile-left-col
       .well
+        =image_for(promoter, "220x150#")
+        .mb-1
         -if promoter.venues.with_lat_lng.present?
           =link_to "#promoter-map", :'data-toggle' => "modal", :class => "promoter-location" do
             %i.icon-map-marker
@@ -397,8 +399,8 @@
   .span9
     =options_panel do
       =back_link
-      =link_if_can("Edit promoter", [:edit, promoter])
-      =link_if_can("Delete promoter", [:destroy, promoter], :confirm => "Are you sure?")
+      =link_if_can("Edit organisation", [:edit, promoter])
+      =link_if_can("Delete organisation", [:destroy, promoter], :confirm => "Are you sure?")
       -if can?(:create, promoter.venues.build)
         =link_to("Add venue", new_promoter_venue_path(promoter))
       -if can?(:create, promoter.users.build)
