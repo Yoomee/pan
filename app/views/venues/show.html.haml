@@ -42,9 +42,6 @@
         
 
         .clearfix
-        =link_to diary_path(:venue_id => venue.id), :class => "venue-diary-link" do
-          %i.icon-calendar
-          Diary
         .mt-1
         -if venue.address.present?
           =venue.address_without_country
