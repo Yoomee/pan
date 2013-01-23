@@ -7830,15 +7830,17 @@ a:hover {
 	left: 0;
 	top: 0;
 	margin: 0 14px 0 0;
+
 }
 
 .new-message-btn {
 	width: 166px;
-	margin: 22px 0 0 0;
+	margin: -36px 0 0 0;
 	background: silver;
 	color: #4D4E4D;
 	font-weight: bold;
 	text-align: left;
+	float: right;
 }
 
 .admin-btn {
