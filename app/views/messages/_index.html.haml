@@ -17,6 +17,10 @@
   .messages-header
     %h3.message-title
       Messages
+    =link_to "#new-message", :'data-toggle' => "modal", :class => "btn new-message-btn" do
+      %i.icon-envelope
+      New message    
+      
   .clearfix
   -if threads.size == 0
     %p.mt-1 You have no messages.
@@ -44,8 +48,4 @@
     -threads.each do |thread|
       %div{:id => "thread-#{thread.id}", :class => "thread hide"}
         =render "messages/show", :thread => thread
-        
-=link_to "#new-message", :'data-toggle' => "modal", :class => "btn new-message-btn" do
-  %i.icon-envelope
-  Send a message    
         
