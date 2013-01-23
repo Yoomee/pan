@@ -21,8 +21,24 @@ module DiaryHelper
       hash[:region] = params[:region] if params[:region].present?
       hash[:tags] = params[:tags] if params[:tags].present?
       hash[:type] = params[:type] if params[:type].present?
-    end
-    
+    end  
   end
+  
+  def format_time(time_str)
+    hours = time_str.split(":")[0].to_i
+    minutes = time_str.split(":")[1].to_i
+    if hours>12 
+      hours = hours-12 
+      period = "pm"
+    else
+      period = "am"
+    end  
+    if minutes == 0
+      "#{hours} #{period}"
+    else
+      "#{hours}:#{minutes} #{period}"
+    end
+  end
+  
 
 end

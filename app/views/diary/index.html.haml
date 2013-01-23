@@ -73,7 +73,7 @@
                       =link_to_self date.venue, :class => "venue"
                     -else
                       .venue=date.external_venue_name
-                    =date.time  
+                    =format_time(date.time)  
                   %td
                     .clearfix
                     .show-tags
