@@ -84,6 +84,8 @@
       %li
         =link_to "Media", "#media", :'data-toggle' => 'tab'
       %li
+        =link_to "Diary", "#diary", :'data-toggle' => 'tab'
+      %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
       %li
         =link_to "Comments", "#comments", :'data-toggle' => 'tab'
@@ -105,6 +107,15 @@
             .clearfix
           -else
             No media present
+            
+
+      #diary.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              =render("diary", :dates => @dates)
+
+      
       
       #updates.tab-pane.fade.in
         .row

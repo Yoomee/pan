@@ -11,10 +11,7 @@
             %td.date
               =date.date.to_s(:date)
             %td
-              -if date.venue_id > 0
-                =link_to_self date.venue, :class => "venue"
-              -else
-                .venue=date.external_venue_name
+              =link_to_self date.tour, :class => "venue"
+            %td
               =format_time(date.time)
   .clearfix
-              

@@ -73,7 +73,10 @@ class PromotersController < ApplicationController
   
   def new;end
 
-  def show;end
+  def show
+    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)
+    @dates = @dates.where(:venue_id => Promoter.find(params[:id]).venues)    
+  end
   
   def update
     if promoter.save

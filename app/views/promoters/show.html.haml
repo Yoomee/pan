@@ -42,10 +42,7 @@
         =link_to "#", :class => "tag", :id => "region" do
           %span.label.tag-label=promoter.region
         .clearfix
-        .mt-1
-        =link_to diary_path(:organisation_id => promoter.id), :class => "promoter-diary-link" do
-          %i.icon-calendar
-          Diary
+
         -if promoter.venues.present?
           .promoter.venues
             -promoter.venues.each do |venue|
@@ -87,6 +84,8 @@
       %li
         =link_to "Media", "#media", :'data-toggle' => 'tab'
       %li
+        =link_to "Diary", "#diary", :'data-toggle' => 'tab'        
+      %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
       %li
         =link_to "Comments", "#comments", :'data-toggle' => 'tab'
@@ -102,6 +101,14 @@
             .clearfix
           -else
             No media present
+            
+            
+      #diary.tab-pane.fade.in
+        .row
+          .span9
+            .well
+              =render("diary", :dates => @dates)
+                          
       
       #updates.tab-pane.fade.in
         .row

@@ -72,7 +72,10 @@ class VenuesController < ApplicationController
     venue.attributes = {:promoter_id => promoter.id, :region => promoter.region}
   end
   
-  def show;end
+  def show
+    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)
+    @dates.where(:venue_id => params[:id])   
+  end
   
   def update
     if venue.save
