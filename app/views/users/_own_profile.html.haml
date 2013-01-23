@@ -11,15 +11,14 @@
       %li
         =link_to "My Messages", "#messages", :'data-toggle' => 'tab'
       %li
-        =link_to "My Activity", "#activity", :'data-toggle' => 'tab'
-      %li
         =link_to "My Groups", "#groups", :'data-toggle' => 'tab'
-      %li
-        =link_to "My Preferences", "#preferences", :'data-toggle' => 'tab'
     .tab-content
       #about.tab-pane.fade.in.active
-        .well
-          =simple_format(user.description)
+        .well 
+          -if user.description.nil?
+            Edit your profile to enter information about yourself.
+          -else
+            =simple_format(user.description)
 
       #notifications.tab-pane.fade.in
         .well
