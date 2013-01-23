@@ -17,7 +17,7 @@
   =form.input :image, :as => :file, :label => "Select a file to upload",  :input_html => {:class => "mb-2"}
 
   =form.input :description, :as => :redactor, :input_html => {:rows => 5, :class => "span8"}
-  =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres)
+  =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres), :label => "Category"
   =form.input :collections, :label => "Collections <br /><em>Is your show part of a Touring Network Scheme?</em>".html_safe, :as => :check_boxes, :multiple => true
   =form.input :target_age, :label => "Target age range", :as => :text, :input_html => {:rows => 2, :class => "span8"}
   =form.input :running_time, :label => "Running time/with and without interval", :as => :text, :input_html => {:rows => 2, :class => "span8"}
