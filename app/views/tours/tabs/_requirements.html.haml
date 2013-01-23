@@ -1,7 +1,21 @@
 =form.inputs do
+ 
+  %legend Technical requirements
+
   =form.input :min_playing_area, :label => "Minimum playing area <small class='small-info-text'>(sq m)</small>".html_safe
   =form.input :blackout_needed, :label => "Do you need a blackout?"
   =form.input :uses_lighting, :label => "Do you use lighting?"
   =form.input :uses_own_lighting, :label => "Do you tour your own lighting?"
   =form.input :uses_sound, :label => "Do you use sound?"
   
+  %legend Is your production suitable for:
+  =form.input :suits_arts_venue, :label => "Arts venue"
+  =form.input :suits_village_hall, :label => "Village/community hall"
+  =form.input :suits_school_hall, :label => "School hall"
+  =form.input :suits_outdoors, :label => "Outdoors"
+  
+  %legend Other details
+  
+  =form.input :target_age, :label => "Target age range", :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :running_time, :label => "Running time/with and without interval", :as => :text, :input_html => {:rows => 2, :class => "span8"}
+  =form.input :publicity, :label => "Will you provide publicity?", :as => :text, :input_html => {:rows => 2, :class => "span8"}
