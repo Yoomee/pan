@@ -32,8 +32,7 @@ Pan::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
-  # Send email to mailcatcher
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  # Send email to letter opener
+  config.action_mailer.delivery_method = :letter_opener
   
 end
