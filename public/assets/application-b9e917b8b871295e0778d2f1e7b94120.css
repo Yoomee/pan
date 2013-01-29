@@ -7921,7 +7921,7 @@ select[multiple='multiple']{
   line-height: 40px;
   margin:0px;
   background: url(/assets/site-logo.png) no-repeat 0 0;
-  width: 160px;
+  width: 190px;
   float: left;
   height: 30px;
 }
@@ -8964,7 +8964,7 @@ label em.optional {
   background: url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
-  font-size: 53px;
+  font-size: 48px;
   line-height: 1.2;
   float: left;
   clear: both;
@@ -8978,10 +8978,10 @@ label em.optional {
 span.welcome-to-tourbook {
   display: block;
   float: left;
-  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 11px;
+  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 8px;
   text-indent: -9000em;
   margin: 0 0 0 15px;
-  width: 240px;
+  width: 270px;
 }
 
 #sign-in p.sub-title {
