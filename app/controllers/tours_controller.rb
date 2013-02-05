@@ -38,7 +38,7 @@ class ToursController < ApplicationController
   end
   
   def show
-    @available_dates = tour.dates.where(booked: false)
+    @available_dates = tour.dates
   end
   
   def update
