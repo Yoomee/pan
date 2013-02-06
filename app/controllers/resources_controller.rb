@@ -16,10 +16,10 @@ class ResourcesController < ApplicationController
   end
   
   def index
-    @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.scoped.where("file_name IS NOT NULL")
+    @resources = current_tag ? Resource.tagged_with(current_tag) : Resource.publications
     @recent_resources = Resource.order("updated_at DESC").first(3)
-    @resource_links = Resource.where("url IS NOT NULL AND file_name IS NULL and text = ''")
-    @resource_other = Resource.where("text <> ''")
+    @resources_links = Resource.links
+    @resources_other = Resource.other
     
   end
 
@@ -34,11 +34,12 @@ class ResourcesController < ApplicationController
   end
 
   def search
+    @recent_resources = Resource.order("updated_at DESC").first(3)
     @query = strip_tags(params[:q]).to_s.strip
     if @query.present?
-      @resources = Resource.search(@query)
-    else
-      @resources = []
+      @resources = Resource.publications.search(@query).reject{|resource| !resource.is_publication?}
+      @resources_links = Resource.publications.search(@query).reject{|resource| !resource.is_link?}
+      @resources_other = Resource.publications.search(@query).reject{|resource| !resource.is_other?}
     end
     render :action => "index"
   end
