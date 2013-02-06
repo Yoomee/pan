@@ -238,8 +238,10 @@
               .row
                 .span8
                   -if can?(:create, Post)
+                    %p
+                      Use this space to discuss or comment on the show. Comments are only visible to other promoters, not performers, so feel free to be honest - but please be constructive and considerate in your remarks.
                     =render("posts/remote_form", :post => current_user.posts.build(:target => tour))
-                  =render("posts/posts", :posts => tour.posts.page(params[:page]))
+                    =render("posts/posts", :posts => tour.posts.page(params[:page]))
 
 =render 'interested_modal'
             
