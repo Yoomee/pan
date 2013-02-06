@@ -902,7 +902,9 @@ h4.directory-item-extra,
 }
 .directory-item-region h4.active a,
 #directory-sidebar .well li.active a {
-  color: #bb2550;  
+  background: rgb(255, 255, 100);
+  padding: 2px;
+  margin: 5px 0 5px 0;
 }
 .controller_directory table a,
 .controller_directory #directory-sidebar a,
