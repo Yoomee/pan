@@ -33,8 +33,9 @@
       .well
         %h4 Search Groups
         %form.form-search.pull-right{:action => search_groups_path, :method => 'get'}
-        =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-        %input.btn.mt-1{:type => 'submit', :value => "Search"}    
+          =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+          %input.btn.mt-1{:type => 'submit', :value => "Search"}
+        .clearfix
       
       .well
         %h4 Members
