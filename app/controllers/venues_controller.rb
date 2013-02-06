@@ -73,8 +73,7 @@ class VenuesController < ApplicationController
   end
   
   def show
-    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)
-    @dates.where(:venue_id => params[:id])   
+    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today).where(:venue_id => params[:id])   
   end
   
   def update

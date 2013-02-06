@@ -10,6 +10,13 @@ class Group < ActiveRecord::Base
   
   scope :without, lambda {|groups| where("id NOT IN (?)", groups)}
   
+  define_index do
+    indexes name, :sortable => true
+    indexes description
+    indexes posts(:text), :as => :text
+    has promoter_id, created_at, updated_at
+  end
+  
   class << self
     def top_tags
       Tag.most_used.joins(:taggings).joins("JOIN posts ON posts.id = taggings.taggable_id AND taggings.taggable_type = 'Post'").joins("JOIN groups ON groups.id = posts.target_id AND posts.target_type = 'Group'") 

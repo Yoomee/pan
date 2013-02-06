@@ -28,6 +28,12 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
   
+  def search
+    @top_tags = Group.top_tags
+    @groups = Group.search(params[:q])
+    render :index
+  end
+
   def show
     @posts = @group.posts.page(params[:page])
     @top_tags = Group.top_tags.where(:groups => {:id => @group.id})
