@@ -25,6 +25,7 @@ module DiaryHelper
   end
   
   def format_time(time_str)
+    return "" if time_str.nil?
     hours = time_str.split(":")[0].to_i
     minutes = time_str.split(":")[1].to_i
     if hours>12 

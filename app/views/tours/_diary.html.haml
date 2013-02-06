@@ -7,14 +7,16 @@
       %thead
       %tbody
         -dates.each do |date|
-          %tr
-            %td.date
-              =date.date.to_s(:date)
-            %td
-              -if date.venue_id > 0
-                =link_to_self date.venue, :class => "venue"
-              -else
-                .venue=date.external_venue_name
-              =format_time(date.time)
+          -if !date.venue_id.nil? ||  !date.external_venue_name.nil?
+            %tr
+              %td.date
+                =date.date.to_s(:date)
+              %td
+                -if !date.venue_id.nil? 
+                  =link_to_self date.venue, :class => "venue"
+                  =format_time(date.time)
+                -elsif !date.external_venue_name.nil? && !date.external_venue_name.empty?
+                  .venue=date.external_venue_name
+                  =format_time(date.time)
   .clearfix
               
