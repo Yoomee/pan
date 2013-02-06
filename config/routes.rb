@@ -1,6 +1,8 @@
 Pan::Application.routes.draw do
   
   root :to => 'home#index'
+  
+  match '/welcome' => 'home#welcome'
 
   match 'beta' => 'enquiries#new', :id => 'feedback', :as => 'beta'
   match 'invite' => 'enquiries#new', :id => 'invite', :as => 'invite'

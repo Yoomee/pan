@@ -1,3 +1,11 @@
+-content_for :head do
+  :javascript
+    $(document).ready(function(){
+      if ("#{params[:action]}"=="welcome") {
+        $("#welcome-popup").modal('show');
+      };
+    });
+
 .container
 .welcome-banner
   .container
@@ -231,3 +239,5 @@
       .row
         -4.times do
           .span1=image_placeholder("60x60")
+          
+=render ('welcome_modal')              

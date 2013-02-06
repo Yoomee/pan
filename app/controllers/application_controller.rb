@@ -9,11 +9,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(user)
     if user.promoter
-      root_path
+      welcome_path
     elsif user.performer
-      root_path
+      welcome_path
     else
-      params.delete(:next) || super
+      params.delete(:next) 
+      welcome_path
     end
   end
 

@@ -15,6 +15,9 @@ class HomeController < ApplicationController
       redirect_to sign_in_path
     end
   end
-
+  
+  def welcome
+    index
+  end
 
 end
