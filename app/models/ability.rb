@@ -52,6 +52,7 @@ class Ability
         can :update, Review, :user_id => user.id
         can :create, TourDate
         can [:index, :show], Group
+        can [:index, :download], Resource
       end
       
       # promoter admin ability
