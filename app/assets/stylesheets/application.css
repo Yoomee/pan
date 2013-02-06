@@ -114,7 +114,23 @@ legend {
 	padding: 17px 20px 18px 0px;
 }
 
+.table-bordered th, .table-bordered td {
+	border-left: 0px;
+}
+
+.table-bordered {
+	border-left-color: rgb(221, 221, 221);
+	border-left-style: solid;
+	border-left-width: 1px;
+}
+
+.table td.right-align {
+  text-align: right;
+  padding-right: 25px;
+}
+
 /*========== Bootstrap extensions ==========*/
+
 .popover-footer {
   padding: 9px 15px;
   line-height: 1;
@@ -176,6 +192,14 @@ h3 {
   font-size: 14px;
   line-height: 1.3;
   
+}
+
+
+h1 {
+	font-family:"Adelle Regular", Georgia, serif; font-size-adjust:0.516; font-weight:normal; font-style:normal;
+	text-transform: uppercase;
+  	font-size: 25px;
+
 }
 
 .profile-title,
@@ -892,6 +916,16 @@ h4.directory-item-extra,
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.right-align .show-tags .tag  {
+	float: right;
+	padding-right: 0px;
+}
+
+div.right-align a.tag span.label.tag-label {
+	margin: 0 0 11px 18px;
+}
+
 .show-tags .tag.active span.label.tag-label,
 .show-tags .tag span.label.tag-label.label-success {
   background: #bb2550;
