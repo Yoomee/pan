@@ -29355,11 +29355,7 @@ Copyright (c) 2011 by Harvest
     },
     beforeShowDay: function(date) {
       var dateAvailable, dateClass;
-      if ($.inArray(TourForm.dateToString(date), InterestedModal.available) > -1) {
-        dateAvailable = 1;
-      } else {
-        dateAvailable = 0;
-      }
+      dateAvailable = 1;
       if ($.inArray(TourForm.dateToString(date), InterestedModal.selected_dates) > -1) {
         dateClass = "ui-datepicker-booked";
       } else {
