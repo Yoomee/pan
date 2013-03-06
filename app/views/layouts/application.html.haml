@@ -13,7 +13,7 @@
     .main-wrapper
       -if logged_in?
         =render("layouts/header")
-        -if !current_page?(root_path)
+        -if !current_page?(root_path) && controller.action_name != "welcome"
           =render("layouts/nav_strip")
       -elsif current_page?(invite_path)
         .container
