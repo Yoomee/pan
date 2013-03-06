@@ -7564,7 +7564,10 @@ a.download-doc-zip {
   direction: rtl;
 }
 /* @end */
-/* @override http://localhost:3000/assets/application.css?body=1 */
+/* @override 
+	http://localhost:3000/assets/application.css?body=1
+	http://localhost:3001/assets/application.css?body=1
+*/
 
 /*
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
@@ -9000,24 +9003,29 @@ label em.optional {
   background: url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
-  font-size: 48px;
-  line-height: 1.2;
   float: left;
+  width: 100%;
   clear: both;
+  font-size: 40px;
+  line-height: 40px;
+  height: 40px;
+  text-align: left;
 }
-.welcome-to {
+span.welcome-to {
+  margin: 0 0 0px;
+  display: block;
   float: left;
-  margin: 0 0 0 45px;
 
  
 }
 span.welcome-to-tourbook {
   display: block;
-  float: left;
-  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px 8px;
+  background: url(/assets/welcome-to-tourbook.png) no-repeat 0px -5px;
   text-indent: -9000em;
   margin: 0 0 0 15px;
   width: 270px;
+
+  float: left;
 }
 
 #sign-in p.sub-title {
