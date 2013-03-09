@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   include YmUsers::ApplicationController
   
-  before_filter :authenticate, :clear_registration_session!
+  before_filter :clear_registration_session!
 
   AUTH_USERS = { "pan" => "highlands123" }
 
