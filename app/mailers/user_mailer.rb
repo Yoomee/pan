@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   
   helper YmCore::UrlHelper
   
-  default :from => "site@pan.yoomee.com", 
+  default :from => "info@tourbook.org.uk", 
           :bcc => ["developers@yoomee.com", "andy@yoomee.com"]
   
   def welcome_email(user)
