@@ -33,7 +33,7 @@
                     %icon.icon-flag
                     My organisation 
                   %li.divider                    
-                -elsif current_user.admin?
+                -if current_user.admin?
                   %li
                     =link_to("/admin") do
                       %icon.icon-cogs

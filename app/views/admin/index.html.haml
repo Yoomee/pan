@@ -21,7 +21,7 @@
             =link_to(current_user.performer) do
               %icon.icon-flag
               My organisation 
-          -elsif current_user.admin?
+          -if current_user.admin?
             %div
               =link_to(needs_approval_tour_dates_path) do
                 %icon.icon-calendar
