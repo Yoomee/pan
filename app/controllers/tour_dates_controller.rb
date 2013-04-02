@@ -17,7 +17,7 @@ class TourDatesController < ApplicationController
   end
   
   def needs_approval
-    @pending_dates = TourDate.where('needs_approval = 1')
+    @pending_dates = TourDate.where('needs_approval = 1 AND tour_id IS NOT NULL')
   end
   
   def approve_dates
