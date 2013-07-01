@@ -2,7 +2,7 @@
   =image_for(item.user, '70x70#')
 .news-feed-text  
   %p
-    =link_to_self item.user.name
+    =link_to_self item.user
     added a comment about
   %h3
     -if item.target_type == "Tour"
