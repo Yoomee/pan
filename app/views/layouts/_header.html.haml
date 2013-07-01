@@ -13,7 +13,7 @@
         .user-links
           -if user_signed_in?                   
             .header-btn-group.btn-group
-              =link_to(current_user.performer || current_user, :class => 'btn header-btn') do
+              =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle header-btn') do
                 =current_user.performer || current_user
               =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle header-btn') do
                 %span.caret
