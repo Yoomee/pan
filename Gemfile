@@ -2,7 +2,7 @@ source 'https://yoomee:wLjuGMTu30AvxVyIrq3datc73LVUkvo@gems.yoomee.com'
 source 'http://rubygems.org'
 
 ### Always used
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.12'
 gem 'mysql2'
 gem "rake", "0.8.7"
 
