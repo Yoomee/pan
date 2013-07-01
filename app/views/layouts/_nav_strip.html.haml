@@ -11,7 +11,7 @@
             %span.nav-smallprint    
               view your profile
               %br
-              and latest update
+              and latest updates
         =content_tag_with_active(:div, (current_page?(shows_path) || current_page?(:controller => "/tours")), :class => "inner") do
           =link_to shows_path, :class=>"nav-link nav-link-shows"  do
             .header
