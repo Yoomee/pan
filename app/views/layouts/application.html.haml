@@ -12,9 +12,8 @@
   -body_tag do
     .main-wrapper
       -if logged_in?
-        =render("layouts/header")
-        -if !current_page?(root_path) && controller.action_name != "welcome"
-          =render("layouts/nav_strip")
+        =render("layouts/header")        
+        =render("layouts/nav_strip")
       -elsif current_page?(invite_path)
         .container
         .top-bar.logged-out
