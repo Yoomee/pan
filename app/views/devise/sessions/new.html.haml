@@ -20,8 +20,7 @@
               =f.input :password, :prepend => "<i class='icon-key'></i>".html_safe, :label => false, :input_html => {:placeholder => "password"}
               =f.hidden_field :remember_me, :value => true
 
-            =#render "devise/shared/links"
-            =link_to "Not a member?", invite_path, :id => "sign_up_link"
+            =#render "devise/shared/links"            
           =f.submit "Sign in", :class => "btn mt-1 sign-in-btn", :'data-loading-text' => 'Signing in...'
     .row#sign-in-info
       .span3
