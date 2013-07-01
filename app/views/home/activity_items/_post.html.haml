@@ -3,11 +3,14 @@
 .news-feed-text  
   %p
     =link_to_self item.user
-    added a comment about
+    -if item.is_update
+      added an update about
+    -else
+      added a comment about
   %h3
-    -if item.target_type == "Tour"
-      =link_to item.target.name, tour_path(item.target.id, :anchor => 'comments')
+    -if item.target_type == "Tour"      
+      =link_to item.target.name, tour_path(item.target.id, :anchor => (item.is_update ? 'updates' : 'comments'))
     -elsif item.target_type == "Performer"
-      =link_to item.target.name, performer_path(item.target.id, :anchor => 'comments')
+      =link_to item.target.name, performer_path(item.target.id, :anchor => (item.is_update ? 'updates' : 'comments')) 
     -else
       =link_to_self item.target
