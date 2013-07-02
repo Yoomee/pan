@@ -10,19 +10,25 @@
             tourbook
         %p.sub-title supporting touring performance in your community
 
-    .row
-      .span4.offset4
-        =semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          #sign-in-box
-            .sign-in-white-box.mb-1
-              =f.input :email, :prepend => "<i class='icon-user'></i>".html_safe, :label => false, :input_html => {:placeholder => "email"}
-              %hr
-              =f.input :password, :prepend => "<i class='icon-key'></i>".html_safe, :label => false, :input_html => {:placeholder => "password"}
-              =f.input :remember_me, :as => :boolean
-            =link_to "Forgotten your password?", new_password_path, :class => "forgotten-password"
+    .row    
+      .span5.forgotten-password
+             
+        =semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post}) do |form|
+          %h2 Forgot your password?          
+          =form.inputs do
+            =form.input :email, :label => false, :placeholder => "email"
+          =form.buttons do
+            =form.commit_button "Send me reset password instructions"
+      .span8.sign-in-links
+        %ul
+          %li
+            =link_to "Sign in", new_session_path(resource_name)
+          %li
+            =link_to "Sign up", invite_path
+        
 
-            =#render "devise/shared/links"            
-          =f.submit "Sign in", :class => "btn mt-1 sign-in-btn", :'data-loading-text' => 'Signing in...'
+        
+    
     .row#sign-in-info
       .span3
         %h2 About Tourbook
@@ -44,3 +50,4 @@
           ="."
         =link_to "The Touring Network", "http://www.thetouringnetwork.com", :class=>"the-touring-network", :target=>"blank"
         =link_to "Creative Scotland", "http://www.creativescotland.com/", :class=>"creative-scotland", :target=>"blank"
+

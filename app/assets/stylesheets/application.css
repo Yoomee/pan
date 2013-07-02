@@ -115,6 +115,7 @@ legend {
 
 .form-actions {
 	padding: 17px 20px 18px 0px;
+  background:#4D4E4D;
 }
 
 .table-bordered th, .table-bordered td {
@@ -160,8 +161,13 @@ body, p,
   font-size-adjust:0.488;
   font-weight:200;
   font-style:normal;
-  color: #6b6a68;
+  color: #4D4E4D;
 }
+
+body.controller_sessions.action_new, body.controller_passwords.action_new{
+  background: #4D4E4D;
+}
+
 h1,
 h2,
 h3,
@@ -274,6 +280,7 @@ a:hover {
   padding: 7px 14px;
   color: #fff;
 }
+
 .btn:hover {
   background: #000;
   color: #fff;
@@ -1443,10 +1450,53 @@ label em.optional {
   font-weight:normal;
 }
 
+.span5.forgotten-password{
+  margin-left:270px;
+}
+
+#sign-in .forgotten-password form#user_new{
+  background:#fff;
+  padding:20px;
+  margin-top:30px;
+}
+
+#sign-in .forgotten-password form#user_new input#user_email{
+  border: 1px solid #e3e3e3;
+  width:314px;
+  padding-left:10px;
+}
+
+.span8.sign-in-links{
+  margin-left:270px;
+}
+
+.span8.sign-in-links li{
+  display:inline;
+  margin-right:5px;
+}
+
+.span8.sign-in-links ul{
+  margin-left:0;
+}
+
+.forgotten-password form#user_new .form-actions{
+  background:none;
+  padding:0;
+  margin:10px 0;
+  border-top: none;
+}
+
+#sign-in .forgotten-password form#user_new input.btn.commit.create {
+  padding-left: 10px;
+  width: 335px;
+  font-size:14px;
+  text-transform:none;
+}
+
 /*========== Sign in page ==========*/
 #sign-in {
   padding-top: 130px;
-  background: url(/assets/home-illustration.png) repeat-x center 120px;
+  background: #F6F6F2 url(/assets/home-illustration.png) repeat-x center 120px;
 }
 #sign-in h1 {
   float: left;
@@ -1484,6 +1534,11 @@ span.welcome-to-tourbook {
   font-size: 20px;
   line-height: 1;
 }
+
+#sign-in form#user_new a.forgotten-password{
+  font-size: 13px;
+}
+
 #sign-in-box .add-on {
   width: 30px;
   margin: 0;
@@ -1496,8 +1551,7 @@ span.welcome-to-tourbook {
   /*height: 35px;*/
 }
 #sign-in form#user_new input {
-  font-size: 16px;
-  float: right;
+  font-size: 16px;  
   border: none;
   padding: 10px 10px 10px 0;
   box-shadow:none;
@@ -1505,10 +1559,16 @@ span.welcome-to-tourbook {
   -moz-box-shadow:none;
   width: 235px;
 }
+
+#sign-in form#user_new input#user_remember_me {  
+  width:auto;
+  margin:3px 10px 0 0;
+  }
 #sign-in form#user_new input.sign-in-btn {
   padding: 10px 20px;
   width: auto;
 }
+
 #sign-in form#user_new .input-prepend span.add-on {	
 	padding: 10px;
 	background: none;
@@ -1522,6 +1582,7 @@ span.welcome-to-tourbook {
 #sign-in form#user_new input[name='commit'] {
   background: #AAC544;
 }
+
 #sign-in .row#sign-in-info {
   padding-top: 100px;
   padding-bottom: 50px;
@@ -1538,13 +1599,13 @@ span.welcome-to-tourbook {
   font-style: italic;
   color: #f6f6f2;
   
-    margin: 15px 0 0;
+  margin: 15px 0 0;
   float: left;
 
 }
 .sign-in-white-box {
   background: #fff;
-  padding: 10px 0 0;
+  padding: 10px 0 10px;
   border: 1px solid #e3e3e3;
   border-radius:4px;
   -webkit-border-radius:4px;
@@ -1552,6 +1613,7 @@ span.welcome-to-tourbook {
 .sign-in-white-box hr {
   margin: 0 0 8px;
 }
+
 .sign-in-intro {
   margin-left: 180px;
 }
