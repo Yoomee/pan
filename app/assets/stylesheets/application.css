@@ -1671,7 +1671,11 @@ span.welcome-to-tourbook {
   float: left;
   width: 100%;
   line-height: 1.1;
-  margin: 10px 0 0px ;
+  margin: 10px 0 0px;
+}
+h2.tour-box-title {
+  padding-top: 10px;
+  font-size:18px;
 }
 .tour-performer-name {
   float: left;
