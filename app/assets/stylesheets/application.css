@@ -1716,6 +1716,13 @@ h2.tour-box-title {
 .span9.show-tour .row .span3 img {
   padding: 10px 0 10px 10px;
 }
+
+.show-tour img.list-image{
+  width:auto;
+  height:128px;
+  margin:24px;
+}
+
 #interested {
   width: 500px;
 }
@@ -1738,7 +1745,7 @@ h2.tour-box-title {
   color: #4D4E4D;
 }
 .show-list-view-text {
-  margin: 8px 0 0 8px;
+  margin: 24px 0 0 8px;
 }
 #sort-shows-btn-group {
   margin-top: 9px;
