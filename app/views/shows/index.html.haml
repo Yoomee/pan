@@ -1,6 +1,7 @@
 -content_for :head do
   :javascript
     $(document).ready(function() {
+      $('.dropdown-toggle').dropdown();
       var base_url = "shows?#{{:tags => @tags.uniq, :region => @region, :collection => @collection, :sort => @sort}.delete_if { |k, v| v.blank? }.to_query}"
       $('#start_date').change(function() {
         location.href = base_url + '&start_date=' + encodeURIComponent($(this).val()) + '&end_date=' + encodeURIComponent($('#end_date').val());
@@ -24,7 +25,7 @@
   .span4
     .mt-2
       .btn-group.pull-right#sort-shows-btn-group
-        =link_to "#", :class => 'btn', :id => "sort-shows-btn" do
+        =link_to "#", :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle', :id => "sort-shows-btn" do
           Sort by
         =link_to('#', :data => {:toggle => "dropdown"}, :class => 'btn dropdown-toggle') do
           %span.caret
