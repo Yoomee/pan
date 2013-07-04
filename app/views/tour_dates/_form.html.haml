@@ -2,6 +2,7 @@
   =form.inputs do
     =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
     =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
-    =form.input :date, :as => :string
+    =form.input :date_s, :label => 'Date', :as => :string, :input_html => {:class => 'datepicker'}
+    =form.input :time,  :label => "Start time (24 hour format, hh:mm)", :as => :string, :input_html => {:class => 'timepicker'}  
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary'}

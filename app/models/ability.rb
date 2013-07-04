@@ -51,6 +51,7 @@ class Ability
         can [:create, :read], Review
         can :update, Review, :user_id => user.id
         can :create, TourDate
+        can :update, TourDate, :user_id => user.id
         can [:index, :show], Group
         can [:index, :download], Resource
       end

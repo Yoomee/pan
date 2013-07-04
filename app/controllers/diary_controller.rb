@@ -14,7 +14,7 @@ class DiaryController < ApplicationController
 
     @all_tags = Tour.genre_counts.order(:name)
 
-    @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)
+    @dates =  TourDate.approved.where('date > ?', Date.today)
 
     if @tags.present?
       tour_ids = Tour.tagged_with(@tags).collect(&:id)

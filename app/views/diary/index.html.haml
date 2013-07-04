@@ -68,6 +68,7 @@
                     =date.date.strftime("%e")
                   %td
                     =link_to_self date.tour, :class => "tour"
+                    =link_if_can('edit', [:edit, date])
                   %td
                     -if date.venue_id.to_i > 0
                       =link_to_self date.venue, :class => "venue"

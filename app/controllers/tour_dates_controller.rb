@@ -17,9 +17,20 @@ class TourDatesController < ApplicationController
   end
   
   def needs_approval
-    @pending_dates = TourDate.where('needs_approval = 1 AND tour_id IS NOT NULL')
+    @pending_dates = TourDate.needs_approval.where('tour_id IS NOT NULL')
   end
-  
+
+  def update
+    tour_date.attributes = { :needs_approval => true, :booked => false }
+    if tour_date.save
+      flash[:notice] = "Thanks for updating a date. This will be reviewed shortly by the website administrator before appearing in the diary."
+      redirect_to diary_path
+    else
+      flash_notice = tour_date
+      redirect_to diary_path 
+    end
+  end
+
   def approve_dates
     if params &&  params['date_id']
       params['date_id'].each do |date_id|
