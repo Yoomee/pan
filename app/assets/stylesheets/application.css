@@ -50,12 +50,12 @@
     -webkit-animation-iteration-count: 1;
 }
 
-.fade_in.fade_one,{-webkit-animation-delay: 0, 0;}
-.fade_in.fade_two,   {-webkit-animation-delay: 0, 0.3s;}
-.fade_in.fade_three, {-webkit-animation-delay: 0, 0.6s;}
-.fade_in.fade_four,  {-webkit-animation-delay: 0, 0.9s;}
-.fade_in.fade_five,  {-webkit-animation-delay: 0, 1.2s;}
-.fade_in.fade_six, {-webkit-animation-delay: 0, 1.5s;}
+.fade_in.fade_one   {-webkit-animation-delay: 0, 0;}
+.fade_in.fade_two   {-webkit-animation-delay: 0, 0.3s;}
+.fade_in.fade_three {-webkit-animation-delay: 0, 0.6s;}
+.fade_in.fade_four  {-webkit-animation-delay: 0, 0.9s;}
+.fade_in.fade_five  {-webkit-animation-delay: 0, 1.2s;}
+.fade_in.fade_six   {-webkit-animation-delay: 0, 1.5s;}
 
 .main-nav a,
 .welcome-item i,
@@ -2269,4 +2269,29 @@ span.small-info-text {
 }
 #notifications img {
   margin-right: 5px;
+}
+/*========== genre tag colours  ==========*/
+a.tag.childrens span.label.tag-label {
+  background-color: #f28820;
+}
+a.tag.circus span.label.tag-label {
+  background-color: #4cc0b6;
+}
+a.tag.comedy span.label.tag-label {
+  background-color: #f2af1c;
+}
+a.tag.dance span.label.tag-label {
+  background-color: #acc636;
+}
+a.tag.music span.label.tag-label {
+  background-color: #f05b69;
+}
+a.tag.musical-theatre span.label.tag-label {
+  background-color: #324b70;
+}
+a.tag.spoken-word span.label.tag-label {
+  background-color: #7a6d6d;
+}
+a.tag.theatre span.label.tag-label {
+  background-color: #3b849b;
 }
