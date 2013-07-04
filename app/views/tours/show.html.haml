@@ -29,8 +29,11 @@
         .date-and-genres
           %h4=tour.dates_string
           -if tour.genre_list.present?
-            .genres
-              =comma_list_tags(tour, :genres)
+            .show-tags
+              -tour.genres.each do |tag|
+                =link_to directory_path(:letter => 'A', :tags => [tag.name]), :class => "tag #{tag.name}" do
+                  %span.label.tag-label=tag.name
+            .clearfix
         -if tour.links_or_performer_links.present?
           -if tour.links_or_performer_links_without_twitter_and_facebook.present?
             %ul.unstyled.links
