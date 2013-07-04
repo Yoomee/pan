@@ -3,6 +3,18 @@
 
 #directory-sidebar
   .well
+    -if @type.present? || @collection.present?
+      %ul.unstyled
+        =type_filter_link(@type)
+        =collection_filter_link(@collection) if @collection.present?
+    .show-tags
+      -@tags.sort.each do |tag|
+        -param_tags = original_tags.dup
+        =directory_item_tag(Tag.find_by_name(tag), param_tags)
+    .clearfix
+    -if @region.present?
+      %ul.unstyled
+        =region_filter_link(:li, @region)
     =clear_all_filters_link
   .well
     %h4 Search

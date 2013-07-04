@@ -52,22 +52,6 @@
       -if @tag
         =li_with_active(true, link_to(@tag.to_s.titleize.humanize, '#'))
 
--if controller_name.directory? && action_name.directory?
-  .row
-    .span12
-      %ul#directorynav.nav.nav-pills
-        -('A'..'Z').each do |letter|
-          =letter_link(letter)
-        =number_link
--if action_name.directory? && !controller_name.directory?
-  .row
-    .span12
-      %ul#directorynav.nav.nav-pills
-        -('A'..'Z').each do |letter|
-          %li{:class => "#{'active' if @letter == letter}#{' disabled' unless present_directory_letters.include?(letter)}"}
-            =link_to(letter, {:controller => controller_name, :action => 'directory', :letter => letter})
-        %li{:class => "#{'active' if @letter == '#'}#{' disabled' unless present_directory_letters.join('').match(/[^A-Z]/)}"}
-          =link_to('#', {:controller => controller_name, :action => 'directory', :letter => '0'})
 .row
   -if current_page?(venues_path)
     #map-canvas.span12{:style => "height:600px"}
