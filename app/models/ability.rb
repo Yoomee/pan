@@ -19,6 +19,10 @@ class Ability
       # admin ability
     elsif user
       # user ability
+      can :show, MessageThread do |thread|
+        thread.users.exists?(:id => user.id)
+      end
+      can :index, MessageThread
       can [:create, :read], Message
       can [:create], Comment
       can [:create, :show, :file], Post
