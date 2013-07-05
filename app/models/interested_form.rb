@@ -13,7 +13,6 @@ module InterestedForm
   email_to "panpromoters@gmail.com"
   
   
-  response_message "Thanks for your interest - we'll get back to you soon."
-  
+  response_message "Thanks for your interest - we'll get back to you soon."  
 end
   

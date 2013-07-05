@@ -9,7 +9,7 @@ class EnquiriesController < ApplicationController
       YmEnquiries::EnquiryMailer.new_enquiry(@enquiry).deliver
       flash[:notice] = "#{@enquiry.response_message}"
       if current_user
-        redirect_to root_url
+        redirect_to :back
       else
         redirect_to sign_in_path
       end
