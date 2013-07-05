@@ -20,6 +20,7 @@ Pan::Application.routes.draw do
   resources :performers, :only => [:show] do
     resources :tours, :only => [:new, :index]    
     resources :reviews, :except => [:show, :delete]
+    resources :messages, :only => [:new]
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'search'
@@ -127,7 +128,7 @@ Pan::Application.routes.draw do
     end
   end
 
-  resources :messages, :only => :create
+  resources :messages, :only => [:create, :new]
   resources :collections, :except => :show
   
 end

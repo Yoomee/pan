@@ -17,6 +17,7 @@
   -else
     =image_for(tour, "220x150")
   =form.input :image, :as => :file, :label => "Select a file to upload",  :input_html => {:class => "mb-2"}
-  =form.input :description, :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }, :label => "Short description - <em>Max 200 words</em>".html_safe
+  =form.input :short_description, :input_html => {:rows => 2, :class => "span8", :maxlength => 120 }, :label => "Short Description".html_safe
+  =form.input :description, :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }, :label => "Description".html_safe
   =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres), :label => "Category"
   =form.input :collections, :label => "Collections <br /><em>Is your show part of a Touring Network Scheme?</em>".html_safe, :as => :check_boxes, :multiple => true
