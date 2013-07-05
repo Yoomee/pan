@@ -342,6 +342,11 @@ a:hover {
 	margin-left: 10px;
 }
 
+p.back-link a{
+  font-size:16px;
+  color:#333;
+  font-style:italic;  
+}
 
 .red {
   color: #d33958;

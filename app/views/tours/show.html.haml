@@ -52,10 +52,7 @@
               I'm interested
             =link_to "", :class => "btn", :id => "go-to-comment" do
               %i.icon-pencil
-              Post a comment
-            =link_to "", :class => "btn" do
-              %i.icon-comment
-              Provide feedback
+              Post a comment            
 
   .span9
     %ul.nav.nav-tabs#tour-tabs
@@ -247,11 +244,16 @@
                     =render("posts/posts", :posts => tour.posts.page(params[:page]))
 
 =render 'interested_modal'
+
+.row
+  .span3
+    %p.back-link
+      %i.icon-long-arrow-left
+      =back_link "Back to search"
             
 .row
   .span9
-    =options_panel do
-      =back_link
+    =options_panel do      
       =link_to("Edit show", edit_tour_path(tour)) if can?(:edit,tour)
       =link_if_can("Delete show", [:destroy, tour], :confirm => "Are you sure?")
       =link_to("Manage bookings", bookings_tour_path(tour)) if can?(:bookings, tour)

@@ -13,6 +13,7 @@
     =form.input :form_name, :as => "hidden"
     =form.input :message, :as => "hidden", :value => "#{current_user.full_name} (#{user_url(current_user)}) has said they are interested in booking #{tour} by #{tour.performer} - #{show_url(tour)}. \n\n "
     =form.input :dates_interested_in, :as => "hidden"
+    =hidden_field_tag :return_to, request.path
     
     .modal-header
       %button.close{:type => 'button', :'data-dismiss' => 'modal'} x

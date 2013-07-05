@@ -9,7 +9,11 @@ class EnquiriesController < ApplicationController
       YmEnquiries::EnquiryMailer.new_enquiry(@enquiry).deliver
       flash[:notice] = "#{@enquiry.response_message}"
       if current_user
-        redirect_to :back
+        if params[:return_to].to_s =~ /^\//
+          redirect_to params[:return_to]
+        else
+          redirect_to tours_path
+        end
       else
         redirect_to sign_in_path
       end
