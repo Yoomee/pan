@@ -50,18 +50,8 @@ module DirectoryHelper
   end
 
   def collection_filter_link(collection)
-    param_options = {}.tap do |hash|
-      hash[:letter] = params[:letter] if params[:letter].present?
-      hash[:q] = params[:q] if params[:q].present?
-      hash[:region] = params[:region] if params[:region].present?
-      hash[:tags] = params[:tags] if params[:tags].present?
-      hash[:type] = params[:type] if params[:type].present?
-    end
-
-    active = params[:collection] == collection.to_s.parameterize
-    param_options.merge!({:collection => collection.to_s.parameterize}) unless active
-
-    li_with_active(active, (link_to collection, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+    active = params[:collection] == collection.id.to_s
+    li_with_active(active, (link_to(collection, '#', :class => 'collection', :id => "collection-#{collection.id}")))
   end
 
   def directory_item_class(directory_item)
@@ -124,20 +114,8 @@ module DirectoryHelper
   end
 
   def directory_item_tag(tag, original_tags)
-    
-  param_tags = original_tags.dup
-  active_tag = param_tags.delete(tag.name)
-  param_tags << tag.name unless active_tag
-
-  param_options = {}.tap do |hash|
-    hash[:collection] = params[:collection] if params[:collection].present?
-    hash[:letter] = params[:letter] if params[:letter].present?
-    hash[:q] = params[:q] if params[:q].present?
-    hash[:region] = params[:region] if params[:region].present?
-    hash[:tags] = param_tags if param_tags.present?
-    hash[:type] = params[:type] if params[:type].present?
-  end
-  link_to(tag_label(tag, :active => active_tag), action_name.search? ? directory_search_path(param_options) : directory_path(param_options), :class => "tag #{tag.name}")
+  active = params[:tags].present? && params[:tags].include?(tag.name)
+  link_to(tag_label(tag, :active => active), '#', :class => "tag #{tag.name} tag-#{tag.name.parameterize}")
   end
   
   def present_directory_letters
@@ -161,50 +139,27 @@ module DirectoryHelper
   end
   
   def region_filter_link(content_tag, region)
-    active = params[:region] == region
-
-    param_options = {}.tap do |hash|
-      hash[:collection] = params[:collection] if params[:collection].present?
-      hash[:letter] = params[:letter] if params[:letter].present?
-      hash[:q] = params[:q] if params[:q].present?
-      hash[:tags] = params[:tags] if params[:tags].present?
-      hash[:type] = params[:type] if params[:type].present?
-      hash[:region] = region unless active
-    end
-
-    content_tag_with_active(content_tag, active, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+    active = params[:region] == region.first
+    content_tag_with_active(content_tag, active, (link_to("#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region.last}".html_safe, '#', :class => 'region', :id =>"region-#{region.first}")))
   end
   
   def type_filter_link(type)
-    param_options = {}.tap do |hash|
-      hash[:collection] = params[:collection] if params[:collection].present?
-      hash[:letter] = params[:letter] if params[:letter].present?
-      hash[:q] = params[:q] if params[:q].present?
-      hash[:region] = params[:region] if params[:region].present?
-      hash[:tags] = params[:tags] if params[:tags].present?
-    end
     case type
-    when "show"
-      active = params[:type] == "tour"
-      param_options.merge!({:type => "tour"}) unless active
-      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
-    when "performer"
-      active = params[:type] == "performer"
-      param_options.merge!({:type => "performer"}) unless active
-      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
-    when "promoter"
-      active = params[:type] == "promoter"
-      param_options.merge!({:type => "promoter"}) unless active
-      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
-    when "venue"
-      active = params[:type] == "venue"
-      param_options.merge!({:type => "venue"}) unless active
-      puts param_options
-      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
-    when "user"
-      active = params[:type] == "user"
-      param_options.merge!({:type => "user"}) unless active
-      li_with_active(active, (link_to "#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, action_name.search? ? directory_search_path(param_options) : directory_path(param_options)))
+    when "Tour"
+      active = params[:type] == "Tour"
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+    when "Performer"
+      active = params[:type] == "Performer"
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+    when "Promoter"
+      active = params[:type] == "Promoter"
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+    when "Venue"
+      active = params[:type] == "Venue"
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+    when "User"
+      active = params[:type] == "User"
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
     end
   end
 

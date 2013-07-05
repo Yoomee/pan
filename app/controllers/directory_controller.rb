@@ -35,7 +35,7 @@ class DirectoryController < ApplicationController
 
   private
   def set_up_queries_and_classes
-    @collection = params[:collection]
+    @collection = Collection.find_by_id(params[:collection]).to_s.parameterize
     @region = params[:region]
     @tags = [*params[:tags]]
     @type = params[:type]

@@ -93,8 +93,9 @@
                   %td.span6
                     %h4.directory-item-extra=directory_item_extra(directory_item)
                   %td.span6.right-align
-                    -if directory_item.class.to_s == "Venue"
-                      .directory-item-region=region_filter_link(:h4, directory_item.region)
+                    -if directory_item.respond_to?(:region) && directory_item.region.present?
+                      .directory-item-region
+                        =region_filter_link(:h4, Pan::REGIONS.detect { |r| r[1] == directory_item.region })
                     -elsif directory_item.respond_to?(:genres)
                       .show-tags.right-align
                         =render 'organisations/tags_for_directory_view', :tags => directory_item.genres, :original_tags => original_tags
