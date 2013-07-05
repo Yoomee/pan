@@ -408,6 +408,6 @@ DEPENDENCIES
   ym_search (~> 0.1)
   ym_tags (~> 0.1)
   ym_tools
-  ym_users (~> 0.1)
+  ym_users (~> 0.1.27)
   ym_videos (~> 0.1)
   yoomee!
