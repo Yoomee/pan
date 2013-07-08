@@ -114,6 +114,7 @@
                         =pluralize(directory_item.reviews.count, "review")
                   %td.span8
                     =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
+        =will_paginate @everything
     .span3
       =render "organisations/directory_sidebar"
 .row
