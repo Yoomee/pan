@@ -7,7 +7,7 @@
           =link_to "/" do
             =Settings.site_name
         #search-box.hide
-          %form{:action => directory_search_path}
+          %form{:action => directory_path}
             =text_field_tag 'q', params[:q]
             %input.btn{:type => 'submit', :value => "Search"}
         .user-links
