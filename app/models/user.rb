@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
   has_many :group_members
   has_many :groups, :through => :group_members
 
-  has_many :thread_participants, :foreign_key => :participant_id, :dependent => :destroy
-  has_many :threads, :through => :thread_participants, :source => :message_thread
+  has_many :message_thread_users, :foreign_key => :user_id, :dependent => :destroy
+  has_many :threads, :through => :message_thread_users, :source => :message_thread
   has_many :messages, :dependent => :destroy
 
   has_many :message_notifications, :class_name => "Notification", :conditions => {:context => "messages", :read => false}

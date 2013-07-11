@@ -37,11 +37,11 @@
                 =time_ago_in_words(thread.messages.last.created_at)
                 ago
               .thread-participants
-                -thread.participants.each do |participant|
+                -thread.users.each do |user|
                   .thread-participant
-                    =image_for(participant, '18x18#')
+                    =image_for(user, '18x18#')
                     .thread-participant-name
-                      =participant
+                      =user
             
       .clearfix      
 

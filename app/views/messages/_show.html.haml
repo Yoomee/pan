@@ -11,7 +11,7 @@
         .pull-left
           =link_to_self(message.user)
           %i.icon-chevron-right
-          =thread.participants.where("participant_id != ?", message.user.id).collect{|participant| (link_to "#{image_for(participant, '20x20#')} #{participant}".html_safe, participant)}.join(", ").html_safe
+          =thread.users.where("user_id != ?", message.user.id).collect{|user| (link_to "#{image_for(user, '20x20#')} #{user}".html_safe, user)}.join(", ").html_safe
           %br
           %span.small-info-text
             =time_ago_in_words(message.created_at)
