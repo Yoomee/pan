@@ -56,19 +56,7 @@
             -if can?(:edit,tour)
               =link_to edit_tour_path(tour), {:class => "btn"} do
                 %i.icon-edit
-                Edit Show
-            -if can?(:destroy, tour)
-              =link_to tour_path(tour), :method => :delete, :confirm => "Are you sure?", :class => "btn" do
-                %i.icon-trash
-                Delete Show
-            -if can?(:bookings,tour)
-              =link_to bookings_tour_path(tour), {:class => "btn"} do
-                %i.icon-calendar
-                Manage Bookings
-            -if can?(:create,tour)
-              =link_to new_performer_tour_path(tour.performer), {:class => "btn"} do
-                %i.icon-edit
-                Add new show                              
+                Edit Show                                        
 
   .span9
     %ul.nav.nav-tabs#tour-tabs

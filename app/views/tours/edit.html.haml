@@ -1,2 +1,7 @@
 %h1.mt-2.mb-1=title("Edit show")
+-if can?(:destroy, tour)
+  .black-block-links
+    =link_to tour_path(tour), :method => :delete, :confirm => "Are you sure?", :class => "btn delete-button pull-right" do
+      %i.icon-trash
+      Delete Show
 =render('form')

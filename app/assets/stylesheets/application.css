@@ -1981,6 +1981,12 @@ a i.icon-facebook:hover {
 .black-block-links a i {
   margin-right: 10px
 }
+
+.black-block-links .delete-button{
+  width:111px;
+  text-align:right;
+}
+
 #tour-tabs {
   padding: 0 5px;
   margin-bottom: 0;
