@@ -409,7 +409,7 @@ DEPENDENCIES
   whenever
   ym_activity
   ym_cms (~> 0.1)
-  ym_core (~> 0.1.33)
+  ym_core (~> 0.1.68)
   ym_docs (~> 0.1)
   ym_enquiries (~> 0.1)
   ym_likes
