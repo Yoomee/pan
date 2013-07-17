@@ -7,23 +7,34 @@
 -@tags ||= [*params[:tags]]
 
 #directory-sidebar  
-  -if @type.present? || @collection.present? || @query.present? || @tags.present? || @region.present?
-    .well
-      %h4 Filters
-      -if @type.present? || @collection.present? 
-        %ul.unstyled
-          =type_filter_link(@type)
-          =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }) if @collection.present?
-      .show-tags
-        -@tags.sort.each do |tag|
-          =directory_item_tag(Tag.find_by_name(tag), @tags.dup)
-      .clearfix
-      -if @region.present?
-        %ul.unstyled
-          =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region })
-      =link_to 'view all', directory_path, :class => 'pull-right'
-      .clearfix
-  
+  //-if @type.present? || @collection.present? || @query.present? || @tags.present? || @region.present?
+  / / .well
+  /   %h4 Filters
+  /   -if @type.present? || @collection.present? 
+  /     %ul.unstyled
+  /       =type_filter_link(@type)
+  /       =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }) if @collection.present?
+  /   .show-tags
+  /     -@tags.sort.each do |tag|
+  /       =directory_item_tag(Tag.find_by_name(tag), @tags.dup)
+  /   .clearfix
+  /   -if @region.present?
+  /     %ul.unstyled
+  /       =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region })
+  /   =link_to 'view all', directory_path, :class => 'pull-right'
+  /   .clearfix
+
+  .well
+    %h2.mb-1 Filter by:  
+    .show-tags
+      -@tags.each do |tag|
+        -param_tags = original_tags.dup
+        -param_tags.delete(tag)
+        =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
+      =show_region_filter_link(:span, @region)
+      =type_filter_link(@type)
+    .clearfix
+
   .well
     %h4 Type
     %ul.unstyled

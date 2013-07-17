@@ -63,3 +63,9 @@ $(document).ready () ->
 
   $('directory-sidebar-submit').click ->
     $('directory-sidebar-search').submit()
+
+  $('.calendar-button-from').click ->
+    $('input.sidebar-calendar-from').focus()
+
+  $('.calendar-button-to').click ->
+    $('input.sidebar-calendar-to').focus()

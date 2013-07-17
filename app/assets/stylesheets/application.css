@@ -934,6 +934,16 @@ h4.directory-item-extra,
   font-weight: bold;
 }
 
+.show-tags li.active{
+  list-style-type: none;
+}
+
+.show-tags li.active a.label, .show-tags span.active a.label{
+  margin:0 10px 10px 0;
+  background: #bebebe;
+}
+
+
 .right-align .show-tags .tag  {
 	float: right;
 	padding-right: 0px;
@@ -945,7 +955,7 @@ div.right-align a.tag span.label.tag-label {
 
 .show-tags .tag.active span.label.tag-label,
 .show-tags .tag span.label.tag-label.label-success {
-  background: #bb2550;
+  background: #bebebe;
   padding: 3px 8px 4px;
   float: left;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -1696,7 +1706,7 @@ h2.tour-box-title {
   font-weight: bold;
 }
 .show-tags .tag.active span.label.tag-label {
-  background: #bb2550;
+  background: #bebebe;
   padding: 3px 8px 4px;
   float: left;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -1900,9 +1910,6 @@ table#diary a.venue,
   font-size: 16px;
   margin-bottom: 5px;
 }
-.filter-sidebar li.active a {
-  color: #BB2550;
-}
 .filter-sidebar a {
   color: #4d4e4d;
 }
@@ -1914,6 +1921,23 @@ table#diary a.venue,
 .filter-sidebar form#show-sidebar-search{
   margin:0;
 }
+
+#directory-sidebar form #directory-sidebar-submit.btn-primary{
+  margin-bottom:9px;
+}
+
+#directory-sidebar form#directory-sidebar-search{
+  margin:0;
+}
+
+#directory-sidebar form input#q{
+  width:143px;
+}
+
+#directory-sidebar a.type i{
+  padding-right:4px;
+}
+
 
 /*========== tours#show ==========*/
 h1.tour {
@@ -2349,7 +2373,7 @@ a:hover.tag.theatre span.label.tag-label {
 }
 
 /*-----------other labels-------------*/
-.filter-sidebar a.label{
+.filter-sidebar a.label, #directory-sidebar a.region, .directory-item-region a.region{
   background-color:#acc636;
   color:#fff;
   text-transform: uppercase;
@@ -2357,7 +2381,8 @@ a:hover.tag.theatre span.label.tag-label {
   padding:6px 6px;
   font-size:14px;
   text-shadow:none;
+  font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
-.filter-sidebar a:hover.label{
+.filter-sidebar a:hover.label, #directory-sidebar a:hover.region{
   background-color:#d1de4b;
 }
