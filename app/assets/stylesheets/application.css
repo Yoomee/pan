@@ -929,7 +929,7 @@ h4.directory-item-extra,
 .show-tags .tag span.label.tag-label {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
   margin: 0 10px 10px 0;
-  background: #4095b7;
+  background: none; /*For now until she gives us a hover colour*/
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -1643,7 +1643,7 @@ span.welcome-to-tourbook {
 }
 /*========== Shows page ==========*/
 .show-tour {
-  padding: 10px 10px 0; 
+  padding: 0; 
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
@@ -1712,7 +1712,15 @@ h2.tour-box-title {
   float: right;
 }
 #show-date-filter.form-horizontal .controls input {
-  width: 90px;
+  width: 156px;
+}
+
+#show-date-filter.form-horizontal .controls input#end_date{
+  margin-left: 20px;
+}
+
+#show-date-filter .control-group{
+  float:left;
 }
 #remove-start-date,
 #remove-end-date {
@@ -1897,6 +1905,14 @@ table#diary a.venue,
 }
 .filter-sidebar a {
   color: #4d4e4d;
+}
+
+.filter-sidebar form #show-sidebar-submit.btn-primary{
+  margin-bottom:9px;
+}
+
+.filter-sidebar form#show-sidebar-search{
+  margin:0;
 }
 
 /*========== tours#show ==========*/
@@ -2305,4 +2321,43 @@ a.tag.spoken-word span.label.tag-label {
 }
 a.tag.theatre span.label.tag-label {
   background-color: #3b849b;
+}
+
+a:hover.tag.childrens span.label.tag-label {
+  background-color: #D84826;
+}
+a:hover.tag.circus span.label.tag-label {
+  background-color: #30a394;
+}
+a:hover.tag.comedy span.label.tag-label {
+  background-color: #efd61d;
+}
+a:hover.tag.dance span.label.tag-label {
+  background-color: #d1de4b;
+}
+a:hover.tag.music span.label.tag-label {
+  background-color: #ed295f;
+}
+a:hover.tag.musical-theatre span.label.tag-label {
+  background-color: #406793;
+}
+a:hover.tag.spoken-word span.label.tag-label {
+  background-color: #5b4646;
+}
+a:hover.tag.theatre span.label.tag-label {
+  background-color: #109daa;
+}
+
+/*-----------other labels-------------*/
+.filter-sidebar a.label{
+  background-color:#acc636;
+  color:#fff;
+  text-transform: uppercase;
+  font-weight:normal;
+  padding:6px 6px;
+  font-size:14px;
+  text-shadow:none;
+}
+.filter-sidebar a:hover.label{
+  background-color:#d1de4b;
 }
