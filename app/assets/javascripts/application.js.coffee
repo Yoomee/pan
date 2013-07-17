@@ -57,3 +57,9 @@ $(document).ready () ->
     maxlength = $(this).attr('maxlength');
     val = $(this).val();
     $(this).val(val.slice(0, maxlength)) if val.length > maxlength
+
+  $('show-sidebar-submit').click ->
+    $('show-sidebar-search').submit()
+
+  $('directory-sidebar-submit').click ->
+    $('directory-sidebar-search').submit()
