@@ -2,14 +2,14 @@
 
 .filter-sidebar
   .well
-    %h2.mb-1 Filter by:  
-    .show-tags
+    %h2.mb-1 Filter by:     
+    .show-tags{:id => "filter-top"}
       -@tags.each do |tag|
         -param_tags = original_tags.dup
         -param_tags.delete(tag)
         =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
-      =show_region_filter_link(:span, @region)
-      =show_collection_filter_link(@collection)
+      =show_region_filter_link(:span, @region, true) if @region
+      =show_collection_filter_link(@collection, true) if @collection        
     .clearfix
 
   .well
@@ -46,13 +46,13 @@
     %h2.mb-1 Collections
     %ul.unstyled.collection-list
       -Collection.all.each do |collection|
-        =show_collection_filter_link(collection)
+        =show_collection_filter_link(collection, false)
 
   .well
     %h2.mb-1 Location
     %ul.unstyled.location-list
       -Pan::REGIONS.values.sort.each do |region|
-        =show_region_filter_link(:li, region)
+        =show_region_filter_link(:li, region, false)
 
   
 

@@ -31,7 +31,7 @@
         -param_tags = original_tags.dup
         -param_tags.delete(tag)
         =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
-      =show_region_filter_link(:span, @region)
+      =show_region_filter_link(:span, @region, true)
       =type_filter_link(@type)
     .clearfix
 
