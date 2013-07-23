@@ -48,7 +48,7 @@
       =render "shows/toggle_view_links"
 
 .row
-  .span9
+  .span8
     -if @tours.size == 0
       %p.lead No shows with these filters!
     -elsif view_preference == 'block'
@@ -56,5 +56,5 @@
     -elsif view_preference == 'list'
       =render "shows/list_view", :original_tags => original_tags
 
-  .span3
+  .span4
     = render 'filter_sidebar', :original_tags => original_tags

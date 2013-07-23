@@ -1,10 +1,10 @@
 module FilterHelper
 
-  def show_collection_filter_link(collection)
+  def show_collection_filter_link(collection, top)
     active = params[:collection] == collection.to_s.parameterize
 
     param_options = {}.tap do |hash|
-      hash[:collection] = collection.name.parameterize unless active
+      hash[:collection] = collection.name.parameterize if collection.present? unless active
       hash[:month] = params[:month] if params[:month].present?
       hash[:region] = params[:region] if params[:region].present?
       hash[:sort] = params[:sort] if params[:sort].present?
@@ -15,10 +15,10 @@ module FilterHelper
 
     param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year}) if controller_name.diary?
 
-    li_with_active(active, (link_to collection, controller_name.diary? ? diary_path(param_options) : shows_path(param_options)))
+    li_with_active(active, (link_to "#{collection} #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, controller_name.diary? ? diary_path(param_options) : shows_path(param_options), :class => "label collections"))
   end
 
-  def show_region_filter_link(content_tag, region)
+  def show_region_filter_link(content_tag, region, top)
     active = params[:region] == region
 
     param_options = {}.tap do |hash|
@@ -33,7 +33,7 @@ module FilterHelper
     
     param_options.reverse_merge!({:month => Date.today.month, :year => Date.today.year}) if controller_name.diary?
 
-    content_tag_with_active(content_tag, active, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region}".html_safe, controller_name.diary? ? diary_path(param_options) : shows_path(param_options)))
+    content_tag_with_active(content_tag, active, (link_to "#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region} #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, controller_name.diary? ? diary_path(param_options) : shows_path(param_options), :class => 'label'))
   end
 
   def tag_link(label, param_options, classes, add_remove=false)

@@ -34,6 +34,7 @@ class UsersController < ApplicationController
         @letter = '#'
         @users = @users.where("last_name REGEXP '^[^a-zA-Z]'")
       end
+      @tags = [*params[:tags]]
       render :template => 'organisations/directory'
     end
   end

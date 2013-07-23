@@ -4,56 +4,61 @@
       Directory.init();
       });
 
--original_tags = @tags || []
+-@tags ||= [*params[:tags]]
 
+#directory-sidebar  
+  //-if @type.present? || @collection.present? || @query.present? || @tags.present? || @region.present?
+  / / .well
+  /   %h4 Filters
+  /   -if @type.present? || @collection.present? 
+  /     %ul.unstyled
+  /       =type_filter_link(@type)
+  /       =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }) if @collection.present?
+  /   .show-tags
+  /     -@tags.sort.each do |tag|
+  /       =directory_item_tag(Tag.find_by_name(tag), @tags.dup)
+  /   .clearfix
+  /   -if @region.present?
+  /     %ul.unstyled
+  /       =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region })
+  /   =link_to 'view all', directory_path, :class => 'pull-right'
+  /   .clearfix
 
-#directory-sidebar
-  -if @type.present? || @collection.present? || @query.present? || @tags.present? || @region.present?
-    .well
-      %h4 Filters
-      -if @type.present? || @collection.present? 
-        %ul.unstyled
-          =type_filter_link(@type)
-          =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }) if @collection.present?
-      .show-tags
-        -@tags.sort.each do |tag|
-          -param_tags = original_tags.dup
-          =directory_item_tag(Tag.find_by_name(tag), param_tags)
-      .clearfix
-      -if @region.present?
-        %ul.unstyled
-          =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region })
-      =link_to 'view all', directory_path, :class => 'pull-right'
-      .clearfix
   .well
-    %h4 Search
-    =form_tag(directory_path, :method => :get, :id => 'directory-search') do
-      =text_field_tag(:q, @query)
+    %h2.mb-1 Filter by:  
+    .show-tags
+      -@tags.each do |tag|
+        -param_tags = original_tags.dup
+        -param_tags.delete(tag)
+        =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
+      =show_region_filter_link(:span, @region, true)
+      =type_filter_link(@type)
+    .clearfix
+
+  .well
+    %h4 Type
+    %ul.unstyled
+      -%w{Performer Promoter Tour Venue User}.each do |type|
+        =type_filter_link(type)  
+  .well
+    %h4 Genre
+    .show-tags
+      =render 'organisations/tags_for_directory_view', :tags => Tag.genres, :original_tags => @tags
+    .clearfix
+  .well
+    %h4 Location
+    %ul.unstyled
+      -Pan::REGIONS.sort.each do |region|
+        =region_filter_link(:li, region)
+  .well    
+    =form_tag(directory_path, :method => :get, :id => 'directory-sidebar-search') do
+      =text_field_tag(:q, @query, :placeholder => "Enter your keyword")
       .hide
         =select_tag(:type, options_from_collection_for_select(%w{Performer Promoter Tour Venue User}, :to_s, :to_s, params[:type]), :prompt => 'Please select...')
         =select_tag(:collection, options_from_collection_for_select(Collection.order(:name), :id, :name, params[:collection]), :prompt => 'Please select...')
         =select_tag(:region, options_from_collection_for_select(Pan::REGIONS.sort, :first, :last, params[:region]), :prompt => 'Please select...')
         -Tag.genres.each do |tag|
           =check_box_tag('tags[]', tag.name.parameterize, @tags.include?(tag.name.parameterize), :class => 'tags', :id => "tag-#{tag.name.parameterize}")
-      =submit_tag('Filter', :class => 'btn')
-  .well
-    %h4 Type
-    %ul.unstyled
-      -%w{Performer Promoter Tour Venue User}.each do |type|
-        =type_filter_link(type)
-  .well
-    %h4 Collections
-    %ul.unstyled
-      -Collection.order(:name).each do |collection|
-        =collection_filter_link(collection)
-  .well
-    %h4 Genre
-    .show-tags
-      =render 'organisations/tags_for_directory_view', :tags => Tag.genres, :original_tags => original_tags
-    .clearfix
-  .well
-    %h4 Locations
-    %ul.unstyled
-      -Pan::REGIONS.sort.each do |region|
-        =region_filter_link(:li, region)
-
+      %button.btn-primary{:id => 'directory-sidebar-submit'}
+        %i.icon-search
+      =submit_tag('Filter', :class => 'btn hide')

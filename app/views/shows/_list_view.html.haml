@@ -1,11 +1,11 @@
 -@tours.each do |tour|
   .row
-    .span9.show-tour.list
+    .span8.show-tour.list
       .row
         .span3
           =link_to show_path(tour) do
             =image_for(tour, "200x160#", :class => "list-image")
-        .span6.show-list-view-text
+        .span5.show-list-view-text
           =link_to tour do
             %h2=tour
             %h3=tour.performer

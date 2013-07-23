@@ -1,50 +1,70 @@
 -month ||= ""; year ||= ""
-.well.filter-sidebar
-  %h2.mb-1 Filter by:
-  .show-tags
-    -@tags.each do |tag|
-      -param_tags = original_tags.dup
-      -param_tags.delete(tag)
-      =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
 
-  .clearfix
+.filter-sidebar
+  .well
+    %h2.mb-1 Filter by:     
+    .show-tags{:id => "filter-top"}
+      -@tags.each do |tag|
+        -param_tags = original_tags.dup
+        -param_tags.delete(tag)
+        =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
+      =show_region_filter_link(:span, @region, true) if @region
+      =show_collection_filter_link(@collection, true) if @collection        
+    .clearfix
 
-  %h2.mb-1 Dates
+  .well
+    %h2.mb-1 Dates
 
-  =form_tag 'shows', :method => "get", :class => "form-horizontal", :id => "show-date-filter" do
-    .control-group
-      .controls
-        .input-append
-          =text_field_tag :start_date, @start_date, :class => " datepicker"
-          %span.add-on#remove-start-date
-            %i.icon-remove
-      =label_tag :start_date, "From:", :class => "control-label"
-    .control-group
-      .controls
-        .input-append
-          =text_field_tag :end_date, @end_date, :class => "span2 datepicker"
-          %span.add-on#remove-end-date
-            %i.icon-remove
-      =label_tag :end_date, "To:", :class => "control-label"
+    =form_tag 'shows', :method => "get", :class => "form-horizontal", :id => "show-date-filter" do
+      .control-group
+        .controls
+          .input-append
+            =text_field_tag :start_date, @start_date, :class => "datepicker sidebar-calendar-from"
+            %span.add-on.calendar-button-from
+              %i.icon-calendar
+        =label_tag :start_date, "From:", :class => "control-label"
+      .control-group{:id => 'show-date-to'}
+        .controls
+          .input-append
+            =text_field_tag :end_date, @end_date, :class => "span2 datepicker sidebar-calendar-to"
+            %span.add-on.calendar-button-to
+              %i.icon-calendar
+        =label_tag :end_date, "To:", :class => "control-label"
+    .clearfix      
+  .well
+    %h2.mb-1 Genre
 
+    .show-tags.show-tags
+      -@all_tags.each do |tag|
+        -param_tags = original_tags.dup
+        -param_tags << tag.name unless param_tags.delete(tag.name)
+        
+        =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id, :collection => @collection, :region => @region, :sort => @sort}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''} #{tag.name}")
+    .clearfix      
 
-  %h2.mb-1 Collections
-  %ul.unstyled
-    -Collection.all.each do |collection|
-      =show_collection_filter_link(collection)
+  .well
+    %h2.mb-1 Collections
+    %ul.unstyled.collection-list
+      -Collection.all.each do |collection|
+        =show_collection_filter_link(collection, false)
 
-  %h2.mb-1 Locations
-  %ul.unstyled
-    -Pan::REGIONS.values.sort.each do |region|
-      =show_region_filter_link(:li, region)
+  .well
+    %h2.mb-1 Location
+    %ul.unstyled.location-list
+      -Pan::REGIONS.values.sort.each do |region|
+        =show_region_filter_link(:li, region, false)
 
+  
 
-  %h2.mb-1 Genre
-
-  .show-tags.show-tags
-    -@all_tags.each do |tag|
-      -param_tags = original_tags.dup
-      -param_tags << tag.name unless param_tags.delete(tag.name)
-      
-      =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id, :collection => @collection, :region => @region, :sort => @sort}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''} #{tag.name}")
-  .clearfix
+  .well   
+    =form_tag(shows_path, :method => :get, :id => 'show-sidebar-search') do
+      =text_field_tag(:q, @query, :placeholder => "Enter your keyword")
+      .hide      
+        =select_tag(:type, options_from_collection_for_select(%w{Performer Promoter Tour Venue User}, :to_s, :to_s, params[:type]), :prompt => 'Please select...')
+        =select_tag(:collection, options_from_collection_for_select(Collection.order(:name), :id, :name, params[:collection]), :prompt => 'Please select...')
+        =select_tag(:region, options_from_collection_for_select(Pan::REGIONS.sort, :first, :last, params[:region]), :prompt => 'Please select...')
+        -Tag.genres.each do |tag|
+          =check_box_tag('tags[]', tag.name.parameterize, @tags.include?(tag.name.parameterize), :class => 'tags', :id => "tag-#{tag.name.parameterize}")
+      %button.btn-primary{:id => 'show-sidebar-submit'}
+        %i.icon-search
+      =submit_tag("Submit", :class => 'btn hide')

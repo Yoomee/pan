@@ -33,13 +33,14 @@ class PerformersController < ApplicationController
         @letter = '#'
         @performers = @performers.where("name REGEXP '^[^a-zA-Z]'")
       end
+      @tags = [*params[:tags]]
       render :template => 'organisations/directory'
     end
   end
   
   def index
     if (@tag_context = params[:tag_context]).present?
-      if (@tag = params[:tag]).present?
+      if (@tag = params[:tags]).present?
         @performers = Performer.tagged_with(@tag, :on => @tag_context)
       else
         @tags = Performer.tag_counts_on(@tag_context)
@@ -47,6 +48,7 @@ class PerformersController < ApplicationController
     else
       @performers = Performer.order("created_at DESC").limit(10)
     end
+    @tags = params[:tags]
     render :template => 'organisations/directory'
   end
   
@@ -65,6 +67,7 @@ class PerformersController < ApplicationController
     else
       @performers = []
     end
+    @tags = params[:tags]
     render :template => 'organisations/directory'
   end
   

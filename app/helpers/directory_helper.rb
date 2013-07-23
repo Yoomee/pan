@@ -140,7 +140,7 @@ module DirectoryHelper
   
   def region_filter_link(content_tag, region)
     active = params[:region] == region.first
-    content_tag_with_active(content_tag, active, (link_to("#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region.last}".html_safe, '#', :class => 'region', :id =>"region-#{region.first}")))
+    content_tag_with_active(content_tag, active, (link_to("#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region.last}".html_safe, '#', :class => 'region label', :id =>"region-#{region.first}")))
   end
   
   def type_filter_link(type)

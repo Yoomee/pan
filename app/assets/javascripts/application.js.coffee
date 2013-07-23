@@ -57,3 +57,15 @@ $(document).ready () ->
     maxlength = $(this).attr('maxlength');
     val = $(this).val();
     $(this).val(val.slice(0, maxlength)) if val.length > maxlength
+
+  $('show-sidebar-submit').click ->
+    $('show-sidebar-search').submit()
+
+  $('directory-sidebar-submit').click ->
+    $('directory-sidebar-search').submit()
+
+  $('.calendar-button-from').click ->
+    $('input.sidebar-calendar-from').focus()
+
+  $('.calendar-button-to').click ->
+    $('input.sidebar-calendar-to').focus()

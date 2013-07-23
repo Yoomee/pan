@@ -927,11 +927,23 @@ h4.directory-item-extra,
  color: #4d4e4d;
 }
 .show-tags .tag span.label.tag-label {
-  font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
-  margin: 0 10px 10px 0;
-  background: #4095b7;
+  font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  margin: 0 10px 10px 0;  
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight:normal;
+  font-size:14px;
+}
+
+.show-tags li.active{
+  list-style-type: none;
+}
+
+.show-tags li.active a.label, .show-tags span.active a.label{
+  margin:0 10px 10px 0;  
+}
+
+.show-tags#filter-top li.active a.label, .show-tags span.active a.label, .show-tags#filter-top .tag span.label.tag-label{
+  background: #bebebe;
 }
 
 .right-align .show-tags .tag  {
@@ -944,8 +956,7 @@ div.right-align a.tag span.label.tag-label {
 }
 
 .show-tags .tag.active span.label.tag-label,
-.show-tags .tag span.label.tag-label.label-success {
-  background: #bb2550;
+.show-tags .tag span.label.tag-label.label-success {  
   padding: 3px 8px 4px;
   float: left;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -1643,7 +1654,7 @@ span.welcome-to-tourbook {
 }
 /*========== Shows page ==========*/
 .show-tour {
-  padding: 10px 10px 0; 
+  padding: 0; 
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
@@ -1688,15 +1699,14 @@ h2.tour-box-title {
   line-height: 1.5;
   margin: 0px 0 0px;
 }
-.show-tags .tag span.label.tag-label {
+/*.show-tags .tag span.label.tag-label {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
   margin: 0 10px 10px 0;
   background: #4095b7;
   text-transform: uppercase;
   font-weight: bold;
-}
-.show-tags .tag.active span.label.tag-label {
-  background: #bb2550;
+}*/
+.show-tags .tag.active span.label.tag-label {  
   padding: 3px 8px 4px;
   float: left;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -1712,7 +1722,15 @@ h2.tour-box-title {
   float: right;
 }
 #show-date-filter.form-horizontal .controls input {
-  width: 90px;
+  width: 156px;
+}
+
+#show-date-filter.form-horizontal .controls input#end_date{
+  margin-left: 20px;
+}
+
+#show-date-filter .control-group{
+  float:left;
 }
 #remove-start-date,
 #remove-end-date {
@@ -1892,12 +1910,34 @@ table#diary a.venue,
   font-size: 16px;
   margin-bottom: 5px;
 }
-.filter-sidebar li.active a {
-  color: #BB2550;
-}
 .filter-sidebar a {
   color: #4d4e4d;
 }
+
+.filter-sidebar form #show-sidebar-submit.btn-primary{
+  margin-bottom:9px;
+}
+
+.filter-sidebar form#show-sidebar-search{
+  margin:0;
+}
+
+#directory-sidebar form #directory-sidebar-submit.btn-primary{
+  margin-bottom:9px;
+}
+
+#directory-sidebar form#directory-sidebar-search{
+  margin:0;
+}
+
+#directory-sidebar form input#q{
+  width:143px;
+}
+
+#directory-sidebar a.type i{
+  padding-right:4px;
+}
+
 
 /*========== tours#show ==========*/
 h1.tour {
@@ -2305,4 +2345,44 @@ a.tag.spoken-word span.label.tag-label {
 }
 a.tag.theatre span.label.tag-label {
   background-color: #3b849b;
+}
+
+a:hover.tag.childrens span.label.tag-label {
+  background-color: #D84826;
+}
+a:hover.tag.circus span.label.tag-label {
+  background-color: #30a394;
+}
+a:hover.tag.comedy span.label.tag-label {
+  background-color: #efd61d;
+}
+a:hover.tag.dance span.label.tag-label {
+  background-color: #d1de4b;
+}
+a:hover.tag.music span.label.tag-label {
+  background-color: #ed295f;
+}
+a:hover.tag.musical-theatre span.label.tag-label {
+  background-color: #406793;
+}
+a:hover.tag.spoken-word span.label.tag-label {
+  background-color: #5b4646;
+}
+a:hover.tag.theatre span.label.tag-label {
+  background-color: #109daa;
+}
+
+/*-----------other labels-------------*/
+.filter-sidebar a.label, #directory-sidebar a.region, .directory-item-region a.region{
+  background-color:#acc636;
+  color:#fff;
+  text-transform: uppercase;
+  font-weight:normal;
+  padding:6px 6px;
+  font-size:14px;
+  text-shadow:none;
+  font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.filter-sidebar a:hover.label, #directory-sidebar a:hover.region{
+  background-color:#d1de4b;
 }
