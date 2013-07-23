@@ -5,6 +5,7 @@ module FilterHelper
 
     param_options = {}.tap do |hash|
       hash[:collection] = collection.name.parameterize if collection.present? unless active
+      hash[:q] = params[:q] if params[:q].present?
       hash[:month] = params[:month] if params[:month].present?
       hash[:region] = params[:region] if params[:region].present?
       hash[:sort] = params[:sort] if params[:sort].present?
@@ -23,6 +24,7 @@ module FilterHelper
 
     param_options = {}.tap do |hash|
       hash[:collection] = params[:collection] if params[:collection].present?
+      hash[:q] = params[:q] if params[:q].present?
       hash[:month] = params[:month] if params[:month].present?
       hash[:region] = region unless active
       hash[:sort] = params[:sort] if params[:sort].present?
@@ -38,9 +40,10 @@ module FilterHelper
 
   def tag_link(label, param_options, classes, add_remove=false)
     
-    if (param_options[:tour_id].present? || param_options[:organisation_id].present? || param_options[:venue_id].present?) && (param_options[:start_date].present? || param_options[:end_date].present?)
+    if (param_options[:tour_id].present? || param_options[:organisation_id].present? || param_options[:q].present? || param_options[:venue_id].present?) && (param_options[:start_date].present? || param_options[:end_date].present?)
       param_options[:month] = param_options[:start_date].split("/")[1]
       param_options[:year] = param_options[:start_date].split("/")[2]
+      param_options[:q] = params[:q]
       param_options[:tour_id] = ""
       param_options[:organisation_id] = ""
       param_options[:venue_id] = ""

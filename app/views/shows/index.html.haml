@@ -31,19 +31,19 @@
           %span.caret
         %ul.dropdown-menu.pull-right
           %li
-            =link_to "/shows?sort=title" do
+            =link_to "/shows?sort=name" do
               Title
           %li.divider
           %li
-            =link_to "/shows?sort=performer" do
+            =link_to "/shows?sort=performer_name" do
               Performer
           %li.divider
           %li
-            =link_to "/shows?sort=start-date" do
+            =link_to "/shows?sort=start_on" do
               Date available
           %li.divider
           %li
-            =link_to "/shows?sort=date-added" do
+            =link_to "/shows?sort=created_at" do
               Date added
       =render "shows/toggle_view_links"
 

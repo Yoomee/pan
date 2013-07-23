@@ -9,7 +9,8 @@
         -param_tags.delete(tag)
         =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
       =show_region_filter_link(:span, @region, true) if @region
-      =show_collection_filter_link(@collection, true) if @collection        
+      =show_collection_filter_link(@collection, true) if @collection
+    =link_to "Clear all filters", shows_path, :class => "clear-all" if @region || @collection || params[:tags].present?
     .clearfix
 
   .well
@@ -39,7 +40,7 @@
         -param_tags = original_tags.dup
         -param_tags << tag.name unless param_tags.delete(tag.name)
         
-        =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id, :collection => @collection, :region => @region, :sort => @sort}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''} #{tag.name}")
+        =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date,:end_date => @end_date, :month => month, :year => year, :tour_id => @tour_id, :organisation_id => @organisation_id, :venue_id => @venue_id, :collection => @collection, :region => @region, :sort => @sort, :q => @query}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''} #{tag.name}")
     .clearfix      
 
   .well
@@ -58,13 +59,7 @@
 
   .well   
     =form_tag(shows_path, :method => :get, :id => 'show-sidebar-search') do
-      =text_field_tag(:q, @query, :placeholder => "Enter your keyword")
-      .hide      
-        =select_tag(:type, options_from_collection_for_select(%w{Performer Promoter Tour Venue User}, :to_s, :to_s, params[:type]), :prompt => 'Please select...')
-        =select_tag(:collection, options_from_collection_for_select(Collection.order(:name), :id, :name, params[:collection]), :prompt => 'Please select...')
-        =select_tag(:region, options_from_collection_for_select(Pan::REGIONS.sort, :first, :last, params[:region]), :prompt => 'Please select...')
-        -Tag.genres.each do |tag|
-          =check_box_tag('tags[]', tag.name.parameterize, @tags.include?(tag.name.parameterize), :class => 'tags', :id => "tag-#{tag.name.parameterize}")
+      =text_field_tag(:q, @query, :placeholder => "Enter your keyword")      
       %button.btn-primary{:id => 'show-sidebar-submit'}
         %i.icon-search
       =submit_tag("Submit", :class => 'btn hide')

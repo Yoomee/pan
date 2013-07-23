@@ -7,10 +7,12 @@ class Tour < ActiveRecord::Base
   define_index do
     indexes name, :sortable => true
     indexes description
+    indexes performer(:name), :as => :performer_name, :sortable => true
     indexes genre_tags(:name), :as => :genres
     indexes collections(:name), :as => :collection
-    indexes booked_venues(:region), :as => :region 
-    has created_at, updated_at
+    indexes booked_venues(:region), :as => :region    
+    has created_at, start_on, :sortable => true
+    has updated_at, end_on
   end
   
   image_accessor :image
