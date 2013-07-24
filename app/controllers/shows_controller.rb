@@ -15,16 +15,19 @@ class ShowsController < ApplicationController
 
     @conditions = {}.tap do |hash|
       hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
-      hash[:genres] = @tags if @tags.present?
+      hash[:genres] = @tags.join(' | ') if @tags.present?
       hash[:region] = @region if @region.present?
     end
 
     @withs = {}.tap do |hash|
       hash[:end_on] = Time.parse(@start_date)..10.years.from_now if @start_date.present?
-      hash[:start_on] = Time.now..Time.parse(@end_date) if @end_date.present?
+      hash[:start_on] = Time.now..Time.parse(@end_date) if @end_date.present?    
+    end    
+    if @withs == {}
+      @withs = {:end_on => Time.now..10.years.from_now, :start_on => Time.now..10.years.from_now}
     end
 
-    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :any, :order => @sort)
+    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort)
 
   end
 
