@@ -915,12 +915,12 @@ h4.directory-item-extra,
 .directory-item-region h4 {
   font-size: 16px;
 }
-.directory-item-region h4.active a,
+/*.directory-item-region h4.active a,
 #directory-sidebar .well li.active a {
   background: rgb(255, 255, 100);
   padding: 2px;
   margin: 5px 0 5px 0;
-}
+}*/
 .controller_directory table a,
 .controller_directory #directory-sidebar a,
 .controller_groups #groups-sidebar a {
@@ -942,8 +942,8 @@ h4.directory-item-extra,
   margin:0 10px 10px 0;  
 }
 
-.show-tags#filter-top li.active a.label, .show-tags span.active a.label, .show-tags#filter-top .tag span.label.tag-label{
-  background: #bebebe;
+.show-tags#filter-top li.active a.label, .show-tags span.active a.label, .show-tags#filter-top .tag span.label.tag-label, #directory-sidebar #filter-top .label{
+  background-color: #bebebe;
 }
 
 .right-align .show-tags .tag  {
@@ -2378,7 +2378,7 @@ a:hover.tag.theatre span.label.tag-label {
 }
 
 /*-----------other labels-------------*/
-.filter-sidebar a.label, #directory-sidebar a.region, .directory-item-region a.region{
+.filter-sidebar a.label, #directory-sidebar a.region, .directory-item-region a.region, #directory-sidebar a.type{
   background-color:#acc636;
   color:#fff;
   text-transform: uppercase;

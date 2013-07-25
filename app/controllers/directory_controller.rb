@@ -3,19 +3,26 @@ class DirectoryController < ApplicationController
   before_filter :set_up_queries_and_classes
   
   def directory
+    search_params = {:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40, :page => params[:page]}
+   
     if @query.present? && @conditions.present?
-      @everything = ThinkingSphinx.search(@query, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40)
+      @everything = ThinkingSphinx.search(@query, search_params.merge(:conditions => @conditions))
     elsif @query.present?
-      @everything = ThinkingSphinx.search(@query, :match_mode => :extended, :classes => @search_classes, :order => :name_sort, :sort_mode => :asc, :per_page => 40)
+      @everything = ThinkingSphinx.search(@query, search_params)
     elsif @conditions.present?
       # If we had a newer version of sphinx we could do this for first letter of first word
       # @everything = ThinkingSphinx.search("@name[1] ^?", @letter, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40)
-      @everything = ThinkingSphinx.search(:conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40)
+        @everything = ThinkingSphinx.search(search_params.merge(:conditions => @conditions))
     elsif @search_classes.present?
-      @everything = ThinkingSphinx.search(:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40)
+      @everything = ThinkingSphinx.search(search_params)
     else
       @everything = []
     end
+
+
+    # @everything = ThinkingSphinx.search(@query, :conditions => @conditions, :classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40, :page => params[:page])
+
+
     render :template => 'organisations/directory'
   end
   

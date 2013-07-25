@@ -19,15 +19,13 @@ class ShowsController < ApplicationController
       hash[:region] = @region if @region.present?
     end
 
-    @withs = {}.tap do |hash|
-      hash[:end_on] = Time.parse(@start_date)..10.years.from_now if @start_date.present?
-      hash[:start_on] = Time.now..Time.parse(@end_date) if @end_date.present?    
-    end    
-    if @withs == {}
-      @withs = {:end_on => Time.now..10.years.from_now, :start_on => Time.now..10.years.from_now}
-    end
+    @withs = {}
+    @withs[:end_on] = @from_date.present? ? Time.parse(@start_date)..10.years.from_now : Time.now..10.years.from_now
+    @withs[:start_on] = 10.years.ago..Time.parse(@end_date) if @to_date.present?
 
-    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort)
+    
+
+    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort, :per_page => 20, :page => params[:page])
 
   end
 

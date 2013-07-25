@@ -114,8 +114,18 @@ module DirectoryHelper
   end
 
   def directory_item_tag(tag, original_tags)
-  active = params[:tags].present? && params[:tags].include?(tag.name)
-  link_to(tag_label(tag, :active => active), '#', :class => "tag #{tag.name} tag-#{tag.name.parameterize}")
+    active = params[:tags].present? && params[:tags].include?(tag.name)    
+
+    param_options = {}.tap do |hash|
+        hash[:collection] = params[:collection] if params[:collection].present?
+        hash[:letter] = params[:letter] if params[:letter].present?
+        hash[:q] = params[:q] if params[:q].present?
+        hash[:region] = params[:region] if params[:region].present?
+        hash[:tags] =  original_tags + [*tag] unless active
+        hash[:type] = params[:type] if params[:type].present?
+    end
+
+    link_to(tag_label(tag, :active => active), directory_path(param_options), :class => "tag #{tag.name} tag-#{tag.name.parameterize}")
   end
   
   def present_directory_letters
@@ -139,27 +149,48 @@ module DirectoryHelper
   end
   
   def region_filter_link(content_tag, region)
-    active = params[:region] == region.first
-    content_tag_with_active(content_tag, active, (link_to("#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region.last}".html_safe, '#', :class => 'region label', :id =>"region-#{region.first}")))
+    active = params[:region] == region.try(:first)
+
+    param_options = {}.tap do |hash|
+      hash[:collection] = params[:collection] if params[:collection].present?
+      hash[:letter] = params[:letter] if params[:letter].present?
+      hash[:q] = params[:q] if params[:q].present?
+      hash[:region] = region.try(:first) unless active
+      hash[:tags] = params[:tags] if params[:tags].present?
+      hash[:type] = params[:type] if params[:type].present?
+    end
+
+    content_tag_with_active(content_tag, active, (link_to("#{content_tag(:i, nil, :class => 'icon-map-marker')} #{region.try(:last) || region}".html_safe, directory_path(param_options), :class => 'region label', :id =>"region-#{region.try(:first) || region }")))
   end
   
   def type_filter_link(type)
+    active = params[:type] == type
+
+    param_options = {}.tap do |hash|
+      hash[:collection] = params[:collection] if params[:collection].present?
+      hash[:letter] = params[:letter] if params[:letter].present?
+      hash[:q] = params[:q] if params[:q].present?
+      hash[:region] = params[:region] if params[:region].present?
+      hash[:tags] = params[:tags] if params[:tags].present?
+      hash[:type] = type unless active
+    end    
+
     case type
     when "Tour"
       active = params[:type] == "Tour"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-star')}Show".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Performer"
       active = params[:type] == "Performer"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-group')}Performer".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Promoter"
       active = params[:type] == "Promoter"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Venue"
       active = params[:type] == "Venue"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-home')}Venue".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "User"
       active = params[:type] == "User"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, '#', :class => 'type', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-user')}Person".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     end
   end
 
