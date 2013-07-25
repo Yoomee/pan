@@ -30,7 +30,7 @@
   .span3
     .row.profile-left-col
       .well
-        =image_for(promoter, "220x150#")
+        =promoter.image.present? ? image_for(promoter, "220x150#") : image_tag("placeholder-organisation.jpg")
         .mb-1
         -if promoter.venues.with_lat_lng.present?
           =link_to "#promoter-map", :'data-toggle' => "modal", :class => "promoter-location" do

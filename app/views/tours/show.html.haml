@@ -20,7 +20,7 @@
   .span3
     .row.profile-left-col
       .well
-        =image_for(tour, "220x150#")
+        =tour.image.present? ? image_for(tour, "220x150#") : image_tag("placeholder-show.jpg")
         .performer
           %h4
             =link_to tour.performer do

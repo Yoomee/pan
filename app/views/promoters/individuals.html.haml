@@ -11,7 +11,7 @@
           -promoters.joins(:users).group('promoters.id').each do |promoter|
             %tr
               %td
-                =image_for(promoter, "50x50#", :class => "pull-left mr-1")
+                =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg")
                 %h4=link_to_self(promoter)
               %td
                 %table.table.table-bordered

@@ -2,7 +2,7 @@
   .span3
     .row
       .well
-        =image_for(user, "220x150#")
+        =user.image.present? ? image_for(user, "220x150#") : image_tag("placeholder-individual.jpg")
         -if user.promoter
           .promoter
             =link_to user.promoter do

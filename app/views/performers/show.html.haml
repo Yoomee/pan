@@ -20,7 +20,7 @@
   .span3
     .row.profile-left-col
       .well
-        =image_for(performer, "220x150#")
+        =performer.image.present? ? image_for(performer, "220x150#") : image_tag("placeholder-performer.jpg")
         
         -if current_user.performer_id == performer.id
           .black-block-links
