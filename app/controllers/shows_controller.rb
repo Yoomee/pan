@@ -20,8 +20,8 @@ class ShowsController < ApplicationController
     end
 
     @withs = {}
-    @withs[:end_on] = @from_date.present? ? Time.parse(@start_date)..10.years.from_now : Time.now..10.years.from_now
-    @withs[:start_on] = 10.years.ago..Time.parse(@end_date) if @to_date.present?
+    @withs[:end_on] = @start_date.present? ? Time.parse(@start_date)..10.years.from_now : Time.now..10.years.from_now
+    @withs[:start_on] = 10.years.ago..Time.parse(@end_date) if @end_date.present?
 
     
 
