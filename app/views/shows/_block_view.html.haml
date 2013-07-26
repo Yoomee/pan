@@ -1,10 +1,10 @@
--@tours.each_slice(3) do |three_tours|
+-@tours.each_slice(2) do |two_tours|
   .row
-    -three_tours.each do |tour|
-      .span3
+    -two_tours.each do |tour|
+      .span4
         .show-tour.block
           =link_to show_path(tour) do
-            =image_for(tour, "200x150#")
+            =image_for(tour, "250x200#")
             %h2.tour-box-title
               =truncate(tour.name, :length => 50, :separator => " ")
             -if tour.performer.name != tour.name

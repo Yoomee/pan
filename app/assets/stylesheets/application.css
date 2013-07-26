@@ -1668,7 +1668,25 @@ span.welcome-to-tourbook {
   box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2), 2px 3px 6px rgba(0, 0, 0, 0.1), 2px 3px 15px rgba(0, 0, 0, 0.1);
 }
 .show-tour.block {
-	height: 440px;
+	height: 470px;
+}
+
+.show-tour.block img{
+  margin-left:30px;
+  margin-top:20px;
+}
+
+.show-tour.block a p{
+  padding-left:20px;
+  padding-right:20px;
+}
+
+.show-tour.block .show-tags{
+  margin-left:20px;
+}
+
+p.tour-dates{
+  text-align:center;
 }
 .span9.show-tour {
   /*padding: 10px 10px 0; */
@@ -1697,12 +1715,14 @@ span.welcome-to-tourbook {
 h2.tour-box-title {
   padding-top: 10px;
   font-size:18px;
+  text-align:center;
 }
 .tour-performer-name {
   float: left;
   width: 100%;
   line-height: 1.5;
   margin: 0px 0 0px;
+  text-align:center;
 }
 /*.show-tags .tag span.label.tag-label {
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
