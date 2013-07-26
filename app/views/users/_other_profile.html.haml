@@ -50,11 +50,12 @@
                   =link_to(link, link.url, :target => '_blank')
           -if user.links_only_twitter_and_facebook.present?
             -user.links_only_twitter_and_facebook.each do |link|
-              =facebook_twitter_link(link)
-        .black-block-links
-          =link_to "#new-message", :'data-toggle' => "modal", :class => "btn" do
-            %i.icon-envelope
-            Send a message
+              =facebook_twitter_link(link)        
+        .black-block-links        
+          -if can?(:edit,user)
+            =link_to edit_user_path(user), {:class => "btn"} do
+              %i.icon-edit
+              Edit User 
 
   .span9
     %ul.nav.nav-tabs#tour-tabs

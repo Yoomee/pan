@@ -14,6 +14,17 @@ class MessagesController < ApplicationController
     else
       recipient_ids = nil      
     end
+    if @promoters = Promoter.find_by_id(params[:promoter_id])
+      recipient_ids = @promoters.user_ids
+      if recipient_ids == []
+        flash[:error] = "You cannot send a message to the organisation at this time because there is no administrator to receive the promoter's messages."
+        redirect_to :back
+      end    
+    elsif params[:user_id].present? && recipient = User.find_by_id(params[:user_id])
+      recipient_ids = [recipient.id]
+    else
+      recipient_ids = nil      
+    end
     if recipient_ids
       @message_thread = MessageThread.find_or_initialize_by_user_ids(recipient_ids + [current_user.id])
       if !@message_thread.new_record?

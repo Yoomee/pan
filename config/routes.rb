@@ -49,6 +49,7 @@ Pan::Application.routes.draw do
   resources :promoters, :only => [:show], :path => "organisations" do
     resources :users, :only => [:new, :create]
     resources :venues
+    resources :messages, :only => [:new]
     collection do
       get 'directory(/:letter)', :action => 'directory', :as => 'directory'
       get 'regions(/:region_url)', :action => 'region', :as => 'region'
@@ -62,7 +63,7 @@ Pan::Application.routes.draw do
     end
   end
   
-  resources :venues, :except => :new do
+  resources :venues, :except => :new do    
     member do
       get 'location', :as => 'edit_location'
       get 'bookings', :action => 'bookings'
