@@ -12,6 +12,4 @@
 .row.mt-2
   .span8
     =options_panel do
-      =back_link
-      =link_if_can("Edit profile", [:edit, user])
-      =link_if_can("Delete user", [:destroy, user], :confirm => "Are you sure?")
+      =back_link      

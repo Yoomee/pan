@@ -65,7 +65,7 @@
             =link_to "#addevent", :'data-toggle' => "modal", :class => "btn side-btn" do
               %i.icon-pencil
               Add an event
-          =link_to "", :class => "btn" do
+          =link_to new_promoter_message_path(venue.promoter), :class => "btn" do
             %i.icon-envelope
             Send a message
           =link_to "", :class => "btn", :id => "go-to-comment" do
@@ -74,7 +74,8 @@
           -if can?(:edit,venue)
             =link_to edit_venue_path(venue), {:class => "btn"} do
               %i.icon-edit
-              Edit Venue  
+              Edit Venue
+        =debug params  
 
   .span9
     %ul.nav.nav-tabs#tour-tabs

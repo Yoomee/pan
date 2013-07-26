@@ -1,2 +1,7 @@
 %h1.mb2=title("Edit profile")
+-if can?(:destroy, user)
+  .black-block-links
+    =link_to user_path(user), :method => :delete, :confirm => "Are you sure?", :class => "btn delete-button pull-right" do
+      %i.icon-trash
+      Delete User
 =render('form')
