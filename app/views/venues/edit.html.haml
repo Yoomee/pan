@@ -1,2 +1,7 @@
 %h1.mb1=title("Edit venue")
+-if can?(:destroy, venue)
+  .black-block-links
+    =link_to venue_path(venue), :method => :delete, :confirm => "Are you sure?", :class => "btn delete-button pull-right" do
+      %i.icon-trash
+      Delete Venue   
 =render('form')

@@ -77,6 +77,10 @@
             =link_to "", :class => "btn", :id => "go-to-comment" do
               %i.icon-pencil
               Post a comment
+            -if can?(:edit,performer)
+              =link_to edit_performer_path(performer), {:class => "btn"} do
+                %i.icon-edit
+                Edit Performer      
 
   .span9
     %ul.nav.nav-tabs#tour-tabs
@@ -183,6 +187,3 @@
   .span9
     =options_panel do
       =back_link
-      =link_to("Edit performer", edit_performer_path(performer)) if can?(:edit,performer)
-      =link_if_can("Delete performer", [:destroy, performer], :confirm => "Are you sure?")
-      =link_to("Add new show", new_performer_tour_path(performer)) if can?(:edit,performer)

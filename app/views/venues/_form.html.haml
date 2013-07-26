@@ -1,5 +1,5 @@
 =semantic_form_for(venue, :html => {:multipart => true}) do |form|
   =error_alert(venue)
-  =tabs('details', 'technical', ["slideshow", "Media"] , 'organisations/tabs/links', ['contact_info', "Address & Contact Info"], ['organisations/tabs/resources','Downloads'], :form => form)
+  =tabs('details', 'technical', ["slideshow", "Media"] , 'organisations/tabs/links', ['contact_info', "Address & Contact Info"], ['organisations/tabs/resources','Downloads'], ['bookings', "Manage Bookings"], :form => form)
   =form.buttons do
     =form.commit_button "Save all venue information", :button_html => {:class => 'btn-primary'}

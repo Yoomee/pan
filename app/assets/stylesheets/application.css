@@ -2032,6 +2032,37 @@ a i.icon-facebook:hover {
   text-align:right;
 }
 
+.black-block-links .delete-button.delete-performer{
+  width:144px;
+  text-align:right;
+  display:block;
+
+}
+
+.black-block-links .add-show{
+  display:block;
+  text-align:right;
+  margin-right:10px;
+}
+
+.black-block-links .add-venue, .add-individual{
+  
+  text-align:right;
+  margin-right:10px;
+}
+
+.black-block-links .add-venue{
+  width:99px;  
+}
+
+.black-block-links .add-individual{
+  width:118px;
+}
+
+.black-block-links .delete-organisation{
+  width:98px;
+}
+
 #tour-tabs {
   padding: 0 5px;
   margin-bottom: 0;

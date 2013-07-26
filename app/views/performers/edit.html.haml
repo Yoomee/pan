@@ -1,2 +1,11 @@
 %h1.mb1=title("Edit performer")
+-if can?(:destroy, performer)
+  .black-block-links
+    =link_to performer_path(performer), :method => :delete, :confirm => "Are you sure?", :class => "btn delete-button delete-performer pull-right" do
+      %i.icon-trash
+      Delete Performer
+    -if can?(:edit,performer)  
+      =link_to new_performer_tour_path(performer), :class => "btn delete-button add-show   pull-right" do
+        %i.icon-plus
+        Add Show    
 =render('form')

@@ -71,6 +71,10 @@
           =link_to "", :class => "btn", :id => "go-to-comment" do
             %i.icon-pencil
             Post a comment
+          -if can?(:edit,venue)
+            =link_to edit_venue_path(venue), {:class => "btn"} do
+              %i.icon-edit
+              Edit Venue  
 
   .span9
     %ul.nav.nav-tabs#tour-tabs
@@ -204,9 +208,6 @@
 .row.mt-2
   .span9
     =options_panel do
-      =back_link
-      =link_if_can("Edit venue", [:edit, venue])
-      =link_if_can("Delete venue", [:destroy, venue], :confirm => "Are you sure?")
-      =link_to("Manage bookings", bookings_venue_path(venue)) if can?(:edit,venue)    
+      =back_link        
       
 =render 'tour_dates/addevent_modal'        
