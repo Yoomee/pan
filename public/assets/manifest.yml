@@ -27,13 +27,10 @@ jquery-ui-bootstrap/ui-icons_cd0a0a_256x240.png: jquery-ui-bootstrap/ui-icons_cd
 jquery-ui-bootstrap/ui-icons_f6cf3b_256x240.png: jquery-ui-bootstrap/ui-icons_f6cf3b_256x240-45d5163a72132cf054415a3a233a0f98.png
 latest-shows.jpg: latest-shows-0eacdeda5840f8920f3e701623300a3e.jpg
 news-feed-image.jpg: news-feed-image-20a8bac535c3915a80296dede1357bf3.jpg
-<<<<<<< HEAD
 placeholder-individual.jpg: placeholder-individual-d2cbb66577bce5040f5b1c9d62545b46.jpg
 placeholder-organisation.jpg: placeholder-organisation-bec6b864d8e6de172bba44e9ad1a0df5.jpg
 placeholder-performer.jpg: placeholder-performer-5ffa23513c2dc58487fc6ee368dc7c1d.jpg
 placeholder-show.jpg: placeholder-show-da797cb522f4e117f6b1f382f2bca65e.jpg
-=======
->>>>>>> 681b619a017c171e6436deb4513df75f0ced8cc6
 register-facebook.png: register-facebook-05cb07c5bcf7334bf495492b33d81adf.png
 register-linkedin.png: register-linkedin-0a59c4c511663c727fe71bb85a120c23.png
 register-twitter.png: register-twitter-cb6f93f68d1b28ca64ec73f8a3e36017.png
@@ -44,11 +41,7 @@ temp-profile.jpg: temp-profile-1462251f82795d3bc24668e65f7bdbbf.jpg
 the-touring-network.png: the-touring-network-eb4fb4417f802b219995e7900ef6c8f1.png
 welcome-to-tourbook.png: welcome-to-tourbook-acf98a908824d4886b99a7c256d69a2c.png
 application.js: application-75f0f1613f4c62c0913c69d498790ccd.js
-<<<<<<< HEAD
 application.css: application-51c919c2e6d98dac5a43062855ca71aa.css
-=======
-application.css: application-3c5f96e09c160e14318ea332245134d4.css
->>>>>>> 681b619a017c171e6436deb4513df75f0ced8cc6
 mercury_save_btn_bg.png: mercury_save_btn_bg-450c6c8e3627a8bdd2e5a6468656245f.png
 mercury_sprite.png: mercury_sprite-c38d4ff3f48a599443b742a510e0929d.png
 mercury/button.png: mercury/button-c80a3cd84d843dde39d7da804c17a520.png
