@@ -43,20 +43,20 @@
           -if tour.links_or_performer_links_only_twitter_and_facebook.present?
             -tour.links_or_performer_links_only_twitter_and_facebook.each do |link|
               =facebook_twitter_link(link)
-          .black-block-links
-            =link_to new_performer_message_path(tour.performer), :class => "btn" do
-              %i.icon-envelope
-              Send a message
-            =link_to "#interested", :'data-toggle' => "modal", :class => "btn" do
-              %i.icon-heart
-              I'm interested
-            =link_to "", :class => "btn", :id => "go-to-comment" do
-              %i.icon-pencil
-              Post a comment
-            -if can?(:edit,tour)
-              =link_to edit_tour_path(tour), {:class => "btn"} do
-                %i.icon-edit
-                Edit Show                                        
+        .black-block-links
+          =link_to new_performer_message_path(tour.performer), :class => "btn" do
+            %i.icon-envelope
+            Send a message
+          =link_to "#interested", :'data-toggle' => "modal", :class => "btn" do
+            %i.icon-heart
+            I'm interested
+          =link_to "", :class => "btn", :id => "go-to-comment" do
+            %i.icon-pencil
+            Post a comment
+          -if can?(:edit,tour)
+            =link_to edit_tour_path(tour), {:class => "btn"} do
+              %i.icon-edit
+              Edit Show                                        
 
   .span9
     %ul.nav.nav-tabs#tour-tabs

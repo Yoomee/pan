@@ -71,17 +71,17 @@
           -if promoter.links_only_twitter_and_facebook.present?
             -promoter.links_only_twitter_and_facebook.each do |link|
               =facebook_twitter_link(link)
-          .black-block-links
-            =link_to new_promoter_message_path(promoter), :class => "btn" do
-              %i.icon-envelope
-              Send a message
-            =link_to "", :class => "btn", :id => "go-to-comment" do
-              %i.icon-pencil
-              Post a comment
-            -if can?(:edit,promoter)
-              =link_to edit_promoter_path(promoter), {:class => "btn"} do
-                %i.icon-edit
-                Edit Organisation                
+        .black-block-links
+          =link_to new_promoter_message_path(promoter), :class => "btn" do
+            %i.icon-envelope
+            Send a message
+          =link_to "", :class => "btn", :id => "go-to-comment" do
+            %i.icon-pencil
+            Post a comment
+          -if can?(:edit,promoter)
+            =link_to edit_promoter_path(promoter), {:class => "btn"} do
+              %i.icon-edit
+              Edit Organisation                
 
   .span9
     %ul.nav.nav-tabs#tour-tabs
