@@ -25,7 +25,7 @@ class ShowsController < ApplicationController
 
     
 
-    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort, :per_page => 10, :page => params[:page])
+    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort, :per_page => 12, :page => params[:page])
 
   end
 
