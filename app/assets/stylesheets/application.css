@@ -2049,6 +2049,15 @@ a i.icon-facebook:hover {
   margin-right: 10px
 }
 
+a.btn.delete-button.delete-tour-date.pull-right{
+  font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  width:140px;
+}
+
+.black-block-links.tour-dates{
+  display:inline;  
+}
+
 .black-block-links .delete-button{
   width:111px;
   text-align:right;

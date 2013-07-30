@@ -1,3 +1,8 @@
 %h1.mb1
   =title('Edit tour date')
+  -if can?(:destroy, tour_dates)
+    .black-block-links.tour-dates
+      =link_to tour_dates_path, :method => :delete, :confirm => "Are you sure?", :class => "btn delete-button delete-tour-date pull-right" do
+        %i.icon-trash
+        Delete Tour Date
 =render('form')
