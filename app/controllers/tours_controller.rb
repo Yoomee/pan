@@ -13,7 +13,7 @@ class ToursController < ApplicationController
       flash[:notice] = "Created a new show"
       redirect_to @tour
     else
-      render :action => "new"
+      render :action => "new"     
     end
   end
   

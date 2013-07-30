@@ -1,10 +1,10 @@
--@tours.each_slice(2) do |two_tours|
+-@tours.each_slice(3) do |three_tours|
   .row
-    -two_tours.each do |tour|
-      .span4
+    -three_tours.each do |tour|
+      .span3
         .show-tour.block
           =link_to show_path(tour) do
-            =image_for(tour, "250x200#")
+            =image_for(tour, "200x100#")
             %h2.tour-box-title
               =truncate(tour.name, :length => 50, :separator => " ")
             -if tour.performer.name != tour.name
@@ -14,7 +14,7 @@
               =truncate(strip_tags(tour.description), :length => 200, :separator => " ")
               =#link_to "read more...", tour_path(tour)
             .show-tags
-              -tour.genres.first(2).each do |tag|
+              -tour.genres.first(3).each do |tag|
                 -param_tags = original_tags.dup
                 -param_tags << tag.name unless param_tags.delete(tag.name)
                 =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :collection => @collection, :region => @region, :sort => @sort}, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''} #{tag.name}")

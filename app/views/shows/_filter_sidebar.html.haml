@@ -19,18 +19,18 @@
     =form_tag 'shows', :method => "get", :class => "form-horizontal", :id => "show-date-filter" do
       .control-group
         .controls
-          .input-append
+          =label_tag :start_date, "From:", :class => "control-label"
+          .input-append           
             =text_field_tag :start_date, @start_date, :class => "datepicker sidebar-calendar-from"
             %span.add-on.calendar-button-from
-              %i.icon-calendar
-        =label_tag :start_date, "From:", :class => "control-label"
+              %i.icon-calendar        
       .control-group{:id => 'show-date-to'}
         .controls
+          =label_tag :end_date, "To:", :class => "control-label"
           .input-append
             =text_field_tag :end_date, @end_date, :class => "span2 datepicker sidebar-calendar-to"
             %span.add-on.calendar-button-to
-              %i.icon-calendar
-        =label_tag :end_date, "To:", :class => "control-label"
+              %i.icon-calendar        
     .clearfix      
   .well
     %h2.mb-1 Genre
