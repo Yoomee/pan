@@ -8,4 +8,4 @@
   =link_to("Click to add your own review.", @tour ? new_tour_review_path(@tour) : new_performer_review_path(@performer))
 =render 'reviews/reviews', :reviews => @reviews
 =options_panel do
-  =back_link
+  =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"

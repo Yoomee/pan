@@ -249,8 +249,7 @@
 
 =render 'interested_modal'
 
-.row
-  .span3
-    %p.back-link
-      %i.icon-long-arrow-left
-      =link_to "Back to search", shows_path
+.row.mt-2
+  .span9
+    =options_panel do
+      =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"   

@@ -793,6 +793,13 @@ ul.messages-and-notifications {
 	padding-bottom: 13px;
 }
 
+.options_panel a{
+  width: 180px;
+  color: white;
+  background: #aac544;
+  margin-bottom: 10px;
+}
+
 /*========== Footer ==========*/
 /*
 Sticky Footer by Ryan Fait

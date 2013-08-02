@@ -1,4 +1,4 @@
-=google_maps_javascript_include_tag
+options_panel=google_maps_javascript_include_tag
 =content_for :head do
   :javascript
     VenuesMap.venues = #{Venue.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
@@ -15,4 +15,4 @@
 .row.mt-2
   .span9
     =options_panel do
-      =back_link
+      =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"

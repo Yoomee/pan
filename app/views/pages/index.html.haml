@@ -1,0 +1,12 @@
+%h1 Pages
+-if Page.count.zero?
+  %p There aren't any pages yet.
+-else
+  %ul
+    -Page.root.each do |page|
+      =render("page", :page => page)
+
+=options_panel do
+  =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"
+  =link_if_can("New page", [:new, Page.new], :class => "btn black-block-links")
+  =link_if_can("Set root order", [:order, :pages], :class => "btn black-block-links")

@@ -15,16 +15,16 @@
             %p=truncate(strip_tags(page.text), :length => 300)
           -if page.image  
             =image_for(page, "370x200#", :class => "gallery_image")
-    -if can?(:new, Page)
+    -if can?(:new, Page.new)
       .span4.mt-2.fade_in.new-page-box{:class => "fade_#{(page_children.size/2.0).ceil.to_word}"}
         =link_to("+ Add a subpage", new_child_page_path(:parent_id => page.id), :class=>"btn")
   .row
     .span8
       =options_panel do
-        =back_link
+        =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"
         -if can?(:edit, page)
           =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
         =link_if_can("Edit page details", [:edit, page])
         =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
-        =link_if_can("New page", new_child_page_path(:parent_id => page.id)) if can?(:new,Page)
-        =link_if_can("Set order", [:order, page])
+        =link_if_can("New page", new_child_page_path(:parent_id => page.id)) if can?(:new,Page.new)
+        =link_if_can("Set order", [:order, page])=link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"

@@ -34,7 +34,7 @@
   .span7
     =options_panel do
       -if can?(:mercury_update, page)
-        =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link")
-      =link_if_can("Edit page details", [:edit, page])
-      =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?") unless page.slug.present?
-      =link_to("New page", new_child_page_path(:parent_id => page.id)) if can?(:new, Page)
+        =mercury_edit_link("Edit page content", mercury_update_page_path(page), :id => "mercury_edit_link", :class => "btn black-block-links")
+      =link_if_can("Edit page details", [:edit, page], :class => "btn black-block-links")
+      =link_if_can("Delete page", [:destroy, page], :confirm => "Are you sure?", :class => "btn black-block-links") unless page.slug.present?
+      =link_to("New page", new_child_page_path(:parent_id => page.id), :class => "btn black-block-links") if can?(:new, Page.new)

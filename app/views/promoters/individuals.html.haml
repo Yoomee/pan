@@ -11,7 +11,7 @@
           -promoters.joins(:users).group('promoters.id').each do |promoter|
             %tr
               %td
-                =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg")
+                =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg", :height => '50', :width => '50', :class => "pull-left mr-1")
                 %h4=link_to_self(promoter)
               %td
                 %table.table.table-bordered
@@ -38,5 +38,5 @@
 .row
   .span8
     =options_panel do
-      =back_link
-      =link_if_can("Add new promoter", [:new, Promoter])      
+      =link_to "#{content_tag(:i, nil, :class => 'icon-arrow-left')}Back".html_safe, :back, :class => "btn black-block-links"
+      =link_if_can("Add new promoter", [:new, Promoter.new], :class => "btn black-block-links")      
