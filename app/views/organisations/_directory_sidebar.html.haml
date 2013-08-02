@@ -1,16 +1,10 @@
--javascript_include_tag "venues"
--google_maps_javascript_include_tag
--content_for :head do
+=google_maps_javascript_include_tag
+=content_for :head do
   :javascript
     VenuesMap.venues = #{Venue.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
-    $(document).ready(function() {
-      Directory.init();
+    $(document).ready(function() {      
       VenuesMap.init(true);
-      });
-    
-    $(document).ready(function() {
-      
-    });
+      }); 
 
 -@tags ||= [*params[:tags]]
 
@@ -65,5 +59,6 @@
         %i.icon-search
       =submit_tag('Filter', :class => 'btn hide')
   .well
-    #map-canvas{:style => "height:220px;width:100%"}
+    =link_to venues_path, do
+      #map-canvas{:style => "height:220px;width:100%"}
 //=will_paginate @everything

@@ -1,15 +1,12 @@
-options_panel=google_maps_javascript_include_tag
+=google_maps_javascript_include_tag
 =content_for :head do
   :javascript
     VenuesMap.venues = #{Venue.with_lat_lng.to_json(:only => [:id, :name, :lat, :lng], :methods => [:infowindow_image_url, :short_description])};
     $(document).ready(function() {
       VenuesMap.init(true);
     });
-    
-.row.mb-2
-  .span12
-    =render("community/nav")
-.row
+
+.row  
   #map-canvas.span12{:style => "height:600px"}
 
 .row.mt-2

@@ -1,7 +1,3 @@
--if viewing_community?
-  .row.mb-2
-    .span12
-      =render("community/nav")
 -if current_page?(venues_path)
   =google_maps_javascript_include_tag
   =content_for :head do
@@ -13,13 +9,13 @@
 
 -original_tags = @tags || []
 
--unless controller_name.directory?
-  .row
-    .span12
-      %h2.pull-left
-      %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
-        =text_field_tag 'q', params[:q], :class => "input-medium search-query"
-        %input.btn{:type => 'submit', :value => "Search"}
+/ -unless controller_name.directory?
+/   .row
+/     .span12
+/       %h2.pull-left
+/       %form.form-search.pull-right{:action => url_for({:controller => controller_name, :action => 'search'}), :method => 'get'}
+/         =text_field_tag 'q', params[:q], :class => "input-medium search-query"
+/         %input.btn{:type => 'submit', :value => "Search"}
 .row
   .span12.mt-2
     %ul.nav.nav-tabs
