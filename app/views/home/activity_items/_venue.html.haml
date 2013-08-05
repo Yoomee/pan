@@ -1,5 +1,5 @@
 =link_to item, :class=>"news-feed-image" do
-  =image_for(item, '70x70#')
+  =item.image.present? ? image_for(item, '70x70#') : image_tag('placeholder-organisation.jpg')
 .news-feed-text  
   %p
     -if item.promoter.present?
