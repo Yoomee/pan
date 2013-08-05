@@ -31,10 +31,10 @@
                 =link_to_self group   
                 %br    
 
-        / .bt      
-        /   -if user.skills.present?
-        /     .genres
-        /       =comma_list_tags(user, :skills)
+        .bt      
+          -if user.skills.present?
+            .genres
+              =comma_list_tags(user, :skills)
               
         -if user.promoter
           %h5
