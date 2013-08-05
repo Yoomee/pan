@@ -100,7 +100,7 @@
                   %td.span6.right-align
                     -if directory_item.respond_to?(:region) && directory_item.region.present?
                       .directory-item-region
-                        =region_filter_link(:h4, Pan::REGIONS.detect { |r| r[1] == directory_item.region })
+                        =region_filter_link(:h4, Pan::REGIONS.detect { |r| r[1] == directory_item.region }, false)
                     -elsif directory_item.respond_to?(:genres)
                       .show-tags.right-align
                         =render 'organisations/tags_for_directory_view', :tags => directory_item.genres, :original_tags => original_tags
