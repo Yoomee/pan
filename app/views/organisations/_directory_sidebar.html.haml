@@ -14,15 +14,15 @@
     -if @type.present? || @collection.present? || @query.present? || @tags.present? || @region.present?      
       -if @type.present? || @collection.present? 
         %ul.unstyled
-          =type_filter_link(@type)
-          =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }) if @collection.present?
+          =type_filter_link(@type, true)
+          =collection_filter_link(Collection.all.detect { |c| c.name.parameterize == @collection }, true) if @collection.present?
       .show-tags
         -@tags.sort.each do |tag|
-          =directory_item_tag(Tag.find_by_name(tag), @tags.dup)
+          =directory_item_tag(Tag.find_by_name(tag), @tags.dup, true)
       .clearfix
       -if @region.present?
         %ul.unstyled
-          =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region })
+          =region_filter_link(:li, Pan::REGIONS.detect { |r| r[0] ==@region }, true)
       =link_to 'Clear all filters', directory_path, :class => 'pull-right clear-all '
       .clearfix
 
@@ -41,7 +41,7 @@
     %h4 Type
     %ul.unstyled
       -%w{Performer Promoter Tour Venue User}.each do |type|
-        =type_filter_link(type)
+        =type_filter_link(type, false)
   .well
     %h4 Genre
     .show-tags
@@ -51,7 +51,7 @@
     %h4 Location
     %ul.unstyled
       -Pan::REGIONS.sort.each do |region|        
-        =region_filter_link(:li, region)
+        =region_filter_link(:li, region, false)
   .well    
     =form_tag(directory_path, :method => :get, :id => 'directory-sidebar-search') do
       =text_field_tag(:q, @query, :placeholder => "Enter your keyword")      
