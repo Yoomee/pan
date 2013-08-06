@@ -804,6 +804,10 @@ ul.messages-and-notifications {
   margin-bottom: 10px;
 }
 
+.options_panel a:hover{
+  background-color:#d1de4b;
+}
+
 /*========== Footer ==========*/
 /*
 Sticky Footer by Ryan Fait
