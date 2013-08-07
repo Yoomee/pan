@@ -29,6 +29,9 @@ Pan::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  # Don't user precompiled assets
+  config.serve_static_assets = false
+
   # Expands the lines which load the assets
   config.assets.debug = true
   
