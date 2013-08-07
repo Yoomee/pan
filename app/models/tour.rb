@@ -53,7 +53,7 @@ class Tour < ActiveRecord::Base
   validates :name, :performer, :presence => true
   validates :min_playing_area, :numericality => true, :allow_blank => true
   validates_associated :dates
-  validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image"
+  validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image", :case_sensitive => false
   
   delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :to => :performer
   
