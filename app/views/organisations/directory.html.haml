@@ -79,14 +79,15 @@
     .span9
       -if directory_items.empty?
         %p
-          There are no 
-          =controller_name.directory? ? "items" : controller_name
-          -if @tags
-            with these tags
-          -if @query
-            ="that match \"#{@query}\""
-          -elsif @letter
-            ="beginning with \"#{@letter}\""
+          / There are no 
+          / =controller_name.directory? ? "items" : controller_name
+          / -if @tags
+          /   with these tags
+          / -if @query
+          /   ="that match \"#{@query}\""
+          / -elsif @letter
+          /   ="beginning with \"#{@letter}\""
+          No results were found for these filters.
       -else
         %table.table.table-bordered.table-striped
           -if controller_name.directory?

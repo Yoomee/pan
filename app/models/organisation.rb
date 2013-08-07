@@ -13,7 +13,7 @@ module Organisation
     base.accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
     
     base.validates :name, :presence => true
-    base.send(:validates_property, :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image")
+    base.send(:validates_property, :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image", :case_sensitive => false)
   end 
   
   module ClassMethods

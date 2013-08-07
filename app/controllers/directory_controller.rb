@@ -3,9 +3,12 @@ class DirectoryController < ApplicationController
   before_filter :set_up_queries_and_classes
   
   def directory
+
     search_params = {:classes => @search_classes, :match_mode => :extended, :order => :name_sort, :sort_mode => :asc, :per_page => 40, :page => params[:page]}
-   
-    if @query.present? && @conditions.present?
+    
+    if @search_classes.empty?
+      @everything = []
+    elsif @query.present? && @conditions.present?
       @everything = ThinkingSphinx.search(@query, search_params.merge(:conditions => @conditions))
     elsif @query.present?
       @everything = ThinkingSphinx.search(@query, search_params)
@@ -62,6 +65,7 @@ class DirectoryController < ApplicationController
       hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
       hash[:genres] = @search_tags if @search_tags.present?
       hash[:region] = @region if @region.present?
+      # hash[:type] = @type if @type.present?
     end
   end
 
