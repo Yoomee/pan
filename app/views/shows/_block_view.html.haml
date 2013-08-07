@@ -11,7 +11,7 @@
               %h3.tour-performer-name=truncate(tour.performer.name, :length => 50, :separator => " ")
             %p.tour-dates=tour.dates_string
             %p
-              =truncate(strip_tags(tour.description), :length => 200, :separator => " ")
+              =tour.short_description.nil? || tour.short_description.empty? ? truncate(strip_tags(tour.description), :length => 200, :separator => " ") : tour.short_description
               =#link_to "read more...", tour_path(tour)
             .show-tags
               -tour.genres.first(3).each do |tag|
