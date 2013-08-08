@@ -9,7 +9,6 @@
     =image_for(performer, "220x150")
   =form.input :image, :as => :file, :label => "Select a file to upload",  :input_html => {:class => "mb-2"}
   =form.input :description, :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }, :label => "Description - <em>Max 200 words</em>".html_safe
-  =form.input :notes, :label => "Notes - <em>Only visible to Administrators</em>".html_safe, :input_html => {:rows => 6, :class => "span8"} if current_user.admin?
-  =form.input :categories, :label => "Category", :as => :select, :multiple => true, :collection => tag_list_options(:categories, performer, Tag.categories)
-  =form.input :tags, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:tags, performer, Tag.tags)
+  =form.input :categories, :label => "Genre", :as => :select, :multiple => true, :collection => tag_list_options(:categories, performer, Tag.categories)
+  =form.input :tags, :label => "Tags", :as => :select, :multiple => true, :collection => tag_list_options(:tags, performer, Tag.tags)  
   =form.input :retained_image, :as => :hidden
