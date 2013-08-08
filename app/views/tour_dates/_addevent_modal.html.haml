@@ -7,9 +7,9 @@
         Add an event
     .modal-body
       =form.inputs do
-        =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}
-        =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}
-        =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}  
+        =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}, :label => "Select a Show"
+        =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}, :label => "Select a Venue"
+        =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}, :label => "Select a Date"  
         =form.input :time,  :label => "Start time (24 hour format, hh:mm)", :as => :string, :input_html => {:class => 'timepicker'}  
         
       
