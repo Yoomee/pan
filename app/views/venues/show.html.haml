@@ -52,14 +52,14 @@
               =venue.promoter
           
         -if venue.links.present?
-          -if venue.links_without_twitter_and_facebook.present?
+          -if venue.links_without_twitter_and_facebook_and_youtube.present?
             %ul.unstyled.links
-              -venue.links_without_twitter_and_facebook.each do |link|
+              -venue.links_without_twitter_and_facebook_and_youtube.each do |link|
                 %li
                   =link_to(link, link.url, :target => '_blank')
-          -if venue.links_only_twitter_and_facebook.present?
-            -venue.links_only_twitter_and_facebook.each do |link|
-              =facebook_twitter_link(link)
+          -if venue.links_only_twitter_and_facebook_and_youtube.present?
+            -venue.links_only_twitter_and_facebook_and_youtube.each do |link|
+              =facebook_twitter_youtube_link(link)
         .black-block-links
           -if current_user.promoter || current_user.admin?        
             =link_to "#addevent", :'data-toggle' => "modal", :class => "btn side-btn" do

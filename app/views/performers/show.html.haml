@@ -60,14 +60,14 @@
                   =link_to_self tour
                   %br
         -if performer.links.present?
-          -if performer.links_without_twitter_and_facebook.present?
+          -if performer.links_without_twitter_and_facebook_and_youtube.present?
             %ul.unstyled.links
-              -performer.links_without_twitter_and_facebook.each do |link|
+              -performer.links_without_twitter_and_facebook_and_youtube.each do |link|
                 %li
                   =link_to(link, link.url, :target => '_blank')
-          -if performer.links_only_twitter_and_facebook.present?
-            -performer.links_only_twitter_and_facebook.each do |link|
-              =facebook_twitter_link(link)
+          -if performer.links_only_twitter_and_facebook_and_youtube.present?
+            -performer.links_only_twitter_and_facebook_and_youtube.each do |link|
+              =facebook_twitter_youtube_link(link)
         .black-block-links
           =link_to new_performer_message_path(performer), :class => "btn" do
             %i.icon-envelope

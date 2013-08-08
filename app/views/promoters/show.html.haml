@@ -63,14 +63,14 @@
             =render "tags/horizontal_list", :tags => promoter.genres
           .clearfix
         -if promoter.links.present?
-          -if promoter.links_without_twitter_and_facebook.present?
+          -if promoter.links_without_twitter_and_facebook_and_youtube.present?
             %ul.unstyled.links
-              -promoter.links_without_twitter_and_facebook.each do |link|
+              -promoter.links_without_twitter_and_facebook_and_youtube.each do |link|
                 %li
                   =link_to(link, link.url, :target => '_blank')
-          -if promoter.links_only_twitter_and_facebook.present?
-            -promoter.links_only_twitter_and_facebook.each do |link|
-              =facebook_twitter_link(link)
+          -if promoter.links_only_twitter_and_facebook_and_youtube.present?
+            -promoter.links_only_twitter_and_facebook_and_youtube.each do |link|
+              =facebook_twitter_youtube_link(link)
         .black-block-links
           =link_to new_promoter_message_path(promoter), :class => "btn" do
             %i.icon-envelope

@@ -90,14 +90,14 @@ class Tour < ActiveRecord::Base
     links.presence || performer.links
   end
    
-  def links_or_performer_links_only_twitter_and_facebook
+  def links_or_performer_links_only_twitter_and_facebook_and_youtube
     links = links.presence || performer.links
-    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
   end
   
-  def links_or_performer_links_without_twitter_and_facebook
+  def links_or_performer_links_without_twitter_and_facebook_and_youtube
     links = links.presence || performer.links
-    links.where("host != 'facebook.com' AND host != 'twitter.com'")
+    links.where("host != 'facebook.com' AND host != 'twitter.com' AND host != 'youtube.com'")
   end
   
   # def regions

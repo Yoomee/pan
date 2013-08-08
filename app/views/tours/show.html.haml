@@ -35,14 +35,14 @@
                   %span.label.tag-label=tag.name
             .clearfix
         -if tour.links_or_performer_links.present?
-          -if tour.links_or_performer_links_without_twitter_and_facebook.present?
+          -if tour.links_or_performer_links_without_twitter_and_facebook_and_youtube.present?
             %ul.unstyled.links
-              -tour.links_or_performer_links_without_twitter_and_facebook.each do |link|
+              -tour.links_or_performer_links_without_twitter_and_facebook_and_youtube.each do |link|
                 %li
                   =link_to(link, link.url, :target => '_blank')
-          -if tour.links_or_performer_links_only_twitter_and_facebook.present?
-            -tour.links_or_performer_links_only_twitter_and_facebook.each do |link|
-              =facebook_twitter_link(link)
+          -if tour.links_or_performer_links_only_twitter_and_facebook_and_youtube.present?
+            -tour.links_or_performer_links_only_twitter_and_facebook_and_youtube.each do |link|
+              =facebook_twitter_youtube_link(link)
         .black-block-links
           =link_to new_performer_message_path(tour.performer), :class => "btn" do
             %i.icon-envelope
@@ -231,9 +231,12 @@
             .well
               .row
                 .span8
+                  -if tour.updates.empty?
+                    %p This show has no updates.                    
+                  -else                    
+                    =render("posts/posts", :posts => tour.updates.page(params[:page]))
                   -if can?(:create, Post) && (tour.performer.users.include?(current_user) || current_user.admin?)
-                    =render("posts/remote_form", :post => current_user.updates.build(:target => tour))
-                  =render("posts/posts", :posts => tour.updates.page(params[:page]))
+                    =render("posts/remote_form", :post => current_user.updates.build(:target => tour))                  
             
       #comments.tab-pane.fade.in
         .row
@@ -244,7 +247,7 @@
                   -if can?(:create, Post)
                     %p
                       Use this space to discuss or comment on the show. Comments are only visible to other promoters, not performers, so feel free to be honest - but please be constructive and considerate in your remarks.
-                    =render("posts/remote_form", :post => current_user.posts.build(:target => tour))
+                    =render("posts/remote_form", :post => current_user.posts.build(:target => tour))                    
                     =render("posts/posts", :posts => tour.posts.page(params[:page]))
 
 =render 'interested_modal'

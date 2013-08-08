@@ -61,11 +61,11 @@
     %br
     %br      
     -if user.links.present?
-      -if user.links_without_twitter_and_facebook.present?
+      -if user.links_without_twitter_and_facebook_and_youtube.present?
         %ul.unstyled.links.mt-3
-          -user.links_without_twitter_and_facebook.each do |link|
+          -user.links_without_twitter_and_facebook_and_youtube.each do |link|
             %li
               =link_to(link, link.url, :target => '_blank')
-      -if user.links_only_twitter_and_facebook.present?
-        -user.links_only_twitter_and_facebook.each do |link|
-          =facebook_twitter_link(link)
+      -if user.links_only_twitter_and_facebook_and_youtube.present?
+        -user.links_only_twitter_and_facebook_and_youtube.each do |link|
+          =facebook_twitter_youtube_link(link)

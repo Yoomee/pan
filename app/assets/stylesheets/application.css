@@ -2007,7 +2007,8 @@ h1.tour i {
   background: #F6F6F2;
 }
 a i.icon-twitter,
-a i.icon-facebook {
+a i.icon-facebook,
+a i.icon-youtube {
   color: white;
   height: 24px;
   border-radius: 40px;
@@ -2024,6 +2025,11 @@ a i.icon-facebook {
   background: #465d98;
   width: 16px;
   padding-left: 10px;
+}
+a i.icon-youtube {
+  background: #C2302A;
+  width: 16px;
+  padding-left: 7px;
 }
 a i.icon-twitter:hover,
 a i.icon-facebook:hover {

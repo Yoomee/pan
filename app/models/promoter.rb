@@ -38,12 +38,12 @@ class Promoter < ActiveRecord::Base
     "UK"
   end
   
-  def links_only_twitter_and_facebook
-    links.where("host = 'facebook.com' OR host = 'twitter.com'")
+  def links_only_twitter_and_facebook_and_youtube
+    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
   end
   
-  def links_without_twitter_and_facebook
-    links.where("host != 'facebook.com' AND host != 'twitter.com'")
+  def links_without_twitter_and_facebook_and_youtube
+    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
   end
   
   def resources_present?
