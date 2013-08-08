@@ -21,3 +21,4 @@
   =form.input :description, :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }, :label => "Description".html_safe
   =form.input :genre_list, :label => "Genres", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres), :label => "Category"
   =form.input :collections, :label => "Collections <br /><em>Is your show part of a Touring Network Scheme?</em>".html_safe, :as => :check_boxes, :multiple => true
+  =form.input :additional_events, :label => "Additional Events or Education", :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }

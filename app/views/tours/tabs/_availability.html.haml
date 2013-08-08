@@ -3,3 +3,5 @@
     =form.input :start_on_s, :as => :string, :label => "Start date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
   .span
     =form.input :end_on_s, :as => :string, :label => "End date", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mt-2'}
+  .span
+    =form.input :expiry_date, :as => :string, :label => "Expiry date (Set a date after which bookings can no longer be made)", :input_html => {:class => "datepicker", :placeholder => "Click here to set date"}, :value_method => :to_s, :wrapper_html => {:class => 'pull-left mr-1 mt-2'}
