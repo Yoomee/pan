@@ -12,7 +12,7 @@
               view your profile
               %br
               and latest updates
-        =content_tag_with_active(:div, (current_page?(shows_path) || current_page?(:controller => "/tours")), :class => "inner") do
+        =content_tag_with_active(:div, (current_page?(shows_path) || controller_name.tours?) , :class => "inner") do
           =link_to shows_path, :class=>"nav-link nav-link-shows"  do
             .header
               %i.icon-star
@@ -40,14 +40,14 @@
               talk to other promoters
               %br
               and share your skills
-        =content_tag_with_active(:div, current_page?(:controller => "/resources"), :class => "inner") do
+        =content_tag_with_active(:div, controller_name.resources?, :class => "inner") do
           =link_to resources_path, :class=>"nav-link nav-link-resources"  do
             .header
               %i.icon-book
               Resources
             %span.nav-smallprint      
               find help and information
-        =content_tag_with_active(:div, (current_page?(:controller => "/performers") || current_page?(:controller => "/venues") || defined?(tour) || controller_name.directory?), :class => "inner") do
+        =content_tag_with_active(:div, (controller_name.performers? || controller_name.venues? || controller_name.directory?), :class => "inner") do
           =link_to directory_path, :class=>"nav-link nav-link-directory"  do
             .header
               %i.icon-list-ul
