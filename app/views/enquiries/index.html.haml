@@ -17,7 +17,7 @@
           %th
         %th Name
         %th Email
-        %th Date
+        %th Dates Interested
         %th{:colspan => 2}
     %tbody
       -@enquiries.each do |enquiry|
@@ -26,7 +26,7 @@
             %td=enquiry.form_name.humanize
           %td=enquiry.full_name if enquiry.full_name.present?
           %td=enquiry.email_address if enquiry.email_address.present?
-          %td=enquiry.created_at.to_s(:date_and_time)
+          %td=enquiry.enquiry_fields.where(:name => "dates_interested_in").first.try(:value)
           %td=link_to("More info", enquiry)
           %td
             =link_to(enquiry, :confirm => 'Are you sure?', :method => :delete) do
