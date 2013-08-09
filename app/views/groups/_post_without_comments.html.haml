@@ -9,6 +9,7 @@
             %span.small-info-text
               =time_ago_in_words(post.created_at)
               ago
-      =link_if_can post, :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'pull-right' do
+      =can?(:destroy, post)
+      =link_if_can [:destroy, post], :confirm => 'Are you sure?', :remote => true, :class => 'pull-right' do
         %i.icon-trash
     .clearfix
