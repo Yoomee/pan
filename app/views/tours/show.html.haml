@@ -35,7 +35,7 @@
                   %span.label.tag-label=tag.name
             .clearfix
         %ul.unstyled.links             
-          %li            
+          %li.website-link            
             =link_to(tour.performer.website_url, tour.performer.website_url, :target => '_blank') if tour.performer.website_url
           %li
             =link_to(content_tag(:i, "", :class => "icon-facebook"), tour.performer.facebook_url, :target => '_blank') if tour.performer.facebook_url          
