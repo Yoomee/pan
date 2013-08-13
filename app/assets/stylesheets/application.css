@@ -155,7 +155,7 @@ a.back-to-all{
 
 body, p,
 .ym_messages li .thread-participants {
-  font-size: 13px;
+  font-size: 16px;
   line-height: 20px;
   font-family:"Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size-adjust:0.488;
@@ -1231,6 +1231,10 @@ ul.links li img {
 ul.links li a {
   color:#333;
   font-family:"Proxima Nova Semibold", 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight:600; font-style:normal;
+  word-break:break-all;  
+}
+ul.links li a.website-link{
+  display:block;
 }
 .notifications {
   margin-top: 20px;
