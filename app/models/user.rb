@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   
   include YmUsers::User
   include YmCore::Multistep
+  include HasLinks
   
   define_index do
     indexes first_name, :sortable => true
@@ -14,9 +15,6 @@ class User < ActiveRecord::Base
   belongs_to :promoter, :autosave => true
   
   has_many :venues, :dependent => :nullify
-
-  has_many :links, :as => :attachable, :dependent => :destroy
-  accepts_nested_attributes_for :links, :reject_if => :all_blank, :allow_destroy => true  
   
   has_many :reviews, :dependent => :nullify
   
@@ -57,18 +55,6 @@ class User < ActiveRecord::Base
   end
   alias_method :summary, :description
   
-  def facebook_url
-    @facebook_url ||= links.find_by_host('facebook.com').try(:url)
-  end
-
-  def links_only_twitter_and_facebook_and_youtube
-    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
-  end
-  
-  def links_without_twitter_and_facebook_and_youtube
-    links.where("host != 'facebook.com' AND host != 'twitter.com' AND host != 'youtube.com'")
-  end
-  
   def name
     [first_name, last_name].join(' ')
   end
@@ -96,13 +82,6 @@ class User < ActiveRecord::Base
     %w{user_details organisation_type organisation_details}
   end 
 
-  def twitter_url
-    @twitter_url ||= links.find_by_host('twitter.com').try(:url)
-  end
-  
-  def twitter_username
-    @twitter_username ||= twitter_url.nil? ? '' : twitter_url.scan(/twitter\.com\/(#!\/)?(\w*)/).flatten.last
-  end
   
   private
   def create_organisation

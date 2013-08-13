@@ -60,12 +60,12 @@
       
     %br
     %br      
-    -if user.links.present?
-      -if user.links_without_twitter_and_facebook_and_youtube.present?
-        %ul.unstyled.links.mt-3
-          -user.links_without_twitter_and_facebook_and_youtube.each do |link|
-            %li
-              =link_to(link, link.url, :target => '_blank')
-      -if user.links_only_twitter_and_facebook_and_youtube.present?
-        -user.links_only_twitter_and_facebook_and_youtube.each do |link|
-          =facebook_twitter_youtube_link(link)
+    %ul.unstyled.links             
+      %li.website-link
+        =link_to(user.website_url, user.website_url, :target => '_blank') if user.website_url
+      %li
+        =link_to(content_tag(:i, "", :class => "icon-facebook"), user.facebook_url, :target => '_blank') if user.facebook_url          
+        =link_to(content_tag(:i, "", :class => "icon-twitter"), user.twitter_url, :target => '_blank') if user.twitter_url
+        =link_to(content_tag(:i, "", :class => "icon-youtube"), user.youtube_url, :target => '_blank') if user.youtube_url
+
+        

@@ -61,16 +61,15 @@
         -if promoter.genres.present?
           .promoter.genres
             =render "tags/horizontal_list", :tags => promoter.genres
-          .clearfix
-        -if promoter.links.present?
-          -if promoter.links_without_twitter_and_facebook_and_youtube.present?
-            %ul.unstyled.links
-              -promoter.links_without_twitter_and_facebook_and_youtube.each do |link|
-                %li
-                  =link_to(link, link.url, :target => '_blank')
-          -if promoter.links_only_twitter_and_facebook_and_youtube.present?
-            -promoter.links_only_twitter_and_facebook_and_youtube.each do |link|
-              =facebook_twitter_youtube_link(link)
+        .clearfix        
+          %ul.unstyled.links              
+            %li.website-link
+              / =debug promoter  
+              =link_to(promoter.website_url, promoter.website_url, :target => '_blank') if promoter.website_url
+            %li                
+              =link_to(content_tag(:i, "", :class => "icon-facebook"), promoter.facebook_url, :target => '_blank') if promoter.facebook_url
+              =link_to(content_tag(:i, "", :class => "icon-twitter"), promoter.twitter_url) if promoter.twitter_url
+              =link_to(content_tag(:i, "", :class => "icon-youtube"), promoter.youtube_url, :target => '_blank') if promoter.youtube_url                      
         .black-block-links
           =link_to new_promoter_message_path(promoter), :class => "btn" do
             %i.icon-envelope

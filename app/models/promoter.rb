@@ -1,6 +1,7 @@
 class Promoter < ActiveRecord::Base
   
   include Organisation
+  include HasLinks
 
   after_create :create_private_group
   
@@ -36,14 +37,6 @@ class Promoter < ActiveRecord::Base
   
   def country
     "UK"
-  end
-  
-  def links_only_twitter_and_facebook_and_youtube
-    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
-  end
-  
-  def links_without_twitter_and_facebook_and_youtube
-    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
   end
   
   def resources_present?

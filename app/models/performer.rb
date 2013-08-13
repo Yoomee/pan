@@ -3,6 +3,7 @@ class Performer < ActiveRecord::Base
   include YmLikes::Likeable
   include YmActivity::Recordable
   include Organisation
+  include HasLinks
   include HasReviews
   
   define_index do
@@ -50,21 +51,6 @@ class Performer < ActiveRecord::Base
   
   def future_tours
     tours.order(:end_on).where("end_on > :now", now: Time.now).drop(1)
-  end
-  
-  def social_urls
-    %w{facebook twitter youtube vimeo soundcloud}.collect do |site_name|
-      url = send("#{site_name}_url")
-      [site_name.humanize, url] if url.present?
-    end.compact
-  end
-
-  def links_only_twitter_and_facebook_and_youtube
-    links.where("host = 'facebook.com' OR host = 'twitter.com' OR host = 'youtube.com'")
-  end
-  
-  def links_without_twitter_and_facebook_and_youtube
-    links.where("host = 'facebook.com' AND host != 'twitter.com' AND host != 'youtube.com'")
   end
   
   private

@@ -67,7 +67,9 @@ class PromotersController < ApplicationController
     render :template => 'organisations/directory'
   end
   
-  def edit;end
+  def edit
+    promoter.build_social_links
+  end
   
   def individuals;end  
   

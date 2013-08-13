@@ -11,7 +11,7 @@
         =link_to new_promoter_venue_path(promoter), :class => "btn add-venue pull-right mt-3" do
           %i.icon-plus
           Add Venue
-      -if can?(:edit,promoter)  
+      -if can?(:edit,promoter)
         =link_to new_promoter_user_path(promoter), :class => "btn add-individual pull-right mt-3" do
           %i.icon-plus
           Add Individual

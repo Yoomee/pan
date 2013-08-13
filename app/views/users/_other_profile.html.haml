@@ -39,18 +39,14 @@
         -if user.promoter
           %h5
             %i.icon-map-marker
-            =user.promoter.region      
-
-    
-        -if user.links.present?
-          -if user.links_without_twitter_and_facebook_and_youtube.present?
-            %ul.unstyled.links
-              -user.links_without_twitter_and_facebook_and_youtube.each do |link|
-                %li
-                  =link_to(link, link.url, :target => '_blank')
-          -if user.links_only_twitter_and_facebook_and_youtube.present?
-            -user.links_only_twitter_and_facebook_and_youtube.each do |link|
-              =facebook_twitter_youtube_link(link)        
+            =user.promoter.region    
+        
+        %ul.unstyled.links             
+          %li
+            =link_to(user.facebook_url, user.facebook_url, :target => '_blank') if user.facebook_url          
+            =link_to(user.twitter_url, user.twitter_url, :target => '_blank') if user.twitter_url
+            =link_to(user.youtube_url, user.youtube_url, :target => '_blank') if user.youtube_url
+            =link_to(user.website_url, user.website_url, :target => '_blank') if user.website_url                          
         .black-block-links        
           -if can?(:edit,user)
             =link_to edit_user_path(user), {:class => "btn"} do

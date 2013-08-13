@@ -58,16 +58,14 @@
                   Past shows
                 -performer.tours.where("end_on > ?", Date.today).each do |tour|
                   =link_to_self tour
-                  %br
-        -if performer.links.present?
-          -if performer.links_without_twitter_and_facebook_and_youtube.present?
-            %ul.unstyled.links
-              -performer.links_without_twitter_and_facebook_and_youtube.each do |link|
-                %li
-                  =link_to(link, link.url, :target => '_blank')
-          -if performer.links_only_twitter_and_facebook_and_youtube.present?
-            -performer.links_only_twitter_and_facebook_and_youtube.each do |link|
-              =facebook_twitter_youtube_link(link)
+                  %br        
+        %ul.unstyled.links              
+          %li.website-link
+            =link_to(performer.website_url, performer.website_url, :target => '_blank') if performer.website_url
+          %li
+            =link_to(content_tag(:i, "", :class => "icon-facebook"), performer.facebook_url, :target => '_blank') if performer.facebook_url          
+            =link_to(content_tag(:i, "", :class => "icon-twitter"), :target => '_blank') if performer.twitter_url
+            =link_to(content_tag(:i, "", :class => "icon-youtube"), :target => '_blank') if performer.youtube_url                           
         .black-block-links
           =link_to new_performer_message_path(performer), :class => "btn" do
             %i.icon-envelope

@@ -34,15 +34,13 @@
                 =link_to directory_path(:letter => 'A', :tags => [tag.name]), :class => "tag #{tag.name}" do
                   %span.label.tag-label=tag.name
             .clearfix
-        -if tour.links_or_performer_links.present?
-          -if tour.links_or_performer_links_without_twitter_and_facebook_and_youtube.present?
-            %ul.unstyled.links
-              -tour.links_or_performer_links_without_twitter_and_facebook_and_youtube.each do |link|
-                %li
-                  =link_to(link, link.url, :target => '_blank')
-          -if tour.links_or_performer_links_only_twitter_and_facebook_and_youtube.present?
-            -tour.links_or_performer_links_only_twitter_and_facebook_and_youtube.each do |link|
-              =facebook_twitter_youtube_link(link)
+        %ul.unstyled.links             
+          %li            
+            =link_to(tour.performer.website_url, tour.performer.website_url, :target => '_blank') if tour.performer.website_url
+          %li
+            =link_to(content_tag(:i, "", :class => "icon-facebook"), tour.performer.facebook_url, :target => '_blank') if tour.performer.facebook_url          
+            =link_to(content_tag(:i, "", :class => "icon-twitter"), tour.performer.twitter_url, :target => '_blank') if tour.performer.twitter_url
+            =link_to(content_tag(:i, "", :class => "icon-youtube"), tour.performer.youtube_url, :target => '_blank') if tour.performer.youtube_url  
         .black-block-links
           =link_to new_performer_message_path(tour.performer), :class => "btn" do
             %i.icon-envelope
