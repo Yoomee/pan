@@ -25,7 +25,10 @@ class VenuesController < ApplicationController
     redirect_to(venue.promoter)
   end
 
-  def edit;end
+  def edit
+    promoter = Promoter.find(params[:promoter_id])
+    promoter.build_social_links
+  end
   
   def location;end
   
@@ -69,6 +72,7 @@ class VenuesController < ApplicationController
   
   def new
     promoter = Promoter.find(params[:promoter_id])
+    promoter.build_social_links
     venue.attributes = {:promoter_id => promoter.id, :region => promoter.region}
   end
   

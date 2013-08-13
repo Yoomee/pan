@@ -11,6 +11,11 @@ class UsersController < ApplicationController
   expose(:promoter) {Promoter.find_by_id(params[:promoter_id])}
   
   def new
+    user.build_social_links
+  end
+
+  def edit
+    user.build_social_links
   end
   
   def create

@@ -73,7 +73,9 @@ class PromotersController < ApplicationController
   
   def individuals;end  
   
-  def new;end
+  def new
+    promoter.build_social_links
+  end
 
   def show
     @dates =  TourDate.where(:booked => true,).where('date > ?', Date.today)

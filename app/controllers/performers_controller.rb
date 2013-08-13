@@ -57,7 +57,12 @@ class PerformersController < ApplicationController
     render :template => 'organisations/directory'
   end
   
+  def edit
+    performer.build_social_links
+  end
+
   def new
+    performer.build_social_links
   end
   
   def search
