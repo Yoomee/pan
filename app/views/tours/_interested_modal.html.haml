@@ -20,11 +20,11 @@
       %h3 I'm interested
     .modal-body
       #dates.hide
-        #start_on=@tour.start_on.to_s(:date)        
-        #end_on=@tour.end_on.to_s(:date)
+        #start_on=(@tour.start_on || Date.today).to_s(:date)
+        #end_on=(@tour.end_on || Date.today + 5.year).to_s(:date)
       / -if @available_dates.present?
       %h4 Which dates would you like to book this show for?
-      please select all dates for which are interested:      
+      please select all dates for which are interested      
       .mt-1.mb-1#availability_datepicker
     .control-group
       =label_tag "not_sure_yet", "I'm not sure yet - keep me updated", :class => "control-label"
