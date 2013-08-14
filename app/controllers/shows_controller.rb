@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
     @end_date = params[:end_date]
     @collection = params[:collection]
     @region = params[:region]
-    @sort = params[:sort].try(:to_sym).presence || :start_on
+    @sort = params[:sort].try(:to_sym).presence
     @query = params[:q]
 
 
@@ -21,12 +21,13 @@ class ShowsController < ApplicationController
 
     @withs = {}
     @withs[:end_on] = @start_date.present? ? Time.parse(@start_date)..10.years.from_now : Time.now..10.years.from_now
-    @withs[:start_on] = 10.years.ago..Time.parse(@end_date) if @end_date.present?
-
+    @withs[:start_on] = 10.years.ago..Time.parse(@end_date) if @end_date.present?    
     
-
-    @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort, :per_page => 12, :page => params[:page])
-
+    if @query || @conditions != {} || @sort
+      @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => @sort, :per_page => 12, :page => params[:page])
+    else
+      @tours = Tour.search(@query, :conditions => @conditions, :with => @withs, :match_mode => :extended, :order => "@random", :per_page => 12, :page => params[:page])
+    end
   end
 
   def set_view
