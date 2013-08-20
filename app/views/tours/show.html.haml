@@ -35,12 +35,12 @@
                   %span.label.tag-label=tag.name
             .clearfix
         %ul.unstyled.links             
-          %li.website-link            
-            =link_to(tour.performer.website_url, tour.performer.website_url, :target => '_blank') if tour.performer.website_url
+          %li.website-link                      
+            =link_to(tour.performer.website_url.gsub(/\/.*/, ''), "http://" + tour.performer.website_url, :target => '_blank') if tour.performer.website_url
           %li
-            =link_to(content_tag(:i, "", :class => "icon-facebook"), tour.performer.facebook_url, :target => '_blank') if tour.performer.facebook_url          
-            =link_to(content_tag(:i, "", :class => "icon-twitter"), tour.performer.twitter_url, :target => '_blank') if tour.performer.twitter_url
-            =link_to(content_tag(:i, "", :class => "icon-youtube"), tour.performer.youtube_url, :target => '_blank') if tour.performer.youtube_url  
+            =link_to(content_tag(:i, "", :class => "icon-facebook"), "http://" +  tour.performer.facebook_url, :target => '_blank') if tour.performer.facebook_url          
+            =link_to(content_tag(:i, "", :class => "icon-twitter"), "http://" +  tour.performer.twitter_url, :target => '_blank') if tour.performer.twitter_url
+            =link_to(content_tag(:i, "", :class => "icon-youtube"), "http://" +  tour.performer.youtube_url, :target => '_blank') if tour.performer.youtube_url  
         .black-block-links
           =link_to new_performer_message_path(tour.performer), :class => "btn" do
             %i.icon-envelope

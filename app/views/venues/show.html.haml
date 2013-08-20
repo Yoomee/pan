@@ -53,7 +53,7 @@
           
         %ul.unstyled.links            
           %li.website-link
-            =link_to(venue.website_url, venue.website_url, :target => '_blank') if venue.website_url
+            =link_to(venue.website_url.gsub(/\/.*/, ''), "http://" + venue.website_url, :target => '_blank') if venue.website_url
           %li
             =link_to(content_tag(:i, "", :class => "icon-facebook"), venue.facebook_url, :target => '_blank') if venue.facebook_url          
             =link_to(content_tag(:i, "", :class => "icon-twitter"), venue.twitter_url, :target => '_blank') if venue.twitter_url

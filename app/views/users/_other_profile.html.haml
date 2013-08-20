@@ -46,7 +46,7 @@
             =link_to(user.facebook_url, user.facebook_url, :target => '_blank') if user.facebook_url          
             =link_to(user.twitter_url, user.twitter_url, :target => '_blank') if user.twitter_url
             =link_to(user.youtube_url, user.youtube_url, :target => '_blank') if user.youtube_url
-            =link_to(user.website_url, user.website_url, :target => '_blank') if user.website_url                          
+            =link_to(user.website_url.gsub(/\/.*/, ''), "http://" + user.website_url, :target => '_blank') if user.website_url                          
         .black-block-links        
           -if can?(:edit,user)
             =link_to edit_user_path(user), {:class => "btn"} do

@@ -65,7 +65,7 @@
           %ul.unstyled.links              
             %li.website-link
               / =debug promoter  
-              =link_to(promoter.website_url, promoter.website_url, :target => '_blank') if promoter.website_url
+              =link_to(promoter.website_url.gsub(/\/.*/, ''), "http://" + promoter.website_url, :target => '_blank') if promoter.website_url
             %li                
               =link_to(content_tag(:i, "", :class => "icon-facebook"), promoter.facebook_url, :target => '_blank') if promoter.facebook_url
               =link_to(content_tag(:i, "", :class => "icon-twitter"), promoter.twitter_url) if promoter.twitter_url

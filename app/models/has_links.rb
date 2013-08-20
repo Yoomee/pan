@@ -21,20 +21,34 @@ module HasLinks
   end
   
   def facebook_url
-    facebook_link.try(:url)
+    url = facebook_link.try(:url).try(:gsub, 'http://', '')
+    addwww(url)
+    url
   end
 
   def twitter_url
-    twitter_link.try(:url)
+    url = twitter_link.try(:url).try(:gsub, 'http://', '')
+    addwww(url)
+    url
   end
 
   def youtube_url
-    youtube_link.try(:url)
+    url = youtube_link.try(:url).try(:gsub, 'http://', '')
+    addwww(url)
+    url
   end
 
   def website_url
-    website_link.try(:url)
-  end  
+    url = website_link.try(:url).try(:gsub, 'http://', '')
+    addwww(url)    
+    url  
+  end
+
+  def addwww(url)
+    unless url.blank?    
+      url.insert(0, 'www.') unless url.start_with?('www.')           
+    end
+  end   
 
   def social_urls
     %w{facebook twitter youtube vimeo soundcloud}.collect do |site_name|
