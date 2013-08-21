@@ -414,7 +414,7 @@ DEPENDENCIES
   ym_enquiries (~> 0.1)
   ym_likes
   ym_messages
-  ym_notifications (~> 0.1)
+  ym_notifications (= 0.1)
   ym_permalinks (~> 0.1)
   ym_posts (~> 0.1)
   ym_search (~> 0.1)
