@@ -407,7 +407,7 @@ DEPENDENCIES
   stamp
   uglifier
   whenever
-  ym_activity
+  ym_activity (~> 0.1.2)
   ym_cms (~> 0.1)
   ym_core (~> 0.1.68)
   ym_docs (~> 0.1)
