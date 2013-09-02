@@ -31,8 +31,8 @@ gem 'ym_permalinks', "~> 0.1"
 gem 'ym_docs', "~> 0.1"
 gem 'ym_cms', "~> 0.1"
 gem 'ym_enquiries', "~> 0.1"
-gem 'ym_notifications', "~> 0.1"
-gem 'ym_activity'
+gem 'ym_notifications', "0.1"
+gem 'ym_activity', '~> 0.1.2'
 gem 'ym_likes'
 gem 'ym_messages'
 

@@ -407,14 +407,14 @@ DEPENDENCIES
   stamp
   uglifier
   whenever
-  ym_activity
+  ym_activity (~> 0.1.2)
   ym_cms (~> 0.1)
   ym_core (~> 0.1.68)
   ym_docs (~> 0.1)
   ym_enquiries (~> 0.1)
   ym_likes
   ym_messages
-  ym_notifications (~> 0.1)
+  ym_notifications (= 0.1)
   ym_permalinks (~> 0.1)
   ym_posts (~> 0.1)
   ym_search (~> 0.1)
