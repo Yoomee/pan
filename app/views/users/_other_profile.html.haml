@@ -7,7 +7,7 @@
           .promoter
             =link_to user.promoter do
               %h5
-                %i.icon-briefcase
+                %i.icon-group
                 =user.promoter
                 %br
               =user.job_title
@@ -20,7 +20,7 @@
                     =venue
         -elsif user.performer
           =link_to user.performer do
-            %i.icon-user
+            %i.icon-magic
             =user.performer
             
         -if user.groups.present?

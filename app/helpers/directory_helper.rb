@@ -57,9 +57,9 @@ module DirectoryHelper
   def directory_item_class(directory_item)
     case directory_item.class.to_s
     when "Performer"
-      "icon-group"
+      "icon-magic"
     when "Promoter"
-      "icon-briefcase"
+      "icon-group"
     when "Tour"
       "icon-star"
     when "Venue"
@@ -184,10 +184,10 @@ module DirectoryHelper
       li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-star')}Show #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Performer"
       active = params[:type] == "Performer"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-group')}Performer #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-magic')}Performer #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Promoter"
       active = params[:type] == "Promoter"
-      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-briefcase')}Organisation #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
+      li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-group')}Organisation #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
     when "Venue"
       active = params[:type] == "Venue"
       li_with_active(active, (link_to("#{content_tag(:i, nil, :class => 'icon-home')}Venue #{content_tag(:i, nil, :class => 'icon-remove') if top}".html_safe, directory_path(param_options), :class => 'type label', :id => "type-#{type}" )))
