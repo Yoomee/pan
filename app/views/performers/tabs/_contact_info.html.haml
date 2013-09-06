@@ -5,7 +5,7 @@
   =form.input :address2
   =form.input :city
   =form.input :postcode
-  =form.country_select(:country, ["United Kingdom"], :include_blank => true)
+  =form.country_select(:country, ["England", "Scotland", "Wales", "Ireland", "Northern Ireland"], :include_blank => true)
   
   %legend Primary contact
   =form.input :contact1_name, :label => 'Name'
