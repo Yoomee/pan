@@ -74,9 +74,10 @@
           =link_to new_promoter_message_path(promoter), :class => "btn" do
             %i.icon-envelope
             Send a message
-          =link_to "", :class => "btn", :id => "go-to-comment" do
-            %i.icon-pencil
-            Post a comment
+          -unless current_user.try(:performer_id)
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
           -if can?(:edit,promoter)
             =link_to edit_promoter_path(promoter), {:class => "btn"} do
               %i.icon-edit
@@ -92,8 +93,9 @@
         =link_to "Diary", "#diary", :'data-toggle' => 'tab'        
       %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
-      %li
-        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+      -unless current_user.try(:performer_id)
+        %li
+          =link_to "Comments", "#comments", :'data-toggle' => 'tab'
     .tab-content
       #about.tab-pane.fade.in.active
         .well

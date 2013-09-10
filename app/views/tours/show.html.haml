@@ -48,9 +48,10 @@
           =link_to "#interested", :'data-toggle' => "modal", :class => "btn" do
             %i.icon-heart
             I'm interested
-          =link_to "", :class => "btn", :id => "go-to-comment" do
-            %i.icon-pencil
-            Post a comment
+          -unless current_user.try(:performer_id)
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
           -if can?(:edit,tour)
             =link_to edit_tour_path(tour), {:class => "btn"} do
               %i.icon-edit
@@ -68,12 +69,14 @@
         =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'    
       %li
         =link_to "Press Reviews", "#reviews", :'data-toggle' => 'tab'
-      %li
-        =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
+      -unless current_user.try(:performer_id)
+        %li
+          =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
       %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
-      %li
-        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+      -unless current_user.try(:performer_id)
+        %li
+          =link_to "Comments", "#comments", :'data-toggle' => 'tab'
     .tab-content
       #about.tab-pane.fade.in.active
         .well
