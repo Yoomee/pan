@@ -82,6 +82,9 @@ class User < ActiveRecord::Base
     %w{user_details organisation_type organisation_details}
   end 
 
+  def to_s    
+    performer.present? ? performer.name : full_name    
+  end
   
   private
   def create_organisation
