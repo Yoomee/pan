@@ -1,0 +1,7 @@
+.well.performer-home
+  %h2.underline.mb-1 Get Started
+  %ul.unstyled.black-block-links
+    %li=link_to "#{content_tag(:i, nil, :class => 'icon-eye-open')}View Profile".html_safe, current_user, :class => "btn"
+    %li=link_to "#{content_tag(:i, nil, :class => 'icon-edit')}Edit My Profile".html_safe, edit_user_path(current_user), :class => "btn"
+    %li=link_to "#{content_tag(:i, nil, :class => 'icon-star')}Add a Show".html_safe, new_performer_tour_path(current_user.performer), :class => "btn"
+    %li=link_to "#{content_tag(:i, nil, :class => 'icon-search')}Browse Shows".html_safe, shows_path, :class => "btn"

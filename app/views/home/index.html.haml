@@ -25,6 +25,15 @@
               %span.view.red
                 view
         %ul.nav
+          -if current_user.performer
+            %li
+              %i.icon-star
+              %h3 My shows
+              -if @tours.present?
+                -@tours.each do |tour|
+                  =link_to tour.name, tour
+              -else
+                =link_to "None yet - add one", new_performer_tour_path(current_user.performer) 
           -if current_user.promoter
             %li
               %i.icon-group
@@ -37,7 +46,7 @@
               -current_user.venues.each do |venue|
                 =link_to venue, venue_path(venue)
             -else
-              None yet - add one
+              =link_to "None yet - add one", new_promoter_venue_path(current_user)
           %li
             %i.icon-comments
             %h3 My groups
@@ -46,35 +55,37 @@
                 =link_to_self group  
             -else    
               =link_to "None yet - find one", groups_path          
-    .span6
-      .well
-        %h2.underline.mb-1 Latest Shows
-        .latest-shows
-          #latest-news-carousel.carousel.slide
-            .carousel-inner
-              -@latest_shows.each_with_index do |show, index|
-                %div{:class => "item #{index == 1 ? 'active' : ''}"}
-                  =link_to show, :class=>"carousel-link-image" do
-                    =image_for(show, '428x289#')
-                  .carousel-caption
-                    %h4
-                      =link_to_self show, :class=>"carousel-link-title"
-            =link_to "#latest-news-carousel", :class=>"carousel-control left", :"data-slide"=> "prev" do
-              %i.icon-chevron-left
-            =link_to "#latest-news-carousel", :class=>"carousel-control right", :"data-slide"=> "next" do
-              %i.icon-chevron-right
-              
-        %h2.underline.mb-1 Recent Activity
-        -if @recent_activity.size == 0
-          %h4 No activity
-        -else
-          %ul.news-feed.unstyled
-            #recent-activity
-              =render 'home/recent_activity_items', :recent_activity => @recent_activity
-          .clearfix
-          -if @recent_activity.next_page
-            .center
-              =link_to "More activity", root_path(:page => @recent_activity.next_page), :remote => true, :id => "more-activity-btn"
+    .span6      
+      -if current_user.try(:performer_id)
+        =render('performer_home')
+      -else
+        .well
+          %h2.underline.mb-1 Latest Shows
+          .latest-shows
+            #latest-news-carousel.carousel.slide
+              .carousel-inner
+                -@latest_shows.each_with_index do |show, index|
+                  %div{:class => "item #{index == 1 ? 'active' : ''}"}
+                    =link_to show, :class=>"carousel-link-image" do
+                      =image_for(show, '428x289#')
+                    .carousel-caption
+                      %h4
+                        =link_to_self show, :class=>"carousel-link-title"
+              =link_to "#latest-news-carousel", :class=>"carousel-control left", :"data-slide"=> "prev" do
+                %i.icon-chevron-left
+              =link_to "#latest-news-carousel", :class=>"carousel-control right", :"data-slide"=> "next" do
+                %i.icon-chevron-right              
+            %h2.underline.mb-1 Recent Activity
+            -if @recent_activity.size == 0
+              %h4 No activity
+            -else
+              %ul.news-feed.unstyled
+                #recent-activity
+                  =render 'home/recent_activity_items', :recent_activity => @recent_activity
+              .clearfix
+              -if @recent_activity.next_page
+                .center
+                  =link_to "More activity", root_path(:page => @recent_activity.next_page), :remote => true, :id => "more-activity-btn"
 
               
               
