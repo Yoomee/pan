@@ -14,7 +14,7 @@ module InviteForm
   
   email_from Settings.site_email
   email_subject "Requesting an invite for #{Settings.site_name}"
-  email_to "panpromoters@gmail.com"
+  email_to "tourbook@thetouringnetwork.com"
   
   
   response_message "Thanks for your interest - we'll get back to you soon."
