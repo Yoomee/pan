@@ -39,22 +39,23 @@
               %i.icon-group
               %h3 My organisation
               =link_to_self current_user.promoter
-          %li
-            %i.icon-home
-            %h3 My venue(s)
-            -if current_user.venues.present?
-              -current_user.venues.each do |venue|
-                =link_to venue, venue_path(venue)
-            -else
-              =link_to "None yet - add one", new_promoter_venue_path(current_user)
-          %li
-            %i.icon-comments
-            %h3 My groups
-            -if current_user.groups.present?
-              -current_user.groups.each do |group|
-                =link_to_self group  
-            -else    
-              =link_to "None yet - find one", groups_path          
+          -unless current_user.performer
+            %li
+              %i.icon-home
+              %h3 My venue(s)
+              -if current_user.venues.present?
+                -current_user.venues.each do |venue|
+                  =link_to venue, venue_path(venue)
+              -else
+                =link_to "None yet - add one", new_promoter_venue_path(current_user)
+            %li
+              %i.icon-comments
+              %h3 My groups
+              -if current_user.groups.present?
+                -current_user.groups.each do |group|
+                  =link_to_self group  
+              -else    
+                =link_to "None yet - find one", groups_path          
     .span6      
       -if current_user.try(:performer_id)
         =render('performer_home')
