@@ -94,45 +94,50 @@
         
     .span3
       #noticeboard.well
-        %h2.underline.mb-1=link_to_slug("Noticeboard", :noticeboard)
-        %ul.unstyled
-          -if @pages.count ==0 
-            There is nothing on the noticeboard at the moment.
-          -@pages.each do |page|
-            %li
-              =link_to page, :class=>"list-item-title" do
-                %h4=page.title
-              %p
-                -if page.summary
-                  =truncate(page.summary, :length => 200)
-                -else
-                  =truncate(page.text, :length => 200).html_safe  
-                =link_to "Read more", page, :class=>"read-more"
-
-    .span3
-      #upcoming-events
-        %h2.underline.mb-1 Upcoming Events
-        -if @upcoming_events.size == 0
-          %h3 None
+        -if current_user.try(:performer_id)
+          %h2.underline.mb-1 About Tourbook
+          %p Tourbook is a new online platform built to connect Performers and their shows with Promoters and their venues. This platform is currently in Beta so please   bear with us as we continue to develop it. If you have any feedback please email us.
         -else
-          %ul.upcoming-events.news-feed.news-feed-calendar.unstyled
-            -@upcoming_events.each do |event|
+          %h2.underline.mb-1=link_to_slug("Noticeboard", :noticeboard)
+          %ul.unstyled
+            -if @pages.count ==0 
+              There is nothing on the noticeboard at the moment.
+            -@pages.each do |page|
               %li
-                .news-feed-image
-                  .calendar-icon
-                    %span.calendar-icon-date
-                      =event.date.stamp('31')
-                    %span.calendar-icon-month
-                      =event.date.stamp('Sep')
-                .news-feed-text  
-                  %h3
-                    =link_to_self event.tour
-                  %p.event-list-venue
-                    =link_to event.venue do
-                      %i.icon-home
-                      =event.venue
-                  %p.event-list-time    
-                    =format_time(event.time)
+                =link_to page, :class=>"list-item-title" do
+                  %h4=page.title
+                %p
+                  -if page.summary
+                    =truncate(page.summary, :length => 200)
+                  -else
+                    =truncate(page.text, :length => 200).html_safe  
+                  =link_to "Read more", page, :class=>"read-more"
+
+    -unless current_user.try(:performer_id)
+      .span3
+        #upcoming-events
+          %h2.underline.mb-1 Upcoming Events
+          -if @upcoming_events.size == 0
+            %h3 None
+          -else
+            %ul.upcoming-events.news-feed.news-feed-calendar.unstyled
+              -@upcoming_events.each do |event|
+                %li
+                  .news-feed-image
+                    .calendar-icon
+                      %span.calendar-icon-date
+                        =event.date.stamp('31')
+                      %span.calendar-icon-month
+                        =event.date.stamp('Sep')
+                  .news-feed-text  
+                    %h3
+                      =link_to_self event.tour
+                    %p.event-list-venue
+                      =link_to event.venue do
+                        %i.icon-home
+                        =event.venue
+                    %p.event-list-time    
+                      =format_time(event.time)
           
 -if false
   .row.mb-2.fade_in
