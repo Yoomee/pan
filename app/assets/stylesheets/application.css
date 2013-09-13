@@ -360,6 +360,9 @@ p.back-link a{
   border: 1px solid #9a9b98;
   padding: 15px;
 }
+.well.performer-home{
+  height:741px;
+}
 .underline {
   border-bottom: 2px solid;
 }
@@ -2061,6 +2064,9 @@ a i.icon-facebook:hover {
 }
 .black-block-links {
   margin-top: 20px;
+}
+.performer-home .black-block-links a.btn{
+  width:250px;
 }
 .black-block-links a,
 .black-block-links a.like-link,
