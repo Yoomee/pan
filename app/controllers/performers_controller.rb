@@ -81,9 +81,9 @@ class PerformersController < ApplicationController
   end
   
   def update
-    if performer.save
-      flash_notice(performer)
-      redirect_to(performer)
+    if @performer.update_attributes(params[:performer])
+      flash_notice(@performer)
+      redirect_to(@performer)
     else
       render :action => 'edit'
     end

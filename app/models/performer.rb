@@ -30,7 +30,8 @@ class Performer < ActiveRecord::Base
 
   has_many :external_reviews, :as => :reviewable, :dependent => :destroy
   accepts_nested_attributes_for :external_reviews, :reject_if => :all_blank, :allow_destroy => true
-  
+  accepts_nested_attributes_for :users
+
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true

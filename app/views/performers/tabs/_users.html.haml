@@ -1,0 +1,2 @@
+=form.inputs do
+  =form.input :users, :label => 'Users', :as => :select, :multiple => true, :collection => User.where(:promoter_id => nil).order(:first_name)
