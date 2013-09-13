@@ -24,7 +24,7 @@
         
         -if current_user.performer_id == performer.id
           .black-block-links
-            =link_to edit_performer_path(current_user.performer_id), :class => "btn" do
+            =link_to edit_user_path(current_user), :class => "btn" do
               %i.icon-pencil
               Edit profile
           .notifications
