@@ -46,8 +46,7 @@ class Performer < ActiveRecord::Base
   before_create :create_user, :if => lambda{|u| u.create_user_from_performer == true}
 
   def create_user
-    name = split_name(contact1_name)
-    debugger    
+    name = split_name(contact1_name)       
     self.users << User.new(:first_name => name[0], :last_name => name[1], :email => contact1_email, :password => contact1_password)
     puts "hello"
   end
