@@ -13,7 +13,7 @@
   =form.input :contact1_phone, :label => 'Phone'  
   =form.input :create_user_from_performer, :as => :boolean, :label => "Create a user from this performer" if performer.new_record?
   #create-user.hide    
-    =form.input :contact1_password    
+    =form.input :contact1_password, :label => "Password for contact"    
   %legend Secondary contact
   =form.input :contact2_name, :label => 'Name'
   =form.input :contact2_email, :label => 'Email'
