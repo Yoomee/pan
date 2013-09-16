@@ -6,9 +6,10 @@ module InviteForm
   
   intro "If you would like to know more about joining the Tourbook community tell us about your interest in promoting or performing and we will get in touch with more information."
   
-  fields :name, :telephone, :email, :message
+  fields :first_name, :last_name, :telephone, :email, :message
   
-  validates :name,:presence => {:message => "Please tell us your name."}
+  validates :first_name,:presence => {:message => "Please tell us your first name."}
+  validates :last_name,:presence => {:message => "Please tell us your last name."}
   validates :message, :presence => {:message => "Please tell us more"}
   validates :email, :email => true, :allow_blank => false
   
