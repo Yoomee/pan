@@ -48,6 +48,7 @@ $(document).ready () ->
     $('#search-box').toggle()
   
   YmComments.Form.init({submitOnEnter: true})
+  Performers.init()
 
   $('a[data-scroll]').live 'click', (event) ->
     event.preventDefault()

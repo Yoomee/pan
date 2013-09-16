@@ -17,6 +17,8 @@ class Performer < ActiveRecord::Base
   acts_as_taggable_on :genres, :art_forms, :funders, :work_scales, :categories, :tags
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
+
+  validates :description, length: {maximum: 1000}
   
   
   has_many :posts, :as => :target, :conditions => {:is_update => false}
@@ -37,6 +39,24 @@ class Performer < ActiveRecord::Base
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
   
   after_update :create_notifications_if_favourite
+
+  boolean_accessor :create_user_from_performer
+  attr_accessor :contact1_password
+
+  before_create :create_user, :if => lambda{|u| u.create_user_from_performer == true}
+
+  def create_user
+    name = split_name(contact1_name)
+    debugger    
+    self.users << User.new(:first_name => name[0], :last_name => name[1], :email => contact1_email, :password => contact1_password)
+    puts "hello"
+  end
+
+  def split_name(name)
+    name = name.split(' ')     
+    name.push('n/a') if name.count == 1
+    name
+  end
   
   def contact1_details
     [contact1_name, contact1_email, contact1_phone].compact
