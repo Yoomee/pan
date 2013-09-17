@@ -5,10 +5,10 @@ class ShowsController < ApplicationController
     @tags = [*params[:tags]]
     @start_date = params[:start_date]
     @end_date = params[:end_date]
-    @collection = params[:collection]
-    @region = params[:region]
+    @collection = params[:collection]    
+    @region = [*params[:region]] + [*params[:locations]]
     @sort = params[:sort].try(:to_sym).presence
-    @query = params[:q]
+    @query = params[:q]    
 
 
     @all_tags = Tour.genre_counts.order(:name)
@@ -16,7 +16,7 @@ class ShowsController < ApplicationController
     @conditions = {}.tap do |hash|
       hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
       hash[:genres] = @tags.join(' | ') if @tags.present?
-      hash[:region] = @region if @region.present?
+      hash[:region] = @region if @region.present?      
     end
 
     @withs = {}
