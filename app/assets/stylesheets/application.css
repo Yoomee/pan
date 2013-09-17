@@ -17,6 +17,7 @@
  *= require ym_tags 
  *= require ym_posts
  *= require ym_docs
+ *= require ym_messages
  *= require slideshow 
  *= require chosen
  *= require_self
@@ -2270,10 +2271,8 @@ a.promoter.venues {
 .messages-header {
   width: 668px;
   float: left;
-  margin:  -15px 0 0px -15px;
+  margin:  0px 0 0px 0px;
   padding: 15px;
-
-  
        -moz-border-radius-topleft:4px;
     -moz-border-radius-topright:4px;
     -webkit-border-top-right-radius:4px;

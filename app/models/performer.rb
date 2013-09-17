@@ -47,7 +47,6 @@ class Performer < ActiveRecord::Base
 
   def create_user
     name = split_name(contact1_name)
-    debugger    
     self.users << User.new(:first_name => name[0], :last_name => name[1], :email => contact1_email, :password => contact1_password)
     puts "hello"
   end
