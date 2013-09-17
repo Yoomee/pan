@@ -9,6 +9,7 @@ class Venue < ActiveRecord::Base
     indexes description
     indexes region
     has created_at, updated_at
+    set_property :delta => true 
   end
   
   

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     indexes last_name, :as => :name, :sortable => true
     indexes bio
     has role, created_at, updated_at
+    set_property :delta => true 
   end
   
   belongs_to :performer, :autosave => true

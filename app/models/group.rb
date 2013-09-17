@@ -15,6 +15,7 @@ class Group < ActiveRecord::Base
     indexes description
     indexes posts(:text), :as => :text
     has promoter_id, created_at, updated_at
+    set_property :delta => true 
   end
   
   class << self

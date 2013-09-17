@@ -11,6 +11,7 @@ class Performer < ActiveRecord::Base
     indexes description
     indexes genre_tags(:name), :as => :genres
     has created_at, updated_at
+    set_property :delta => true 
   end
   
   image_accessor :image

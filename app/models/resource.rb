@@ -20,6 +20,7 @@ class Resource < ActiveRecord::Base
     indexes publication_date
     indexes filename
     has user_id, created_at, updated_at
+    set_property :delta => true 
   end
   
   def is_publication?

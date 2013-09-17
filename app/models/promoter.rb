@@ -11,6 +11,7 @@ class Promoter < ActiveRecord::Base
     indexes genre_tags(:name), :as => :genres
     indexes region
     has created_at, updated_at
+    set_property :delta => true 
   end
 
   acts_as_taggable_on :genres, :art_forms, :genre_interests, :art_form_interests, :funders, :audiences, :marketing_resources, :pr_resources, :equipment, :hireable_resources, :skills, :skills_needed, :skills_need_training, :skills_underused, :skills_offered

@@ -11,12 +11,15 @@ class Tour < ActiveRecord::Base
     indexes performer(:name), :as => :performer_name, :sortable => true
     indexes genre_tags(:name), :as => :genres
     indexes collections(:name), :as => :collection
-    indexes booked_venues(:region), :as => :region    
+    indexes booked_venues(:region), :as => :region
+    indexes locations, :as => :locations    
     has created_at, start_on, :sortable => true
     has updated_at, end_on
+    set_property :delta => true 
   end
   
   image_accessor :image
+  serialize :locations
   
   belongs_to :performer
   has_many :dates, :class_name => "TourDate", :dependent => :destroy, :autosave => true, :order => "date ASC"
@@ -46,7 +49,6 @@ class Tour < ActiveRecord::Base
   has_many :genre_tags, :through => :taggings, :source => :tag, :class_name => "ActsAsTaggableOn::Tag",
           :conditions => "taggings.context = 'genres'"
           
-  
   after_save :create_notifications_if_favourite
   
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
@@ -93,6 +95,13 @@ class Tour < ActiveRecord::Base
   
   # def regions
   #   dates.where("booked = true AND venue_id != 0").collect{|date| date.venue.region}.uniq.join(" ")
+  # end
+
+  # def strip_locations
+  #   locations.gsub!(/'|-/, ' ')    
+  #   locations = locations.split("\n")
+  #   locations = locations.delete_if {|x| x.match(/^\s*$/)}
+  #   locations = locations.map {|x| x.strip!}
   # end
   
   def sibling_tours
