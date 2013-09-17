@@ -1,7 +1,8 @@
 window.Performers =
   init: ->
     Performers.showHideForm() if document.getElementById('performer_create_user_from_performer') is not null
-    if $('#performer_description').val()? then Performers.descriptionUpdate($('#performer_description').val()) else Performers.descriptionUpdate($('#tour_description').val())
+    if $('#performer_description').val()? then Performers.descriptionUpdate($('#performer_description').val())
+    else if $('#tour_description').val()? then Performers.descriptionUpdate($('#tour_description').val())
 
     $('#performer_create_user_from_performer').change ->
       Performers.showHideForm()    
