@@ -11,6 +11,7 @@
 #= require ym_cms
 #= require ym_tags
 #= require ym_posts
+#= require ym_likes
 #= require cocoon
 #= require_tree .
 
