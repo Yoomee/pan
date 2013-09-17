@@ -2,6 +2,7 @@
   =form.semantic_errors
   =form.inputs do
     =form.input :name
+    =form.input :tours, :as => :select
 
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary'}
