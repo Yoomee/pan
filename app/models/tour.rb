@@ -11,8 +11,7 @@ class Tour < ActiveRecord::Base
     indexes performer(:name), :as => :performer_name, :sortable => true
     indexes genre_tags(:name), :as => :genres
     indexes collections(:name), :as => :collection
-    indexes booked_venues(:region), :as => :region
-    indexes locations, :as => :locations    
+    indexes [booked_venues(:region), locations], :as => :region
     has created_at, start_on, :sortable => true
     has updated_at, end_on
     set_property :delta => true 
