@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
   
   validate :only_has_one_organisation
   
+  delegate :region, :to => :promoter, :allow_nil => true
+
   def self.present_directory_letters
     order(:last_name).select("UCASE(SUBSTR(last_name,1,1)) AS letter").group("SUBSTR(last_name,1,1)").collect(&:letter)
   end
