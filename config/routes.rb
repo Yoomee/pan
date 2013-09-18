@@ -93,6 +93,7 @@ Pan::Application.routes.draw do
       put 'update_role/:role', :action => 'update_role', :as => 'update_role'
     end
   end
+  post 'users/admin_create' => 'users#admin_create', :as => 'admin_create_user'
   
   resources :tags, :only => [:index]
   

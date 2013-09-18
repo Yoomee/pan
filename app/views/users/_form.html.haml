@@ -1,6 +1,9 @@
+-if user.new_record? && promoter
+  -url = promoter_users_path(promoter)
+-else
+  -url = current_user.try(:admin?) ? admin_create_user_path : users_path
 
--url_option = user.new_record? && promoter ? {:url => promoter_users_path(promoter)} : {}
-=semantic_form_for(user, {:multipart => true}.merge(url_option)) do |form|
+=semantic_form_for(user, :url => url, :multipart => true) do |form|
   -if user.performer
     =tabs('details', :form => form)
   -elsif promoter

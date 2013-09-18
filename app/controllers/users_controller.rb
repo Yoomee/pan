@@ -18,6 +18,15 @@ class UsersController < ApplicationController
     user.build_social_links
   end
   
+  def admin_create
+    if user.save
+      flash[:notice] = "#{user} has been added"
+      redirect_to(users_path)
+    else
+      render :action => "new"
+    end
+  end
+
   def create
     user.promoter = promoter
     if user.save
