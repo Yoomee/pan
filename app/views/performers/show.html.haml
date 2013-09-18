@@ -65,13 +65,13 @@
           %li                
             =link_to(content_tag(:i, "", :class => "icon-facebook"), performer.facebook_url, :target => '_blank') if performer.facebook_url
             =link_to(content_tag(:i, "", :class => "icon-twitter"), performer.twitter_url) if performer.twitter_url
-            =link_to(content_tag(:i, "", :class => "icon-youtube"), performer.youtube_url, :target => '_blank') if performer.youtube_url                     
+            =link_to(content_tag(:i, "", :class => "icon-youtube"), performer.youtube_url, :target => '_blank') if performer.youtube_url
         .black-block-links
-          =link_to new_performer_message_path(performer), :class => "btn" do
-            %i.icon-envelope
-            Send a message
-          
-          =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Unfavourite", :class => "btn")
+          -unless current_user.performer_id == performer.id
+            =link_to new_performer_message_path(performer), :class => "btn" do
+              %i.icon-envelope
+              Send a message
+            =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Unfavourite", :class => "btn")
           =link_to "", :class => "btn", :id => "go-to-comment" do
             %i.icon-pencil
             Post a comment
@@ -134,7 +134,8 @@
         #messages.tab-pane.fade.in
           .well
             =render "messages/index", :threads => current_user.threads            
-          
+
+        =render 'messages/new_message_modal', :recipient => current_user
 
       #spec.tab-pane.fade.in
         .well
