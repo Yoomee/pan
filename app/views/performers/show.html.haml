@@ -72,9 +72,10 @@
               %i.icon-envelope
               Send a message
             =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Unfavourite", :class => "btn")
-          =link_to "", :class => "btn", :id => "go-to-comment" do
-            %i.icon-pencil
-            Post a comment
+          -unless current_user.try(:performer_id)
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
           -if can?(:edit,performer)
             =link_to edit_performer_path(performer), {:class => "btn"} do
               %i.icon-edit
@@ -96,8 +97,9 @@
         =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
       %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
-      %li
-        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+      -unless current_user.try(:performer_id)
+        %li
+          =link_to "Comments", "#comments", :'data-toggle' => 'tab'
     .tab-content
       #about.tab-pane.fade.in.active
         .well
@@ -177,8 +179,10 @@
               .row
                 .span8
                   -if can?(:create, Post)
+                    %p
+                      Use this space to discuss or comment on the performer. Comments are only visible to other promoters, not performers, so feel free to be honest - but please be constructive and considerate in your remarks.
                     =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
-                  =render("posts/posts", :posts => performer.posts.page(params[:page]))
+                    =render("posts/posts", :posts => performer.posts.page(params[:page]))
             
                 
             
