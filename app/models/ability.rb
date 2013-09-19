@@ -34,8 +34,8 @@ class Ability
       
       # performer ability
       if user.try(:performer_id)
-        can :update, Performer, :id => user.performer_id
-        can [:create, :update], Tour, :performer_id => user.performer_id
+        can :manage, Performer, :id => user.performer_id
+        can :manage, Tour, :performer_id => user.performer_id
         can :index, Group
         can :index, Resource
         can [:read, :set_view], :show
