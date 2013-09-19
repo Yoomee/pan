@@ -150,7 +150,7 @@ class Tour < ActiveRecord::Base
   end
 
   def start_on_before_end_on
-    return true if start_on <= end_on
+    return true if start_on.present? && endon.present? && (start_on <= end_on)
     errors.add(:end_on_s, 'must after the start date')
   end
 
