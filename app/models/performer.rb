@@ -27,7 +27,9 @@ class Performer < ActiveRecord::Base
   has_many :tours, :dependent => :destroy
   has_many :tour_dates, :through => :tours, :source => :dates, :order => "date ASC"
   has_many :venues, :through => :tour_dates, :uniq => true
-  has_many :users, :dependent => :nullify
+
+  has_many :performer_users, :dependent => :destroy
+  has_many :users, :through => :performer_users
   
   has_many :notifications, :as => :resource, :dependent => :destroy
 

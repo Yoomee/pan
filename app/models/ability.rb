@@ -35,9 +35,9 @@ class Ability
       can [:read, :download], Resource
       
       # performer ability
-      if user.try(:performer_id)
-        can :manage, Performer, :id => user.performer_id
-        can :manage, Tour, :performer_id => user.performer_id
+      if user.performers.present?
+        can :manage, Performer, :performer_users => { :user_id => user.id }
+        can :manage, Tour, :performer => { :performer_users => { :user_id => user.id } }
         can :index, Group
         can :index, Resource
         can [:read, :set_view], :show
