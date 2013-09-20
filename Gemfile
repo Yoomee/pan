@@ -50,7 +50,7 @@ group :development do
  gem 'growl'
  gem 'ruby-debug19', :require => 'ruby-debug'
  gem 'yoomee', :git => "git://git.yoomee.com:4321/gems/yoomee.git", :branch => "rails3"
- gem 'ym_tools'
+ gem 'ym_tools', '~> 0.1.10'
  # comment this when deploying
 end
 
