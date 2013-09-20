@@ -13,7 +13,8 @@ class Ability
     can :index, Page
     can :create, User, :promoter_id => nil
     can :modal, Post
-    
+
+
     if user.try(:admin?)
       can :manage, :all
       # admin ability
@@ -31,6 +32,7 @@ class Ability
       can :search, :all
       can [:read, :rating], Performer
       can :read, Tour
+      can [:read, :download], Resource
       
       # performer ability
       if user.try(:performer_id)
@@ -57,7 +59,6 @@ class Ability
         can :create, TourDate
         can :update, TourDate, :user_id => user.id
         can [:index, :show], Group
-        can [:index, :download], Resource
       end
       
       # promoter admin ability
