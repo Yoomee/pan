@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   end 
 
   def to_s    
-    performer.present? ? performer.name : full_name    
+    full_name    
   end
   
   private

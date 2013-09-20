@@ -1,6 +1,6 @@
 class ToursController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :new
   
   expose(:tour)  
   expose(:performer) {params[:performer_id] ? Performer.find(params[:performer_id]) : nil}
@@ -31,6 +31,7 @@ class ToursController < ApplicationController
   def new
     @performer = Performer.find(params[:performer_id])
     @tour = @performer.tours.build(:genre_list => @performer.genre_list)
+    authorize! :new, @tour
   end
   
   def rating  
