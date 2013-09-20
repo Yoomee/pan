@@ -79,13 +79,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def performer
-    performers.present? ? performers.first : nil
-  end
+  # def performer
+  #   performers.present? ? performers.first : nil
+  # end
 
-  def performer_id
-    performers.present? ? performers.first.id : nil
-  end
+  # def performer_id
+  #   performers.present? ? performers.first.id : nil
+  # end
 
   def set_notifications_as_read!
     notifications.where("notifications.user_id = ?", self.id).update_all(:read => true)
