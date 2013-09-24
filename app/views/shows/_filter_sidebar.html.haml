@@ -8,9 +8,9 @@
         -param_tags = original_tags.dup
         -param_tags.delete(tag)
         =tag_link(tag, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :month => month, :year => year, :collection => @collection, :region => @region, :sort => @sort}, "tag active", true)
-      =show_region_filter_link(:span, @region, true) if @region
-      =show_collection_filter_link(@collection, true) if @collection
-    =link_to "Clear all filters", shows_path, :class => "clear-all" if @region || @collection || params[:tags].present?
+      =show_region_filter_link(:span, @region, true) if @region.present?
+      =show_collection_filter_link(@collection, true) if @collection.present?
+    =link_to "Clear all filters", shows_path, :class => "clear-all" if @region.present? || @collection.present? || params[:tags].present?
     .clearfix
 
   .well
