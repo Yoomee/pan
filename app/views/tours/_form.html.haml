@@ -1,8 +1,5 @@
 =semantic_form_for(@tour, :html => {:multipart => true}) do |form|
-  =error_alert(@tour)  
-  -if current_user.try(:performer_id)
-    =tabs('details', ["slideshow", "Media"], ['requirements', 'Technical requirements'], 'availability', 'external_reviews/tabs/reviews', :form => form)
-  -else   
-    =tabs('details', ["slideshow", "Media"], ['requirements', 'Technical requirements'], 'availability', 'external_reviews/tabs/reviews','pricing', :form => form)  
+  =error_alert(@tour)
+  =tabs('details', ["slideshow", "Media"], ['requirements', 'Technical requirements'], 'availability', 'external_reviews/tabs/reviews','pricing', :form => form)
   =form.buttons do
     =form.commit_button "Save all show details", :button_html => {:class => 'btn-primary'}

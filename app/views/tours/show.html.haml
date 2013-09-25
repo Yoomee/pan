@@ -69,7 +69,7 @@
         =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'    
       %li
         =link_to "Press Reviews", "#reviews", :'data-toggle' => 'tab'
-      -unless current_user.try(:performer_id)
+      -if can?(:edit, tour)
         %li
           =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
       %li
