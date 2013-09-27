@@ -1,7 +1,9 @@
 -if user.new_record? && promoter
   -url = promoter_users_path(promoter)
--else
+-elsif user.new_record?
   -url = current_user.try(:admin?) ? admin_create_user_path : users_path
+-else
+  -url = user_path(user)
 
 =semantic_form_for(user, :url => url, :multipart => true) do |form|
   -if user.performer
