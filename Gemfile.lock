@@ -306,7 +306,7 @@ GEM
       rails (~> 3.1.0)
       ym_core
       ym_users
-    ym_cms (0.1.1)
+    ym_cms (0.1.2)
       mercury-rails (~> 0.3.1)
       rack-cache
       rails (~> 3.1.0)
@@ -410,7 +410,7 @@ DEPENDENCIES
   uglifier
   whenever
   ym_activity (~> 0.1.2)
-  ym_cms (~> 0.1.1)
+  ym_cms (~> 0.1.2)
   ym_core (~> 0.1.68)
   ym_docs (~> 0.1)
   ym_enquiries (~> 0.1)
