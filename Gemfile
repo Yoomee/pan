@@ -29,7 +29,7 @@ gem 'ym_search', "~> 0.1"
 gem 'ym_tags', "~> 0.1" #, :path => "~/Rails/Gems/ym_tags"
 gem 'ym_permalinks', "~> 0.1"
 gem 'ym_docs', "~> 0.1"
-gem 'ym_cms', "~> 0.1"
+gem 'ym_cms', "~> 0.1.1"#, :path => "~/Rails/Gems/ym_cms"
 gem 'ym_enquiries', "~> 0.1"
 gem 'ym_notifications', "0.1"
 gem 'ym_activity', '~> 0.1.2'
