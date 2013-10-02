@@ -17,10 +17,15 @@
               =link_to(current_user.promoter) do
                 %icon.icon-flag
                 My organisation
-          -elsif current_user.performer     
-            =link_to(current_user.performer) do
-              %icon.icon-flag
-              My organisation 
+          -elsif current_user.performer   
+            %icon.icon-magic
+            -if current_user.performers.count == 1
+              My Performer
+            -else
+              My Performers
+            %ul.unstyled
+              -current_user.performers.each do |performer|
+                %li=link_to_self current_user.performer
           -if current_user.admin?
             %div
               =link_to(needs_approval_tour_dates_path) do

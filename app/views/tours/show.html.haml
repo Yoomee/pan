@@ -45,10 +45,10 @@
           =link_to new_performer_message_path(tour.performer), :class => "btn" do
             %i.icon-envelope
             Send a message
-          =link_to "#interested", :'data-toggle' => "modal", :class => "btn" do
-            %i.icon-heart
-            I'm interested
           -unless current_user.try(:performer_id)
+            =link_to "#interested", :'data-toggle' => "modal", :class => "btn" do
+              %i.icon-heart
+              I'm interested
             =link_to "", :class => "btn", :id => "go-to-comment" do
               %i.icon-pencil
               Post a comment
@@ -69,7 +69,7 @@
         =link_to "Tech Spec", "#spec", :'data-toggle' => 'tab'    
       %li
         =link_to "Press Reviews", "#reviews", :'data-toggle' => 'tab'
-      -unless current_user.try(:performer_id)
+      -if can?(:edit, tour)
         %li
           =link_to "Pricing", "#pricing", :'data-toggle' => 'tab'
       %li

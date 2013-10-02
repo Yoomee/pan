@@ -18,6 +18,15 @@ class UsersController < ApplicationController
     user.build_social_links
   end
   
+  def admin_create
+    if user.save
+      flash[:notice] = "#{user} has been added"
+      redirect_to(users_path)
+    else
+      render :action => "new"
+    end
+  end
+
   def create
     user.promoter = promoter
     if user.save
@@ -28,7 +37,7 @@ class UsersController < ApplicationController
   end
   
   def directory
-    @users = User.order([:last_name, :first_name]).where(:performer_id => nil)
+    @users = User.order([:last_name, :first_name])
     @letter = params[:letter].to_s.first.upcase.presence || User.present_directory_letters.first
     if @letter != params[:letter]
       redirect_to directory_users_path(:letter => @letter)
@@ -50,7 +59,7 @@ class UsersController < ApplicationController
     else    
       @users = User.order("created_at DESC").limit(10)
     end
-    @users = @users.where(:performer_id => nil)
+    @users = @users
     render :template => 'organisations/directory'
   end
   
@@ -65,9 +74,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    if user.performer
-      redirect_to(user.performer)
-    end
   end
   
   def update_role

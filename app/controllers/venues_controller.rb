@@ -26,8 +26,8 @@ class VenuesController < ApplicationController
   end
 
   def edit
-    promoter = Promoter.find(params[:promoter_id])
-    promoter.build_social_links
+    promoter = Promoter.find_by_id(params[:promoter_id])
+    promoter.try(:build_social_links)
   end
   
   def location;end

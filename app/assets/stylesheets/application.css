@@ -2293,8 +2293,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 
 box-shadow:0px 1px 5px rgba(0,0,0,0.1), 0px 1px 0px rgba(0,0,0,0.3), inset 0px 1px 0px rgba(255,255,255,0.3);
 
-
-  
+}
+.ym_messages .messages-header {
+  width: 638px;
 }
 .ym_messages a {
   color: #4D4E4D;

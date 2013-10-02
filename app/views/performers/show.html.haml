@@ -65,16 +65,17 @@
           %li                
             =link_to(content_tag(:i, "", :class => "icon-facebook"), performer.facebook_url, :target => '_blank') if performer.facebook_url
             =link_to(content_tag(:i, "", :class => "icon-twitter"), performer.twitter_url) if performer.twitter_url
-            =link_to(content_tag(:i, "", :class => "icon-youtube"), performer.youtube_url, :target => '_blank') if performer.youtube_url                     
+            =link_to(content_tag(:i, "", :class => "icon-youtube"), performer.youtube_url, :target => '_blank') if performer.youtube_url
         .black-block-links
-          =link_to new_performer_message_path(performer), :class => "btn" do
-            %i.icon-envelope
-            Send a message
-          
-          =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Unfavourite", :class => "btn")
-          =link_to "", :class => "btn", :id => "go-to-comment" do
-            %i.icon-pencil
-            Post a comment
+          -unless current_user.performer_id == performer.id
+            =link_to new_performer_message_path(performer), :class => "btn" do
+              %i.icon-envelope
+              Send a message
+            =like_link(performer, :like_text => "Add to favourites", :unlike_text => "Unfavourite", :class => "btn")
+          -unless current_user.try(:performer_id)
+            =link_to "", :class => "btn", :id => "go-to-comment" do
+              %i.icon-pencil
+              Post a comment
           -if can?(:edit,performer)
             =link_to edit_performer_path(performer), {:class => "btn"} do
               %i.icon-edit
@@ -96,8 +97,9 @@
         =link_to "Reviews", "#reviews", :'data-toggle' => 'tab'
       %li
         =link_to "Updates", "#updates", :'data-toggle' => 'tab'
-      %li
-        =link_to "Comments", "#comments", :'data-toggle' => 'tab'
+      -unless current_user.try(:performer_id)
+        %li
+          =link_to "Comments", "#comments", :'data-toggle' => 'tab'
     .tab-content
       #about.tab-pane.fade.in.active
         .well
@@ -134,7 +136,8 @@
         #messages.tab-pane.fade.in
           .well
             =render "messages/index", :threads => current_user.threads            
-          
+
+        =render 'messages/new_message_modal', :recipient => current_user
 
       #spec.tab-pane.fade.in
         .well
@@ -176,8 +179,10 @@
               .row
                 .span8
                   -if can?(:create, Post)
+                    %p
+                      Use this space to discuss or comment on the performer. Comments are only visible to other promoters, not performers, so feel free to be honest - but please be constructive and considerate in your remarks.
                     =render("posts/remote_form", :post => current_user.posts.build(:target => performer))
-                  =render("posts/posts", :posts => performer.posts.page(params[:page]))
+                    =render("posts/posts", :posts => performer.posts.page(params[:page]))
             
                 
             

@@ -26,8 +26,14 @@
       .performer
         %h4
           %i.icon-magic
-          My Performer
-        =link_to_self user.performer
+          -if user.performers.count == 1
+            My Performer
+          -else
+            My Performers
+
+        -user.performers.each do |performer|
+          =link_to_self performer
+          %br
 
     -if user.venues.present?
       .venues

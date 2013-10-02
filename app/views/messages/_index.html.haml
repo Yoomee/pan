@@ -4,7 +4,7 @@
       $('.thread-link').click(function(event) {
         event.preventDefault();
         $('#all-threads').addClass('hide');
-        $('#thread-' + event.target.id).removeClass('hide');
+        $('#thread-' + $(this).attr('id')).removeClass('hide');
       });
       $('.show-all-threads').click(function(event) {
         event.preventDefault();

@@ -6,7 +6,7 @@ class ShowsController < ApplicationController
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @collection = params[:collection]    
-    @region = [*params[:region]] + [*params[:locations]]
+    @region = params[:region]
     @sort = params[:sort].try(:to_sym).presence
     @query = params[:q]    
 

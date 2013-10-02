@@ -1,5 +1,7 @@
 class ResourcesController < ApplicationController
     
+  authorize_resource
+
   expose(:resource)
   expose(:top_tags) {Resource.tag_counts_on(:resource_tags, :limit => 10)}
   expose(:current_tag) {Tag.find_by_name(params[:tag])}

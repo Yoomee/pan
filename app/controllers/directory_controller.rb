@@ -64,7 +64,7 @@ class DirectoryController < ApplicationController
     @conditions = {}.tap do |hash|
       hash[:collection] = @collection.gsub(/-/, ' ') if @collection.present?
       hash[:genres] = @search_tags if @search_tags.present?
-      hash[:region] = @region if @region.present?
+      hash[:region] = Pan::REGIONS[@region] if @region.present?
       # hash[:type] = @type if @type.present?
     end
   end

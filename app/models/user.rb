@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
     has role, created_at, updated_at
     set_property :delta => true 
   end
+
+  has_many :performer_users, :dependent => :destroy
+  has_many :performers, :through => :performer_users
   
-  belongs_to :performer, :autosave => true
   belongs_to :promoter, :autosave => true
   
   has_many :venues, :dependent => :nullify
@@ -47,6 +49,8 @@ class User < ActiveRecord::Base
   
   validate :only_has_one_organisation
   
+  delegate :region, :to => :promoter, :allow_nil => true
+
   def self.present_directory_letters
     order(:last_name).select("UCASE(SUBSTR(last_name,1,1)) AS letter").group("SUBSTR(last_name,1,1)").collect(&:letter)
   end
@@ -75,6 +79,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def performer
+    performers.present? ? performers.first : nil
+  end
+
+  def performer_id
+    performers.present? ? performers.first.id : nil
+  end
+
   def set_notifications_as_read!
     notifications.where("notifications.user_id = ?", self.id).update_all(:read => true)
   end
@@ -84,7 +96,7 @@ class User < ActiveRecord::Base
   end 
 
   def to_s    
-    performer.present? ? performer.name : full_name    
+    full_name    
   end
   
   private
@@ -95,7 +107,7 @@ class User < ActiveRecord::Base
   end
   
   def only_has_one_organisation
-    if performer.present? && promoter.present?
+    if performers.present? && promoter.present?
       errors.add(:promoter, "can't have a promoter and a performer")
     end
   end

@@ -72,11 +72,12 @@ module DirectoryHelper
   def directory_item_extra(directory_item)
     case directory_item.class.to_s
     when "Performer"
-      tours_html =[]
-      directory_item.tours.where("end_on < ?", Date.today).each do |tour|
-        tours_html << link_to_self(tour)
-      end
-      tours_html.join('<br>').html_safe
+      directory_item.country
+      # tours_html =[]
+      # directory_item.tours.where("end_on < ?", Date.today).each do |tour|
+      #   tours_html << link_to_self(tour)
+      # end
+      # tours_html.join('<br>').html_safe
     when "Promoter"
       venues_html = []
       directory_item.venues.each do |venue|

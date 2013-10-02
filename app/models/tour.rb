@@ -11,8 +11,7 @@ class Tour < ActiveRecord::Base
     indexes performer(:name), :as => :performer_name, :sortable => true
     indexes genre_tags(:name), :as => :genres
     indexes collections(:name), :as => :collection
-    indexes booked_venues(:region), :as => :region
-    indexes locations, :as => :locations    
+    indexes [booked_venues(:region), locations], :as => :region
     has created_at, start_on, :sortable => true
     has updated_at, end_on
     set_property :delta => true 
@@ -57,7 +56,8 @@ class Tour < ActiveRecord::Base
   validates :min_playing_area, :numericality => true, :allow_blank => true
   validates_associated :dates
   validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image", :case_sensitive => false
-  
+  validate :start_on_before_end_on
+
   delegate :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone, :contact1_details, :contact2_details, :to => :performer
   
   scope :past, joins(:dates).where("booked = 1 && tour_dates.date < ?", Date.today).group("tours.id")
@@ -147,6 +147,11 @@ class Tour < ActiveRecord::Base
         notifications.create(:user => liker, :context => "tour_updated")
       end
     end
+  end
+
+  def start_on_before_end_on
+    return true if start_on.present? && end_on.present? && (start_on <= end_on)
+    errors.add(:end_on_s, 'must after the start date')
   end
 
 end

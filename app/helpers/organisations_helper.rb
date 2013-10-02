@@ -31,9 +31,12 @@ module OrganisationsHelper
   def error_alert(object)
     if !object.errors.empty?
       capture_haml do
-        haml_tag('div',:class=>'alert alert-error') {
-              haml_tag('b.icon-warning-sign'," There's a problem with the information you've entered. Please check the fields below and make corrections.")
-            }
+        haml_tag('div',:class=>'alert alert-error') do
+          haml_tag('b') do
+            haml_tag('icon.icon-warning-sign')
+            haml_concat("There's a problem with the information you've entered. Please check the fields below and make corrections.")
+          end
+        end
       end    
     end  
   end
