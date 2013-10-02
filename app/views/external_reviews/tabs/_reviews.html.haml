@@ -1,10 +1,8 @@
 -content_for(:head) do
   :javascript
     $(document).ready(function() {
-      console.log('document ready');
       Redactor.init();
       $('#external_reviews').on('cocoon:after-insert', function() {
-        console.log('in callback');
         Redactor.init();
      });
     });
