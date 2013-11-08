@@ -17,10 +17,11 @@
               %td
                 =date.date
               %td
-                =date.tour.name
+                =link_to_self(date.tour, :target => '_blank')
               %td
-                =date.venue_name
+                =link_to_self(date.venue, :target => '_blank')
               %td
-                Added by
-                =link_to(date.user.first_name + " " + date.user.last_name, user_path(date.user))
-        =button_tag "Approve", :class => 'btn-primary'    
+                -if date.user
+                  Added by
+                  =link_to_self(date.user, :target => '_blank')
+        =button_tag "Approve", :class => 'btn-primary'
