@@ -66,7 +66,7 @@ Pan::Application.configure do
     :address        => 'mail.yoomeedigital.com',
     :domain         => 'mail.yoomeedigital.com',
     :authentication => :login,
-    :user_name      => 'tourbook@yoomeedigital.com',
+    :user_name      => 'info@yoomeedigital.com',
     :password       => 'm:HE4,4JF2KL_{mG*;IG;(xGGjOA.;r',
     :enable_starttls_auto => false
   }
