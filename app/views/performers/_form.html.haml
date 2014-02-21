@@ -1,5 +1,5 @@
 =semantic_form_for(performer, :html => {:multipart => true}) do |form|
-  =error_alert(performer)
+  %p.error-messages=@performer.errors.full_messages unless @performer.errors.blank?
   =tabs('details', 'contact_info', ["slideshow", "Media"], 'organisations/tabs/links', 'external_reviews/tabs/reviews', 'users', :form => form)
   =form.buttons do
     =form.commit_button "Save", :button_html => {:class => 'btn-primary details-save'}

@@ -2484,3 +2484,9 @@ a:hover.tag.theatre span.label.tag-label {
 .filter-sidebar a:hover.label, #directory-sidebar a:hover.region{
   background-color:#d1de4b;
 }
+
+/*------Error messages----*/
+p.error-messages{
+  background-color: #FA8072;
+  width: 200px;
+}
