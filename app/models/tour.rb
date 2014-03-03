@@ -53,6 +53,7 @@ class Tour < ActiveRecord::Base
   accepts_nested_attributes_for :dates, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :performer, :start_on_s, :end_on_s, :presence => true
+  validates :description, length: {maximum: 1000}
   validates :min_playing_area, :numericality => true, :allow_blank => true
   validates_associated :dates
   validates_property :format, :of => :image, :in => [:jpeg, :jpg, :png, :gif], :message => "must be an image", :case_sensitive => false

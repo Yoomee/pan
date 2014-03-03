@@ -12,7 +12,7 @@
     =image_for(tour, "220x150")
   =form.input :image, :as => :file, :label => "Select a file to upload",  :input_html => {:class => "mb-2"}
   =form.input :short_description, :input_html => {:rows => 2, :class => "span8", :maxlength => 120 }, :label => "Short Description".html_safe
-  =form.input :description, :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }, :label => "Full Description".html_safe
+  =form.input :description, :input_html => {:rows => 8, :class => "span8"}, :label => "Full Description".html_safe
   %p#countdown
   =form.input :genre_list, :label => "Genre", :as => :select, :multiple => true, :collection => tag_list_options(:genres, tour, Tag.genres)  
   =form.input :additional_events, :label => "Additional Events or Education", :input_html => {:rows => 8, :class => "span8", :maxlength => 1000 }
