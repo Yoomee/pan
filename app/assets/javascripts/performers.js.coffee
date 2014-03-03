@@ -21,7 +21,7 @@ window.Performers =
       $('#create-user').addClass('hide')   
 
   descriptionUpdate: (description) ->    
-    used = if description != "" then description.replace(/(\n|\r)/, "").length else 0
+    used = if description != "" then description.replace( /\r?\n/g, "\r\n").length else 0
     remaining = 1000 - used    
     $('#countdown').text("You have " + remaining + " characters remaining")
     $('#countdown').data('remaining', remaining)
