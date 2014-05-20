@@ -15,6 +15,11 @@ class TourDatesController < ApplicationController
       redirect_to diary_path 
     end
   end
+
+  def destroy
+    tour_date.update_attribute(:removed_at, Time.now)
+    redirect_to diary_path
+  end
   
   def needs_approval
     @pending_dates = TourDate.needs_approval.where('tour_id IS NOT NULL')

@@ -12,11 +12,11 @@ class TourDate < ActiveRecord::Base
   validates :date, :date_s, :presence => true
   validates :tour, :presence => true, :on => :update
   
-  scope :approved, where(:needs_approval => false, :booked => true)
-  scope :future, where(:booked => true).where("date >= ?", Date.today)
-  scope :in_pan_venue, where('venue_id != 0 AND venue_id IS NOT NULL')
-  scope :needs_approval, where(:needs_approval => true)
-  scope :past, where(:booked => true).where("date < ?", Date.today)
+  scope :approved, where(:needs_approval => false, :booked => true).where('removed_at IS NULL')
+  scope :future, where(:booked => true).where("date >= ?", Date.today).where('removed_at IS NULL')
+  scope :in_pan_venue, where('venue_id != 0 AND venue_id IS NOT NULL AND removed_at IS NULL')
+  scope :needs_approval, where(:needs_approval => true).where('removed_at IS NULL')
+  scope :past, where(:booked => true).where("date < ?", Date.today).where('removed_at IS NULL')
 
   def to_hash
     {
