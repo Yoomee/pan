@@ -8,6 +8,9 @@
     .modal-body
       =form.inputs do
         =form.input :tour, :input_html => { :class => "chosen", :style => "width: 300px;"}, :label => "Select a Show", :collection => Tour.order(:name)
+        %p
+          Or if your show isn't listed, add details
+          =link_to 'here', '#'
         =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}, :label => "Select a Venue", :collection => Venue.order(:name)
         =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}, :label => "Select a Date"  
         =form.input :time,  :label => "Start time (24 hour format, hh:mm)", :as => :string, :input_html => {:class => 'timepicker'}  
