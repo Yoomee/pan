@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
   
   def steps
     %w{user_details organisation_type organisation_details}
+  end
+
+  def suspended?
+    promoter.try(:suspended?)
   end 
 
   def to_s    

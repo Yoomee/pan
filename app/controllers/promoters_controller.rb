@@ -66,6 +66,15 @@ class PromotersController < ApplicationController
     end
     render :template => 'organisations/directory'
   end
+
+  def toggle_suspension
+    if @promoter.update_attribute(:suspended, !@promoter.suspended?)
+      flash[:notice] = "#{promoter} updated"
+    else
+      flash[:notice] = "#{promoter}} could not be updated"
+    end
+    redirect_to individuals_promoters_path
+  end
   
   def edit
     promoter.build_social_links

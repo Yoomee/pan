@@ -11,8 +11,12 @@
           -promoters.joins(:users).group('promoters.id').each do |promoter|
             %tr
               %td
-                =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg", :height => '50', :width => '50', :class => "pull-left mr-1")
+                =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg", :height => '55', :width => '55', :class => "pull-left mr-1")
                 %h4=link_to_self(promoter)
+                -if promoter.suspended?
+                  =link_to 'Unsuspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'warning-text pull-right'
+                -else
+                  =link_to 'Suspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'pull-right'
               %td
                 %table.table.table-bordered
                   %tbody
@@ -20,21 +24,22 @@
                       %tr
                         %td.span8
                           =link_to_self(user, :target => "_blank")
-                          -if user.promoter_admin?
-                            %span.label Admin
-                          .pull-right
+                          -unless promoter.suspended?
                             -if user.promoter_admin?
-                              =link_to(update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?", :class => "admin-btn") do
-                                %i.icon.icon-minus
-                                Undo admin
-                            -else
-                              =link_to(update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.", :class => "admin-btn") do
-                                %i.icon.icon-plus
-                                Make admin                            
-                            -if can?(:destroy, user)
-                              =link_to(user_path(user, :return_to => individuals_promoters_path), :method => :delete, :confirm => "Are you sure?", :class => "admin-btn") do
-                                %i.icon.icon-trash
-                                Delete user
+                              %span.label Admin
+                            .pull-right
+                              -if user.promoter_admin?
+                                =link_to(update_role_user_path(user, :role => 'promoter_staff'), :method => :put, :confirm => "Are you sure?", :class => "admin-btn") do
+                                  %i.icon.icon-minus
+                                  Undo admin
+                              -else
+                                =link_to(update_role_user_path(user, :role => 'promoter_admin'), :method => :put, :confirm => "Are you sure? This will notify #{user} via email.", :class => "admin-btn") do
+                                  %i.icon.icon-plus
+                                  Make admin
+                              -if can?(:destroy, user)
+                                =link_to(user_path(user, :return_to => individuals_promoters_path), :method => :delete, :confirm => "Are you sure?", :class => "admin-btn") do
+                                  %i.icon.icon-trash
+                                  Delete user
 .row
   .span8
     =options_panel do

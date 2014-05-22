@@ -62,6 +62,9 @@ Pan::Application.routes.draw do
       get 'scale_of_work', :action => 'index', :as => 'scale_of_work', :tag_context => 'work_scales'
       get ':tag_context/:tag', :action => 'index', :as => 'tag'      
     end
+    member do
+      put 'toggle_suspension'
+    end
   end
   
   resources :venues, :except => :new do    
@@ -92,7 +95,6 @@ Pan::Application.routes.draw do
     end
     member do
       put 'update_role/:role', :action => 'update_role', :as => 'update_role'
-      put 'toggle_suspension'
     end
   end
   post 'users/admin_create' => 'users#admin_create', :as => 'admin_create_user'

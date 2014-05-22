@@ -299,9 +299,6 @@ a:hover {
 .btn-primary {
   background:#acc543;
 }
-.btn-orange{
-  background-color:#f89406;
-}
 .btn-primary:hover {
   background:#97AD3B;
 }
@@ -2238,6 +2235,10 @@ a.promoter.venues {
 .bt {
 	border-top: 1px #919191 solid;
 	margin: 20px 0 20px 0;
+}
+
+.warning-text{
+  color:#f89406;
 }
 
 /*========== groups ==========*/
