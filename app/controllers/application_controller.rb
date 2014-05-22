@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include YmUsers::ApplicationController
   
   before_filter :clear_registration_session!
+  before_filter :check_for_suspension
 
   AUTH_USERS = { "pan" => "highlands123" }
 
@@ -23,6 +24,12 @@ class ApplicationController < ActionController::Base
     return true unless Rails.env.production?
     authenticate_or_request_with_http_basic do |username|
       AUTH_USERS[username]
+    end
+  end
+
+  def check_for_suspension
+    if current_user.try(:suspended?)
+      redirect_to renew_path unless params[:action] == 'destroy' || params[:action] == 'renew' || (params[:controller] == 'pages' && params[:id] == Page.find_by_slug('contact').id.to_s)
     end
   end
 

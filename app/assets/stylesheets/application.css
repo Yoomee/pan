@@ -299,6 +299,9 @@ a:hover {
 .btn-primary {
   background:#acc543;
 }
+.btn-orange{
+  background-color:#f89406;
+}
 .btn-primary:hover {
   background:#97AD3B;
 }

@@ -75,6 +75,15 @@ class UsersController < ApplicationController
   
   def show
   end
+
+  def toggle_suspension
+    if @user.update_attribute(:suspended, !@user.suspended?)
+      flash[:notice] = "#{user} updated"
+    else
+      flash[:notice] = "#{user} could not be updated"
+    end
+    redirect_to directory_users_path(params[:letter])
+  end
   
   def update_role
     if user.update_attribute(:role, params[:role])

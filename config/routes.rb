@@ -3,6 +3,7 @@ Pan::Application.routes.draw do
   root :to => 'home#index'
   
   match '/welcome' => 'home#welcome'
+  match '/renew' => 'home#renew'
 
   match 'beta' => 'enquiries#new', :id => 'feedback', :as => 'beta'
   match 'invite' => 'enquiries#new', :id => 'invite', :as => 'invite'
@@ -91,6 +92,7 @@ Pan::Application.routes.draw do
     end
     member do
       put 'update_role/:role', :action => 'update_role', :as => 'update_role'
+      put 'toggle_suspension'
     end
   end
   post 'users/admin_create' => 'users#admin_create', :as => 'admin_create_user'
