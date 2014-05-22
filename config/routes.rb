@@ -123,6 +123,7 @@ Pan::Application.routes.draw do
   
   resources :groups do
     collection do
+      get 'maintenance'
       get 'search'
     end
     member do
