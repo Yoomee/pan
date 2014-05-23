@@ -1,5 +1,8 @@
 .well.mt-2
   %p
-    Unfortunately, your membership has been suspended because your promoter has not renewed their membership.
-    =link_to_slug 'Contact Tourbook', 'contact'
-    if you have any questions about this.
+    -if current_user.suspended?
+      Unfortunately, your membership has been suspended because your promoter has not renewed their membership.
+      =link_to_slug 'Contact Tourbook', 'contact'
+      if you have any questions about this.
+    -else
+      Your promoter's account does not need to be renewed yet.
