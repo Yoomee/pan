@@ -1,0 +1,5 @@
+=form.inputs do  
+  =form.input :ticket_price_full, :as => :string, :label => 'Ticket Price (Full)',  :input_html => {:value => number_with_precision(promoter.ticket_price_full, precision: 2)}
+  =form.input :ticket_price_concession, :as => :string, :label => 'Ticket Price (Concession)', :input_html => {:value => number_with_precision(promoter.ticket_price_concession, precision: 2)}
+  =form.input :ticket_price_other, :as => :string, :label => 'Ticket Price (Other)', :input_html => {:value => number_with_precision(promoter.ticket_price_other, precision: 2)}
+  =form.input :ticket_link, :label => 'Ticket Link'
