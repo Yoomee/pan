@@ -13,6 +13,7 @@ Pan::Application.routes.draw do
 
   resources :tour_dates do
     collection do
+      get 'event_listing'
       get 'needs_approval'
       post 'approve_dates'
     end  
