@@ -1282,6 +1282,10 @@ controller_users .venues {
   color: #4D4E4D;
 }
 
+a.suspension-text{
+  font-size:14px;
+}
+
 /*========== Slideshow ==========*/
 
 div.slideshow {

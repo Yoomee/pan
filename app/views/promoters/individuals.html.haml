@@ -14,9 +14,9 @@
                 =promoter.image.present? ? image_for(promoter, "50x50#", :class => "pull-left mr-1") : image_tag("placeholder-performer.jpg", :height => '55', :width => '55', :class => "pull-left mr-1")
                 %h4=link_to_self(promoter)
                 -if promoter.suspended?
-                  =link_to 'Unsuspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'warning-text pull-right'
+                  =link_to 'Unsuspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'warning-text suspension-text'
                 -else
-                  =link_to 'Suspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'pull-right'
+                  =link_to 'Suspend account', toggle_suspension_promoter_path(promoter), :method => 'put', :class => 'suspension-text'
               %td
                 %table.table.table-bordered
                   %tbody
