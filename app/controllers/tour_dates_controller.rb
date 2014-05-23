@@ -17,7 +17,11 @@ class TourDatesController < ApplicationController
   end
 
   def destroy
-    tour_date.update_attribute(:removed_at, Time.now)
+    if tour_date.update_attribute(:removed_at, Time.now)
+      flash[:notice] = "Date successfully deleted from the diary."
+    else
+      flash[:notice] = "The date could not be removed from the diary."
+    end
     redirect_to diary_path
   end
   

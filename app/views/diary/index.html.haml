@@ -85,7 +85,7 @@
                         =tag_link(tag.name, {:tags => param_tags, :start_date => @start_date, :end_date => @end_date, :tour_id => @tour_id, :organisation_id => @organisation_id , :venue_id => @venue_id }, "tag #{@tags.include?(tag.name.gsub(/-/, ' ')) ? 'active' : ''}")
                   -if can? :destroy, date
                     %td
-                      =link_to date, :method => :delete do
+                      =link_to date, :method => :delete, :confirm => 'Are you sure?' do
                         %i.icon-remove
                     .clearfix
             -if @dates.total_pages > 2
