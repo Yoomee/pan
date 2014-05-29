@@ -1,19 +1,34 @@
 .row.mt-2.mb-2
   .span12
-    %h1=title("Diary dates needing approval")
+    %h1=title("Diary dates")
     
 .row
-  .span9
-    -if @pending_dates.empty?
+  .span12
+    -if @tour_dates.empty?
       %p
-        No dates need approval at the moment.
+        No dates in the diary.
     -else
       =form_tag(approve_dates_tour_dates_path) do
         %table.table
-          -@pending_dates.each do |date|
-            %tr.striped
+          %tr
+            %th
+            %th
+            %th
+            %th
+            %th
+              %strong='Full Ticket'
+            %th
+              %strong='Concession Ticket'
+            %th
+              %strong='Other Ticket'
+            %th
+              %strong='Ticket Link'
+            %th
+            %th
+          -@tour_dates.each do |date|
+            %tr{:class => date.needs_approval? ? 'striped' : ''}
               %td
-                =check_box_tag "date_id[]", date.id
+                =check_box_tag "date_id[]", date.id if date.needs_approval?
               %td
                 =date.date
               %td
@@ -21,7 +36,18 @@
               %td
                 =link_to_self(date.venue, :target => '_blank')
               %td
+                =number_with_precision(date.ticket_price_full, precision: 2)
+              %td
+                =number_with_precision(date.ticket_price_concession, precision: 2)
+              %td
+                =number_with_precision(date.ticket_price_other, precision: 2)
+              %td
+                =date.ticket_link
+              %td
                 -if date.user
                   Added by
                   =link_to_self(date.user, :target => '_blank')
+              %td
+                =date.needs_approval? ? 'Needs Approval' : 'Approved'
         =button_tag "Approve", :class => 'btn-primary'
+    =will_paginate(@tour_dates)

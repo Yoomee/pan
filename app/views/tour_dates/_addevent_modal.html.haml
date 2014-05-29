@@ -14,7 +14,10 @@
         =form.input :venue, :input_html => { :class => "chosen", :style => "width: 300px;"}, :label => "Select a Venue", :collection => Venue.order(:name)
         =form.input :date, :as => :string, :input_html => {:class => 'datepicker'}, :label => "Select a Date"  
         =form.input :time,  :label => "Start time (24 hour format, hh:mm)", :as => :string, :input_html => {:class => 'timepicker'}
-        
+        =form.input :ticket_price_full, :as => :string, :label => 'Ticket Price (Full)'
+        =form.input :ticket_price_concession, :as => :string, :label => 'Ticket Price (Concession)'
+        =form.input :ticket_price_other, :as => :string, :label => 'Ticket Price (Other)'
+        =form.input :ticket_link, :label => 'Ticket Link'
       
     .modal-footer
       =link_to("Cancel", "#", :class => "btn btn-primary", :'data-dismiss' => 'modal')

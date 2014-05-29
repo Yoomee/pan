@@ -1992,6 +1992,13 @@ table#diary a.venue,
   padding-right:4px;
 }
 
+/*========== needs approval ==========*/
+
+tr.striped{
+  background-color: white;
+}
+
+
 
 /*========== tours#show ==========*/
 h1.tour {

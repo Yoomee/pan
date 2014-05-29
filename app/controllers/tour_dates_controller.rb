@@ -8,10 +8,11 @@ class TourDatesController < ApplicationController
     tour_date.needs_approval = true
     tour_date.user_id = current_user.id
     if tour_date.save
+      UserMailer.approval_needed.deliver
       flash[:notice] = "Thanks for adding a date. This will be reviewed shortly by the website administrator before appearing in the diary."
       redirect_to diary_path
     else
-      flash_notice = tour_date
+      flash[:notice] = "The tour date could not be saved, perhaps because you entered information in the wrong format. Please try again."
       redirect_to diary_path 
     end
   end
@@ -26,7 +27,7 @@ class TourDatesController < ApplicationController
   end
   
   def needs_approval
-    @pending_dates = TourDate.needs_approval.where('tour_id IS NOT NULL')
+    @tour_dates = TourDate.order('needs_approval DESC, created_at DESC').where('tour_id IS NOT NULL').paginate(:per_page => 20, :page => params[:page])
   end
 
   def update

@@ -14,5 +14,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => user.email, :subject => "#{Settings.site_name}: Your are now an administrator")
   end
+
+  def approval_needed
+    mail(:to => Settings.site_email, :subject => "#{Settings.site_name}: A new tour date needs approval")
+  end
   
 end
