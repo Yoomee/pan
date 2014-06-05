@@ -13,6 +13,7 @@ class Ability
     can :index, Page
     can :create, User, :promoter_id => nil
     can :modal, Post
+    can :event_listing, TourDate
 
 
     if user.try(:admin?)
