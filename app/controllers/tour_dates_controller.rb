@@ -12,7 +12,7 @@ class TourDatesController < ApplicationController
       flash[:notice] = "Thanks for adding a date. This will be reviewed shortly by the website administrator before appearing in the diary."
       redirect_to diary_path
     else
-      flash[:notice] = "The tour date could not be saved, perhaps because you entered information in the wrong format. Please try again."
+      flash[:notice] = "The tour date could not be saved: " << tour_date.errors.full_messages.join('/')
       redirect_to diary_path 
     end
   end
