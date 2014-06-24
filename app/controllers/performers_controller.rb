@@ -6,10 +6,14 @@ class PerformersController < ApplicationController
   expose(:posts) {performer.posts.page(params[:page])}
 
   def create
-    if performer.save
-      current_user.record_activity!(performer)
-      flash_notice(performer)
-      redirect_to(performer)
+    if performer.errors.count == 0 #errors from trying to save new performer user
+      if performer.save
+        current_user.record_activity!(performer)
+        flash_notice(performer)
+        redirect_to(performer)
+      else
+        render :action => 'new'
+      end
     else
       render :action => 'new'
     end

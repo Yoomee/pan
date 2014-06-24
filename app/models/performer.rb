@@ -40,6 +40,7 @@ class Performer < ActiveRecord::Base
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
+  validate :validate_user
   
   after_update :create_notifications_if_favourite
 
@@ -51,7 +52,17 @@ class Performer < ActiveRecord::Base
   def create_user
     name = split_name(contact1_name)
     self.users << User.new(:first_name => name[0], :last_name => name[1], :email => contact1_email, :password => contact1_password)
-    puts "hello"
+  end
+
+  def validate_user
+    name = split_name(contact1_name)
+    new_user = User.new(:first_name => name[0], :last_name => name[1], :email => contact1_email, :password => contact1_password)
+    unless new_user.valid?
+      self.errors.add(:contact1_email, 'Email invalid, or this user already exists') if new_user.errors.messages.keys.include?(:email)
+      self.errors.add(:contact1_name, 'Name invalid') if new_user.errors.messages.keys.include?(:first_name) || new_user.errors.messages.keys.include?(:last_name)
+      self.errors.add(:contact1_password, 'Password invalid') if new_user.errors.messages.keys.include?(:password)
+    end
+
   end
 
   def split_name(name)
