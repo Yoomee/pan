@@ -123,13 +123,7 @@
                       %h6  
                         =pluralize(directory_item.reviews.count, "review")
                   %td.span8
-                    -if controller_name.users? && !directory_item.admin?
-                      -if directory_item.suspended?
-                        =link_to 'Unsuspend account', toggle_suspension_user_path(directory_item, :letter => params[:letter]), :method => 'put', :class => 'btn btn-orange pull-right mr-3'
-                      -else
-                        =link_to 'Suspend account', toggle_suspension_user_path(directory_item, :letter => params[:letter]), :method => 'put', :class => 'btn btn-primary pull-right mr-3'
-                    -else
-                      =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
+                    =directory_item.summary.present? ? directory_item.summary : truncate(directory_item.try(:description).to_s, :length => 255)
 
         -if @everything
           =will_paginate @everything
