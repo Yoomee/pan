@@ -51,13 +51,9 @@
           \- edit tour to change availability         
 
 .clearfix
-=semantic_form_for(venue) do |form|
   -# Needs to have ID of availability for JS to work
   #availability.hide
     =form.inputs do
       =form.semantic_fields_for :booked_dates do |date_form|
         =render("venues/booked_date_fields", :f => date_form)
-    =link_to_add_association "+ Add a date", form, :booked_dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"  
-  =form.buttons do
-    =form.commit_button "Save"
-
+    =link_to_add_association "+ Add a date", form, :booked_dates, :"data-association-insertion-node" => '#availability .add_fields', :id => "add_tour_date"
