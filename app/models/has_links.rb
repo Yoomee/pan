@@ -22,31 +22,27 @@ module HasLinks
   
   def facebook_url
     url = facebook_link.try(:url).try(:gsub, 'http://', '')
-    addwww(url)
     url
   end
 
   def twitter_url
     url = twitter_link.try(:url).try(:gsub, 'http://', '')
-    addwww(url)
     url
   end
 
   def youtube_url
     url = youtube_link.try(:url).try(:gsub, 'http://', '')
-    addwww(url)
     url
   end
 
   def website_url
     url = website_link.try(:url).try(:gsub, 'http://', '')
-    addwww(url)    
     url  
   end
 
   def addwww(url)
     unless url.blank?    
-      url.insert(0, 'www.') unless url.start_with?('www.')           
+      url.insert(0, 'www.') unless url.start_with?('www.')
     end
   end   
 
