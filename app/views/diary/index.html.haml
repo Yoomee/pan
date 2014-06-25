@@ -88,7 +88,7 @@
                       =link_to date, :method => :delete, :confirm => 'Are you sure?' do
                         %i.icon-remove
                     .clearfix
-            -if @dates.total_pages > 2
+            -if @dates.total_pages > 1
               %tr.paginate
                 %td{:colspan => 4}
                   =will_paginate @dates
