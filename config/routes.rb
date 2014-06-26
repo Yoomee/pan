@@ -121,6 +121,8 @@ Pan::Application.routes.draw do
   match "shows/view/list" => "shows#set_view", :view => 'list', :as => 'set_list_view'
   match "shows/view/block" => "shows#set_view", :view => 'block', :as => 'set_block_view'
 
+  put "threads/:id/set_thread_to_read", :to => 'message_threads#set_thread_to_read', :as => 'set_thread_to_read'
+
   get 'diary', :to => 'diary#index'
   
   get 'directory/search', :to => 'directory#search', :as => 'directory_search'

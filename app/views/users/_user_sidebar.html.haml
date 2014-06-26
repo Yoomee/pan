@@ -12,7 +12,7 @@
       =link_to "view", "#notifications", :'data-toggle' => 'tab'
     .messages
       %i.icon-envelope
-      %span.number=user.message_notifications.count
+      %span.number=@unread_messages_count
       messages
       =link_to "view", "#messages", :'data-toggle' => 'tab'
     -if user.promoter

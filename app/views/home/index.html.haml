@@ -20,7 +20,7 @@
             =link_to "#{user_path(current_user)}/#messages" do
               %i.icon-envelope-alt
               %strong.red
-                =current_user.message_notifications.count
+                =@unread_messages_count
               messages
               %span.view.red
                 view

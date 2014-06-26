@@ -74,6 +74,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @unread_messages_count = MessageThreadUser.where(:user_id => current_user.id, :read => false).joins(:message_thread).count
   end
   
   def update_role

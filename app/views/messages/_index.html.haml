@@ -5,6 +5,7 @@
         event.preventDefault();
         $('#all-threads').addClass('hide');
         $('#thread-' + $(this).attr('id')).removeClass('hide');
+        $.ajax({url: '/threads/' + $(this).attr('id') + '/set_thread_to_read', method:'PUT'})
       });
       $('.show-all-threads').click(function(event) {
         event.preventDefault();
@@ -19,7 +20,7 @@
       Messages
     =link_to "#new-message", :'data-toggle' => "modal", :class => "btn new-message-btn" do
       %i.icon-envelope
-      New message    
+      New message
       
   .clearfix
   -if threads.size == 0
@@ -30,8 +31,9 @@
         -threads.each do |thread|
           %li
             =link_to "#", :class => "thread-link", :id => "#{thread.id}" do
-              .message-count
-                %span.badge=thread.messages.count
+              -unless (message_count = thread.unread_count(current_user)) == 0
+                .message-count
+                  %span.badge=message_count
               =thread.messages.first.text.truncate(65)
               %span.small-info-text
                 =time_ago_in_words(thread.messages.last.created_at)
