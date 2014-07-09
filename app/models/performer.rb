@@ -40,7 +40,7 @@ class Performer < ActiveRecord::Base
   has_snippets :contact1_name, :contact1_email, :contact1_phone, :contact2_name, :contact2_email, :contact2_phone
   
   validates :contact1_email, :contact2_email, :email => true, :allow_blank => true
-  validate :validate_user
+  validate :validate_user, :if => :new_record?
   
   after_update :create_notifications_if_favourite
 
