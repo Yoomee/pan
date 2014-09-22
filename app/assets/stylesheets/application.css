@@ -503,6 +503,24 @@ h1.logged_out {
   padding: 5px;
 }
 
+.announcement{
+  background: #acc543;
+  padding-top: 8px;
+  margin: 5px 0;
+}
+
+.announcement a{
+  background: #acc543;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.announcement a:hover{
+  background: #acc543 !important;
+  color: #fff !important;
+  text-decoration: none;
+}
+
 /*========== Homepage logged in ==========*/
 .welcome-title {
   float: left;
