@@ -2,13 +2,13 @@
 #nav-strip
   .container
     .row
-      .span12        
+      .span12
         =content_tag_with_active(:div, current_page?(root_path), :class => "inner") do
           =link_to root_path, :class=>"nav-link nav-link-home" do
             .header
               %i.icon-home
               Home
-            %span.nav-smallprint    
+            %span.nav-smallprint
               view your profile
               %br
               and latest updates
@@ -17,8 +17,8 @@
             .header
               %i.icon-star
               Shows
-            %span.nav-smallprint      
-              browse or search 
+            %span.nav-smallprint
+              browse or search
               %br
               available tours
         =content_tag_with_active(:div, current_page?(diary_path), :class => "inner") do
@@ -26,17 +26,17 @@
             .header
               %i.icon-calendar
               Diary
-            %span.nav-smallprint      
+            %span.nav-smallprint
               see what's on
               %br
               across the network
-              
+
         =content_tag_with_active(:div, (controller_name.groups? || controller_name.posts?), :class => "inner") do
           =link_to groups_path, :class=>"nav-link nav-link-groups"  do
             .header
               %i.icon-comment
               Groups
-            %span.nav-smallprint      
+            %span.nav-smallprint
               talk to other promoters
               %br
               and share your skills
@@ -45,7 +45,7 @@
             .header
               %i.icon-book
               Resources
-            %span.nav-smallprint      
+            %span.nav-smallprint
               find help and information
         =content_tag_with_active(:div, (controller_name.performers? || controller_name.venues? || controller_name.directory?), :class => "inner") do
           =link_to directory_path, :class=>"nav-link nav-link-directory"  do
@@ -56,9 +56,4 @@
               search promoters, venues,
               %br
               performers and shows
-    .row.announcement
-      .span12
-        %p 
-          Supported Touring shows for Spring/Summer 2015 now available for selection.
-          =link_to "Let us know what you'd like here.", "https://www.surveymonkey.com/s/XT2YSMG", :target => "_blank"
 
