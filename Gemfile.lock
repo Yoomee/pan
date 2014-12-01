@@ -1,15 +1,4 @@
 GIT
-  remote: git://git.yoomee.com:4321/gems/yoomee.git
-  revision: 97e0aae289bfa1111722f37220588fc8afff78e9
-  branch: rails3
-  specs:
-    yoomee (0.0.1)
-      engineyard (~> 1.4.22)
-      git (~> 1.2.5)
-      net-ssh
-      rails (~> 3.1.0)
-
-GIT
   remote: git://github.com/cgunther/formtastic-bootstrap.git
   revision: 3428fef4f7870b01241d65893b882ad32cfc18d8
   branch: bootstrap-2
@@ -424,4 +413,3 @@ DEPENDENCIES
   ym_tools (~> 0.1.10)
   ym_users (~> 0.1.27)
   ym_videos (~> 0.1)
-  yoomee!
